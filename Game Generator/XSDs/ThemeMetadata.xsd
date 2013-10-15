@@ -1,0 +1,11 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SearchMetaData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="Setting"/>
+        <xs:element type="xs:string" name="GameType"/>
+        <xs:element type="xs:string" name="Subject"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

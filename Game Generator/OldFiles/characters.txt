@@ -1,0 +1,4 @@
+3 4 Characters
+Characters0: age: 4  	playerGender: 1 	numberOfCharacters: 6	nicelyDressed: 1
+Characters1: age: 2 	playerGender: 1 	numberOfCharacters: 7	nicelyDressed: 1
+Characters2: age: 6 	playerGender: 1 	numberOfCharacters: 1	nicelyDressed: 1

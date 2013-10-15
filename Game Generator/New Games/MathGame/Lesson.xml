@@ -1,0 +1,34 @@
+<Lesson>
+    <LessonScreens>
+      <LessonScreen>
+        <Buttons>
+          <Button>
+            <ButtonLocationType>NEXT</ButtonLocationType>
+            <Text>Continue</Text>
+            <Timer></Timer>
+            <TransitionType>NEXT_SCREEN</TransitionType>
+          </Button>
+        </Buttons>
+        <LOCharacters>
+          <Character>
+            <CharacterType>HERO</CharacterType>
+            <!--<MovementType>WALK_ONTO_SCREEN</MovementType>-->
+            <Timer></Timer>
+          </Character>
+          <Character>
+          <CharacterType>PLAYER</CharacterType>
+            <!--<MovementType>WALK_ONTO_SCREEN</MovementType>-->
+            <Timer></Timer>
+          </Character>
+        </LOCharacters>
+        <InformationBoxes>
+          <InformationBox>
+            <Text>To perform the addition operator you must add together the operands. EX: 2+4=6</Text>
+            <TextType>ALT1</TextType>
+            <Timer></Timer>
+          </InformationBox>
+        </InformationBoxes>
+      </LessonScreen>
+    </LessonScreens>
+  
+</Lesson>

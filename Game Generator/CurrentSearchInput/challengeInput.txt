@@ -1,0 +1,11 @@
+9 challenge
+	The diagonal should be 1, otherwise the top right triangle should be the inverse of the bottom left triangle		
+Short: 			vShort: 1 		vLong: 3		vEasy: 1		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: 1			
+Short: 			vShort: 1 		vLong: 3		vEasy: 1		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: 1		
+Long: 			vShort: .33		vLong: 1		vEasy: 1		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: 1		
+Easy: 			vShort: 1 		vLong: 1		vEasy: 1		vHard: 3		vPersonal: 1		vProfessional: 1		vSchool: 1		
+Short: 			vShort: 1 		vLong: 3		vEasy: 1		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: 1		
+Hard: 			vShort: 1 		vLong: 1		vEasy: .33		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: 1		
+Personal: 		vShort: 1 		vLong: 1		vEasy: 1		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: .33		
+Professional: 	vShort: 1 		vLong: 1		vEasy: 1		vHard: 1		vPersonal: 1		vProfessional: 1		vSchool: .33		
+School: 		vShort: 1 		vLong: 1		vEasy: 1		vHard: 1		vPersonal: 3		vProfessional: 3		vSchool: 1

@@ -1,0 +1,82 @@
+<character>
+	<Characters id="0">
+		<SearchMetaData>
+			<Age>
+				<Young>7</Young>
+				<Old>3</Old>
+			</Age>
+			<PlayerGender>
+				<Male>1</Male>
+				<Female>9</Female>
+			</PlayerGender>
+			<Dress>
+				<Casual>9</Casual>
+				<Formal>1</Formal>
+			</Dress>
+		</SearchMetaData>
+</Characters>
+<Characters id="1">
+<SearchMetaData>
+			<Age>
+				<Young>7</Young>
+				<Old>3</Old>
+			</Age>
+			<PlayerGender>
+				<Male>9</Male>
+				<Female>1</Female>
+			</PlayerGender>
+			<Dress>
+				<Casual>1</Casual>
+				<Formal>9</Formal>
+			</Dress>
+		</SearchMetaData>
+</Characters>
+<Characters id="2">
+		<SearchMetaData>
+			<Age>
+				<Young>9</Young>
+				<Old>1</Old>
+			</Age>
+			<PlayerGender>
+				<Male>9</Male>
+				<Female>1</Female>
+			</PlayerGender>
+			<Dress>
+				<Casual>9</Casual>
+				<Formal>1</Formal>
+			</Dress>
+		</SearchMetaData>
+</Characters>
+<Characters id="3">
+		<SearchMetaData>
+			<Age>
+				<Young>7</Young>
+				<Old>3</Old>
+			</Age>
+			<PlayerGender>
+				<Male>9</Male>
+				<Female>1</Female>
+			</PlayerGender>
+			<Dress>
+				<Casual>9</Casual>
+				<Formal>1</Formal>
+			</Dress>
+		</SearchMetaData>
+</Characters>
+<Characters id="4">
+		<SearchMetaData>
+			<Age>
+				<Young>3</Young>
+				<Old>7</Old>
+			</Age>
+			<PlayerGender>
+				<Male>1</Male>
+				<Female>9</Female>
+			</PlayerGender>
+			<Dress>
+				<Casual>1</Casual>
+				<Formal>9</Formal>
+			</Dress>
+		</SearchMetaData>
+</Characters>
+</character>

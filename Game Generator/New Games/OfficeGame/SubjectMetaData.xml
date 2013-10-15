@@ -1,0 +1,16 @@
+		<SearchMetaData>
+			<SubjectType>
+				<Math>1</Math>
+				<Reading>1</Reading>
+				<English>1</English>
+				<SocialStudies>1</SocialStudies>
+				<Science>1</Science>
+				<Professional>9</Professional>
+			</SubjectType>
+			<GradeLevel>
+				<primary>1</primary>
+				<middle>1</middle>
+				<high>9</high>
+				<college>1</college>
+			</GradeLevel>
+		</SearchMetaData>

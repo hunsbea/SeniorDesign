@@ -1,0 +1,10 @@
+8 locale
+	The diagonal should be 1, otherwise the top right triangle should be the inverse of the bottom left triangle		
+Past: 				vPast: 1		vPresent: 1		vFuture: .5		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: 1
+Present: 			vPast: 1		vPresent: 1		vFuture: .5		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: 1		
+Future:				vPast: 2		vPresent: 2		vFuture: 1		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: 1		
+Professional:		vPast: 1		vPresent: 1		vFuture: 1		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: .25		
+Casual: 			vPast: 1		vPresent: 1		vFuture: 1		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: .25		
+Nature: 			vPast: 1		vPresent: 1		vFuture: 1		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: .25		
+Educational: 		vPast: 1		vPresent: 1		vFuture: 1		vProfessional: 1		vCasual: 1		vNature: 1		vEducational: 1		vNon-Terrestrial: .25		
+Non-Terrestrial: 	vPast: 1		vPresent: 1		vFuture: 1		vProfessional: 4		vCasual: 4		vNature: 4		vEducational: 4		vNon-Terrestrial: 1

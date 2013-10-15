@@ -1,0 +1,92 @@
+<Subjects>
+	<Subject id="0">
+		<SearchMetaData>
+			<SubjectType>
+				<Math>9</Math>
+				<Reading>1</Reading>
+				<English>1</English>
+				<SocialStudies>1</SocialStudies>
+				<Science>1</Science>
+				<Professional>1</Professional>
+			</SubjectType>
+			<GradeLevel>
+				<primary>9</primary>
+				<middle>1</middle>
+				<high>1</high>
+				<college>1</college>
+			</GradeLevel>
+		</SearchMetaData>
+</Subject>
+<Subject id="1">
+		<SearchMetaData>
+			<SubjectType>
+				<Math>1</Math>
+				<Reading>1</Reading>
+				<English>1</English>
+				<SocialStudies>1</SocialStudies>
+				<Science>1</Science>
+				<Professional>9</Professional>
+			</SubjectType>
+			<GradeLevel>
+				<primary>1</primary>
+				<middle>1</middle>
+				<high>9</high>
+				<college>1</college>
+			</GradeLevel>
+		</SearchMetaData>
+</Subject>
+<Subject id="2">
+		<SearchMetaData>
+			<SubjectType>
+				<Math>1</Math>
+				<Reading>1</Reading>
+				<English>1</English>
+				<SocialStudies>1</SocialStudies>
+				<Science>9</Science>
+				<Professional>1</Professional>
+			</SubjectType>
+			<GradeLevel>
+				<primary>1</primary>
+				<middle>9</middle>
+				<high>1</high>
+				<college>1</college>
+			</GradeLevel>
+		</SearchMetaData>
+</Subject>
+<Subject id="3">
+		<SearchMetaData>
+			<SubjectType>
+				<Math>1</Math>
+				<Reading>1</Reading>
+				<English>9</English>
+				<SocialStudies>1</SocialStudies>
+				<Science>1</Science>
+				<Professional>1</Professional>
+			</SubjectType>
+			<GradeLevel>
+				<primary>1</primary>
+				<middle>1</middle>
+				<high>1</high>
+				<college>9</college>
+			</GradeLevel>
+		</SearchMetaData>
+</Subject>
+<Subject id="4">
+		<SearchMetaData>
+			<SubjectType>
+				<Math>1</Math>
+				<Reading>1</Reading>
+				<English>1</English>
+				<SocialStudies>9</SocialStudies>
+				<Science>1</Science>
+				<Professional>1</Professional>
+			</SubjectType>
+			<GradeLevel>
+				<primary>1</primary>
+				<middle>1</middle>
+				<high>1</high>
+				<college>9</college>
+			</GradeLevel>
+		</SearchMetaData>
+</Subject>
+</Subjects>

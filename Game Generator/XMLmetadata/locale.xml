@@ -1,0 +1,82 @@
+<Locales>
+	<Locale id="0">
+		<SearchMetaData>
+			<Setting>
+				<Past>9</Past>
+				<Present>1</Present>
+				<Future>1</Future>
+			</Setting>
+			<Subject>
+				<Professional>1</Professional>
+				<Casual>6</Casual>
+				<Nature>4</Nature>
+				<Educational>1</Educational>
+				<Non-Terrestrial>1</Non-Terrestrial>
+			</Subject>
+		</SearchMetaData>a>
+</Locale>
+<Locale id="1">
+		<SearchMetaData>
+			<Setting>
+				<Past>1</Past>
+				<Present>9</Present>
+				<Future>1</Future>
+			</Setting>
+			<Subject>
+				<Professional>9</Professional>
+				<Casual>1</Casual>
+				<Nature>1</Nature>
+				<Non-Terrestrial>1</Non-Terrestrial>
+				<Educational>1</Educational>
+			</Subject>
+		</SearchMetaData>
+</Locale>
+<Locale id="2">
+		<SearchMetaData>
+			<Setting>
+				<Past>1</Past>
+				<Present>4</Present>
+				<Future>6</Future>
+			</Setting>
+			<Subject>
+				<Professional>1</Professional>
+				<Casual>1</Casual>
+				<Nature>1</Nature>
+				<Non-Terrestrial>9</Non-Terrestrial>
+				<Educational>1</Educational>
+			</Subject>
+		</SearchMetaData>
+</Locale>
+<Locale id="3">
+		<SearchMetaData>
+			<Setting>
+				<Past>1</Past>
+				<Present>9</Present>
+				<Future>1</Future>
+			</Setting>
+			<Subject>
+				<Professional>1</Professional>
+				<Casual>1</Casual>
+				<Nature>1</Nature>
+				<Non-Terrestrial>1</Non-Terrestrial>
+				<Educational>9</Educational>
+			</Subject>
+		</SearchMetaData>
+</Locale>
+<Locale id="4">
+		<SearchMetaData>
+			<Setting>
+				<Past>9</Past>
+				<Present>1</Present>
+				<Future>1</Future>
+			</Setting>
+			<Subject>
+				<Professional>1</Professional>
+				<Casual>1</Casual>
+				<Nature>1</Nature>
+				<Non-Terrestrial>1</Non-Terrestrial>
+				<Educational>9</Educational>
+			</Subject>
+		</SearchMetaData>
+</Locale>
+</Locales>

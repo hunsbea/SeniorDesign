@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Subject>
+  <IntroText>Science</IntroText>
+  <Subject>Solar System Tour</Subject>
+  <SearchMetaData>
+    <Subject>Science</Subject>
+    <Focus>SolarSystem</Focus>  
+  </SearchMetaData>
+</Subject>

@@ -1,0 +1,14 @@
+		<SearchMetaData>
+			<Age>
+				<Young>3</Young>
+				<Old>7</Old>
+			</Age>
+			<PlayerGender>
+				<Male>1</Male>
+				<Female>9</Female>
+			</PlayerGender>
+			<Dress>
+				<Casual>1</Casual>
+				<Formal>9</Formal>
+			</Dress>
+		</SearchMetaData>

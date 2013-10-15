@@ -1,0 +1,1681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ff25414f-3217-4b0c-b12e-a23734698ecb" name="New changelist" comment="Removed unnecessary xml files">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Character/LearningActCharacterType.java" />
+      <change type="DELETED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Character\LearningObjectiveCharacterType.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Shared/Asset.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Shared/Asset.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Shared/Behavior.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Shared/Behavior.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Challenge/Challenge.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Challenge/Challenge.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xml/Challenge.xml" afterPath="$PROJECT_DIR$/xml/Challenge.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Characters/Characters.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Characters/Characters.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/GameGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/GameGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Layers.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Layers.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Lesson/Lesson.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Lesson/Lesson.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Locale/Locale.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Locale/Locale.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Locale/LocaleScreen.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Locale/LocaleScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Shared/SharedCharacter.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Shared/SharedCharacter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Structure/Structure.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Structure/Structure.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Test.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/TestObjects.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/TestObjects.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/Theme.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/Theme.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/ThemeScreen.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/ThemeScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/ThemeStoryScreenIntro.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/ThemeStoryScreenIntro.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/ThemeStoryScreenOutro.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Theme/ThemeStoryScreenOutro.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Challenge\ChallengeOption.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Challenge/ChallengeOption.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Challenge\ChallengeOptionType.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Challenge/ChallengeOptionType.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Challenge\Reward.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Challenge/Reward.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Character\LearningObjectiveCharacter.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Character/LearningActCharacter.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Character\Movement.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Character/Movement.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\LearningObjective.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/LearningAct.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\LessonAct.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/LessonAct.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Prop\GameButton.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Prop/GameButton.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Prop\GameText.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Prop/GameText.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Prop\TextType.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Prop/TextType.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\LearningObjectiveChallenge.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/ChallengeScreen.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\LearningObjectiveFailure.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/FailureScreen.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\LearningObjectiveLesson.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/LessonScreen.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\LearningObjectiveNeutral.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/NeutralScreen.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\LearningObjectiveScreen.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/BaseScreen.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\LearningObjectiveSuccess.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/SuccessScreen.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\ScreenType.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/ScreenType.java" />
+      <change type="MOVED" beforePath="E:\Development\Java\GameGenerator\src\main\java\edu\utdallas\gamegenerator\LearningObjective\Screen\TransitionType.java" afterPath="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/TransitionType.java" />
+    </list>
+    <ignored path="GameGenerator.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="/ScreenNode.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365884143247" ignored="false" />
+    <file path="/fragment.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367979933783" ignored="false" />
+    <file path="/ScreenType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363140747708" ignored="false" />
+    <file path="$PROJECT_DIR$/../GameManager/src/main/java/com/porpoise/gamemanager/web/domain/User.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361035049763" ignored="false" />
+    <file path="/User.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361035028953" ignored="false" />
+    <file path="$PROJECT_DIR$/../Git/GameManager/.idea/workspace.xml" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361758255403" ignored="false" />
+    <file path="/ChallengeOption.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365802724152" ignored="false" />
+    <file path="/GameText.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363136002725" ignored="false" />
+    <file path="/TextType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361139505700" ignored="false" />
+    <file path="/GameObject.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364782691730" ignored="false" />
+    <file path="/GameCharacter.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363223289943" ignored="false" />
+    <file path="/TransitionType.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364527208600" ignored="false" />
+    <file path="/Screen.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363138972193" ignored="false" />
+    <file path="/LearningObjectScreen.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361141301689" ignored="false" />
+    <file path="/GameButton.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364782348967" ignored="false" />
+    <file path="/GameCharacterType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361146084402" ignored="false" />
+    <file path="/Movement.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361138884294" ignored="false" />
+    <file path="/LearningObjectiveChallenge.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365802673959" ignored="false" />
+    <file path="/ChallengeOptionType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363137407220" ignored="false" />
+    <file path="/LearningObjectiveLesson.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365813118381" ignored="false" />
+    <file path="/LearningObjectiveFailure.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365814445662" ignored="false" />
+    <file path="/LearningObjectiveSuccess.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361141396010" ignored="false" />
+    <file path="/LearningObjectiveNeutral.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361141350517" ignored="false" />
+    <file path="/LearningObjective.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363139725033" ignored="false" />
+    <file path="/Lesson.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367196530412" ignored="false" />
+    <file path="/Locale.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366856382203" ignored="false" />
+    <file path="/NPCCharacter.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366076480061" ignored="false" />
+    <file path="/PlayerCharacter.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363134772786" ignored="false" />
+    <file path="/LocaleCharacter.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1362106913721" ignored="false" />
+    <file path="/Subject.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364781893038" ignored="false" />
+    <file path="/Theme.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366245392917" ignored="false" />
+    <file path="/ThemeCharacter.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361759138648" ignored="false" />
+    <file path="/LearningObjectiveCharacterType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1361759595862" ignored="false" />
+    <file path="/LearningObjectiveScreen.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365814833097" ignored="false" />
+    <file path="/ObjectMovement.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364783774597" ignored="false" />
+    <file path="/ObjectMovementType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363139003355" ignored="false" />
+    <file path="/Structure.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366244157777" ignored="false" />
+    <file path="/Game.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365892054536" ignored="false" />
+    <file path="/Act.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365892234602" ignored="false" />
+    <file path="/Scene.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365884108787" ignored="false" />
+    <file path="/TestObjects.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365814386584" ignored="false" />
+    <file path="/a.dummy" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366077079836" ignored="false" />
+    <file path="/*.regexp" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367980500229" ignored="false" />
+    <file path="/ThemeScreen.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365732556880" ignored="false" />
+    <file path="/Asset.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365892505989" ignored="false" />
+    <file path="/Color.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1362365942052" ignored="false" />
+    <file path="/Behavior.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365893230348" ignored="false" />
+    <file path="/Character.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366077633570" ignored="false" />
+    <file path="/Test.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367453636518" ignored="false" />
+    <file path="/SharedButton.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363229834910" ignored="false" />
+    <file path="/SharedInformationBox.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1362711749163" ignored="false" />
+    <file path="/SharedCharacter.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364783669481" ignored="false" />
+    <file path="/pom.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1363566385771" ignored="false" />
+    <file path="/NPCCharacter.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366076544122" ignored="false" />
+    <file path="/Dummy.txt" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367978891055" ignored="false" />
+    <file path="$PROJECT_DIR$/../TheGamesDBJavaAPI/.idea/workspace.xml" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363138114965" ignored="false" />
+    <file path="/ThemeStory.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364784140484" ignored="false" />
+    <file path="/ThemeStoryScreen.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363141735613" ignored="false" />
+    <file path="/ThemeStoryScreenOutro.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363141772876" ignored="false" />
+    <file path="/CharacterAssetType.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365807172693" ignored="false" />
+    <file path="/LearningObjectiveCharacter.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364781802120" ignored="false" />
+    <file path="/ButtonLocationType.java" changelist="ae160c5c-7d43-4b07-9781-fd4e4e88fd38" time="1363226785024" ignored="false" />
+    <file path="/Reward.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364781522365" ignored="false" />
+    <file path="/BehaviorType.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1363565623652" ignored="false" />
+    <file path="/LocaleScreen.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364786043210" ignored="false" />
+    <file path="/MySchemaOutputResolver.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1364786608194" ignored="false" />
+    <file path="/NPCCharacter.xsd" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365560359873" ignored="false" />
+    <file path="/Subject.xsd" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365560708624" ignored="false" />
+    <file path="/Theme.xsd" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365560907971" ignored="false" />
+    <file path="/TriggerType.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365893226550" ignored="false" />
+    <file path="/LearningObjective.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365895706074" ignored="false" />
+    <file path="/ThemeStoryScreenIntro.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365815507645" ignored="false" />
+    <file path="/Theme.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367455787419" ignored="false" />
+    <file path="/ImageAsset.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365887492286" ignored="false" />
+    <file path="/CharacterAsset.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365888010936" ignored="false" />
+    <file path="/ImformationBoxAsset.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365888111958" ignored="false" />
+    <file path="/ButtonAsset.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365888475626" ignored="false" />
+    <file path="/TransitionBehavior.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365895750898" ignored="false" />
+    <file path="/EndGameBehavior.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365896285701" ignored="false" />
+    <file path="/Game.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1365896248790" ignored="false" />
+    <file path="/GameGenerator.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367197305705" ignored="false" />
+    <file path="/Layers.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367196813211" ignored="false" />
+    <file path="/Character.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366079256343" ignored="false" />
+    <file path="/LearningObjectiveList.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1366079667382" ignored="false" />
+    <file path="/Challenge.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367197399874" ignored="false" />
+    <file path="/Challenge.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367980595123" ignored="false" />
+    <file path="/Lesson.xml" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367456158935" ignored="false" />
+    <file path="/FailureScreen.java" changelist="ff25414f-3217-4b0c-b12e-a23734698ecb" time="1367980402282" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/GameGenerator$Test.coverage" NAME="Test Coverage Results" MODIFIED="1363917232028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.utdallas.gamegenerator.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Test.java" line="87" class="edu.utdallas.gamegenerator.Test" package="edu.utdallas.gamegenerator">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Locale/Locale.java" line="290" class="edu.utdallas.gamegenerator.Locale.Locale" package="edu.utdallas.gamegenerator.Locale">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="GameGenerator" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Characters/CharacterAssetType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Challenge/Challenge.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Lesson/Lesson.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/GameGenerator.java" />
+        <option value="$PROJECT_DIR$/Theme.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningObjective/Screen/LearningObjectiveScreen.java" />
+        <option value="$PROJECT_DIR$/xml/Lesson.xml" />
+        <option value="$PROJECT_DIR$/xml/Theme.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningObjective/Character/LearningObjectiveCharacter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Test.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Layers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/LearningObjective.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/LearningAct.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/Locale/Locale.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/Screen/FailureScreen.java" />
+        <option value="$PROJECT_DIR$/xml/Challenge.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="GameGenerator" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="GameGenerator" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Imports</id>
+          </State>
+          <State>
+            <id>J2ME issues</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Memory issues</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
+            <id>Resource management issues</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamegenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamegenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Theme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamegenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Subject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamegenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Structure" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamegenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Locale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameGenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamegenerator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LearningAct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="292" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="292" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="296" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="293" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="971" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="967" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="292" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="285" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Development\Java\GameGenerator\xml" />
+      <recent name="E:\Development\Java\GameGenerator" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="edu.utdallas.gamegenerator.Locale" />
+      <recent name="edu.utdallas.gamegenerator" />
+      <recent name="edu.utdallas.gamegenerator.Shared" />
+      <recent name="edu.utdallas.gamegenerator.Characters" />
+      <recent name="edu.utdallas.gamegenerator.Theme" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Test">
+    <configuration default="false" name="Test" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="edu.utdallas.gamegenerator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="edu.utdallas.gamegenerator.Test" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="GameGenerator" />
+      <envs />
+      <RunnerSettings RunnerId="Cover" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Cover" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GameGenerator" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="edu.utdallas.gamegenerator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="edu.utdallas.gamegenerator.GameGenerator" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="xml\Characters.xml xml\Lesson.xml xml\Challenge.xml xml\Locale.xml xml\Subject.xml xml\Theme.xml" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="GameGenerator" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.Test" />
+      <item index="1" class="java.lang.String" itemvalue="Application.GameGenerator" />
+    </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="1" class="java.lang.String" itemvalue="Application.GameGenerator" />
+      </list>
+    </recent_temporary>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="true">C:\Users\Terminus Est\AppData\Roaming\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff25414f-3217-4b0c-b12e-a23734698ecb" name="New changelist" comment="" />
+      <created>1360986158557</created>
+      <updated>1360986158557</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1363134510726</created>
+      <updated>1363134510726</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added some marshalling and started working on locale getact">
+      <created>1363144740102</created>
+      <updated>1363144740102</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added some marshalling and started working on locale getact">
+      <created>1363311977305</created>
+      <updated>1363311977305</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added building challenge">
+      <created>1364174170521</created>
+      <updated>1364174170521</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added multiple questions in a challenge">
+      <created>1364522994410</created>
+      <updated>1364522994410</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Wiring up structure">
+      <created>1364527358689</created>
+      <updated>1364527358689</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Committing workspace.xml">
+      <created>1364781427146</created>
+      <updated>1364781427146</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Annotated all input types for xml input">
+      <created>1364787028927</created>
+      <updated>1364787028927</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed XML unmarshalling issues">
+      <created>1365816613454</created>
+      <updated>1365816613454</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Adding sample game xml">
+      <created>1365816644962</created>
+      <updated>1365816644962</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Various fixes">
+      <created>1365896781803</created>
+      <updated>1365896781803</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixing NPC Character xml">
+      <created>1365920328594</created>
+      <updated>1365920328594</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Merged Character layers, added 2 layer architecture">
+      <created>1366081126765</created>
+      <updated>1366081126765</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added controller and javadoc comments as well as name refactoring">
+      <created>1366766245344</created>
+      <updated>1366766245344</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactoring and split learning objective into two layers (lesson and challenge) for import only">
+      <created>1367198587164</created>
+      <updated>1367198587164</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated test.java to create new xsds for lesson and challenge layers">
+      <created>1367453821301</created>
+      <updated>1367453821301</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated paths in program arguments">
+      <created>1367454782639</created>
+      <updated>1367454782639</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fixed text in theme xml">
+      <created>1367455140610</created>
+      <updated>1367455140610</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fixed characters not being loaded on locale screens">
+      <created>1367457674760</created>
+      <updated>1367457674760</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Removed unnecessary xml files">
+      <created>1367978899517</created>
+      <updated>1367978899517</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31995663" sideWeight="0.9989827" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32725322" sideWeight="0.48719317" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32725322" sideWeight="0.50053364" order="3" side_tool="false" content_ui="tabs" x="669" y="331" width="788" height="423" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.49839914" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.49573106" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24813233" sideWeight="0.23752712" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.670282" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20917822" sideWeight="0.6800434" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33476394" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.670282" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991323" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed unnecessary xml files" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Added some marshalling and started working on locale getact" />
+    <MESSAGE value="Added building challenge" />
+    <MESSAGE value="Added multiple questions in a challenge" />
+    <MESSAGE value="Wiring up structure" />
+    <MESSAGE value="Committing workspace.xml" />
+    <MESSAGE value="Annotated all input types for xml input" />
+    <MESSAGE value="Fixed XML unmarshalling issues" />
+    <MESSAGE value="Adding sample game xml" />
+    <MESSAGE value="Various fixes" />
+    <MESSAGE value="Fixing NPC Character xml" />
+    <MESSAGE value="Merged Character layers, added 2 layer architecture" />
+    <MESSAGE value="Added controller and javadoc comments as well as name refactoring" />
+    <MESSAGE value="Refactoring and split learning objective into two layers (lesson and challenge) for import only" />
+    <MESSAGE value="Updated test.java to create new xsds for lesson and challenge layers" />
+    <MESSAGE value="Updated paths in program arguments" />
+    <MESSAGE value="Fixed text in theme xml" />
+    <MESSAGE value="Fixed characters not being loaded on locale screens" />
+    <MESSAGE value="Removed unnecessary xml files" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/xml/Challenge.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="20" selection-start="274" selection-end="274" vertical-scroll-proportion="0.25757575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.LearningAct.Character">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.LearningAct.Character</OriginalElement>
+          <nodes>
+            <node x="" y="">edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacterType</node>
+            <node x="" y="">edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacter</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="93.0" y="207.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/characters.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Characters">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Characters</OriginalElement>
+          <nodes>
+            <node x="" y="">edu.utdallas.gamegenerator.Characters.GameCharacter</node>
+            <node x="" y="">edu.utdallas.gamegenerator.Characters.Characters</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="75.0" y="363.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Challenge">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Challenge</OriginalElement>
+          <nodes>
+            <node x="" y="">edu.utdallas.gamegenerator.Challenge.Challenge</node>
+            <node x="" y="">edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="44.5" y="14.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Challenge.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Challenge</OriginalElement>
+          <nodes>
+            <node x="0.0" y="219.0">edu.utdallas.gamegenerator.Challenge.Challenge</node>
+            <node x="39.0" y="0.0">edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="45.0" y="14.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Lesson">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Lesson</OriginalElement>
+          <nodes>
+            <node x="0.0" y="0.0">edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen</node>
+            <node x="129.5" y="299.0">edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen</node>
+            <node x="79.0" y="397.0">edu.utdallas.gamegenerator.Lesson.Lesson</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="edu.utdallas.gamegenerator.Lesson.Lesson" target="edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="0.0" y="124.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="-344.0" y="35.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Structure">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Structure</OriginalElement>
+          <nodes>
+            <node x="254.84375" y="439.0">edu.utdallas.gamegenerator.Structure.Act</node>
+            <node x="123.75" y="957.0">edu.utdallas.gamegenerator.Structure.Structure</node>
+            <node x="141.75" y="698.0">edu.utdallas.gamegenerator.Structure.Game</node>
+            <node x="0.0" y="0.0">edu.utdallas.gamegenerator.Structure.Scene</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="edu.utdallas.gamegenerator.Structure.Game" target="edu.utdallas.gamegenerator.Structure.Act">
+              <point x="0.0" y="-104.5" />
+              <point x="284.75" y="673.0" />
+              <point x="306.84375" y="673.0" />
+              <point x="-104.0" y="104.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Structure.Structure" target="edu.utdallas.gamegenerator.Structure.Game">
+              <point x="0.0" y="-164.5" />
+              <point x="323.75" y="932.0" />
+              <point x="356.25" y="932.0" />
+              <point x="71.5" y="104.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Structure.Act" target="edu.utdallas.gamegenerator.Structure.Scene">
+              <point x="0.0" y="-104.5" />
+              <point x="410.84375" y="414.0" />
+              <point x="393.75" y="414.0" />
+              <point x="131.25" y="194.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Structure.Structure" target="edu.utdallas.gamegenerator.Structure.Scene">
+              <point x="-160.0" y="-164.5" />
+              <point x="163.75" y="932.0" />
+              <point x="131.25" y="932.0" />
+              <point x="-131.25" y="194.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Structure.Structure" target="edu.utdallas.gamegenerator.Structure.Act">
+              <point x="80.0" y="-164.5" />
+              <point x="403.75" y="932.0" />
+              <point x="438.25" y="932.0" />
+              <point x="438.25" y="673.0" />
+              <point x="410.84375" y="673.0" />
+              <point x="0.0" y="104.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="90.0" y="947.5" />
+          <SelectedNodes>
+            <node>edu.utdallas.gamegenerator.Structure.Act</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Methods</Category>
+            <Category>Fields</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Subject">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Subject</OriginalElement>
+          <nodes>
+            <node x="0.0" y="0.0">edu.utdallas.gamegenerator.Subject.Subject</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="38.5" y="14.0" />
+          <SelectedNodes>
+            <node>edu.utdallas.gamegenerator.Subject.Subject</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Theme">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Theme</OriginalElement>
+          <nodes>
+            <node x="421.25" y="0.0">edu.utdallas.gamegenerator.Theme.ThemeStoryScreenOutro</node>
+            <node x="0.0" y="98.0">edu.utdallas.gamegenerator.Theme.ThemeScreen</node>
+            <node x="616.25" y="0.0">edu.utdallas.gamegenerator.Theme.ThemeStoryScreenIntro</node>
+            <node x="442.0" y="188.0">edu.utdallas.gamegenerator.Theme.ThemeStory</node>
+            <node x="173.75" y="477.0">edu.utdallas.gamegenerator.Theme.Theme</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="edu.utdallas.gamegenerator.Theme.Theme" target="edu.utdallas.gamegenerator.Theme.ThemeStory">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Theme.ThemeStory" target="edu.utdallas.gamegenerator.Theme.ThemeStoryScreenIntro">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Theme.ThemeStory" target="edu.utdallas.gamegenerator.Theme.ThemeStoryScreenOutro">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.Theme.Theme" target="edu.utdallas.gamegenerator.Theme.ThemeScreen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="130.5" y="123.5" />
+          <SelectedNodes>
+            <node>edu.utdallas.gamegenerator.Theme.ThemeStoryScreenOutro</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LearningAct.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.LearningAct</OriginalElement>
+          <nodes>
+            <node x="580.2333333333333" y="379.0">edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen</node>
+            <node x="983.5055555555556" y="728.5">edu.utdallas.gamegenerator.LearningAct.Screen.NeutralScreen</node>
+            <node x="1006.9277777777778" y="60.0">edu.utdallas.gamegenerator.LearningAct.Prop.GameText</node>
+            <node x="562.5611111111111" y="1295.0">edu.utdallas.gamegenerator.LearningAct.LearningAct</node>
+            <node x="617.5055555555556" y="728.5">edu.utdallas.gamegenerator.LearningAct.Screen.FailureScreen</node>
+            <node x="223.31111111111113" y="877.0">edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen</node>
+            <node x="1166.5055555555557" y="728.5">edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen</node>
+            <node x="800.5055555555556" y="728.5">edu.utdallas.gamegenerator.LearningAct.Screen.SuccessScreen</node>
+            <node x="515.5611111111111" y="1096.0">edu.utdallas.gamegenerator.LearningAct.LessonAct</node>
+            <node x="0.0" y="0.0">edu.utdallas.gamegenerator.LearningAct.Prop.GameButton</node>
+            <node x="42.0" y="678.0">edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOption</node>
+            <node x="569.9277777777778" y="60.0">edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacter</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.LessonAct" target="edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.LessonAct" target="edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="53.5" y="-84.5" />
+              <point x="383.81111111111113" y="852.0" />
+              <point x="499.3166666666667" y="852.0" />
+              <point x="499.3166666666667" y="658.0" />
+              <point x="685.7333333333333" y="658.0" />
+              <point x="-105.5" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.SuccessScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="882.0055555555556" y="658.0" />
+              <point x="826.4000000000001" y="658.0" />
+              <point x="35.166666666666686" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen" target="edu.utdallas.gamegenerator.LearningAct.Prop.GameText">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.LearningAct" target="edu.utdallas.gamegenerator.LearningAct.LessonAct">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen" target="edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacter">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen" target="edu.utdallas.gamegenerator.LearningAct.Prop.GameButton">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOption" target="edu.utdallas.gamegenerator.LearningAct.Prop.GameButton">
+              <point x="-90.5" y="-74.5" />
+              <point x="-132.5" y="164.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.NeutralScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="1065.0055555555555" y="658.0" />
+              <point x="896.7333333333333" y="658.0" />
+              <point x="105.5" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.FailureScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="699.0055555555556" y="658.0" />
+              <point x="756.0666666666667" y="658.0" />
+              <point x="-35.16666666666663" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOption" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen" target="edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOption">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="1248.0055555555557" y="648.0" />
+              <point x="967.0666666666667" y="648.0" />
+              <point x="175.83333333333331" y="124.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="595.1428571428571" y="1087.8571428571427" />
+          <SelectedNodes>
+            <node>edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learningobjective.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/utdallas/gamegenerator/LearningAct/LessonAct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="18" selection-start="384" selection-end="384" vertical-scroll-proportion="0.16887417">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learningact.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.LearningAct">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.LearningAct</OriginalElement>
+          <nodes>
+            <node x="618.1208333333334" y="617.0">edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen</node>
+            <node x="1031.0333333333333" y="298.0">edu.utdallas.gamegenerator.LearningAct.Prop.GameText</node>
+            <node x="1027.2791666666667" y="966.5">edu.utdallas.gamegenerator.LearningAct.Screen.NeutralScreen</node>
+            <node x="532.3708333333334" y="1533.0">edu.utdallas.gamegenerator.LearningAct.LearningAct</node>
+            <node x="661.2791666666668" y="966.5">edu.utdallas.gamegenerator.LearningAct.Screen.FailureScreen</node>
+            <node x="193.1208333333334" y="1115.0">edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen</node>
+            <node x="1210.279166666667" y="966.5">edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen</node>
+            <node x="844.2791666666668" y="966.5">edu.utdallas.gamegenerator.LearningAct.Screen.SuccessScreen</node>
+            <node x="485.37083333333345" y="1334.0">edu.utdallas.gamegenerator.LearningAct.LessonAct</node>
+            <node x="12.033333333333417" y="707.5">edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOptionType</node>
+            <node x="1086.5333333333333" y="10.0">edu.utdallas.gamegenerator.LearningAct.Prop.TextType</node>
+            <node x="44.03333333333342" y="238.0">edu.utdallas.gamegenerator.LearningAct.Prop.GameButton</node>
+            <node x="107.03333333333342" y="49.5">edu.utdallas.gamegenerator.LearningAct.Challenge.Reward</node>
+            <node x="709.5333333333334" y="40.0">edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacterType</node>
+            <node x="266.0333333333334" y="0.0">edu.utdallas.gamegenerator.LearningAct.Screen.TransitionType</node>
+            <node x="0.0" y="916.0">edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOption</node>
+            <node x="594.0333333333334" y="298.0">edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacter</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="53.5" y="-84.5" />
+              <point x="353.6208333333334" y="1090.0" />
+              <point x="513.6958333333336" y="1090.0" />
+              <point x="513.6958333333336" y="896.0" />
+              <point x="723.6208333333334" y="896.0" />
+              <point x="-105.5" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.SuccessScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="925.7791666666668" y="896.0" />
+              <point x="864.2875000000001" y="896.0" />
+              <point x="35.166666666666686" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Challenge.ChallengeOption" target="edu.utdallas.gamegenerator.LearningAct.Prop.GameButton">
+              <point x="0.0" y="-74.5" />
+              <point x="181.0" y="896.0" />
+              <point x="176.53333333333342" y="896.0" />
+              <point x="-132.5" y="164.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.NeutralScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="1108.7791666666667" y="896.0" />
+              <point x="934.6208333333334" y="896.0" />
+              <point x="105.5" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.FailureScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="742.7791666666668" y="896.0" />
+              <point x="793.9541666666668" y="896.0" />
+              <point x="-35.16666666666663" y="124.5" />
+            </edge>
+            <edge source="edu.utdallas.gamegenerator.LearningAct.Screen.LessonScreen" target="edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen">
+              <point x="0.0" y="-24.0" />
+              <point x="1291.779166666667" y="886.0" />
+              <point x="1004.9541666666668" y="886.0" />
+              <point x="175.83333333333331" y="124.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="316.9999999999998" y="851.9999999999998" />
+          <SelectedNodes>
+            <node>edu.utdallas.gamegenerator.LearningAct.LessonAct</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/edu.utdallas.gamegenerator.Locale">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>edu.utdallas.gamegenerator.Locale</OriginalElement>
+          <nodes>
+            <node x="0.0" y="379.0">edu.utdallas.gamegenerator.Locale.Locale</node>
+            <node x="102.0" y="0.0">edu.utdallas.gamegenerator.Locale.LocaleScreen</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="edu.utdallas.gamegenerator.Locale.Locale" target="edu.utdallas.gamegenerator.Locale.LocaleScreen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="721.0" y="307.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>GameGenerator</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+  <component name="simpleUML.UMLToolWindowPlugin">
+    <General>
+      <option name="birdViewUpdateDelay" value="2000" />
+      <option name="defaultFileLocation" value="file://$PROJECT_DIR$/.." />
+    </General>
+    <Classdiagram>
+      <option name="diagramTitleFont" value="SansSerif,1,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="defaultFieldsExpanded" value="false" />
+      <option name="defaultContructorsExpanded" value="false" />
+      <option name="defaultMethodsExpanded" value="false" />
+      <option name="showParameters" value="true" />
+      <option name="showTooltip" value="true" />
+      <option name="showReturnValues" value="true" />
+      <option name="longModifier" value="true" />
+      <option name="implementsBehaviour" value="1" />
+      <option name="extendsBehaviour" value="1" />
+      <option name="compartmentBehaviour" value="1" />
+      <option name="interfaceBackgroundColor" value="-6494306" />
+      <option name="abstractClassBackgroundColor" value="-1580132" />
+      <option name="classBackgroundColor" value="-6508057" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="quickSourceLinkColor" value="-16776961" />
+      <option name="quickDiagramLinkColor" value="-8454144" />
+      <option name="drawDecorations" value="false" />
+      <option name="hideFieldList" value="" />
+      <option name="showFieldList" value="" />
+      <option name="hideConstructorList" value="" />
+      <option name="showConstructorList" value="" />
+      <option name="hideMethodList" value="" />
+      <option name="showMethodList" value="" />
+      <option name="minimumFigureSize" value="0,0" />
+    </Classdiagram>
+    <Dependencydiagram>
+      <option name="diagramTitleFont" value="SansSerif,1,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="packageNameCompressionLevel" value="0" />
+    </Dependencydiagram>
+    <Packagediagram>
+      <option name="diagramTitleFont" value="SansSerif,0,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="packageBackgroundColor" value="-4144960" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="packageNameCompressionLevel" value="2" />
+    </Packagediagram>
+  </component>
+</project>
+

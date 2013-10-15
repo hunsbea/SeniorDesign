@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Theme>
+  <IntroScreens>
+    <IntroScreen>
+      <Background>Backdrops\Bedroom master.png</Background>
+      <ThemeButtons>
+        <entry>
+          <key>NEXT</key>
+          <value>
+            <Height>50.566680908203125</Height>
+            <LocX>581.83331298828125</LocX>
+            <LocY>332.75</LocY>
+            <PathToAsset></PathToAsset>
+            <Text>Continue</Text>
+            <Width>157.86669921875</Width>
+            <behavior>
+              <behaviorType>TRANSITION_BEHAVIOR</behaviorType>
+              <displayName>Transition Behavior</displayName>
+              <Transition>NEXT_SCREEN</Transition>
+              <trigger>Click</trigger>
+            </behavior>
+            <name>Next</name>
+          </value>
+        </entry>
+      </ThemeButtons>
+      <GameObjects>
+        <GameObject>
+          <Height>78.316665649414062</Height>
+          <LocX>327.14999389648438</LocX>
+          <LocY>123.69999694824219</LocY>
+          <PathToAsset>Props\GenericInteraction\TextBubble.png</PathToAsset>
+          <Width>247.89999389648438</Width>
+        </GameObject>
+      </GameObjects>
+      <InformationBoxes>
+        <InformationBox>
+          <Height>59.20001220703125</Height>
+          <LocX>346.88330078125</LocX>
+          <LocY>128.63331604003906</LocY>
+          <Text>I hope I am ready for the test tomorrow. After a long day of studying, all I need is a good nights sleep.</Text>
+          <Width>210.28340148925781</Width>
+          <name>I hope I am ready for the test tomorrow. After a long day of studying, all I need is a good nights sleep.</name>
+        </InformationBox>
+      </InformationBoxes>
+      <ThemeCharacters>
+        <entry>
+          <key>PLAYER</key>
+          <value>
+            <Height>292.91667175292969</Height>
+            <LocX>209.36663818359375</LocX>
+            <LocY>130.48335266113281</LocY>
+            <Text></Text>
+            <Width>171.433349609375</Width>
+            <CharacterAssetType>WALK_LEFT_BEHIND</CharacterAssetType>
+            <CharacterType>PLAYER</CharacterType>
+          </value>
+        </entry>
+      </ThemeCharacters>
+    </IntroScreen>
+    <IntroScreen>
+      <Background>Backdrops\blue.png</Background>
+      <ThemeButtons>
+		<entry>
+          <key>NEXT</key>
+          <value>
+            <Height>35.76666259765625</Height>
+            <LocX>422.11663818359375</LocX>
+            <LocY>266.1500244140625</LocY>
+            <Text>View</Text>
+            <Width>98.050018310546875</Width>
+            <behavior>
+              <behaviorType>TRANSITION_BEHAVIOR</behaviorType>
+              <displayName>Transition Behavior</displayName>
+              <Transition>NEXT_SCREEN</Transition>
+              <trigger>Click</trigger>
+            </behavior>
+            <name>View</name>
+          </value>
+        </entry>
+      </ThemeButtons>
+      <GameObjects>
+      </GameObjects>
+      <InformationBoxes>
+        <InformationBox>
+          <Height>67.833343505859375</Height>
+          <LocX>191.48330688476563</LocX>
+          <LocY>152.06666564941406</LocY>
+          <Text>Dreamable!</Text>
+          <Width>390.35000610351562</Width>
+          <name>Dreamable!</name>
+        </InformationBox>
+        <InformationBox>
+          <Height>36.999984741210938</Height>
+          <LocX>193.33329772949219</LocX>
+          <LocY>224.2166748046875</LocY>
+          <Text>Vocabulary</Text>
+          <Width>220.15000915527344</Width>
+          <name>Vocabulary</name>
+        </InformationBox>
+        <InformationBox>
+          <Height>64.133331298828125</Height>
+          <LocX>192.0999755859375</LocX>
+          <LocY>266.14999389648438</LocY>
+          <Text>The Infinite Forest</Text>
+          <Width>221.38333129882813</Width>
+          <name>The Infinite Forest</name>
+        </InformationBox>
+      </InformationBoxes>
+      <ThemeCharacters />
+    </IntroScreen>
+    
+  </IntroScreens>
+  <OutroScreens>
+    <OutroScreen>
+      <Background>Backdrops\Bedroom master.png</Background>
+      <ThemeButtons>
+        <entry>
+          <key>NEXT</key>
+          <value>
+            <Height>46.86669921875</Height>
+            <LocX>570.7332763671875</LocX>
+            <LocY>325.9666748046875</LocY>
+            <PathToAsset>PathToAsset10</PathToAsset>
+            <Text>End Game</Text>
+            <Width>121.48333740234375</Width>
+            <behavior>
+              <behaviorType>END_GAME_BEHAVIOR</behaviorType>
+              <trigger>Click</trigger>
+            </behavior>
+            <name>End Game</name>
+          </value>
+        </entry>
+      </ThemeButtons>
+      <GameObjects>
+        <GameObject>
+          <Height>109.76666259765625</Height>
+          <LocX>362.29995727539062</LocX>
+          <LocY>98.416656494140625</LocY>
+          <PathToAsset>Props\GenericInteraction\TextBubble.png</PathToAsset>
+          <Width>277.50003051757812</Width>
+        </GameObject>
+      </GameObjects>
+      <InformationBoxes>
+        <InformationBox>
+          <Height>66.599990844726562</Height>
+          <LocX>375.86663818359375</LocX>
+          <LocY>113.83334350585938</LocY>
+          <Text>That was a ... productive dream. I hope I am ready for the test today.</Text>
+          <Width>249.75003051757813</Width>
+          <name>That was a ... productive dream. I hope I am ready for the test today.</name>
+        </InformationBox>
+      </InformationBoxes>
+      <ThemeCharacters>
+        <entry>
+          <key>PLAYER</key>
+          <value>
+            <Height>294.76665496826172</Height>
+            <LocX>218.61663818359375</LocX>
+            <LocY>126.16666412353516</LocY>
+            <PathToAsset>PathToAsset10</PathToAsset>
+            <Width>239.88330078125</Width>
+            <CharacterAssetType>LEFT_POINT_UP</CharacterAssetType>
+            <CharacterType>PLAYER</CharacterType>
+            <Movements>
+            </Movements>
+          </value>
+        </entry>
+      </ThemeCharacters>
+    </OutroScreen>
+  </OutroScreens>
+  <ThemeStories>
+    <ThemeStory>
+      <StoryIntroScreens>
+        <StoryIntroScreen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="themeStoryScreenIntro">
+		  <Buttons>
+		    <Button>
+		      <ButtonLocationType>NEXT</ButtonLocationType>
+			  <Text>Continue</Text>
+			  <Timer></Timer>
+			  <TransitionType>NEXT_SCREEN</TransitionType>
+			</Button>
+		  </Buttons>
+		  <LOCharacters>
+		    <Character>
+			  <CharacterType>PLAYER</CharacterType>
+			  <MovementType></MovementType>
+			  <Timer></Timer>
+			</Character>
+		    <Character>
+			  <CharacterType>HERO</CharacterType>
+			  <MovementType></MovementType>
+			  <Timer></Timer>
+			</Character>
+		  </LOCharacters>
+		  <InformationBoxes>
+		    <InformationBox>
+			  <TextType>PLAYER</TextType>
+			  <Text>Where am I?</Text>
+			  <Timer></Timer>
+			</InformationBox>
+		    <InformationBox>
+			  <TextType>HERO</TextType>
+			  <Text>Welcome to The Forest of Many Questions. Here you will be tested though a series of questions. Your goal is to escape through the cabin in the portal. I will do my best to prepare you for Lord Askalot's questions. He will try and prevent you from leaving.</Text>
+			  <Timer></Timer>
+			</InformationBox>
+		    <InformationBox>
+			  <TextType>ALT1</TextType>
+			  <Text>You find yourself in what seems to be an infinite forest.</Text>
+			  <Timer></Timer>
+			</InformationBox>
+		  </InformationBoxes>			
+        </StoryIntroScreen>
+      </StoryIntroScreens>
+      <StoryOutroScreens>
+        <StoryOutroScreen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="themeStoryScreenOutro">
+		  <Buttons>
+		    <Button>
+		      <ButtonLocationType>NEXT</ButtonLocationType>
+			  <Text>Let's get out of here!</Text>
+			  <Timer></Timer>
+			  <TransitionType>NEXT_ACT</TransitionType>
+			</Button>
+		  </Buttons>
+		  <LOCharacters>
+		    <Character>
+			  <CharacterType>HERO</CharacterType>
+			  <MovementType></MovementType>
+			  <Timer></Timer>
+			</Character>
+		   <Character>
+			  <CharacterType>PLAYER</CharacterType>
+			  <MovementType></MovementType>
+			  <Timer></Timer>
+			</Character>
+		  </LOCharacters>
+		  <InformationBoxes>
+		    <InformationBox>
+			  <TextType>HERO</TextType>
+			  <Text>You did it! You can escape though that cabin. I hope you don't forget what you have learned.</Text>
+			  <Timer></Timer>
+			</InformationBox>
+		    <InformationBox>
+			  <TextType>ALT1</TextType>
+			  <Text>After answering all of Lord Askalot's questions, a cabin seems to have appeared out of nowhere.</Text>
+			  <Timer></Timer>
+			</InformationBox>
+		  </InformationBoxes>			
+        </StoryOutroScreen>
+      </StoryOutroScreens>
+    </ThemeStory>
+  </ThemeStories>
+
+</Theme>

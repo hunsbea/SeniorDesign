@@ -1,0 +1,5 @@
+3 lesson
+	The diagonal should be 1, otherwise the top right triangle should be the inverse of the bottom left triangle		
+Social: 		vSocial: 1		vEducational: 2		vProfessional: 2		
+Educational: 	vSocial: .5		vEducational: 1		vProfessional: 2		
+Professional:	vSocial: .5		vEducational: .5		vProfessional: 1

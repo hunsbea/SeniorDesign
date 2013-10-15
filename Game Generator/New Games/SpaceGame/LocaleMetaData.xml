@@ -1,0 +1,14 @@
+		<SearchMetaData>
+			<Setting>
+				<Past>1</Past>
+				<Present>4</Present>
+				<Future>6</Future>
+			</Setting>
+			<Subject>
+				<Professional>1</Professional>
+				<Casual>1</Casual>
+				<Nature>1</Nature>
+				<Non-Terrestrial>9</Non-Terrestrial>
+				<Educational>1</Educational>
+			</Subject>
+		</SearchMetaData>

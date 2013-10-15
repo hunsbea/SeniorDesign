@@ -1,0 +1,12 @@
+10 subject
+	The diagonal should be 1, otherwise the top right triangle should be the inverse of the bottom left triangle		
+Math: 			vMath: 1		vReading: 1		vEnglish: .25		vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: 1					
+Reading: 		vMath: 1		vReading: 1		vEnglish: .25		vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: 1					
+English: 		vMath: 4		vReading: 4		vEnglish: 1			vSocialStudies: 4		vScience: 4		vProfessional: 4		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: 1					
+SocialStudies: 	vMath: 1		vReading: 1		vEnglish: .25		vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: 1					
+Science: 		vMath: 1		vReading: 1		vEnglish: .25		vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: 1					
+Professional: 	vMath: 1		vReading: 1		vEnglish: .25		vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: 1					
+Primary: 		vMath: 1		vReading: 1		vEnglish: 1			vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: .5					
+Middle: 		vMath: 1		vReading: 1		vEnglish: 1			vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: .5				
+High: 			vMath: 1		vReading: 1		vEnglish: 1			vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 1		vMiddle: 1		vHigh: 1		vCollege: .5					
+College: 		vMath: 1		vReading: 1		vEnglish: 1			vSocialStudies: 1		vScience: 1		vProfessional: 1		vPrimary: 2		vMiddle: 2		vHigh: 2		vCollege: 1

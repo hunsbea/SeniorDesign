@@ -1,0 +1,37 @@
+<Lessons>
+	<Lesson id="0">
+		<SearchMetaData>
+			<Social>1</Social>
+			<Educational>9</Educational>
+			<Professional>1</Professional>
+		</SearchMetaData>
+	</Lesson>
+	<Lesson id="1">
+		<SearchMetaData>
+			<Social>1</Social>
+			<Educational>1</Educational>
+			<Professional>9</Professional>
+		</SearchMetaData>
+	</Lesson>
+	<Lesson id="2">
+		<SearchMetaData>
+			<Social>5</Social>
+			<Educational>5</Educational>
+			<Professional>1</Professional>
+		</SearchMetaData>
+	</Lesson>
+	<Lesson id="3">
+		<SearchMetaData>
+			<Social>1</Social>
+			<Educational>9</Educational>
+			<Professional>1</Professional>
+		</SearchMetaData>
+	</Lesson>
+	<Lesson id="4">
+		<SearchMetaData>
+			<Social>1</Social>
+			<Educational>9</Educational>
+			<Professional>1</Professional>
+		</SearchMetaData>
+	</Lesson>
+</Lessons>

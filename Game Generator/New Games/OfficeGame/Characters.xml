@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Characters>
+  <Alt>
+    <Directory>character_1</Directory>
+    <Name>Chareeeesa</Name>
+    <Prefix>char1</Prefix>
+  </Alt>
+  <Hero>
+    <Directory>character_3</Directory>
+    <Name>Sir Solvesalot</Name>
+    <Prefix>char3</Prefix>
+  </Hero>
+  <Villain>
+    <Directory>character_22</Directory>
+    <Name>Calcutron</Name>
+    <Prefix>char22</Prefix>
+  </Villain>
+  <Player>
+    <Directory>character_11</Directory>
+    <Name>Siva</Name>
+    <Prefix>char11</Prefix>
+  </Player>
+
+</Characters>

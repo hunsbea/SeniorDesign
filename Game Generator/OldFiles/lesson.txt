@@ -1,0 +1,4 @@
+3 3 lesson
+lesson0: socialSubject: 1	professionalSubject:	1	educationalSubject:	9
+lesson1: socialSubject: 1	professionalSubject:	6	educationalSubject:	6
+lesson2: socialSubject: 1	professionalSubject:	7	educationalSubject:	1

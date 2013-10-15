@@ -1,0 +1,64 @@
+<Lesson>
+    <LessonScreens>
+      <LessonScreen>
+        <Buttons>
+          <Button>
+            <ButtonLocationType>NEXT</ButtonLocationType>
+            <Text>Continue</Text>
+            <Timer></Timer>
+            <TransitionType>NEXT_SCREEN</TransitionType>
+          </Button>
+        </Buttons>
+        <LOCharacters>
+          <Character>
+            <CharacterType>HERO</CharacterType>
+            <!--<MovementType>WALK_ONTO_SCREEN</MovementType>-->
+            <Timer></Timer>
+          </Character>
+          <Character>
+            <CharacterType>PLAYER</CharacterType>
+            <!--<MovementType>WALK_ONTO_SCREEN</MovementType>-->
+            <Timer></Timer>
+          </Character>
+        </LOCharacters>
+        <InformationBoxes>
+          <InformationBox>
+            <Text>King Tut ruled from 1332BC-1323BC in the 18th dynasty.</Text>
+            <TextType>ALT1</TextType>
+            <Timer></Timer>
+          </InformationBox>
+        </InformationBoxes>
+      </LessonScreen>
+      <LessonScreen>
+        <Buttons>
+          <Button>
+            <ButtonLocationType>NEXT</ButtonLocationType>
+            <Text>Continue</Text>
+            <Timer></Timer>
+            <TransitionType>NEXT_SCREEN</TransitionType>
+          </Button>
+        </Buttons>
+        <LOCharacters>
+          <Character>
+            <CharacterType>HERO</CharacterType>
+            <!--<MovementType>WALK_ONTO_SCREEN</MovementType>-->
+            <Timer></Timer>
+          </Character>
+          <Character>
+            <CharacterType>PLAYER</CharacterType>
+            <!--<MovementType>WALK_ONTO_SCREEN</MovementType>-->
+            <Timer></Timer>
+          </Character>
+        </LOCharacters>
+        <InformationBoxes>
+          <InformationBox>
+            <Text>The Great Pyramid of Giza was finished around the year 2560BC.</Text>
+            <TextType>ALT1</TextType>
+            <Timer></Timer>
+          </InformationBox>
+        </InformationBoxes>
+      </LessonScreen>
+        
+    </LessonScreens>
+
+</Lesson>

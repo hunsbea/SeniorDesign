@@ -1,0 +1,17 @@
+		<SearchMetaData>
+			<Length>
+				<Short>1</Short>
+				<Medium>9</Medium>				
+				<Long>1</Long>
+			</Length>
+			<Difficulty>
+				<Easy>1</Easy>
+				<Medium>1</Medium>				
+				<Hard>9</Hard>
+			</Difficulty>
+			<Subject>
+				<Personal>1</Personal>
+				<Professional>1</Professional>
+				<School>9</School>
+			</Subject>
+		</SearchMetaData>

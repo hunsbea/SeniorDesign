@@ -1,0 +1,44 @@
+<challenge0>
+  <SearchMetaData>
+    <Length>Short</Length>
+    <Difficulty>Easy</Difficulty>
+    <Subject>
+      <General>Math</General>
+      <Focus>Addition</Focus>
+    </Subject>
+    <QuestionType>MultipleChoice</QuestionType>
+  </SearchMetaData>
+</challenge0>
+<challenge1>
+  <SearchMetaData>
+    <Length>Medium</Length>
+    <Difficulty>Medium</Difficulty>
+    <Subject>
+      <General>Workplace</General>
+      <Focus>OfficeRules</Focus>
+    </Subject>
+    <QuestionType>MultipleChoice</QuestionType>
+  </SearchMetaData>
+</challenge1>
+<challenge2>
+  <SearchMetaData>
+    <Length>Long</Length>
+    <Difficulty>Hard</Difficulty>
+    <Subject>
+      <General>Science</General>
+      <Focus>SolarSystem</Focus>
+    </Subject>
+    <QuestionType>MultipleChoice</QuestionType>
+  </SearchMetaData>
+</challenge2>  
+<challenge3>
+  <SearchMetaData>
+    <Length>Short</Length>
+    <Difficulty>Medium</Difficulty>
+    <Subject>
+      <General>English</General>
+      <Focus>Vocabulary</Focus>
+    </Subject>
+    <QuestionType>MultipleChoice</QuestionType>
+  </SearchMetaData>
+</challenge3>

@@ -1,0 +1,4 @@
+3 3 subject
+subject0: socialSubject: 1		professionalSubject: 1		educationalSubject:	9	
+subject1: socialSubject: 5		professionalSubject: 1		educationalSubject:	4
+subject2: socialSubject: 1		professionalSubject: 9		educationalSubject:	1
