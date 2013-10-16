@@ -23,7 +23,7 @@ import java.util.Scanner;
 
 public class InputWizard implements ActionListener {
 /**
- * @Author Kaleb Breault, Alex Hunsberger
+ * @Authors Kaleb Breault, Alex Hunsberger, Zayed Alfalasi, Abdulla Alfalasi
  * This class makes a GUI interface for entering input and previewing XML games
  * implements ActionListener so a subclass for it is not needed. 
  */
@@ -101,7 +101,7 @@ public class InputWizard implements ActionListener {
             public void valueChanged(TreeSelectionEvent e) 
             {
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) actTree.getLastSelectedPathComponent();
-            	if (selectedNode.isLeaf()) //a scene
+            	if (selectedNode != null && selectedNode.isLeaf()) //a scene
             	{
                 	String sceneName = selectedNode.toString();
             		String actName = selectedNode.getParent().toString();
@@ -110,16 +110,6 @@ public class InputWizard implements ActionListener {
             	}
             }
         });
-        /*DefaultMutableTreeNode act1 = new DefaultMutableTreeNode("Act 1");
-        act1.add(new DefaultMutableTreeNode("Scene 1", false));
-        act1.add(new DefaultMutableTreeNode("Scene 2", false));
-        rootNode.add(act1);
-        DefaultMutableTreeNode act2 = new DefaultMutableTreeNode("Act 2");
-        act2.add(new DefaultMutableTreeNode("Scene 2", false));
-        rootNode.add(act2);
-        actTree.expandRow(0);
-        rootNode.removeAllChildren();
-        model.reload();*/
         
         JScrollPane scrollPane = new JScrollPane(actTree);
         
@@ -422,11 +412,12 @@ public class InputWizard implements ActionListener {
 		chooser.setDialogTitle("Select a game XML file");
 		int retval = chooser.showOpenDialog(null);
 		
-		if(retval == JFileChooser.APPROVE_OPTION) 
+		if(retval == JFileChooser.APPROVE_OPTION)
 		{
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
             displayGame(game, file.getName());
+            scenePanel.clear();
         } 
 		else 
 		{
@@ -437,10 +428,9 @@ public class InputWizard implements ActionListener {
 	// file name is required because it will be the name of the root node
 	private void displayGame(Game game1, String name)
 	{
-		actTree.removeAll();
+		((DefaultMutableTreeNode) actTree.getModel().getRoot()).removeAllChildren();
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(name);
-        DefaultTreeModel model = new DefaultTreeModel(rootNode);
-        actTree.setModel(model);
+        ((DefaultTreeModel) actTree.getModel()).setRoot(rootNode);
 		
 		List<Act> acts = game1.getActs();
 		for(int i = 0; i < acts.size(); i++)

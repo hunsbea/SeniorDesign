@@ -33,6 +33,18 @@ public class ScenePanel extends JPanel
 		infoBoxFonts = new ArrayList<Font>();
 	}
 	
+	public void clear()
+	{
+		background = null;
+		assets = new ArrayList<Asset>();
+		assetImages = new ArrayList<BufferedImage>();
+		infoBoxStrings = new ArrayList<String>();
+		infoBoxPoints = new ArrayList<Point>();
+		infoBoxFonts = new ArrayList<Font>();
+		removeAll();
+		updateUI();
+	}
+	
 	public void loadBackground(String imageFile)
 	{
 		try 
