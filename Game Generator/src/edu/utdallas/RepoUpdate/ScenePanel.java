@@ -25,12 +25,7 @@ public class ScenePanel extends JPanel
 	
 	public ScenePanel()
 	{
-		background = null;
-		assets = new ArrayList<Asset>();
-		assetImages = new ArrayList<BufferedImage>();
-		infoBoxStrings = new ArrayList<String>();
-		infoBoxPoints = new ArrayList<Point>();
-		infoBoxFonts = new ArrayList<Font>();
+		clear();
 	}
 	
 	public void clear()
@@ -48,9 +43,8 @@ public class ScenePanel extends JPanel
 	public void loadBackground(String imageFile)
 	{
 		try 
-		{                
+		{
 			background = ImageIO.read(new File("Office, Classroom\\" + imageFile));
-			System.out.println("success read in image");
 			repaint();
 		} 
 		catch (IOException ex) 
@@ -87,15 +81,33 @@ public class ScenePanel extends JPanel
 		}
 	}
 	
+	private BufferedImage getScaledImage(BufferedImage orig, double scale)
+	{
+		int origW = orig.getWidth();
+		int origH = orig.getHeight();
+		double newW = origW * scale;
+		double newH = origH * scale;
+		
+		BufferedImage resized = new BufferedImage((int)newW, (int)newH, BufferedImage.TYPE_INT_ARGB);
+	    Graphics2D g = resized.createGraphics();
+	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g.drawImage(orig, 0, 0, (int)newW, (int)newH, 0, 0, orig.getWidth(), orig.getHeight(), null);
+	    g.dispose();
+	    
+	    return resized;
+	}
+	
 	public void loadAsset(Asset a, String baseDir)
 	{
 		try 
-		{                
+		{
 			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
-			System.out.println("success read in image");
+			int width = image.getWidth();
+			double desiredWidth = a.getWidth();
+			double scaleFactor = desiredWidth / width;
 			
 			assets.add(a);
-			assetImages.add(image);
+			assetImages.add(getScaledImage(image, scaleFactor));
 			
 			repaint();
 		} 
@@ -122,7 +134,7 @@ public class ScenePanel extends JPanel
         for(int j = 0; j < infoBoxStrings.size(); j++)
         {
         	g.setFont(infoBoxFonts.get(j));
-        	g.drawString(infoBoxStrings.get(j), infoBoxPoints.get(j).x, infoBoxPoints.get(j).y);
+        	g.drawString(infoBoxStrings.get(j), infoBoxPoints.get(j).x, infoBoxPoints.get(j).y + 10/*TODO: shouldn't need this offset*/);
         }
     }
 }
