@@ -17,6 +17,7 @@ public class ScenePanel extends JPanel
 	private ArrayList<Asset> assets;
 	private ArrayList<BufferedImage> assetImages;
 	private ArrayList<String> infoBoxStrings;
+	private ArrayList<String[]> splitStrings;
 	private ArrayList<Point> infoBoxPoints;
 	private ArrayList<Font> infoBoxFonts;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
@@ -36,8 +37,42 @@ public class ScenePanel extends JPanel
 		infoBoxStrings = new ArrayList<String>();
 		infoBoxPoints = new ArrayList<Point>();
 		infoBoxFonts = new ArrayList<Font>();
+		splitStrings = new ArrayList<String[]>();
 		removeAll();
 		updateUI();
+	}
+	
+	// Algorithm for splitting bubble text when it would exceed the width of the bubble
+	// must split string because graphics object doesn't respect "\n" when painting strings
+	private String[] splitTextBubble(String text, int textWidth, int bubbleWidth)
+	{
+		if(textWidth < bubbleWidth - 10)
+		{
+			String[] arrayText = { text };
+			System.out.println("returning early");
+			return arrayText;
+		}
+		
+		// calculate number of splits needed,
+		// insert newlines as placeholders where the string should be split
+		// return the split string
+		int numSplits = (textWidth / bubbleWidth);
+		int currentIndex = 0;
+		for(int i = 0; i < numSplits - 1; i++)
+		{
+			//TODO: ugly logic
+			currentIndex += text.length() / numSplits;
+			while(text.charAt(currentIndex - 1) != ' ' && currentIndex > 4)
+				currentIndex--; //don't cut off a word
+			text = text.substring(0, currentIndex - 1) + "\n" + text.substring(currentIndex, text.length());
+		}
+		
+		//return text.split("\n");
+		String[] strings = text.split("\n");
+		//for(String s : strings)
+			//System.out.println(s + " $");
+		
+		return strings;
 	}
 	
 	public void loadBackground(String imageFile)
@@ -60,6 +95,8 @@ public class ScenePanel extends JPanel
 		infoBoxStrings = new ArrayList<String>();
 		infoBoxPoints = new ArrayList<Point>();
 		infoBoxFonts = new ArrayList<Font>();
+		splitStrings = new ArrayList<String[]>();
+		
 		for(Asset a : as)
 		{
 			if(a instanceof CharacterAsset)
@@ -73,6 +110,16 @@ public class ScenePanel extends JPanel
 			else if(a instanceof InformationBoxAsset)
 			{
 				//loadAsset(a, infoBoxBaseDir);
+				String name = a.getName();
+				Font nameFont = new Font(a.getFontFamily(), Font.BOLD, a.getFontSize());
+				FontMetrics fm = getGraphics().getFontMetrics(nameFont);
+				int fontWidth = fm.stringWidth(name);
+				int bubbleWidth = fontWidth / 2; // TODO: for now
+				//there's no way of knowing which text bubble goes with which text
+				// I would have to use a closest point algorithm to find the correct bubble-text match,
+				// and that would assume all bubbles are initialized before all text,
+				// or I wait until all elements have been read in, and then split the strings after the closest pair alg
+				splitStrings.add(splitTextBubble(name, fontWidth, bubbleWidth));
 				infoBoxStrings.add(a.getName());
 				infoBoxPoints.add(new Point((int)a.getLocX(), (int)a.getLocY()));
 				infoBoxFonts.add(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
@@ -131,10 +178,17 @@ public class ScenePanel extends JPanel
         	Asset a = assets.get(i);
         	g.drawImage(assetImages.get(i), (int)a.getLocX(), (int)a.getLocY(), null);
         }
-        for(int j = 0; j < infoBoxStrings.size(); j++)
+        for(int j = 0; j < splitStrings.size(); j++)
         {
         	g.setFont(infoBoxFonts.get(j));
-        	g.drawString(infoBoxStrings.get(j), infoBoxPoints.get(j).x, infoBoxPoints.get(j).y + 10/*TODO: shouldn't need this offset*/);
+        	g.drawString(infoBoxStrings.get(j), infoBoxPoints.get(j).x, infoBoxPoints.get(j).y + 10);
+        	//TODO: assuming text height known
+        	/*int offsetY = 10;
+        	for(int k = 0; k < splitStrings.get(j).length; k++)
+        	{
+        		g.drawString(splitStrings.get(j)[k], infoBoxPoints.get(j).x, infoBoxPoints.get(j).y + offsetY);
+        		offsetY += 20;
+        	}*/
         }
     }
 }

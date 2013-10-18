@@ -405,7 +405,7 @@ public class InputWizard implements ActionListener {
 		
 		return game1;
 	}
-	// handle loading an XML game into the preview window
+	// C40 handle loading an XML game into the preview window
 	private void loadGame()
 	{
 		JFileChooser chooser = new JFileChooser();
