@@ -778,7 +778,7 @@ public class InputWizard implements ActionListener {
 				checkForXML(gameSavePath);
 				System.out.println("Game Save Path: "+gameSavePath);
 				submitClicked = true;
-				window.dispose();
+				
 			}
 			else if(returnValue == JFileChooser.CANCEL_OPTION)
 			{
