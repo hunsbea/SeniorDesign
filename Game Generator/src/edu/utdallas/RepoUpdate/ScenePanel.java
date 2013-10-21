@@ -185,14 +185,14 @@ public class ScenePanel extends JPanel
 		        public void mouseReleased(MouseEvent e) {
 			        //check for mouse position 
 		        	//replace picture position with mouse position when released
-		        	//mouse position compared to the new label position do not match
+		        	//mouse position compared to the new label position do not match - DONE
 		        	//Instructions to debug: hold a label upwards and will display the coordinates of the new label in a popup box
 		        	PointerInfo t = MouseInfo.getPointerInfo();
 		        	Point b = t.getLocation();
 		        	int x = (int) b.getX();
 		        	int y = (int) b.getY();
-		        	label.setBounds(x, y, (int)a.getWidth(), (int)a.getHeight());
-		        	JOptionPane.showMessageDialog(null, "x:  " + x + "y:" + y);
+		        	label.setBounds(x-250, y-100, (int)a.getWidth(), (int)a.getHeight());
+		        	JOptionPane.showMessageDialog(null, "Label: "+a.getDisplayImage() +"        X: " + x + "  Y: " + y);
 		        }
 		        
 		        public void mouseEntered(MouseEvent e) {
