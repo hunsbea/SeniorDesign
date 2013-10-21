@@ -547,6 +547,8 @@ public class InputWizard implements ActionListener {
 		while(!submitClicked)
 		{
 			//WAIT!!!! waits for the user to hit submit once called
+			// Sleep to avoid running at full CPU usage
+			try { Thread.sleep(200); } catch(Exception e) { }
 		}
 		return componentInputs;
 	}
