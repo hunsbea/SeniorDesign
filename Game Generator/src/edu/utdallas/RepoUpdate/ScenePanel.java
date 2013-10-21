@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ScenePanel extends JPanel
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	//private String inforBoxBaseDir = "Office, Classroom\\Characters\\";
+	private Point prevClickPoint = new Point(0,0);
 	
 	public ScenePanel()
 	{
@@ -168,43 +170,26 @@ public class ScenePanel extends JPanel
 			label.setIcon(new ImageIcon(a.getPaintedImage()));
 			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			
-			
 			label.addMouseListener(new MouseListener() {
-
-		        public void mouseClicked(MouseEvent e) {
-
-		        	
-		           
-		        }
-
-		        public void mousePressed(MouseEvent e) {
-
-	
-		        }
-
-		        public void mouseReleased(MouseEvent e) {
-			        //check for mouse position 
-		        	//replace picture position with mouse position when released
-		        	//mouse position compared to the new label position do not match - DONE
-		        	//Instructions to debug: hold a label upwards and will display the coordinates of the new label in a popup box
-		        	PointerInfo t = MouseInfo.getPointerInfo();
-		        	Point b = t.getLocation();
-		        	int x = (int) b.getX();
-		        	int y = (int) b.getY();
-		        	label.setBounds(x-250, y-100, (int)a.getWidth(), (int)a.getHeight());
-		        	JOptionPane.showMessageDialog(null, "Label: "+a.getDisplayImage() +"        X: " + x + "  Y: " + y);
-		        }
-		        
-		        public void mouseEntered(MouseEvent e) {
-		        }
-
-		        public void mouseExited(MouseEvent e) {
-		        }
+		        public void mouseClicked(MouseEvent e) { }
+		        public void mouseEntered(MouseEvent e) { }
+		        public void mouseExited(MouseEvent e) { }
+		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
+		        public void mouseReleased(MouseEvent e) { }
 		    });
-			
+			label.addMouseMotionListener(new MouseMotionListener() {
+				public void mouseDragged(MouseEvent e) {
+		        	Point p = e.getPoint();
+		        	int deltaX = p.x - prevClickPoint.x;
+		        	int deltaY = p.y - prevClickPoint.y;
+		        	int newX = label.getX() + deltaX;
+		        	int newY = label.getY() + deltaY;
+		        	label.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
+				}
+				public void mouseMoved(MouseEvent e) { }
+			});
 			
 			assetLabels.add(label);
-			
 			repaint();
 		} 
 		catch (IOException ex) 
