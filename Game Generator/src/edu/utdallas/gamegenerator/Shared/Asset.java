@@ -7,6 +7,8 @@ import edu.utdallas.gamegenerator.LearningAct.Prop.GameText;
 import edu.utdallas.gamegenerator.Locale.ObjectMovement;
 
 import javax.xml.bind.annotation.*;
+
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -41,6 +43,7 @@ public class Asset {
     private int points;
     private int hint;
     private String displayImage;
+    private BufferedImage paintedImage;
 
     public Asset() {
         id = UUID.randomUUID();
@@ -155,6 +158,14 @@ public class Asset {
             behavior.setBehaviorType(BehaviorType.TRANSITION_BEHAVIOR);
             behaviors.add(behavior);
         }
+    }
+    
+    public BufferedImage getPaintedImage() {
+    	return paintedImage;
+    }
+    
+    public void setPaintedImage(BufferedImage img) {
+    	paintedImage = img;
     }
 
     public String getType() {

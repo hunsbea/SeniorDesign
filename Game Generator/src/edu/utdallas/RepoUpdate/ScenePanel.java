@@ -15,7 +15,6 @@ public class ScenePanel extends JPanel
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
 	private ArrayList<Asset> assets;
-	private ArrayList<BufferedImage> assetImages;
 	private ArrayList<String> infoBoxStrings;
 	private ArrayList<String[]> splitStrings;
 	private ArrayList<Point> infoBoxPoints;
@@ -33,7 +32,6 @@ public class ScenePanel extends JPanel
 	{
 		background = null;
 		assets = new ArrayList<Asset>();
-		assetImages = new ArrayList<BufferedImage>();
 		infoBoxStrings = new ArrayList<String>();
 		infoBoxPoints = new ArrayList<Point>();
 		infoBoxFonts = new ArrayList<Font>();
@@ -91,7 +89,6 @@ public class ScenePanel extends JPanel
 	public void loadAssets(List<Asset> as)
 	{
 		assets = new ArrayList<Asset>();
-		assetImages = new ArrayList<BufferedImage>();
 		infoBoxStrings = new ArrayList<String>();
 		infoBoxPoints = new ArrayList<Point>();
 		infoBoxFonts = new ArrayList<Font>();
@@ -153,8 +150,8 @@ public class ScenePanel extends JPanel
 			double desiredWidth = a.getWidth();
 			double scaleFactor = desiredWidth / width;
 			
+			a.setPaintedImage(getScaledImage(image, scaleFactor));
 			assets.add(a);
-			assetImages.add(getScaledImage(image, scaleFactor));
 			
 			repaint();
 		} 
@@ -170,13 +167,13 @@ public class ScenePanel extends JPanel
         
         if(background != null)
         {
-        	g.drawImage(background, 0, 0, null);   
+        	g.drawImage(background, 0, 0, null);
         }
         //same number of assets as assetImages
         for(int i = 0; i < assets.size(); i++)
         {
         	Asset a = assets.get(i);
-        	g.drawImage(assetImages.get(i), (int)a.getLocX(), (int)a.getLocY(), null);
+        	g.drawImage(a.getPaintedImage(), (int)a.getLocX(), (int)a.getLocY(), null);
         }
         for(int j = 0; j < splitStrings.size(); j++)
         {
