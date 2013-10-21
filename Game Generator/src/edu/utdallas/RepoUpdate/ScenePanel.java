@@ -81,7 +81,8 @@ public class ScenePanel extends JPanel
 	{
 		try 
 		{
-			background = ImageIO.read(new File("Office, Classroom\\" + imageFile));
+			background = getScaledImage(ImageIO.read(new File("Office, Classroom\\" + imageFile)), 1.5);
+			
 			repaint();
 		} 
 		catch (IOException ex) 
@@ -136,6 +137,7 @@ public class ScenePanel extends JPanel
 		int origH = orig.getHeight();
 		double newW = origW * scale;
 		double newH = origH * scale;
+		
 		
 		BufferedImage resized = new BufferedImage((int)newW, (int)newH, BufferedImage.TYPE_INT_ARGB);
 	    Graphics2D g = resized.createGraphics();

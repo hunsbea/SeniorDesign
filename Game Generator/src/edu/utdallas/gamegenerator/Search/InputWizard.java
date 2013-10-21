@@ -29,8 +29,8 @@ public class InputWizard implements ActionListener {
  * implements ActionListener so a subclass for it is not needed. 
  */
 	
-	private static int WIDTH = 900;
-	private static int HEIGHT = 550;
+	private static int WIDTH = 1177;
+	private static int HEIGHT = 481;
 	private Matrix[] componentInputs;
 	private boolean submitClicked = false;
  	private JFrame window = new JFrame();
@@ -38,7 +38,6 @@ public class InputWizard implements ActionListener {
  	private JMenuBar menuBar;
  	private JMenu menu;
  	private JMenu fileMenu;
- 	private JMenu saveMenu;
  	private JMenuItem openFileItem;
  	private JMenuItem addToRepo;
  	private JMenuItem remakeRepo;
@@ -66,6 +65,7 @@ public class InputWizard implements ActionListener {
 		componentInputs = input;
 		initializeComponentInputs();
         window.setSize(WIDTH, HEIGHT);
+        window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         int nextOpenRow =0; // next available row slot
         final String none = "no";
