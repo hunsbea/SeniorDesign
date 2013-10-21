@@ -37,9 +37,12 @@ public class InputWizard implements ActionListener {
  	private JMenuBar menuBar;
  	private JMenu menu;
  	private JMenu fileMenu;
+ 	private JMenu saveMenu;
  	private JMenuItem openFileItem;
  	private JMenuItem addToRepo;
  	private JMenuItem remakeRepo;
+ 	private JMenuItem saveToRepo;
+ 	
  	private JTree actTree;
  	private ScenePanel scenePanel;
  	
@@ -87,6 +90,17 @@ public class InputWizard implements ActionListener {
         remakeRepo.setActionCommand("remakeRepo");
         menu.add(addToRepo);
         menu.add(remakeRepo);
+        saveMenu = new JMenu("Save");
+        saveMenu.addActionListener(this);
+        saveMenu.setMnemonic(KeyEvent.VK_W);
+        saveMenu.setActionCommand("saveMenu");
+        menuBar.add(saveMenu);
+        saveToRepo = new JMenuItem ("Save to repository", KeyEvent.VK_U);
+        saveToRepo.addActionListener(this);
+        saveToRepo.setActionCommand("saveToRepo");
+        saveMenu.add(saveToRepo);
+        
+        
         
         // create tree-structure for viewing Acts/Scenes
         actTree = new JTree();
@@ -944,6 +958,12 @@ public class InputWizard implements ActionListener {
 		System.out.println("Unanticipated Input in ActionPerformed:" + e.getActionCommand());
 		break;
 		}
+	}
+	public JMenuItem getSaveToRepo() {
+		return saveToRepo;
+	}
+	public void setSaveToRepo(JMenuItem saveToRepo) {
+		this.saveToRepo = saveToRepo;
 	}
 		
 }
