@@ -4,12 +4,15 @@ import edu.utdallas.gamegenerator.Shared.*;
 
 import java.awt.*;
 import java.util.List;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ScenePanel extends JPanel 
@@ -148,10 +151,12 @@ public class ScenePanel extends JPanel
 	    return resized;
 	}
 	
-	public void loadAsset(Asset a, String baseDir)
+	public void loadAsset(final Asset a, String baseDir)
 	{
 		try 
 		{
+			//TODO  add a button to check if in edition mode?
+			
 			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
 			int width = image.getWidth();
 			double desiredWidth = a.getWidth();
@@ -159,9 +164,45 @@ public class ScenePanel extends JPanel
 			
 			a.setPaintedImage(getScaledImage(image, scaleFactor));
 			assets.add(a);
-			JLabel label = new JLabel();
+			final JLabel label = new JLabel();
 			label.setIcon(new ImageIcon(a.getPaintedImage()));
 			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			
+			
+			label.addMouseListener(new MouseListener() {
+
+		        public void mouseClicked(MouseEvent e) {
+
+		        	
+		           
+		        }
+
+		        public void mousePressed(MouseEvent e) {
+
+	
+		        }
+
+		        public void mouseReleased(MouseEvent e) {
+			        //check for mouse position 
+		        	//replace picture position with mouse position when released
+		        	//mouse position compared to the new label position do not match
+		        	//Instructions to debug: hold a label upwards and will display the coordinates of the new label in a popup box
+		        	PointerInfo t = MouseInfo.getPointerInfo();
+		        	Point b = t.getLocation();
+		        	int x = (int) b.getX();
+		        	int y = (int) b.getY();
+		        	label.setBounds(x, y, (int)a.getWidth(), (int)a.getHeight());
+		        	JOptionPane.showMessageDialog(null, "x:  " + x + "y:" + y);
+		        }
+		        
+		        public void mouseEntered(MouseEvent e) {
+		        }
+
+		        public void mouseExited(MouseEvent e) {
+		        }
+		    });
+			
+			
 			assetLabels.add(label);
 			
 			repaint();
