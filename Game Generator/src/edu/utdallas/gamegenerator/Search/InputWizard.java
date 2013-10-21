@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.Updates;
 import edu.utdallas.gamegenerator.Shared.Asset;
+import edu.utdallas.gamegenerator.Shared.ScreenNode;
 import edu.utdallas.gamegenerator.Structure.*;
 
 import Jama.Matrix;
@@ -112,10 +113,10 @@ public class InputWizard implements ActionListener {
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) actTree.getLastSelectedPathComponent();
             	if (selectedNode != null && selectedNode.isLeaf()) //a scene
             	{
-                	String sceneName = selectedNode.toString();
-            		String actName = selectedNode.getParent().toString();
-            		
-            		displayScene(getScene(actName, sceneName));
+                	String screenName = selectedNode.toString();
+            		String sceneName = selectedNode.getParent().toString();
+            		String actName = selectedNode.getParent().getParent().toString();
+            		displayScreen(getScene(actName, sceneName),getScreen(actName, sceneName, screenName));
             	}
             }
         });
@@ -451,6 +452,12 @@ public class InputWizard implements ActionListener {
 			{
 				DefaultMutableTreeNode sceneNode = new DefaultMutableTreeNode("Scene " + (j + 1));
 				actNode.add(sceneNode);
+				List<ScreenNode> screens = scenes.get(j).getScreens();
+				for(int k = 0; k < screens.size(); k++)
+				{
+					DefaultMutableTreeNode screenNode = new DefaultMutableTreeNode("Screen " + (k + 1));
+					sceneNode.add(screenNode);
+				}
 			}
 			
 			rootNode.add(actNode);
@@ -469,12 +476,27 @@ public class InputWizard implements ActionListener {
 		
 		return game.getActs().get(actNum - 1).getScenes().get(sceneNum - 1);
 	}
+	
+	private ScreenNode getScreen(String act, String scene, String screen)
+	{
+		Scanner sc = new Scanner(act);
+		sc.next();
+		int actNum = sc.nextInt();
+		sc = new Scanner(scene);
+		sc.next();
+		int sceneNum = sc.nextInt();
+		sc = new Scanner(screen);
+		sc.next();
+		int screenNum = sc.nextInt();
+		
+		return game.getActs().get(actNum - 1).getScenes().get(sceneNum - 1).getScreens().get(screenNum - 1);
+	}
 	//paint the scene in all of its glory
-	private void displayScene(Scene scene)
+	private void displayScreen(Scene scene, ScreenNode screen)
 	{
 		scenePanel.loadBackground(scene.getBackground());
 		
-		List<Asset> assets = scene.getScreens().get(0).getAssets();
+		List<Asset> assets = screen.getAssets();
 		if(assets != null)
 			scenePanel.loadAssets(assets);
 		else
