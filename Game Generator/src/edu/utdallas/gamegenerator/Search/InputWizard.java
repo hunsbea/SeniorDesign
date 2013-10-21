@@ -90,15 +90,10 @@ public class InputWizard implements ActionListener {
         remakeRepo.setActionCommand("remakeRepo");
         menu.add(addToRepo);
         menu.add(remakeRepo);
-        saveMenu = new JMenu("Save");
-        saveMenu.addActionListener(this);
-        saveMenu.setMnemonic(KeyEvent.VK_W);
-        saveMenu.setActionCommand("saveMenu");
-        menuBar.add(saveMenu);
-        saveToRepo = new JMenuItem ("Save to repository", KeyEvent.VK_U);
+        saveToRepo = new JMenuItem ("Save Game File", KeyEvent.VK_S);
         saveToRepo.addActionListener(this);
         saveToRepo.setActionCommand("saveToRepo");
-        saveMenu.add(saveToRepo);
+        fileMenu.add(saveToRepo);
         
         
         
