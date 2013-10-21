@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ScenePanel extends JPanel 
@@ -19,6 +21,7 @@ public class ScenePanel extends JPanel
 	private ArrayList<String[]> splitStrings;
 	private ArrayList<Point> infoBoxPoints;
 	private ArrayList<Font> infoBoxFonts;
+	private ArrayList<JLabel> assetLabels;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	//private String inforBoxBaseDir = "Office, Classroom\\Characters\\";
@@ -36,6 +39,7 @@ public class ScenePanel extends JPanel
 		infoBoxPoints = new ArrayList<Point>();
 		infoBoxFonts = new ArrayList<Font>();
 		splitStrings = new ArrayList<String[]>();
+		assetLabels = new ArrayList<JLabel>();
 		removeAll();
 		updateUI();
 	}
@@ -93,6 +97,7 @@ public class ScenePanel extends JPanel
 		infoBoxPoints = new ArrayList<Point>();
 		infoBoxFonts = new ArrayList<Font>();
 		splitStrings = new ArrayList<String[]>();
+		assetLabels = new ArrayList<JLabel>();
 		
 		for(Asset a : as)
 		{
@@ -152,6 +157,10 @@ public class ScenePanel extends JPanel
 			
 			a.setPaintedImage(getScaledImage(image, scaleFactor));
 			assets.add(a);
+			JLabel label = new JLabel();
+			label.setIcon(new ImageIcon(a.getPaintedImage()));
+			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			assetLabels.add(label);
 			
 			repaint();
 		} 
@@ -164,6 +173,7 @@ public class ScenePanel extends JPanel
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+		removeAll();
         
         if(background != null)
         {
@@ -173,7 +183,8 @@ public class ScenePanel extends JPanel
         for(int i = 0; i < assets.size(); i++)
         {
         	Asset a = assets.get(i);
-        	g.drawImage(a.getPaintedImage(), (int)a.getLocX(), (int)a.getLocY(), null);
+        	//g.drawImage(a.getPaintedImage(), (int)a.getLocX(), (int)a.getLocY(), null);
+        	add(assetLabels.get(i));
         }
         for(int j = 0; j < splitStrings.size(); j++)
         {

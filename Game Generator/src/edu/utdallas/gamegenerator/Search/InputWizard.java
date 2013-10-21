@@ -132,6 +132,7 @@ public class InputWizard implements ActionListener {
         JPanel browsePanel = new JPanel(new BorderLayout()); // browse/click on Acts/Scenes
         browsePanel.add(scrollPane);
         scenePanel = new ScenePanel(); // view/edit the Scene selected in the browse panel
+        scenePanel.setLayout(null);
         JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, browsePanel, scenePanel);
         previewTab.add(splitPreviewPane);
         
