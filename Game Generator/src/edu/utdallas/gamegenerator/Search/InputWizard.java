@@ -495,13 +495,13 @@ public class InputWizard implements ActionListener {
 	//paint the scene in all of its glory
 	private void displayScreen(Scene scene, ScreenNode screen)
 	{
-		scenePanel.loadBackground(scene.getBackground());
-		
 		List<Asset> assets = screen.getAssets();
 		if(assets != null)
 			scenePanel.loadAssets(assets);
 		else
 			System.out.println("assets null");
+
+		scenePanel.loadBackground(scene.getBackground());
 	}
 	// sets all the values of the matrix to the given value. 
 	private Matrix initializeMatrix(Matrix inputMatrix, double initValue)
