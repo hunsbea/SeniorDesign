@@ -64,6 +64,7 @@ public class ScenePanel extends JPanel
 			if(a instanceof CharacterAsset)
 			{
 				loadAsset(a, charBaseDir);
+				
 			}
 			else if(a instanceof ImageAsset)
 			{
@@ -72,6 +73,24 @@ public class ScenePanel extends JPanel
 			else if(a instanceof InformationBoxAsset)
 			{
 				infoAssets.add((InformationBoxAsset)a);
+			}
+		}
+		
+		associateText(assetPanels, infoAssets);
+		addNotify();
+		revalidate();
+		repaint();
+	}
+	public void loadAssetsToRoot(List<Asset> as)
+	{
+		clear();
+		
+		for(Asset a : as)
+		{
+			if(a instanceof CharacterAsset)
+			{
+				
+				loadAssetToRoot(a, charBaseDir);
 			}
 		}
 		
@@ -122,7 +141,8 @@ public class ScenePanel extends JPanel
 		return (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y);
 	}
 	
-	private BufferedImage getScaledImage(BufferedImage orig, double scale)
+	// ScenePanel.getScaledImage(yourImage, scale);
+	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
 	{
 		int origW = orig.getWidth();
 		int origH = orig.getHeight();
@@ -142,8 +162,49 @@ public class ScenePanel extends JPanel
 	{
 		try 
 		{
-			//TODO: add a button to check if in edition mode?
-			//      ^ what does this mean? -Alex
+			
+			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
+			int width = image.getWidth();
+			double desiredWidth = a.getWidth();
+			double scaleFactor = desiredWidth / width;
+			
+			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+			final JLabel panel = new JLabel(new ImageIcon(scaledImage));
+			panel.setLayout(new BorderLayout());
+			panel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+			add(panel);
+			
+			panel.addMouseListener(new MouseListener() {
+		        public void mouseClicked(MouseEvent e) { }
+		        public void mouseEntered(MouseEvent e) { }
+		        public void mouseExited(MouseEvent e) { }
+		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
+		        public void mouseReleased(MouseEvent e) { }
+		    });
+			panel.addMouseMotionListener(new MouseMotionListener() {
+				public void mouseDragged(MouseEvent e) {
+		        	Point p = e.getPoint();
+		        	int deltaX = p.x - prevClickPoint.x;
+		        	int deltaY = p.y - prevClickPoint.y;
+		        	int newX = panel.getX() + deltaX;
+		        	int newY = panel.getY() + deltaY;
+		        	panel.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
+				}
+				public void mouseMoved(MouseEvent e) { }
+			});
+			
+			assetPanels.add(panel);
+			repaint();
+		} 
+		catch (IOException ex) 
+		{
+			System.out.println(a.getDisplayImage() + " is missing from repository, cannot load");
+		}
+	}
+	public void loadAssetToRoot(final Asset a, String baseDir)
+	{
+		try 
+		{
 			
 			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
 			int width = image.getWidth();

@@ -1,5 +1,6 @@
 package edu.utdallas.gamegenerator.Search;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.tree.*;
@@ -8,8 +9,7 @@ import javax.xml.bind.JAXBException;
 
 import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.Updates;
-import edu.utdallas.gamegenerator.Shared.Asset;
-import edu.utdallas.gamegenerator.Shared.ScreenNode;
+import edu.utdallas.gamegenerator.Shared.*;
 import edu.utdallas.gamegenerator.Structure.*;
 
 import Jama.Matrix;
@@ -18,9 +18,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.StringTokenizer;
+
 
 public class InputWizard implements ActionListener {
 /**
@@ -60,6 +68,12 @@ public class InputWizard implements ActionListener {
  	private static final int wizardRowSize = 10; //row size for wizard
  	private String gameGradeLevel = "none";
 	private Updates updater;
+	private String charBaseDir = "Office, Classroom\\Characters\\";
+	private Double xtraXposition = 180.00;
+	private int imgtrack = 0;
+	CharacterAsset c;
+	
+	
 	public InputWizard(Matrix[] input)
 	{
 		componentInputs = input;
@@ -114,9 +128,84 @@ public class InputWizard implements ActionListener {
             	if (selectedNode != null && selectedNode.isLeaf()) //a scene
             	{
                 	String screenName = selectedNode.toString();
+                	System.out.println(""+screenName);
             		String sceneName = selectedNode.getParent().toString();
+            		System.out.println(""+sceneName);
             		String actName = selectedNode.getParent().getParent().toString();
             		displayScreen(getScene(actName, sceneName),getScreen(actName, sceneName, screenName));
+            	}
+            	if(selectedNode != null && selectedNode.isRoot())
+            	{
+            		//TODO: make some object to hold characters
+            		ArrayList<CharacterAsset> UNIQchars = new ArrayList<CharacterAsset>();
+            		
+            		ArrayList<CharacterAsset> chars = getCharacters();
+            		
+            		Iterator<CharacterAsset> iterchars = chars.iterator();
+            		Iterator<CharacterAsset> iterUNIQ = UNIQchars.iterator();
+            		HashSet<CharacterAsset> uniquechars = new HashSet<CharacterAsset>();
+            		scenePanel.clear();
+            		for (CharacterAsset c : chars){
+            			
+            			if(UNIQchars.size() == 0){
+            				UNIQchars.add(c);
+    						c.setLocX(0);
+    						c.setLocY(0);
+            				scenePanel.loadAssetToRoot(c, charBaseDir);
+            				System.out.println("got here");
+            			}
+            			else{	
+            				int i =0;
+            				
+            				while(true){
+            					StringTokenizer st = new StringTokenizer(c.getDisplayImage(), "\\");
+            					String firstPart = st.nextToken();
+            					StringTokenizer st2 = new StringTokenizer(UNIQchars.get(i).getDisplayImage(), "\\");
+            					String firstPartU = st2.nextToken();
+            					
+            					
+            					if(!firstPart.equals(firstPartU) && i == UNIQchars.size()-1)
+            					{
+            						
+
+            						
+            						UNIQchars.add(c);
+            						try{
+            						BufferedImage img = ScenePanel.getScaledImage(ImageIO.read(new File("Office, Classroom\\Characters\\" + c.getDisplayImage())), 0.5);
+            						
+            						c.setLocX(xtraXposition);
+            						c.setLocY(0);
+            						
+            						scenePanel.loadAssetToRoot(c, charBaseDir);
+            						xtraXposition = xtraXposition+ xtraXposition;
+            						} catch(Exception ex) {}
+            						break;
+            					}
+            					if (firstPart.equals(firstPartU)){
+            					
+            						break;
+            						
+            					}
+            				
+            					i++;
+            					if(i == UNIQchars.size()){
+            						
+            						break;
+            					}
+            					
+            				}
+            				
+            				
+            				
+            				
+            				
+            				
+            			
+            			}
+
+            		}
+            		
+            		
             	}
             }
         });
@@ -392,6 +481,37 @@ public class InputWizard implements ActionListener {
         window.setJMenuBar(menuBar);
         window.setVisible(true); // this needs to happen last to avoid blank window on start-up
 	}
+	
+	private ArrayList<CharacterAsset> getCharacters()
+	{
+		ArrayList<CharacterAsset> chars = new ArrayList<CharacterAsset>();
+		
+		List<Act> acts = game.getActs();
+		for(Act a : acts)
+		{
+			List<Scene> scenes = a.getScenes();
+			for(Scene s : scenes)
+			{
+				List<ScreenNode> screens = s.getScreens();
+				for(ScreenNode scr : screens)
+				{
+					List<Asset> assets = scr.getAssets();
+					for(Asset as : assets)
+					{
+						if(as instanceof CharacterAsset)
+						{
+							chars.add((CharacterAsset)as);
+							
+							
+						}
+					}
+				}
+			}
+		}
+		
+		return chars;
+	}
+	
 	//sets all the component Inputs to 0
 	private void initializeComponentInputs()
 	{
@@ -465,7 +585,7 @@ public class InputWizard implements ActionListener {
 		}
         actTree.expandRow(0);
 	}
-	
+
 	private Scene getScene(String act, String scene)
 	{
 		Scanner sc = new Scanner(act);
@@ -496,12 +616,24 @@ public class InputWizard implements ActionListener {
 	private void displayScreen(Scene scene, ScreenNode screen)
 	{
 		List<Asset> assets = screen.getAssets();
-		if(assets != null)
+		if(assets != null){
 			scenePanel.loadAssets(assets);
+		scenePanel.loadAssetsToRoot(assets);
+		}
 		else
 			System.out.println("assets null");
 
 		scenePanel.loadBackground(scene.getBackground());
+	}
+	
+	private void RootCharacters(ScreenNode screen)
+	{
+		List<Asset> assets = screen.getAssets();
+		if(assets != null)
+			scenePanel.loadAssetsToRoot(assets);
+		else
+			System.out.println("assets null");
+
 	}
 	// sets all the values of the matrix to the given value. 
 	private Matrix initializeMatrix(Matrix inputMatrix, double initValue)
