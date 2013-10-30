@@ -134,9 +134,16 @@ public class InputWizard implements ActionListener {
             		String actName = selectedNode.getParent().getParent().toString();
             		displayScreen(getScene(actName, sceneName),getScreen(actName, sceneName, screenName));
             	}
-            	if(selectedNode != null && selectedNode.isRoot())
+            	else if (selectedNode != null && selectedNode.getLastChild() != null && selectedNode.getLastChild().isLeaf()) //a scene painted
             	{
-            		//TODO: make some object to hold characters
+            		String sceneName = selectedNode.toString();
+            		String actName = selectedNode.getParent().toString();
+          			Scene s = getScene(actName, sceneName);
+          			scenePanel.clear();
+          			scenePanel.loadBackground(s.getBackground());
+            	}
+            	else if(selectedNode != null && selectedNode.isRoot())
+            	{
             		ArrayList<CharacterAsset> UNIQchars = new ArrayList<CharacterAsset>();
             		
             		ArrayList<CharacterAsset> chars = getCharacters();
@@ -166,9 +173,6 @@ public class InputWizard implements ActionListener {
             					
             					if(!firstPart.equals(firstPartU) && i == UNIQchars.size()-1)
             					{
-            						
-
-            						
             						UNIQchars.add(c);
             						try{
             						BufferedImage img = ScenePanel.getScaledImage(ImageIO.read(new File("Office, Classroom\\Characters\\" + c.getDisplayImage())), 0.5);
@@ -186,7 +190,6 @@ public class InputWizard implements ActionListener {
             						break;
             						
             					}
-            				
             					i++;
             					if(i == UNIQchars.size()){
             						
@@ -194,13 +197,6 @@ public class InputWizard implements ActionListener {
             					}
             					
             				}
-            				
-            				
-            				
-            				
-            				
-            				
-            			
             			}
 
             		}
