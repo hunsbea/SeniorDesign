@@ -1,4 +1,5 @@
 package edu.utdallas.RepoUpdate;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -9,7 +10,7 @@ import java.util.*;
 
 public class SoundSelectWindow extends JFrame
 {
-	public static final int WIDTH = 400, HEIGHT = 200;
+	public static final int WIDTH = 450, HEIGHT = 300;
 	public SoundSelectWindow()
 	{
 		super("Sound Selection");
@@ -18,24 +19,48 @@ public class SoundSelectWindow extends JFrame
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(d.width/2 - WIDTH/2, d.height/2 - HEIGHT/2);
 
-		String[] comboStrings = {"Sound1.wav", "Sound2.wav"};
-		JComboBox comboBox = new JComboBox(comboStrings);
+		String[] data = { "Sound1.wav", "Sound2.wav", "Sound3.wav",
+			"Sound4.wav", "Sound5.wav", "Sound6.wav", "Sound7.wav",
+			"Sound8.wav", "Sound9.wav", "Sound10.wav", "Sound11.wav",
+			"Sound12.wav", "Sound13.wav", "Sound14.wav", "Sound15.wav" };
+
+        JList list = new JList(data);
+		ListSelectionModel select = list.getSelectionModel();
+
+		JScrollPane listPane = new JScrollPane(list);
+		add(listPane, BorderLayout.CENTER);
 
 		JPanel flow = new JPanel(new FlowLayout());
 
 		JButton preview = new JButton("Preview");
 		try {
-			BufferedImage img = getScaledImage(ImageIO.read(new File("play.png")), 0.5);
+			BufferedImage img = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/play.png")), 0.5);
 			preview.setIcon(new ImageIcon(img));
 		} catch(Exception e) {}
-		preview.setPreferredSize(new Dimension(150, 30));
+		preview.setPreferredSize(new Dimension(100, 30));
+		JButton stop = new JButton("Stop");
+		try {
+			BufferedImage img = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/stop.png")), 1.0);
+			stop.setIcon(new ImageIcon(img));
+		} catch(Exception e) {}
+		stop.setPreferredSize(new Dimension(100, 30));
 		JButton add = new JButton("Add");
-		add.setPreferredSize(new Dimension(150, 30));
+		add.setPreferredSize(new Dimension(100, 30));
 
-		add(comboBox, BorderLayout.NORTH);
 		flow.add(preview);
+		flow.add(stop);
 		flow.add(add);
 		add(flow, BorderLayout.SOUTH);
+	}
+
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				SoundSelectWindow s = new SoundSelectWindow();
+				s.setVisible(true);
+			}
+		});
 	}
 
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
@@ -52,15 +77,5 @@ public class SoundSelectWindow extends JFrame
 		g.dispose();
 
 		return resized;
-	}
-
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				SoundSelectWindow s = new SoundSelectWindow();
-				s.setVisible(true);
-			}
-		});
 	}
 }
