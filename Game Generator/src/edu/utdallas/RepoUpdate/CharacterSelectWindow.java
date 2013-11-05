@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.swing.*;
+
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.util.*;
@@ -18,9 +19,9 @@ public class CharacterSelectWindow extends JFrame
 
 		JPanel nPanel = new JPanel();
 		String[] comboStrings = {"Character 1", "Character 10", "Character 17"};
-		JComboBox comboBox = new JComboBox(comboStrings);
+		final JComboBox comboBox = new JComboBox(comboStrings);
 		nPanel.add(comboBox);
-
+		
 		JScrollPane wPane = new JScrollPane();
 		//wPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		//wPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -28,28 +29,51 @@ public class CharacterSelectWindow extends JFrame
 		JPanel wPanel = new JPanel(new GridLayout(0, 4));
 		wPane.add(wPanel);
 		wPane.setViewportView(wPanel);
-
+		
+		final ArrayList<JLabel> jlabels = new ArrayList<JLabel>();
+		comboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Object item = comboBox.getSelectedItem();
+                if ("Character 1".equals(item)) {
+                    System.out.println("char 1 is pressed");
+                } else if ("Character 10".equals(item)) {
+                	System.out.println("char 10 is pressed");
+                }
+            }
+        });
 		File dir = new File("Office, Classroom/Characters/character_1/");
 		for (File child : dir.listFiles())
 		{
 			try {
 				BufferedImage image = getScaledImage(ImageIO.read(child), 0.5);
 				final JLabel l = new JLabel(new ImageIcon(image));
-				l.addMouseListener(new MouseListener() {
-					public void mouseClicked(MouseEvent e) {
-						l.setBorder(BorderFactory.createLoweredBevelBorder());
-					}
-					public void mouseEntered(MouseEvent e) {
-					}
-					public void mouseExited(MouseEvent e) {
-					}
-					public void mousePressed(MouseEvent e) {
-					}
-					public void mouseReleased(MouseEvent e) {
-					}
-				});
+				jlabels.add(l);
 				wPanel.add(l);
 			} catch(Exception e) {}
+		}
+		
+		for(final JLabel l : jlabels)
+		{
+			l.addMouseListener(new MouseListener() {
+				public void mouseClicked(MouseEvent e) {
+					for(int i = 0; i < jlabels.size(); i++)
+					{
+						jlabels.get(i).setBorder(null);
+					}
+					l.setBorder(BorderFactory.createLoweredBevelBorder());
+					
+					//l.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				}
+				public void mouseEntered(MouseEvent e) {
+				}
+				public void mouseExited(MouseEvent e) {
+				}
+				public void mousePressed(MouseEvent e) {
+				}
+				public void mouseReleased(MouseEvent e) {
+				}
+			});
 		}
 
 		JPanel ePanel = new JPanel(new GridLayout(0, 1, 0, 0));

@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import edu.utdallas.RepoUpdate.ScenePanel;
+import edu.utdallas.RepoUpdate.CharacterSelectWindow;
 import edu.utdallas.RepoUpdate.Updates;
 import edu.utdallas.gamegenerator.Shared.*;
 import edu.utdallas.gamegenerator.Structure.*;
@@ -55,6 +56,7 @@ public class InputWizard implements ActionListener {
  	private static String label1 = "Preview after generating";
  	private JTree actTree;
  	private ScenePanel scenePanel;
+ 	private CharacterSelectWindow CharacterSelectWindow;
  	
  	private Game game;
  	
@@ -221,10 +223,18 @@ public class InputWizard implements ActionListener {
         tabbedPane.addTab("Preview", null, previewTab);
         JPanel browsePanel = new JPanel(new BorderLayout()); // browse/click on Acts/Scenes
         browsePanel.add(scrollPane);
+        JPanel toolbarPanel = new JPanel(new BorderLayout());
+        JSplitPane splitTreePane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,browsePanel  , toolbarPanel);
+        JButton characterButton = new JButton("Characters");
+        characterButton.addActionListener(this);
+        characterButton.setActionCommand("charactersToolbar");
+        splitTreePane.setBottomComponent(characterButton);
         scenePanel = new ScenePanel(); // view/edit the Scene selected in the browse panel
         scenePanel.setLayout(null);
-        JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, browsePanel, scenePanel);
+        JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitTreePane, scenePanel);
         previewTab.add(splitPreviewPane);
+        
+        
         
         //Jcheckbox
         JCheckBox tickBox = new JCheckBox(label1);
@@ -992,6 +1002,11 @@ public class InputWizard implements ActionListener {
 			break;
 		case "openFile":
 			loadGame();
+			break;
+		case "charactersToolbar":
+			CharacterSelectWindow dr = new CharacterSelectWindow();
+			dr.setVisible(true);
+			
 			break;
 		case "addToRepo":
 			File parent = new File("New Games\\");
