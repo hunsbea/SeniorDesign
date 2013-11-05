@@ -128,7 +128,7 @@ public class InputWizard implements ActionListener {
             public void valueChanged(TreeSelectionEvent e) 
             {
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) actTree.getLastSelectedPathComponent();
-            	if (selectedNode != null && selectedNode.isLeaf()) //a scene
+            	if (selectedNode != null && selectedNode.isLeaf()) //a screen
             	{
                 	String screenName = selectedNode.toString();
                 	System.out.println(""+screenName);
@@ -143,6 +143,7 @@ public class InputWizard implements ActionListener {
             		String actName = selectedNode.getParent().toString();
           			Scene s = getScene(actName, sceneName);
           			scenePanel.clear();
+          			System.out.println("calling clear scene node\n");
           			scenePanel.loadBackground(s.getBackground());
             	}
             	else if(selectedNode != null && selectedNode.isRoot())
@@ -155,6 +156,7 @@ public class InputWizard implements ActionListener {
             		Iterator<CharacterAsset> iterUNIQ = UNIQchars.iterator();
             		HashSet<CharacterAsset> uniquechars = new HashSet<CharacterAsset>();
             		scenePanel.clear();
+            		System.out.println("calling clear rootnode\n");
             		for (CharacterAsset c : chars){
             			
             			if(UNIQchars.size() == 0){
@@ -574,6 +576,7 @@ public class InputWizard implements ActionListener {
             displayGame(game, file.getName());
             
             scenePanel.clear();
+    		System.out.println("calling clear loadgame\n");
         } 
 		else 
 		{
@@ -643,7 +646,7 @@ public class InputWizard implements ActionListener {
 		List<Asset> assets = screen.getAssets();
 		if(assets != null){
 			scenePanel.loadAssets(assets);
-		scenePanel.loadAssetsToRoot(assets);
+		//scenePanel.loadAssetsToRoot(assets);
 		}
 		else
 			System.out.println("assets null");

@@ -30,6 +30,7 @@ public class ScenePanel extends JPanel
 	public ScenePanel()
 	{
 		clear();
+		System.out.println("calling clear constructor\n");
 	}
 	
 	public void clear()
@@ -58,6 +59,7 @@ public class ScenePanel extends JPanel
 	public void loadAssets(List<Asset> as)
 	{
 		clear();
+		System.out.println("calling clear load assets\n");
 		
 		for(Asset a : as)
 		{
@@ -84,6 +86,8 @@ public class ScenePanel extends JPanel
 	public void loadAssetsToRoot(List<Asset> as)
 	{
 		clear();
+		System.out.println("calling clear load assets to root\n");
+		
 		
 		for(Asset a : as)
 		{
