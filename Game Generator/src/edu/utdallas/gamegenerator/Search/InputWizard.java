@@ -17,6 +17,8 @@ import Jama.Matrix;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -50,7 +52,7 @@ public class InputWizard implements ActionListener {
  	private JMenuItem addToRepo;
  	private JMenuItem remakeRepo;
  	private JMenuItem saveToRepo;
- 	
+ 	private static String label1 = "Preview after generating";
  	private JTree actTree;
  	private ScenePanel scenePanel;
  	
@@ -71,8 +73,9 @@ public class InputWizard implements ActionListener {
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private Double xtraXposition = 180.00;
 	private int imgtrack = 0;
+	private int selectedValue = 1;
 	CharacterAsset c;
-	
+	final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	
 	public InputWizard(Matrix[] input)
 	{
@@ -209,7 +212,7 @@ public class InputWizard implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(actTree);
         
         // create tabbed layout
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        
         JPanel generateTab = new JPanel(new BorderLayout());
         JPanel previewTab = new JPanel(new BorderLayout());
         tabbedPane.addTab("Generate", null, generateTab);
@@ -221,6 +224,29 @@ public class InputWizard implements ActionListener {
         JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, browsePanel, scenePanel);
         previewTab.add(splitPreviewPane);
         
+        //Jcheckbox
+        JCheckBox tickBox = new JCheckBox(label1);
+        ActionListener actionListener = new ActionListener() {
+
+        	@Override
+        public void actionPerformed(ActionEvent actionEvent) {
+
+            AbstractButton absB = (AbstractButton) actionEvent.getSource();
+
+            boolean slct = absB.getModel().isSelected();
+
+             selectedValue = (slct ? 0 : 1);
+            
+            System.out.println(selectedValue);
+
+
+        }
+
+          };
+        	  tickBox.addActionListener(actionListener);
+        	 // tickBox.setMnemonic(KeyEvent.VK_S);
+
+
     //gradeButtons    
     ButtonGroup gradeGroup = new ButtonGroup();
  		JRadioButton primaryButton = new JRadioButton("Primary School");
@@ -247,6 +273,7 @@ public class InputWizard implements ActionListener {
  		gradeGroup.add(collegeButton);
  		gradeGroup.add(jobTrainingButton);
  		gradeGroup.add(noGradePreference);
+ 		
  		JPanel gradePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel gradeLabel = new JLabel("Indended grade level:");
     	gradePanel.add(gradeLabel);
@@ -256,6 +283,7 @@ public class InputWizard implements ActionListener {
  		gradePanel.add(collegeButton);
  		gradePanel.add(jobTrainingButton);
  		gradePanel.add(noGradePreference);
+ 		gradePanel.add(tickBox);
  	mainPannel.add(gradePanel,nextOpenRow++);
     //GenderButtons    
         ButtonGroup genderGroup = new ButtonGroup();
@@ -544,6 +572,7 @@ public class InputWizard implements ActionListener {
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
             displayGame(game, file.getName());
+            
             scenePanel.clear();
         } 
 		else 
@@ -679,6 +708,16 @@ public class InputWizard implements ActionListener {
 			try { Thread.sleep(200); } catch(Exception e) { }
 		}
 		return componentInputs;
+	}
+	public void previewGame(File filename){
+		System.out.println(selectedValue);
+    	  if(selectedValue == 0){
+  		  tabbedPane.setSelectedIndex(1);
+          
+          game = readGameFile(filename);
+          displayGame(game, filename.getName());
+  		  
+  	  }
 	}
 	// a way to weight the options for each component against each other (ie age v gender) on which is more important
 	// add a third input to this method called weight and replace the optionTotal in the assignment statement with it. 
@@ -939,6 +978,7 @@ public class InputWizard implements ActionListener {
 				gameSavePath=file.getAbsolutePath(); 
 				checkForXML(gameSavePath);
 				System.out.println("Game Save Path: "+gameSavePath);
+				previewGame(file);
 				submitClicked = true;
 				
 			}
