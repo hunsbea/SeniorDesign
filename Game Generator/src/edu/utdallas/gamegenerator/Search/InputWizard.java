@@ -166,6 +166,12 @@ public class InputWizard implements ActionListener {
             			//create a copy as not to modify the original coordinates
             			CharacterAsset c = (CharacterAsset)ca.clone();
             			
+            			//make all images a standard width
+            			int desiredWidth = 180;
+            			double mFactor = desiredWidth / c.getWidth();
+            			c.setWidth(c.getWidth() * mFactor);
+            			c.setHeight(c.getHeight() * mFactor);
+            			
             			if(UNIQchars.size() == 0){
             				UNIQchars.add(c);
     						c.setLocX(0);
