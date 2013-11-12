@@ -152,13 +152,15 @@ public class InputWizard implements ActionListener {
             	{
             		ArrayList<CharacterAsset> UNIQchars = new ArrayList<CharacterAsset>();
             		
-            		ArrayList<CharacterAsset> chars = getCharacters();
+            		ArrayList<CharacterAsset> chars = null;
             		
-            		Iterator<CharacterAsset> iterchars = chars.iterator();
-            		Iterator<CharacterAsset> iterUNIQ = UNIQchars.iterator();
-            		HashSet<CharacterAsset> uniquechars = new HashSet<CharacterAsset>();
+            		chars = getCharacters();
+            		
             		scenePanel.clear();
             		System.out.println("calling clear rootnode\n");
+            		UNIQchars.clear();
+            		xtraXposition = 180.00;
+            		System.out.println("uniq chars before putting in size "+UNIQchars.size());
             		for (CharacterAsset c : chars){
             			
             			if(UNIQchars.size() == 0){
@@ -166,7 +168,7 @@ public class InputWizard implements ActionListener {
     						c.setLocX(0);
     						c.setLocY(0);
             				scenePanel.loadAssetToRoot(c, charBaseDir);
-            				System.out.println("got here");
+            				
             			}
             			else{	
             				int i =0;
@@ -182,24 +184,24 @@ public class InputWizard implements ActionListener {
             					{
             						UNIQchars.add(c);
             						try{
-            						BufferedImage img = ScenePanel.getScaledImage(ImageIO.read(new File("Office, Classroom\\Characters\\" + c.getDisplayImage())), 0.5);
             						
             						c.setLocX(xtraXposition);
             						c.setLocY(0);
             						
             						scenePanel.loadAssetToRoot(c, charBaseDir);
             						xtraXposition = xtraXposition+ xtraXposition;
+            						System.out.println("xtraposition: "+ xtraXposition);
             						} catch(Exception ex) {}
             						break;
             					}
             					if (firstPart.equals(firstPartU)){
-            					
+               						
             						break;
             						
             					}
             					i++;
             					if(i == UNIQchars.size()){
-            						
+     
             						break;
             					}
             					
