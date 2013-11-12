@@ -40,7 +40,7 @@ public class InputWizard implements ActionListener {
  * implements ActionListener so a subclass for it is not needed. 
  */
 	
-	private static int WIDTH = 1177;
+	private static int WIDTH = 1200;
 	private static int HEIGHT = 481;
 	private Matrix[] componentInputs;
 	private boolean submitClicked = false;
@@ -129,6 +129,7 @@ public class InputWizard implements ActionListener {
         {
             public void valueChanged(TreeSelectionEvent e) 
             {
+            	if(game == null) { return; } // don't try to display an empty game
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) actTree.getLastSelectedPathComponent();
             	if (selectedNode != null && selectedNode.isLeaf()) //a screen
             	{
@@ -234,15 +235,31 @@ public class InputWizard implements ActionListener {
         tabbedPane.addTab("Preview", null, previewTab);
         JPanel browsePanel = new JPanel(new BorderLayout()); // browse/click on Acts/Scenes
         browsePanel.add(scrollPane);
-        JPanel toolbarPanel = new JPanel(new BorderLayout());
-        JSplitPane splitTreePane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,browsePanel  , toolbarPanel);
-        JButton characterButton = new JButton("Characters");
+        
+        JPanel toolbarPanel = new JPanel(new GridLayout(3,2,0,0));
+        //JPanel toolbarPanel = new JPanel(new GridLayout(6,1));
+        //JSplitPane splitTreePane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,browsePanel, toolbarPanel);
+        JButton characterButton = new JButton("Character");
         characterButton.addActionListener(this);
         characterButton.setActionCommand("charactersToolbar");
-        splitTreePane.setBottomComponent(characterButton);
+        toolbarPanel.add(characterButton);
+        JButton propButton = new JButton("Prop");
+        toolbarPanel.add(propButton);
+        JButton speechButton = new JButton("Speech");
+        toolbarPanel.add(speechButton);
+        JButton buttonButton = new JButton("Button");
+        toolbarPanel.add(buttonButton);
+        JButton soundButton = new JButton("Sound");
+        toolbarPanel.add(soundButton);
+        JButton backgroundButton = new JButton("Background");
+        toolbarPanel.add(backgroundButton);
+        //splitTreePane.setBottomComponent(toolbarPanel);
+        browsePanel.add(toolbarPanel, BorderLayout.SOUTH);
+        toolbarPanel.setPreferredSize(new Dimension(0, 80));
+        
         scenePanel = new ScenePanel(); // view/edit the Scene selected in the browse panel
         scenePanel.setLayout(null);
-        JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitTreePane, scenePanel);
+        JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, browsePanel, scenePanel);
         previewTab.add(splitPreviewPane);
         
         
