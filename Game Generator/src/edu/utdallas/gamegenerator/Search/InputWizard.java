@@ -190,7 +190,7 @@ public class InputWizard implements ActionListener {
             						
             						scenePanel.loadAssetToRoot(c, charBaseDir);
             						xtraXposition = xtraXposition+ xtraXposition;
-            						System.out.println("xtraposition: "+ xtraXposition);
+            						
             						} catch(Exception ex) {}
             						break;
             					}
