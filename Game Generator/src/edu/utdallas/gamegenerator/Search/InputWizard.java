@@ -754,6 +754,10 @@ public class InputWizard implements ActionListener {
     	  if(selectedValue == 0){
   		  tabbedPane.setSelectedIndex(1);
           
+  		  //We are literally guessing how long it will take to write to disk.
+  		  //TODO: sync filesystem write
+  		  //note: 2 seconds was a sufficient amount of time for my computer
+  		  try {Thread.sleep(3000);}catch(Exception e){}
           game = readGameFile(filename);
           displayGame(game, filename.getName());
   		  
@@ -1018,9 +1022,8 @@ public class InputWizard implements ActionListener {
 				gameSavePath=file.getAbsolutePath(); 
 				checkForXML(gameSavePath);
 				System.out.println("Game Save Path: "+gameSavePath);
-				previewGame(file);
 				submitClicked = true;
-				
+				previewGame(file);
 			}
 			else if(returnValue == JFileChooser.CANCEL_OPTION)
 			{
