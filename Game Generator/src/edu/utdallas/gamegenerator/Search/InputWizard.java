@@ -53,7 +53,7 @@ public class InputWizard implements ActionListener {
  	private JMenuItem addToRepo;
  	private JMenuItem remakeRepo;
  	private JMenuItem saveToRepo;
- 	private static String label1 = "Preview after generating";
+ 	private static String label1 = "Preview after generating: ";
  	private JTree actTree;
  	private ScenePanel scenePanel;
  	private CharacterSelectWindow CharacterSelectWindow;
@@ -249,6 +249,7 @@ public class InputWizard implements ActionListener {
         
         //Jcheckbox
         JCheckBox tickBox = new JCheckBox(label1);
+        tickBox.setHorizontalTextPosition(SwingConstants.LEFT);
         ActionListener actionListener = new ActionListener() {
 
         	@Override
@@ -306,7 +307,6 @@ public class InputWizard implements ActionListener {
  		gradePanel.add(collegeButton);
  		gradePanel.add(jobTrainingButton);
  		gradePanel.add(noGradePreference);
- 		gradePanel.add(tickBox);
  	mainPannel.add(gradePanel,nextOpenRow++);
     //GenderButtons    
         ButtonGroup genderGroup = new ButtonGroup();
@@ -511,9 +511,10 @@ public class InputWizard implements ActionListener {
      		difficultyPanel.add(hardButton);
      		difficultyPanel.add(noDifficultyPreference);
      	mainPannel.add(difficultyPanel,nextOpenRow++);
+     	JPanel previewCheckPanel = new JPanel(new GridLayout(1,1));
+     	previewCheckPanel.add(tickBox);
+        mainPannel.add(previewCheckPanel, nextOpenRow++);
         //ADD MORE BUTTON SETS HERE IN FUTURE IF DESIRED
-     	
-        
      	
      	
      	//Submit Button on bottom
