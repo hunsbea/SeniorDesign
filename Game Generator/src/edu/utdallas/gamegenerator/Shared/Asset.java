@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 @XmlRootElement(name = "AssetBase")
 @XmlSeeAlso({ImageAsset.class, ButtonAsset.class, InformationBoxAsset.class, CharacterAsset.class})
-public class Asset {
+public class Asset implements Cloneable {
     private String type;
     private UUID id;
     private String name;
@@ -156,6 +156,14 @@ public class Asset {
             Behavior behavior = new Behavior();
             behavior.setBehaviorType(BehaviorType.TRANSITION_BEHAVIOR);
             behaviors.add(behavior);
+        }
+    }
+    
+    public Object clone(){  
+        try{  
+            return super.clone();  
+        }catch(Exception e){ 
+            return null; 
         }
     }
 

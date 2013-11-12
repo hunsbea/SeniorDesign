@@ -161,7 +161,10 @@ public class InputWizard implements ActionListener {
             		UNIQchars.clear();
             		xtraXposition = 180.00;
             		System.out.println("uniq chars before putting in size "+UNIQchars.size());
-            		for (CharacterAsset c : chars){
+            		for (CharacterAsset ca : chars){
+            			
+            			//create a copy as not to modify the original coordinates
+            			CharacterAsset c = (CharacterAsset)ca.clone();
             			
             			if(UNIQchars.size() == 0){
             				UNIQchars.add(c);
@@ -539,8 +542,6 @@ public class InputWizard implements ActionListener {
 						if(as instanceof CharacterAsset)
 						{
 							chars.add((CharacterAsset)as);
-							
-							
 						}
 					}
 				}
