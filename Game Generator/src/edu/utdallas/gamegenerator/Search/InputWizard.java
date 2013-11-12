@@ -972,7 +972,7 @@ public class InputWizard implements ActionListener {
 		}
 		else{ 
 			String extension = input.substring(input.lastIndexOf(".") + 1, input.length());
-			if (!extension.equals("xml")&& !extension.equals("XML")) {
+			if (!extension.equalsIgnoreCase("XML")) {
 				gameSavePath= input.substring(0,input.lastIndexOf("."))+".xml";
 			}
 		}
