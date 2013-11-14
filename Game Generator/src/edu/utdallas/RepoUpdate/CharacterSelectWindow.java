@@ -24,7 +24,6 @@ public class CharacterSelectWindow extends JFrame
 	public CharacterSelectWindow()
 	{
 		super("Character Selection");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
 
 		JPanel nPanel = new JPanel();
@@ -154,16 +153,4 @@ public class CharacterSelectWindow extends JFrame
 
 		    return resized;
 	}
-
-
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				CharacterSelectWindow c = new CharacterSelectWindow();
-				c.setVisible(true);
-			}
-		});
-	}
-
 }

@@ -53,16 +53,6 @@ public class SoundSelectWindow extends JFrame
 		add(flow, BorderLayout.SOUTH);
 	}
 
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				SoundSelectWindow s = new SoundSelectWindow();
-				s.setVisible(true);
-			}
-		});
-	}
-
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
 	{
 		int origW = orig.getWidth();
