@@ -1,29 +1,54 @@
 package edu.utdallas.RepoUpdate;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.io.*;
-import javax.imageio.ImageIO;
-import java.util.*;
+import edu.utdallas.gamegenerator.Shared.CharacterAsset;
 
-public class CharacterSelectWindow extends JFrame
+public class CharacterSelectWindow extends JDialog
 {
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 1000, HEIGHT = 700;
+	public static final int WIDTH = 1050, HEIGHT = 700;
 	final JLabel pic = new JLabel();
 	final JPanel wPanel = new JPanel(new GridLayout(0, 4));
-	final JPanel ePanel = new JPanel(new GridLayout(0, 1, 0, 0));
-	final JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, 200, 120);
+	//final JPanel ePanel = new JPanel(new GridLayout(0, 1, 0, 0));
+	final JPanel ePanel = new JPanel(new BorderLayout());
+	final JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, 130, 80);
 	final JComboBox<String> comboBox = new JComboBox<String>();
 	String selectedPath = "";
+	private CharacterAsset charAsset;
 	
-	public CharacterSelectWindow()
+	public CharacterSelectWindow(JFrame owner)
 	{
-		super("Character Selection");
+		super(owner, "Character Selection", Dialog.DEFAULT_MODALITY_TYPE);
 		setSize(WIDTH, HEIGHT);
 
 		JPanel nPanel = new JPanel();
@@ -51,8 +76,8 @@ public class CharacterSelectWindow extends JFrame
 		slider.setSnapToTicks(true);
 		slider.setPaintTicks(true);
 		Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
-        labels.put(30, new JLabel("Smaller"));
-        labels.put(180, new JLabel("Larger"));
+        labels.put(20, new JLabel("Smaller"));
+        labels.put(120, new JLabel("Larger"));
         slider.setLabelTable(labels);
         slider.setPaintLabels(true);
         slider.addChangeListener(new ChangeListener() {
@@ -69,11 +94,32 @@ public class CharacterSelectWindow extends JFrame
         });
 		panel2.add(slider, BorderLayout.CENTER);
 		JButton place = new JButton("Place");
+		place.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				charAsset = new CharacterAsset();
+				String imgstrng = selectedPath.substring(selectedPath.indexOf((String)comboBox.getSelectedItem()));
+				charAsset.setDisplayImage(imgstrng);
+				charAsset.setFontFamily("Comic Sans MS");
+				charAsset.setFontSize(15);
+				charAsset.setHeight(pic.getIcon().getIconHeight());
+				charAsset.setWidth(pic.getIcon().getIconWidth());
+				charAsset.setLocX(300);
+				charAsset.setLocX2(300 + charAsset.getWidth());
+				charAsset.setLocY(50);
+				charAsset.setLocY2(50 + charAsset.getHeight());
+				charAsset.setOpacity(1);
+				setVisible(false);
+			}
+		});
 		place.setPreferredSize(new Dimension(280, 40));
 		panel2.add(place, BorderLayout.SOUTH);
 
-		ePanel.add(pic);
-		ePanel.add(panel2);
+		//ePanel.add(pic);
+		//ePanel.add(panel2);
+		ePanel.add(pic,BorderLayout.CENTER);
+		ePanel.add(panel2,BorderLayout.SOUTH);
+		ePanel.setPreferredSize(new Dimension(325,650));
 
 		add(ePanel, BorderLayout.EAST);
 		add(wPane, BorderLayout.WEST);
@@ -87,6 +133,8 @@ public class CharacterSelectWindow extends JFrame
 	
 	private void handleChangeCharacter()
 	{
+		if(comboBox.getSelectedItem() == null)
+		{return;}
 		final ArrayList<JLabel> jlabels = new ArrayList<JLabel>();
         String item = (String)comboBox.getSelectedItem();
         
@@ -152,5 +200,25 @@ public class CharacterSelectWindow extends JFrame
 		    g.dispose();
 
 		    return resized;
+	}
+	
+	public void setCharacterAsset(CharacterAsset characterAsset)
+	{
+		charAsset = characterAsset;
+	}
+	
+	public CharacterAsset getNewCharacterAsset()
+	{
+		return charAsset;
+	}
+	
+	public void setCharacterChoices(ArrayList<String> charNames)
+	{
+		comboBox.removeAllItems();
+		for(String charName : charNames)
+		{
+			comboBox.addItem(charName);
+		}
+		handleChangeCharacter();
 	}
 }

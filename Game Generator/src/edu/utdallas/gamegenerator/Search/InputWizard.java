@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ import java.util.StringTokenizer;
 
 public class InputWizard implements ActionListener {
 /**
- * @Authors Kaleb Breault, Alex Hunsberger, Zayed Alfalasi, Abdulla Alfalasi
+ * @Authors Kaleb Breault, Alex Hunsberger, Zayed Alfalasi, Abdulla Alfalasi, Jacob Dahleen
  * This class makes a GUI interface for entering input and previewing XML games
  * implements ActionListener so a subclass for it is not needed. 
  */
@@ -56,7 +58,15 @@ public class InputWizard implements ActionListener {
  	private static String label1 = "Preview after generating: ";
  	private JTree actTree;
  	private ScenePanel scenePanel;
- 	private CharacterSelectWindow CharacterSelectWindow;
+ 	//JD character selection class parameters
+ 	private CharacterSelectWindow characterSelectWindow;
+ 	private CharacterAsset characterSelectAsset;
+ 	public enum gameLevel{GAME, ACT, SCENE, SCREEN, CHALLENGE};
+ 	private gameLevel selectedLevel = null;
+ 	private JButton characterButton;
+ 	private Scene lastSelectedScene = null;
+ 	private ScreenNode lastSelectedScreen = null;
+ 	//JD end
  	
  	private Game game;
  	
@@ -114,7 +124,63 @@ public class InputWizard implements ActionListener {
         saveToRepo.addActionListener(this);
         saveToRepo.setActionCommand("saveToRepo");
         fileMenu.add(saveToRepo);
-        
+        //JD
+        characterSelectWindow = new CharacterSelectWindow(window);
+        characterSelectWindow.addWindowListener(new WindowListener(){
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				if(characterSelectWindow.getNewCharacterAsset() == null)
+				{
+					return;
+				}
+				else
+				{
+					List<Asset> currentAssets = lastSelectedScreen.getAssets();
+					currentAssets.add(characterSelectWindow.getNewCharacterAsset());
+					lastSelectedScreen.setAssets(currentAssets);
+					displayScreen(lastSelectedScene, lastSelectedScreen);
+				}
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         
         
         // create tree-structure for viewing Acts/Scenes
@@ -138,6 +204,12 @@ public class InputWizard implements ActionListener {
             		String sceneName = selectedNode.getParent().toString();
             		System.out.println(""+sceneName);
             		String actName = selectedNode.getParent().getParent().toString();
+            		//JD
+            		characterButton.setEnabled(true);
+            		selectedLevel = gameLevel.SCREEN;
+            		lastSelectedScene = getScene(actName, sceneName);
+            		lastSelectedScreen = getScreen(actName, sceneName, screenName);
+            		//JD end
             		displayScreen(getScene(actName, sceneName),getScreen(actName, sceneName, screenName));
             	}
             	else if (selectedNode != null && selectedNode.getLastChild() != null && selectedNode.getLastChild().isLeaf()) //a scene painted
@@ -148,8 +220,10 @@ public class InputWizard implements ActionListener {
           			scenePanel.clear();
           			System.out.println("calling clear scene node\n");
           			scenePanel.loadBackground(s.getBackground());
+          			characterButton.setEnabled(false);
+          			selectedLevel = gameLevel.SCENE;
             	}
-            	else if(selectedNode != null && selectedNode.isRoot())
+            	else if(selectedNode != null && selectedNode.isRoot()) //game level
             	{
             		ArrayList<CharacterAsset> UNIQchars = new ArrayList<CharacterAsset>();
             		
@@ -162,6 +236,8 @@ public class InputWizard implements ActionListener {
             		UNIQchars.clear();
             		xtraXposition = 180.00;
             		System.out.println("uniq chars before putting in size "+UNIQchars.size());
+            		characterButton.setEnabled(false);
+            		selectedLevel = gameLevel.GAME;
             		for (CharacterAsset ca : chars){
             			
             			//create a copy as not to modify the original coordinates
@@ -221,6 +297,10 @@ public class InputWizard implements ActionListener {
             		}
             		
             		
+            	}//end else if
+            	else {
+            		characterButton.setEnabled(false);
+            		selectedLevel = gameLevel.ACT;
             	}
             }
         });
@@ -239,8 +319,10 @@ public class InputWizard implements ActionListener {
         JPanel toolbarPanel = new JPanel(new GridLayout(3,2,0,0));
         //JPanel toolbarPanel = new JPanel(new GridLayout(6,1));
         //JSplitPane splitTreePane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,browsePanel, toolbarPanel);
-        JButton characterButton = new JButton("Character");
+        //JButton characterButton = new JButton("Character");
+        characterButton = new JButton("Character");
         characterButton.addActionListener(this);
+        characterButton.setEnabled(false);
         characterButton.setActionCommand("charactersToolbar");
         toolbarPanel.add(characterButton);
         JButton propButton = new JButton("Prop");
@@ -573,6 +655,23 @@ public class InputWizard implements ActionListener {
 		}
 		
 		return chars;
+	}
+	
+	private ArrayList<String> getUniqueCharacterNames(ArrayList<CharacterAsset> chars)
+	{
+		ArrayList<String> charStrings = new ArrayList<String>();
+		for(CharacterAsset charAsset : chars)
+		{
+			String filePath = charAsset.getDisplayImage();
+			String charName = filePath.substring(0, filePath.indexOf('\\'));
+			
+			if(!charStrings.contains(charName))
+			{
+				charStrings.add(charName);
+			}
+		}
+		
+		return charStrings;
 	}
 	
 	//sets all the component Inputs to 0
@@ -1034,9 +1133,38 @@ public class InputWizard implements ActionListener {
 			loadGame();
 			break;
 		case "charactersToolbar":
-			CharacterSelectWindow dr = new CharacterSelectWindow();
-			dr.setVisible(true);
-			
+			//JD call method to pass an asset to the character select window.
+			characterSelectAsset = null;
+			characterSelectWindow.setCharacterAsset(characterSelectAsset);
+			ArrayList<CharacterAsset> chars = new ArrayList<CharacterAsset>();
+			List<Asset> assets = lastSelectedScreen.getAssets();
+			for(Asset as : assets)
+			{
+				if(as instanceof CharacterAsset)
+				{
+					chars.add((CharacterAsset)as);
+				}
+			}
+			ArrayList<String> charNamesInScreen = getUniqueCharacterNames(chars);
+			ArrayList<String> charNamesInGame = getUniqueCharacterNames(getCharacters());
+			ArrayList<String> availableChars = new ArrayList<String>();
+			for(String charName : charNamesInGame)
+			{
+				if(!charNamesInScreen.contains(charName))
+				{
+					availableChars.add(charName);
+				}
+			}
+			if(availableChars.isEmpty())
+			{
+				JOptionPane.showMessageDialog(null, "All characters are currently in this Screen, none to add");
+			}
+			else
+			{
+				characterSelectWindow.setCharacterChoices(availableChars);
+				characterSelectWindow.setVisible(true);
+			}
+			//JD end
 			break;
 		case "addToRepo":
 			File parent = new File("New Games\\");
