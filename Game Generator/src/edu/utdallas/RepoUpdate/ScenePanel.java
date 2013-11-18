@@ -16,6 +16,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 public class ScenePanel extends JPanel 
 {
@@ -172,6 +174,7 @@ public class ScenePanel extends JPanel
 			double desiredWidth = a.getWidth();
 			double scaleFactor = desiredWidth / width;
 			
+			
 			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
 			final JLabel panel = new JLabel(new ImageIcon(scaledImage));
 			panel.setLayout(new BorderLayout());
@@ -179,7 +182,14 @@ public class ScenePanel extends JPanel
 			add(panel);
 			
 			panel.addMouseListener(new MouseListener() {
-		        public void mouseClicked(MouseEvent e) { }
+		        public void mouseClicked(MouseEvent e) { 
+		        	
+		        	for (JLabel panel : assetPanels){
+		        		panel.setBorder(null);
+		        	}
+		        	Border highlights = BorderFactory.createLineBorder(Color.YELLOW, 5, true);
+		        		panel.setBorder(highlights);
+		        		}
 		        public void mouseEntered(MouseEvent e) { }
 		        public void mouseExited(MouseEvent e) { }
 		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
