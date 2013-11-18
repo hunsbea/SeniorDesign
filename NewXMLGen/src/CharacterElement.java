@@ -1,0 +1,11 @@
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class CharacterElement extends GameElement
+{
+	@XmlElement
+	public String imagePath;
+	@XmlElement
+	public int characterId;
+}
