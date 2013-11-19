@@ -5,6 +5,9 @@ import edu.utdallas.gamegenerator.Shared.*;
 import java.awt.*;
 import java.awt.Color;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,12 +18,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
+import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
 
-public class ScenePanel extends JPanel 
+public class ScenePanel extends JPanel implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
@@ -30,6 +35,8 @@ public class ScenePanel extends JPanel
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
+	private ScenePanel that = this;
+	private JLabel toDelete = null;
 	
 	public ScenePanel()
 	{
@@ -199,7 +206,18 @@ public class ScenePanel extends JPanel
 			
 			panel.addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
-		        	
+		        	//if right-click
+		        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
+		        		System.out.println("right-clicked");
+		        		JPopupMenu pMenu = new JPopupMenu();
+		        		JMenuItem menuItem = new JMenuItem("delete");
+		        		menuItem.setActionCommand("deleteElement");
+		        		menuItem.addActionListener(that);
+		        		pMenu.add(menuItem);
+		        		toDelete = panel;
+		        		that.add(pMenu);
+		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
+					}
 		        	for (JLabel panel : assetPanels){
 		        		panel.setBorder(null);
 		        	}
@@ -290,4 +308,18 @@ public class ScenePanel extends JPanel
         	add(assetPanels.get(i));
         }*/
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch(e.getActionCommand())
+		{
+		case "deleteElement":
+			System.out.println("got action");
+    		that.remove(toDelete);
+    		that.updateUI();
+    		that.repaint();
+			break;
+		}
+		
+	}
 }
