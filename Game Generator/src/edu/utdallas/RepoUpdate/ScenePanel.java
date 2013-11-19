@@ -13,6 +13,7 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ public class ScenePanel extends JPanel
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
 	private ArrayList<InformationBoxAsset> infoAssets; //separate because must be handled after loading all other assets
+	private ArrayList<ButtonAsset> ButtonAssetList;
 	private ArrayList<JLabel> assetPanels;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
@@ -39,6 +41,7 @@ public class ScenePanel extends JPanel
 	{
 		background = null;
 		infoAssets = new ArrayList<InformationBoxAsset>();
+		ButtonAssetList = new ArrayList<ButtonAsset>(); // button Asset list --Abdulla
 		assetPanels = new ArrayList<JLabel>();
 		removeAll();
 		updateUI();
@@ -77,6 +80,19 @@ public class ScenePanel extends JPanel
 			else if(a instanceof InformationBoxAsset)
 			{
 				infoAssets.add((InformationBoxAsset)a);
+			}
+			else if (a instanceof ButtonAsset){
+				ButtonAssetList.add((ButtonAsset)a); // --Abdulla
+				System.out.println("button assets: "+ a.getName()); // gets the name of the button --Abdulla
+				
+				String bName = a.getName();
+				JButton buttonName = new JButton(bName);
+				buttonName.setBounds(950, 356, 100, 40);
+				add(buttonName);
+				//buttonName.setSize(10, 10);
+				//buttonName.setBounds(x, y, width, height)
+				//System.out.println(buttonName.getSize());
+				
 			}
 		}
 		

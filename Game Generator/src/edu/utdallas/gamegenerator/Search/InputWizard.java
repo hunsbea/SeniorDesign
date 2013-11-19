@@ -834,6 +834,7 @@ public class InputWizard implements ActionListener {
 		List<Asset> assets = screen.getAssets();
 		if(assets != null){
 			scenePanel.loadAssets(assets);
+			//assets.
 		//scenePanel.loadAssetsToRoot(assets);
 		}
 		else
