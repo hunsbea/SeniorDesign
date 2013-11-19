@@ -70,6 +70,7 @@ public class InputWizard implements ActionListener {
  	private JButton backgroundButton;
  	private Scene lastSelectedScene = null;
  	private ScreenNode lastSelectedScreen = null;
+ 	private File Currentfile = null;
  	//JD end
  	
  	private Game game;
@@ -750,6 +751,26 @@ public class InputWizard implements ActionListener {
 		
 		return game1;
 	}
+	private Game SaveGameFile(File gameFile)
+    {
+            
+            
+            try {
+                    
+                    JAXBContext.newInstance(Game.class).createMarshaller().marshal(game, gameFile);
+            }
+            catch (JAXBException e) {
+                    e.printStackTrace();
+                    System.out.println("Unable to open " + gameFile);
+            }
+            
+            return game;
+    }
+    
+    
+
+	
+	
 	// C40 handle loading an XML game into the preview window
 	private void loadGame()
 	{
@@ -762,7 +783,7 @@ public class InputWizard implements ActionListener {
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
             displayGame(game, file.getName());
-            
+            Currentfile = file;
             scenePanel.clear();
     		System.out.println("calling clear loadgame\n");
         } 
@@ -1175,6 +1196,7 @@ public class InputWizard implements ActionListener {
 				checkForXML(gameSavePath);
 				System.out.println("Game Save Path: "+gameSavePath);
 				submitClicked = true;
+				Currentfile = file;
 				previewGame(file);
 			}
 			else if(returnValue == JFileChooser.CANCEL_OPTION)
@@ -1184,6 +1206,7 @@ public class InputWizard implements ActionListener {
 			break;
 		case "openFile":
 			loadGame();
+			
 			break;
 		case "charactersToolbar":
 			//JD call method to pass an asset to the character select window.
@@ -1227,7 +1250,9 @@ public class InputWizard implements ActionListener {
 			backgroundSelectWindow.setBackgroundFolderPath(currentBackgroundPath);
 			backgroundSelectWindow.setVisible(true);
 			break;
-			
+		case "saveToRepo":
+			SaveGameFile(Currentfile);
+			break;
 		case "addToRepo":
 			File parent = new File("New Games\\");
 			saveFileChooser = new JFileChooser(parent);

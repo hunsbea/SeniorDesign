@@ -237,10 +237,12 @@ public class ScenePanel extends JPanel implements ActionListener
 		        	int newX = panel.getX() + deltaX;
 		        	int newY = panel.getY() + deltaY;
 		        	panel.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
+					a.setLocX(newX);
+					a.setLocY(newY);
 				}
 				public void mouseMoved(MouseEvent e) { }
 			});
-			
+
 			assetPanels.add(panel);
 			repaint();
 		} 
