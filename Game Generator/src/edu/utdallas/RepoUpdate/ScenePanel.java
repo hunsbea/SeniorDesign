@@ -36,7 +36,8 @@ public class ScenePanel extends JPanel implements ActionListener
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
 	private ScenePanel that = this;
-	private JLabel toDelete = null;
+	private JLabel toDeleteLabel = null;
+	private Asset toDeleteAsset = null;
 	
 	public ScenePanel()
 	{
@@ -214,7 +215,8 @@ public class ScenePanel extends JPanel implements ActionListener
 		        		menuItem.setActionCommand("deleteElement");
 		        		menuItem.addActionListener(that);
 		        		pMenu.add(menuItem);
-		        		toDelete = panel;
+		        		toDeleteLabel = panel;
+		        		toDeleteAsset = a;
 		        		that.add(pMenu);
 		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
 					}
@@ -317,9 +319,11 @@ public class ScenePanel extends JPanel implements ActionListener
 		{
 		case "deleteElement":
 			System.out.println("got action");
-    		that.remove(toDelete);
+    		that.remove(toDeleteLabel);
     		that.updateUI();
     		that.repaint();
+    		toDeleteAsset.setLocY(-1000);
+    		toDeleteAsset.setLocX(-1000);
 			break;
 		}
 		
