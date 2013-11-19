@@ -1,6 +1,7 @@
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -10,7 +11,8 @@ public class Scene
 	public String purpose;
 	@XmlElement
 	public String learningObjective;
-	@XmlElement
+	@XmlElementWrapper(name = "screens")
+	@XmlElement(name = "screen")
 	public List<Screen> screens;
 	@XmlElement
 	public String backgroundImagePath;

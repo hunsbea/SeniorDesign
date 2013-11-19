@@ -1,0 +1,1284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<game>
+    <acts>
+        <act>
+            <purpose>The purpose of this act to teach you the learning objective</purpose>
+            <learningObjective>In this act, you will learn A, B, and C</learningObjective>
+            <currentScene>0</currentScene>
+            <scenes>
+                <scene>
+                    <purpose>Is this really different from the leaning objective?</purpose>
+                    <learningObjective>In this Scene, you will learn A.X, B.Y and C.Z</learningObjective>
+                    <screens>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>SIT</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>145</moveToX>
+        <moveToY>119</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>558</x>
+    <y>173</y>
+    <width>177</width>
+    <height>295</height>
+    <imagePath>character_6/char6_LEvil.png</imagePath>
+    <characterId>6</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>657</moveToX>
+        <moveToY>238</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>752</x>
+    <y>91</y>
+    <width>182</width>
+    <height>303</height>
+    <imagePath>Cabinet_C.png</imagePath>
+    <type>PLANT</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>467</moveToX>
+        <moveToY>267</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>786</x>
+    <y>234</y>
+    <width>203</width>
+    <height>338</height>
+    <imagePath>character_2/char2_StandOpen.png</imagePath>
+    <characterId>2</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="educationElement">
+    <animation>
+        <movement>WALK</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>498</moveToX>
+        <moveToY>154</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>277</x>
+    <y>14</y>
+    <width>78</width>
+    <height>130</height>
+    <imagePath>BlackBoard.png</imagePath>
+    <type>WHITEBOARD</type>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>627</moveToX>
+        <moveToY>21</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>124</x>
+    <y>123</y>
+    <width>186</width>
+    <height>310</height>
+    <imagePath>character_6/char6_LEvil.png</imagePath>
+    <characterId>6</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>36</moveToX>
+        <moveToY>96</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>23</x>
+    <y>233</y>
+    <width>151</width>
+    <height>251</height>
+    <imagePath>character_2/char2_SitAlmostRaiseChair.png</imagePath>
+    <characterId>2</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="educationElement">
+    <animation>
+        <movement>TALK</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>125</moveToX>
+        <moveToY>57</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>316</x>
+    <y>63</y>
+    <width>55</width>
+    <height>91</height>
+    <imagePath>BulletinBoard.png</imagePath>
+    <type>CLICKER</type>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>DANCE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>662</moveToX>
+        <moveToY>40</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>678</x>
+    <y>171</y>
+    <width>152</width>
+    <height>253</height>
+    <imagePath>Door_2_L.png</imagePath>
+    <type>CLOUDS</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="genericElement">
+    <animation>
+        <movement>DANCE</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>697</moveToX>
+        <moveToY>7</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>713</x>
+    <y>35</y>
+    <width>229</width>
+    <height>381</height>
+    <imagePath>Regular Speech.png</imagePath>
+    <type>TEXT_BOX</type>
+    <color/>
+    <text>This text is inside of this generic element. I wonder what I will be displayed in.</text>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="educationElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>409</moveToX>
+        <moveToY>23</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>696</x>
+    <y>228</y>
+    <width>64</width>
+    <height>106</height>
+    <imagePath>Compscreen.png</imagePath>
+    <type>CLICKER</type>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                    </screens>
+                    <backgroundImagePath>exampleBackground1.png</backgroundImagePath>
+                    <backgroundMusicPath>exampleAudio1.midi</backgroundMusicPath>
+                </scene>
+                <scene>
+                    <purpose>Is this really different from the leaning objective?</purpose>
+                    <learningObjective>In this Scene, you will learn A.X, B.Y and C.Z</learningObjective>
+                    <screens>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>HAND_SHAKE</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>238</moveToX>
+        <moveToY>135</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>89</x>
+    <y>50</y>
+    <width>227</width>
+    <height>378</height>
+    <imagePath>ATM_1_C.png</imagePath>
+    <type>OFFICE_CHAIR</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>DANCE</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>495</moveToX>
+        <moveToY>280</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>325</x>
+    <y>236</y>
+    <width>73</width>
+    <height>121</height>
+    <imagePath>bench long.png</imagePath>
+    <type>PLANT</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>HAND_WAVE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>113</moveToX>
+        <moveToY>209</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>631</x>
+    <y>170</y>
+    <width>91</width>
+    <height>151</height>
+    <imagePath>character_1/char1_StandSmileOpen.png</imagePath>
+    <characterId>1</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>GLIDE</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>499</moveToX>
+        <moveToY>180</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>394</x>
+    <y>72</y>
+    <width>72</width>
+    <height>120</height>
+    <imagePath>character_10/char10_StandSmileClosed.png</imagePath>
+    <characterId>10</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="educationElement">
+    <animation>
+        <movement>HAND_WAVE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>74</moveToX>
+        <moveToY>46</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>545</x>
+    <y>270</y>
+    <width>115</width>
+    <height>191</height>
+    <imagePath>BulletinBoard.png</imagePath>
+    <type>EASEL</type>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>SIT</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>43</moveToX>
+        <moveToY>200</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>774</x>
+    <y>123</y>
+    <width>101</width>
+    <height>168</height>
+    <imagePath>fence_1.png</imagePath>
+    <type>OFFICE_CUBICLE</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>HAND_WAVE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>755</moveToX>
+        <moveToY>22</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>5</x>
+    <y>137</y>
+    <width>157</width>
+    <height>261</height>
+    <imagePath>character_10/char10_LEvil.png</imagePath>
+    <characterId>10</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>TALK</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>556</moveToX>
+        <moveToY>255</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>12</x>
+    <y>55</y>
+    <width>142</width>
+    <height>236</height>
+    <imagePath>character_1/char1_RPointUp.png</imagePath>
+    <characterId>1</characterId>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>HAND_SHAKE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>219</moveToX>
+        <moveToY>217</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>321</x>
+    <y>198</y>
+    <width>184</width>
+    <height>306</height>
+    <imagePath>character_6/char6_StandOpen.png</imagePath>
+    <characterId>6</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>248</moveToX>
+        <moveToY>234</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>307</x>
+    <y>6</y>
+    <width>100</width>
+    <height>166</height>
+    <imagePath>fence_1.png</imagePath>
+    <type>TABLE</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>STAND</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>718</moveToX>
+        <moveToY>94</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>483</x>
+    <y>281</y>
+    <width>182</width>
+    <height>303</height>
+    <imagePath>Desk_1.png</imagePath>
+    <type>TABLE</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>STAND</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>383</moveToX>
+        <moveToY>182</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>685</x>
+    <y>269</y>
+    <width>96</width>
+    <height>160</height>
+    <imagePath>character_27/char27_StandSmileOpen.png</imagePath>
+    <characterId>27</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>HAND_SHAKE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>361</moveToX>
+        <moveToY>2</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>319</x>
+    <y>94</y>
+    <width>158</width>
+    <height>263</height>
+    <imagePath>character_27/char27_RPointUp.png</imagePath>
+    <characterId>27</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="educationElement">
+    <animation>
+        <movement>GLIDE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>380</moveToX>
+        <moveToY>161</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>334</x>
+    <y>96</y>
+    <width>232</width>
+    <height>386</height>
+    <imagePath>Compscreen.png</imagePath>
+    <type>PROJECTOR</type>
+</element>
+                            </elements>
+                            <challenge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="quizChallenge">
+<name>challenge 2</name>
+<hints>
+    <hint>
+        <text>Think outside the box</text>
+    </hint>
+    <hint>
+        <text>The answer is right under your nose</text>
+    </hint>
+    <hint>
+        <text>It's easier than you think</text>
+    </hint>
+</hints>
+<timer>
+    <transitionSpeed>MODERATE_TRANSITION</transitionSpeed>
+    <presentationSpeed>MODERATE_PRESENTATION</presentationSpeed>
+    <hintSpeed>MODERATE_HINT_TIMER</hintSpeed>
+    <animationSpeed>QUICK_MOVEMENT</animationSpeed>
+    <animationEffectSpeed>SLOW_EFFECT</animationEffectSpeed>
+</timer>
+<isTimed>true</isTimed>
+<purpose>This will teach you that one thing</purpose>
+<questions>
+    <question>
+        <responses>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+        </responses>
+        <questionText>What is your name?</questionText>
+    </question>
+    <question>
+        <responses>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+        </responses>
+        <questionText>What is your name?</questionText>
+    </question>
+    <question>
+        <responses>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+        </responses>
+        <questionText>What is your name?</questionText>
+    </question>
+</questions>
+<style>MULTIPLE_CHOICE</style>
+<rewardScheme>UNDEFINED</rewardScheme>
+<reward>
+    <trophy>UNDEFINED</trophy>
+    <promotion>false</promotion>
+    <demotion>false</demotion>
+</reward>
+<isCompetitive>true</isCompetitive>
+<isProctored>true</isProctored>
+                            </challenge>
+                            <hasChallenge>true</hasChallenge>
+                        </screen>
+                    </screens>
+                    <backgroundImagePath>exampleBackground1.png</backgroundImagePath>
+                    <backgroundMusicPath>exampleAudio1.midi</backgroundMusicPath>
+                </scene>
+            </scenes>
+        </act>
+        <act>
+            <purpose>The purpose of this act to teach you the learning objective</purpose>
+            <learningObjective>In this act, you will learn A, B, and C</learningObjective>
+            <currentScene>0</currentScene>
+            <scenes>
+                <scene>
+                    <purpose>Is this really different from the leaning objective?</purpose>
+                    <learningObjective>In this Scene, you will learn A.X, B.Y and C.Z</learningObjective>
+                    <screens>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>HAND_SHAKE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>539</moveToX>
+        <moveToY>108</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>615</x>
+    <y>285</y>
+    <width>67</width>
+    <height>111</height>
+    <imagePath>Desk_1.png</imagePath>
+    <type>SPEAKER_PODIUM</type>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>HAND_SHAKE</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>450</moveToX>
+        <moveToY>239</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>181</x>
+    <y>89</y>
+    <width>57</width>
+    <height>95</height>
+    <imagePath>Cabinet_C.png</imagePath>
+    <type>CLOUDS</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>STAND</movement>
+        <timing>SLOW</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>7</moveToX>
+        <moveToY>269</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>500</x>
+    <y>67</y>
+    <width>64</width>
+    <height>106</height>
+    <imagePath>character_27/char27_SitSad.png</imagePath>
+    <characterId>27</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>STAND</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>205</moveToX>
+        <moveToY>75</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>307</x>
+    <y>191</y>
+    <width>79</width>
+    <height>131</height>
+    <imagePath>character_27/char27_LEvil.png</imagePath>
+    <characterId>27</characterId>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                    </screens>
+                    <backgroundImagePath>exampleBackground1.png</backgroundImagePath>
+                    <backgroundMusicPath>exampleAudio1.midi</backgroundMusicPath>
+                </scene>
+                <scene>
+                    <purpose>Is this really different from the leaning objective?</purpose>
+                    <learningObjective>In this Scene, you will learn A.X, B.Y and C.Z</learningObjective>
+                    <screens>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>DANCE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>282</moveToX>
+        <moveToY>117</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>304</x>
+    <y>128</y>
+    <width>101</width>
+    <height>168</height>
+    <imagePath>ATM_1_C.png</imagePath>
+    <type>TABLE</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>GLIDE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>435</moveToX>
+        <moveToY>17</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>785</x>
+    <y>163</y>
+    <width>221</width>
+    <height>368</height>
+    <imagePath>character_2/char2_SitCheerChair.png</imagePath>
+    <characterId>2</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="genericElement">
+    <animation>
+        <movement>DANCE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>591</moveToX>
+        <moveToY>231</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>719</x>
+    <y>119</y>
+    <width>229</width>
+    <height>381</height>
+    <imagePath>button.png</imagePath>
+    <type>TEXT_BOX</type>
+    <color/>
+    <text>This text is inside of this generic element. I wonder what I will be displayed in.</text>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>NONE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>789</moveToX>
+        <moveToY>110</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>349</x>
+    <y>285</y>
+    <width>83</width>
+    <height>138</height>
+    <imagePath>character_6/char6_StandSmileOpen.png</imagePath>
+    <characterId>6</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="genericElement">
+    <animation>
+        <movement>WALK</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>3</moveToX>
+        <moveToY>283</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>316</x>
+    <y>225</y>
+    <width>63</width>
+    <height>105</height>
+    <imagePath>TextBubble.png</imagePath>
+    <type>BUTTON</type>
+    <color/>
+    <text>This text is inside of this generic element. I wonder what I will be displayed in.</text>
+</element>
+                            </elements>
+                            <challenge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="quizChallenge">
+<name>challenge 1</name>
+<hints>
+    <hint>
+        <text>Think outside the box</text>
+    </hint>
+    <hint>
+        <text>The answer is right under your nose</text>
+    </hint>
+    <hint>
+        <text>It's easier than you think</text>
+    </hint>
+</hints>
+<isTimed>false</isTimed>
+<purpose>This will teach you that one thing</purpose>
+<questions>
+    <question>
+        <responses>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+        </responses>
+        <questionText>What is your name?</questionText>
+    </question>
+    <question>
+        <responses>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+        </responses>
+        <questionText>What is your name?</questionText>
+    </question>
+    <question>
+        <responses>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+            <response>
+                <answer>Bob is my name</answer>
+                <evaluation>UNDEFINED</evaluation>
+                <feedback>Yes, that's correct!</feedback>
+            </response>
+        </responses>
+        <questionText>What is your name?</questionText>
+    </question>
+</questions>
+<style>MULTIPLE_CHOICE</style>
+<rewardScheme>UNDEFINED</rewardScheme>
+<reward>
+    <promotion>true</promotion>
+    <demotion>false</demotion>
+</reward>
+<isCompetitive>false</isCompetitive>
+<isProctored>false</isProctored>
+                            </challenge>
+                            <hasChallenge>true</hasChallenge>
+                        </screen>
+                        <screen>
+                            <elements>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="characterElement">
+    <animation>
+        <movement>STAND</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>307</moveToX>
+        <moveToY>78</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>characterName</name>
+    <x>182</x>
+    <y>299</y>
+    <width>166</width>
+    <height>276</height>
+    <imagePath>character_6/char6_LEvil.png</imagePath>
+    <characterId>6</characterId>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>HAND_WAVE</movement>
+        <timing>MEDIUM</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>51</moveToX>
+        <moveToY>264</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>365</x>
+    <y>125</y>
+    <width>140</width>
+    <height>233</height>
+    <imagePath>Coat_Rack_1.png</imagePath>
+    <type>OFFICE_CUBICLE</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="propElement">
+    <animation>
+        <movement>WALK</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>667</moveToX>
+        <moveToY>265</moveToY>
+    </animation>
+    <sound>
+        <type>VOICE_OVER</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>335</x>
+    <y>33</y>
+    <width>100</width>
+    <height>166</height>
+    <imagePath>fence_1.png</imagePath>
+    <type>PLANT</type>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="genericElement">
+    <animation>
+        <movement>HAND_SHAKE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>false</loop>
+        <moveToX>4</moveToX>
+        <moveToY>270</moveToY>
+    </animation>
+    <sound>
+        <type>MUSIC</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>23</x>
+    <y>179</y>
+    <width>117</width>
+    <height>195</height>
+    <imagePath>Caption Box.png</imagePath>
+    <type>INFORMATION_BOX</type>
+    <color/>
+    <text>This text is inside of this generic element. I wonder what I will be displayed in.</text>
+</element>
+<element xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="educationElement">
+    <animation>
+        <movement>GLIDE</movement>
+        <timing>FAST</timing>
+        <path>STRAIGHT</path>
+        <loop>true</loop>
+        <moveToX>316</moveToX>
+        <moveToY>199</moveToY>
+    </animation>
+    <sound>
+        <type>SOUND_EFFECT</type>
+        <audioFilePath>exampleSoundEffect.midi</audioFilePath>
+    </sound>
+    <name>elementName</name>
+    <x>226</x>
+    <y>257</y>
+    <width>139</width>
+    <height>231</height>
+    <imagePath>Compscreen.png</imagePath>
+    <type>COMPUTER_DISPLAY</type>
+</element>
+                            </elements>
+                            <hasChallenge>false</hasChallenge>
+                        </screen>
+                    </screens>
+                    <backgroundImagePath>exampleBackground1.png</backgroundImagePath>
+                    <backgroundMusicPath>exampleAudio1.midi</backgroundMusicPath>
+                </scene>
+            </scenes>
+        </act>
+    </acts>
+    <player>
+        <name>character_6</name>
+        <modelType>PROTAGONIST</modelType>
+        <profile>
+            <photoImagePath>profile_pic.jpg</photoImagePath>
+            <title>INTERMEDIATE_BUSINESS_ANALYST</title>
+            <skills>
+                <skill>SQL</skill>
+                <skill>PERL</skill>
+                <skill>JAVA</skill>
+            </skills>
+            <yearsOfExperience>4</yearsOfExperience>
+            <communication>GOOD</communication>
+            <leadership>GOOD</leadership>
+            <teamwork>POOR</teamwork>
+            <demographics>
+                <demographic>Male</demographic>
+                <demographic>Caucasian</demographic>
+            </demographics>
+            <availability>VERY_GOOD</availability>
+            <attendance>POOR</attendance>
+            <degrees>
+                <degree>B.S. Computer Science, NorthEastern University</degree>
+            </degrees>
+        </profile>
+        <rewards>
+            <reward>
+                <certificate>UNDEFINED</certificate>
+                <promotion>false</promotion>
+                <demotion>false</demotion>
+            </reward>
+            <reward>
+                <promotion>false</promotion>
+                <demotion>true</demotion>
+            </reward>
+        </rewards>
+        <behavior>NEGATIVE</behavior>
+        <characterId>6</characterId>
+    </player>
+    <nonPlayers>
+        <nonPlayer>
+            <name>character_2</name>
+            <modelType>ANTAGONIST</modelType>
+            <profile>
+                <photoImagePath>profile_pic.jpg</photoImagePath>
+                <title>REQUIREMENTS_ENGINEER</title>
+                <skills>
+                    <skill>JAVA</skill>
+                    <skill>C_SHARP</skill>
+                    <skill>C</skill>
+                </skills>
+                <yearsOfExperience>2</yearsOfExperience>
+                <communication>EXCELLENT</communication>
+                <leadership>EXCELLENT</leadership>
+                <teamwork>FAIR</teamwork>
+                <demographics>
+                    <demographic>Male</demographic>
+                    <demographic>Caucasian</demographic>
+                </demographics>
+                <availability>VERY_GOOD</availability>
+                <attendance>POOR</attendance>
+                <degrees>
+                    <degree>B.S. Computer Science, NorthEastern University</degree>
+                </degrees>
+            </profile>
+            <rewards>
+                <reward>
+                    <certificate>UNDEFINED</certificate>
+                    <promotion>false</promotion>
+                    <demotion>false</demotion>
+                </reward>
+                <reward>
+                    <promotion>true</promotion>
+                    <demotion>false</demotion>
+                </reward>
+            </rewards>
+            <behavior>NEGATIVE</behavior>
+            <characterId>2</characterId>
+        </nonPlayer>
+        <nonPlayer>
+            <name>character_10</name>
+            <modelType>INTERLOCUTOR</modelType>
+            <profile>
+                <photoImagePath>profile_pic.jpg</photoImagePath>
+                <title>INTERMEDIATE_MANAGER</title>
+                <skills>
+                    <skill>C</skill>
+                    <skill>OOD</skill>
+                    <skill>PERL</skill>
+                </skills>
+                <yearsOfExperience>4</yearsOfExperience>
+                <communication>GOOD</communication>
+                <leadership>EXCELLENT</leadership>
+                <teamwork>POOR</teamwork>
+                <demographics>
+                    <demographic>Male</demographic>
+                    <demographic>Caucasian</demographic>
+                </demographics>
+                <availability>POOR</availability>
+                <attendance>FAIR</attendance>
+                <degrees>
+                    <degree>B.S. Computer Science, NorthEastern University</degree>
+                </degrees>
+            </profile>
+            <rewards>
+                <reward>
+                    <certificate>UNDEFINED</certificate>
+                    <promotion>false</promotion>
+                    <demotion>false</demotion>
+                </reward>
+                <reward>
+                    <promotion>true</promotion>
+                    <demotion>false</demotion>
+                </reward>
+            </rewards>
+            <behavior>NEGATIVE</behavior>
+            <characterId>10</characterId>
+        </nonPlayer>
+        <nonPlayer>
+            <name>character_1</name>
+            <modelType>PROTAGONIST</modelType>
+            <profile>
+                <photoImagePath>profile_pic.jpg</photoImagePath>
+                <title>INTERMEDIATE_MANAGER</title>
+                <skills>
+                    <skill>PERL</skill>
+                    <skill>C</skill>
+                    <skill>PYTHON</skill>
+                </skills>
+                <yearsOfExperience>18</yearsOfExperience>
+                <communication>FAIR</communication>
+                <leadership>EXCELLENT</leadership>
+                <teamwork>GOOD</teamwork>
+                <demographics>
+                    <demographic>Male</demographic>
+                    <demographic>Caucasian</demographic>
+                </demographics>
+                <availability>EXCELLENT</availability>
+                <attendance>VERY_GOOD</attendance>
+                <degrees>
+                    <degree>B.S. Computer Science, NorthEastern University</degree>
+                </degrees>
+            </profile>
+            <rewards>
+                <reward>
+                    <promotion>false</promotion>
+                    <demotion>true</demotion>
+                </reward>
+                <reward>
+                    <promotion>true</promotion>
+                    <demotion>false</demotion>
+                </reward>
+            </rewards>
+            <behavior>POSITIVE</behavior>
+            <characterId>1</characterId>
+        </nonPlayer>
+        <nonPlayer>
+            <name>character_27</name>
+            <modelType>CONSTRUCTOR</modelType>
+            <profile>
+                <photoImagePath>profile_pic.jpg</photoImagePath>
+                <title>JUNIOR_REQUIREMENTS_ENGINEER</title>
+                <skills>
+                    <skill>C</skill>
+                    <skill>OOD</skill>
+                    <skill>JAVA</skill>
+                </skills>
+                <yearsOfExperience>0</yearsOfExperience>
+                <communication>FAIR</communication>
+                <leadership>GOOD</leadership>
+                <teamwork>EXCELLENT</teamwork>
+                <demographics>
+                    <demographic>Male</demographic>
+                    <demographic>Caucasian</demographic>
+                </demographics>
+                <availability>POOR</availability>
+                <attendance>GOOD</attendance>
+                <degrees>
+                    <degree>B.S. Computer Science, NorthEastern University</degree>
+                </degrees>
+            </profile>
+            <rewards>
+                <reward>
+                    <trophy>UNDEFINED</trophy>
+                    <promotion>false</promotion>
+                    <demotion>false</demotion>
+                </reward>
+            </rewards>
+            <behavior>NEUTRAL</behavior>
+            <characterId>27</characterId>
+        </nonPlayer>
+    </nonPlayers>
+</game>

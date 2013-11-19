@@ -9,6 +9,8 @@ public class Hint
 		text = hint;
 	}
 	
+	public Hint() { }
+	
 	@XmlElement
 	public String text;
 }

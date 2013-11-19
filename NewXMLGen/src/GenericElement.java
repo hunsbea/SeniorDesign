@@ -6,10 +6,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class GenericElement extends GameElement
 {
-	public enum Type { SPEECH_BUBBLE, INFORMATION_BOX, TEXT_BOX, BUTTON }
+	public enum GenericType { SPEECH_BUBBLE, INFORMATION_BOX, TEXT_BOX, BUTTON }
 	
 	@XmlElement
-	public Type type;
+	public GenericType type;
 	@XmlElement
 	public Color color;
 	@XmlElement

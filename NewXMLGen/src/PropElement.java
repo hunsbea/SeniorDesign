@@ -4,8 +4,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PropElement extends GameElement
 {
-	public enum Type { COFFEE_CUP, OFFICE_DESK, OFFICE_CHAIR, OFFICE_CUBICLE, TABLE, SPEAKER_PODIUM, CLOUDS, PLANT }
+	public enum PropType { COFFEE_CUP, OFFICE_DESK, OFFICE_CHAIR, OFFICE_CUBICLE, TABLE, SPEAKER_PODIUM, CLOUDS, PLANT }
 	
 	@XmlElement
-	public Type type;
+	public PropType type;
 }

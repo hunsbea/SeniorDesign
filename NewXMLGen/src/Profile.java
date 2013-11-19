@@ -1,6 +1,7 @@
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -16,7 +17,8 @@ public class Profile
 	public String photoImagePath;
 	@XmlElement
 	public Title title;
-	@XmlElement
+	@XmlElementWrapper(name = "skills")
+	@XmlElement(name = "skill")
 	public List<Skill> skills;
 	@XmlElement
 	public int yearsOfExperience;
@@ -26,12 +28,14 @@ public class Profile
 	public Proficiency leadership;
 	@XmlElement
 	public Proficiency teamwork;
-	@XmlElement
+	@XmlElementWrapper(name = "demographics")
+	@XmlElement(name = "demographic")
 	public List<String> demographics;
 	@XmlElement
 	public Proficiency availability;
 	@XmlElement
 	public Proficiency attendance;
-	@XmlElement
+	@XmlElementWrapper(name = "degrees")
+	@XmlElement(name = "degree")
 	public List<String> degrees;
 }
