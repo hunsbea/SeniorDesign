@@ -3,3 +3,5 @@ Not enough information to script Challenges:
 	No spec (except "isCompetitive" flag) says whether your nemesis is present during a quiz, and how he will behave
 	
 How to write a superclass to JAXB XML as one of its subclasses to preserve the subclass properties
+
+	

@@ -1,6 +1,3 @@
-import java.awt.Dimension;
-import java.awt.Point;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,7 +11,13 @@ public class GameElement
 	@XmlElement
 	public String name;
 	@XmlElement
-	public Dimension size;
+	public int x;
 	@XmlElement
-	public Point location;
+	public int y;
+	@XmlElement
+	public int width;
+	@XmlElement
+	public int height;
+	@XmlElement
+	public String imagePath;
 }

@@ -19,5 +19,7 @@ public class Animation
 	@XmlElement
 	public boolean loop;
 	@XmlElement
-	public Point moveTo;
+	public int moveToX;
+	@XmlElement
+	public int moveToY;
 }

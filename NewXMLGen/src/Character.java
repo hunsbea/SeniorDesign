@@ -1,6 +1,7 @@
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -15,7 +16,8 @@ public class Character
 	public MetaModelType modelType;
 	@XmlElement
 	public Profile profile;
-	@XmlElement
+	@XmlElementWrapper(name = "rewards")
+	@XmlElement(name = "reward")
 	public List<Reward> rewards;
 	@XmlElement
 	public Behavior behavior;

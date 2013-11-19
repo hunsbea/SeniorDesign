@@ -5,7 +5,5 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CharacterElement extends GameElement
 {
 	@XmlElement
-	public String imagePath;
-	@XmlElement
 	public int characterId;
 }

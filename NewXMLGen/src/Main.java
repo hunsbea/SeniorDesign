@@ -1,23 +1,31 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 //The purpose of this program is to generate random, complete XML files that meet the current (new) specification
 public class Main 
 {
 	public static Random rand = new Random();
-	public static int minNumActs = 3;
+	public static int minNumActs = 2;
 	public static int minNumScenes = 2;
-	public static int minNumScreens = 3;
-	public static int minNumChars = 1;
+	public static int minNumScreens = 2;
+	public static int minNumChars = 3;
 	public static int minNumRewards = 1;
 	public static int minElemWidth = 40;
 	public static int elemWidthRange = 200;
-	public static int randRange = 5;
+	public static int randRange = 2;
 	public static String[] characters = new String[30];
 	public static String[] charPoses = { "StandSmileOpen", "StandSmileClosed", "StandOpen", "LEvil", "RPointUp", 
 			"LPointNo", "WalkRSurprised", "RPointDown", "SitCheerChair", "SitAlmostRaiseChair", "SitSad" };
+	public static String[] prop = { "Desk_1", "Coat_Rack_1", "Cabinet_C", "fence_1", "ATM_1_C", "Door_2_L", "bench long" };
+	public static String[] generic = { "button", "TextBubble", "InformationBoxLarge", "Caption Box", "Regular Speech" };
+	public static String[] education = { "BlackBoard", "BulletinBoard", "Compscreen" };
 	public static int gameWidth = 1000, gameHeight = 500;
 	public static Game game;
 	public static double charWidthPerHeight = 0.6;
@@ -125,14 +133,23 @@ public class Main
 				{
 					Screen sc = new Screen();
 					
+					//generate some GameElements for this Screen
+					sc.elements = randElements();
+					
 					//possibly generate a challenge for this screen
 					sc.hasChallenge = rand.nextInt(2) > 0;
 					if(sc.hasChallenge)
 					{
 						//always a QuizChallenge type for now
 						QuizChallenge qc = new QuizChallenge();
+
+						//generate some GameElements for this Quiz
+						sc.elements = randElements();
+						
 						qc.purpose = "This will teach you that one thing";
 						qc.rewardScheme = randEnum(QuizChallenge.RewardScheme.class);
+						qc.style = randEnum(QuizChallenge.Style.class);
+						qc.reward = randReward();
 						
 						qc.name = "challenge " + k;
 						qc.hints = new ArrayList<Hint>(3);
@@ -161,12 +178,34 @@ public class Main
 						qc.isCompetitive = rand.nextInt(2) > 0;
 						if(qc.isCompetitive)
 						{
+							//TODO: how do you know which character is your nemesis?
 						}
 
 						//possibly quiz is proctored and another character must be present to give the quiz
 						qc.isProctored = rand.nextInt(2) > 0;
 						if(qc.isProctored)
 						{
+							//TODO: do we actually need special code for this? or is a proctor just another character
+						}
+						
+						//create quiz questions
+						qc.questions = new ArrayList<Question>(3);
+						for(int m = 0; m < 3; m++)
+						{
+							Question q = new Question();
+							q.questionText = "What is your name?";
+							
+							q.responses = new ArrayList<Response>(3);
+							for(int n = 0; n < 3; n++)
+							{
+								Response r = new Response();
+								r.answer = "Bob is my name";
+								r.feedback = "Yes, that's correct!";
+								r.evaluation = Response.Evaluation.UNDEFINED;
+								q.responses.add(r);
+							}
+							
+							qc.questions.add(q);
 						}
 					}
 					
@@ -181,6 +220,36 @@ public class Main
 		
 		writeToXML(game);
 
+	}
+	
+	//generate some of each type of element
+	public static ArrayList<GameElement> randElements()
+	{
+		int numProps = rand.nextInt(3);
+		int numChars = rand.nextInt(3);
+		int numGeneric = rand.nextInt(2);
+		int numEducation = rand.nextInt(2);
+		boolean mainCharPresent = rand.nextInt(2) > 0;
+		
+		int total = numProps + numChars + numGeneric + numEducation + (mainCharPresent ? 1 : 0);
+		ArrayList<GameElement> elems = new ArrayList<GameElement>(total);
+		
+		if(mainCharPresent)
+			elems.add(characterById(game.player.characterId));
+		
+		for(int i = 0; i < numProps; i++)
+			elems.add(randProp());
+		
+		for(int i = 0; i < numChars; i++)
+			elems.add(randCharacter());
+		
+		for(int i = 0; i < numGeneric; i++)
+			elems.add(randGeneric());
+		
+		for(int i = 0; i < numEducation; i++)
+			elems.add(randEducation());
+		
+		return elems;
 	}
 	
 	public static String randPose()
@@ -204,7 +273,7 @@ public class Main
 	public static CharacterElement characterById(int id)
 	{
 		//start with base GameElement
-		CharacterElement c = (CharacterElement)randElement();
+		CharacterElement c = fillBaseElement(new CharacterElement());
 		c.imagePath = "character_" + id + "/char" + id + "_" + randPose() + ".png";
 		c.characterId = id;
 		c.animation = randAnimation();
@@ -215,12 +284,14 @@ public class Main
 	
 	public static Animation randAnimation()
 	{
+		Point p = randPoint();
 		Animation a = new Animation();
 		a.movement = randEnum(Animation.Movement.class);
 		a.timing = randEnum(Animation.Timing.class);
 		a.path = randEnum(Animation.Path.class);
 		a.loop = rand.nextInt(2) > 0;
-		a.moveTo = randPoint();
+		a.moveToX = p.x;
+		a.moveToY = p.y;
 		return a;
 	}
 	
@@ -240,30 +311,44 @@ public class Main
 		return characterById(id);
 	}
 	
-	public static GameElement randElement()
+	public static <T extends GameElement> T fillBaseElement(T e)
 	{
-		GameElement e = new GameElement();
+		Point p = randPoint();
+		Dimension d = randSize();
 		e.animation = randAnimation();
 		e.sound = randSound();
 		e.name = "elementName";
-		e.size = randSize();
-		e.location = randPoint();
+		e.x = p.x;
+		e.y = p.y;
+		e.width = d.width;
+		e.height = d.height;
 		return e;
 	}
 	
 	public static GenericElement randGeneric()
 	{
-		return null;
+		GenericElement g = fillBaseElement(new GenericElement());
+		g.type = randEnum(GenericElement.GenericType.class);
+		g.imagePath = generic[rand.nextInt(generic.length)] + ".png";
+		g.color = Color.GRAY;
+		g.text = "This text is inside of this generic element. I wonder what I will be displayed in.";
+		return g;
 	}
 	
 	public static EducationElement randEducation()
 	{
-		return null;
+		EducationElement e = fillBaseElement(new EducationElement());
+		e.type = randEnum(EducationElement.EducationType.class);
+		e.imagePath = education[rand.nextInt(education.length)] + ".png";
+		return e;
 	}
 	
 	public static PropElement randProp()
 	{
-		return null;
+		PropElement p = fillBaseElement(new PropElement());
+		p.type = randEnum(PropElement.PropType.class);
+		p.imagePath = prop[rand.nextInt(prop.length)] + ".png";
+		return p;
 	}
 	
 	// randomly choose an enum constant from the given enumeration
@@ -299,5 +384,22 @@ public class Main
 	
 	public static void writeToXML(Game g)
 	{
+		try 
+		{
+			File file = new File("GAME.XML");
+			JAXBContext jaxbContext = JAXBContext.newInstance(Game.class, QuizChallenge.class, GenericElement.class,
+					PropElement.class, CharacterElement.class, EducationElement.class, NonPlayerCharacter.class,
+					PlayerCharacter.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			jaxbMarshaller.marshal(g, file);
+			//jaxbMarshaller.marshal(g, System.out);
+		  }
+		  catch (Exception e) 
+		  {
+				e.printStackTrace();
+		  }
 	}
 }
