@@ -7,6 +7,7 @@ import javax.swing.tree.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import edu.utdallas.RepoUpdate.BackgroundSelectWindow;
 import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.CharacterSelectWindow;
 import edu.utdallas.RepoUpdate.Updates;
@@ -42,7 +43,7 @@ public class InputWizard implements ActionListener {
  * implements ActionListener so a subclass for it is not needed. 
  */
 	
-	private static int WIDTH = 1200;
+	private static int WIDTH = 1280;
 	private static int HEIGHT = 481;
 	private Matrix[] componentInputs;
 	private boolean submitClicked = false;
@@ -61,9 +62,12 @@ public class InputWizard implements ActionListener {
  	//JD character selection class parameters
  	private CharacterSelectWindow characterSelectWindow;
  	private CharacterAsset characterSelectAsset;
+ 	private BackgroundSelectWindow backgroundSelectWindow;
+ 	private String backgroundSelectPath;
  	public enum gameLevel{GAME, ACT, SCENE, SCREEN, CHALLENGE};
  	private gameLevel selectedLevel = null;
  	private JButton characterButton;
+ 	private JButton backgroundButton;
  	private Scene lastSelectedScene = null;
  	private ScreenNode lastSelectedScreen = null;
  	//JD end
@@ -127,25 +131,21 @@ public class InputWizard implements ActionListener {
         //JD
         characterSelectWindow = new CharacterSelectWindow(window);
         characterSelectWindow.addWindowListener(new WindowListener(){
-
 			@Override
 			public void windowActivated(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-
 			@Override
 			public void windowDeactivated(WindowEvent arg0) {
 				// TODO Auto-generated method stub
@@ -161,19 +161,16 @@ public class InputWizard implements ActionListener {
 					displayScreen(lastSelectedScene, lastSelectedScreen);
 				}
 			}
-
 			@Override
 			public void windowDeiconified(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-
 			@Override
 			public void windowIconified(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				// TODO Auto-generated method stub
@@ -181,7 +178,53 @@ public class InputWizard implements ActionListener {
 			}
         	
         });
-        
+        backgroundSelectWindow = new BackgroundSelectWindow(window);
+        backgroundSelectWindow.addWindowListener(new WindowListener(){
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				if(backgroundSelectWindow.getNewBackgroundPath() == null)
+				{
+					return;
+				}
+				else
+				{
+					lastSelectedScene.setBackground(backgroundSelectWindow.getNewBackgroundPath());
+					scenePanel.loadBackground(lastSelectedScene.getBackground());
+				}
+			}
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         
         // create tree-structure for viewing Acts/Scenes
         actTree = new JTree();
@@ -206,6 +249,7 @@ public class InputWizard implements ActionListener {
             		String actName = selectedNode.getParent().getParent().toString();
             		//JD
             		characterButton.setEnabled(true);
+            		backgroundButton.setEnabled(false);
             		selectedLevel = gameLevel.SCREEN;
             		lastSelectedScene = getScene(actName, sceneName);
             		lastSelectedScreen = getScreen(actName, sceneName, screenName);
@@ -217,11 +261,13 @@ public class InputWizard implements ActionListener {
             		String sceneName = selectedNode.toString();
             		String actName = selectedNode.getParent().toString();
           			Scene s = getScene(actName, sceneName);
+          			characterButton.setEnabled(false);
+            		backgroundButton.setEnabled(true);
+          			selectedLevel = gameLevel.SCENE;
+          			lastSelectedScene = getScene(actName, sceneName);
           			scenePanel.clear();
           			System.out.println("calling clear scene node\n");
           			scenePanel.loadBackground(s.getBackground());
-          			characterButton.setEnabled(false);
-          			selectedLevel = gameLevel.SCENE;
             	}
             	else if(selectedNode != null && selectedNode.isRoot()) //game level
             	{
@@ -237,6 +283,7 @@ public class InputWizard implements ActionListener {
             		xtraXposition = 180.00;
             		System.out.println("uniq chars before putting in size "+UNIQchars.size());
             		characterButton.setEnabled(false);
+            		backgroundButton.setEnabled(false);
             		selectedLevel = gameLevel.GAME;
             		for (CharacterAsset ca : chars){
             			
@@ -300,6 +347,7 @@ public class InputWizard implements ActionListener {
             	}//end else if
             	else {
             		characterButton.setEnabled(false);
+            		backgroundButton.setEnabled(false);
             		selectedLevel = gameLevel.ACT;
             	}
             }
@@ -333,7 +381,10 @@ public class InputWizard implements ActionListener {
         toolbarPanel.add(buttonButton);
         JButton soundButton = new JButton("Sound");
         toolbarPanel.add(soundButton);
-        JButton backgroundButton = new JButton("Background");
+        backgroundButton = new JButton("Background");
+        backgroundButton.addActionListener(this);
+        backgroundButton.setEnabled(false);
+        backgroundButton.setActionCommand("backgroundToolbar");
         toolbarPanel.add(backgroundButton);
         //splitTreePane.setBottomComponent(toolbarPanel);
         browsePanel.add(toolbarPanel, BorderLayout.SOUTH);
@@ -342,6 +393,7 @@ public class InputWizard implements ActionListener {
         scenePanel = new ScenePanel(); // view/edit the Scene selected in the browse panel
         scenePanel.setLayout(null);
         JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, browsePanel, scenePanel);
+        splitPreviewPane.setEnabled(false);
         previewTab.add(splitPreviewPane);
         
         
@@ -1166,6 +1218,15 @@ public class InputWizard implements ActionListener {
 			}
 			//JD end
 			break;
+		case "backgroundToolbar":
+			backgroundSelectPath = null;
+			String currentBackgroundPath = lastSelectedScene.getBackground();
+			currentBackgroundPath = currentBackgroundPath.substring(0, currentBackgroundPath.lastIndexOf('\\'));
+			backgroundSelectWindow.setBackgroundPathString(backgroundSelectPath);
+			backgroundSelectWindow.setBackgroundFolderPath(currentBackgroundPath);
+			backgroundSelectWindow.setVisible(true);
+			break;
+			
 		case "addToRepo":
 			File parent = new File("New Games\\");
 			saveFileChooser = new JFileChooser(parent);
