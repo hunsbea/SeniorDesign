@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Animation 
 {
-	public enum Movement { WALK, GLIDE, SIT, STAND, TALK, HAND_WAVE, HAND_SHAKE, DANCE; }
+	public enum Movement { WALK, GLIDE, SIT, STAND, TALK, HAND_WAVE, HAND_SHAKE, DANCE, NONE }
 	public enum Timing { SLOW, MEDIUM, FAST }
 	public enum Path { STRAIGHT }
 	

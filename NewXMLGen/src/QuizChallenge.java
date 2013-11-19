@@ -27,4 +27,6 @@ public class QuizChallenge extends Challenge
 	public Reward reward;
 	@XmlElement
 	public boolean isCompetitive;
+	@XmlElement
+	public boolean isProctored;
 }

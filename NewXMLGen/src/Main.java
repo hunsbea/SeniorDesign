@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,8 +12,15 @@ public class Main
 	public static int minNumScreens = 3;
 	public static int minNumChars = 1;
 	public static int minNumRewards = 1;
+	public static int minElemWidth = 40;
+	public static int elemWidthRange = 200;
 	public static int randRange = 5;
 	public static String[] characters = new String[30];
+	public static String[] charPoses = { "StandSmileOpen", "StandSmileClosed", "StandOpen", "LEvil", "RPointUp", 
+			"LPointNo", "WalkRSurprised", "RPointDown", "SitCheerChair", "SitAlmostRaiseChair", "SitSad" };
+	public static int gameWidth = 1000, gameHeight = 500;
+	public static Game game;
+	public static double charWidthPerHeight = 0.6;
 	
 	public static void main(String[] args) 
 	{
@@ -21,13 +30,13 @@ public class Main
 		
 		//can't make up my mind, enums or Strings
 		
-		Game game = new Game();
+		game = new Game();
 		
 		//create protagonist
 		game.player = new PlayerCharacter();
 		game.player.characterId = rand.nextInt(characters.length) + 1;
 		game.player.name = characters[game.player.characterId - 1];
-		game.player.behavior = (Character.Behavior)randEnum(Character.Behavior.class);
+		game.player.behavior = randEnum(Character.Behavior.class);
 		game.player.modelType = Character.MetaModelType.PROTAGONIST;
 		int numRewards = rand.nextInt(randRange) + minNumRewards;
 		game.player.rewards = new ArrayList<Reward>(numRewards);
@@ -35,17 +44,17 @@ public class Main
 			game.player.rewards.add(randReward());
 		game.player.profile = new Profile();
 		game.player.profile.photoImagePath = "profile_pic.jpg";
-		game.player.profile.title = (Profile.Title)randEnum(Profile.Title.class);
+		game.player.profile.title = randEnum(Profile.Title.class);
 		game.player.profile.skills = new ArrayList<Profile.Skill>(3);
-		game.player.profile.skills.add((Profile.Skill)randEnum(Profile.Skill.class));
-		game.player.profile.skills.add((Profile.Skill)randEnum(Profile.Skill.class));
-		game.player.profile.skills.add((Profile.Skill)randEnum(Profile.Skill.class));
+		game.player.profile.skills.add(randEnum(Profile.Skill.class));
+		game.player.profile.skills.add(randEnum(Profile.Skill.class));
+		game.player.profile.skills.add(randEnum(Profile.Skill.class));
 		game.player.profile.yearsOfExperience = rand.nextInt(20);
-		game.player.profile.communication = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-		game.player.profile.leadership = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-		game.player.profile.teamwork = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-		game.player.profile.availability = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-		game.player.profile.attendance = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
+		game.player.profile.communication = randEnum(Profile.Proficiency.class);
+		game.player.profile.leadership = randEnum(Profile.Proficiency.class);
+		game.player.profile.teamwork = randEnum(Profile.Proficiency.class);
+		game.player.profile.availability = randEnum(Profile.Proficiency.class);
+		game.player.profile.attendance = randEnum(Profile.Proficiency.class);
 		game.player.profile.demographics = new ArrayList<String>(2);
 		game.player.profile.demographics.add("Male");
 		game.player.profile.demographics.add("Caucasian");
@@ -61,25 +70,25 @@ public class Main
 			while(c.characterId == game.player.characterId) //prevent duplicate protagonist id
 				c.characterId = rand.nextInt(characters.length) + 1;
 			c.name = characters[c.characterId - 1];
-			c.modelType = (Character.MetaModelType)randEnum(Character.MetaModelType.class);
-			c.behavior = (Character.Behavior)randEnum(Character.Behavior.class);
+			c.modelType = randEnum(Character.MetaModelType.class);
+			c.behavior = randEnum(Character.Behavior.class);
 			numRewards = rand.nextInt(randRange) + minNumRewards;
 			c.rewards = new ArrayList<Reward>(numRewards);
 			for(int j = 0; j < numRewards; j++)
 				c.rewards.add(randReward());
 			c.profile = new Profile();
 			c.profile.photoImagePath = "profile_pic.jpg";
-			c.profile.title = (Profile.Title)randEnum(Profile.Title.class);
+			c.profile.title = randEnum(Profile.Title.class);
 			c.profile.skills = new ArrayList<Profile.Skill>(3);
-			c.profile.skills.add((Profile.Skill)randEnum(Profile.Skill.class));
-			c.profile.skills.add((Profile.Skill)randEnum(Profile.Skill.class));
-			c.profile.skills.add((Profile.Skill)randEnum(Profile.Skill.class));
+			c.profile.skills.add(randEnum(Profile.Skill.class));
+			c.profile.skills.add(randEnum(Profile.Skill.class));
+			c.profile.skills.add(randEnum(Profile.Skill.class));
 			c.profile.yearsOfExperience = rand.nextInt(20);
-			c.profile.communication = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-			c.profile.leadership = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-			c.profile.teamwork = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-			c.profile.availability = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
-			c.profile.attendance = (Profile.Proficiency)randEnum(Profile.Proficiency.class);
+			c.profile.communication = randEnum(Profile.Proficiency.class);
+			c.profile.leadership = randEnum(Profile.Proficiency.class);
+			c.profile.teamwork = randEnum(Profile.Proficiency.class);
+			c.profile.availability = randEnum(Profile.Proficiency.class);
+			c.profile.attendance = randEnum(Profile.Proficiency.class);
 			c.profile.demographics = new ArrayList<String>(2);
 			c.profile.demographics.add("Male");
 			c.profile.demographics.add("Caucasian");
@@ -123,7 +132,7 @@ public class Main
 						//always a QuizChallenge type for now
 						QuizChallenge qc = new QuizChallenge();
 						qc.purpose = "This will teach you that one thing";
-						qc.rewardScheme = (QuizChallenge.RewardScheme)randEnum(QuizChallenge.RewardScheme.class);
+						qc.rewardScheme = randEnum(QuizChallenge.RewardScheme.class);
 						
 						qc.name = "challenge " + k;
 						qc.hints = new ArrayList<Hint>(3);
@@ -136,11 +145,11 @@ public class Main
 						if(qc.isTimed)
 						{
 							qc.timer = new Timer();
-							qc.timer.transitionSpeed = (Timer.TransitionSpeed)randEnum(Timer.TransitionSpeed.class);
-							qc.timer.presentationSpeed = (Timer.PresentationSpeed)randEnum(Timer.PresentationSpeed.class);
-							qc.timer.hintSpeed = (Timer.HintSpeed)randEnum(Timer.HintSpeed.class);
-							qc.timer.animationSpeed = (Timer.AnimationSpeed)randEnum(Timer.AnimationSpeed.class);
-							qc.timer.animationEffectSpeed = (Timer.AnimationEffectSpeed)randEnum(Timer.AnimationEffectSpeed.class);
+							qc.timer.transitionSpeed = randEnum(Timer.TransitionSpeed.class);
+							qc.timer.presentationSpeed = randEnum(Timer.PresentationSpeed.class);
+							qc.timer.hintSpeed = randEnum(Timer.HintSpeed.class);
+							qc.timer.animationSpeed = randEnum(Timer.AnimationSpeed.class);
+							qc.timer.animationEffectSpeed = randEnum(Timer.AnimationEffectSpeed.class);
 						}
 						
 						//IMPORTANT: When the challenge is written to XML, by default it will not
@@ -152,8 +161,12 @@ public class Main
 						qc.isCompetitive = rand.nextInt(2) > 0;
 						if(qc.isCompetitive)
 						{
-							//TODO: add nemesis as character in quiz
-							//what else? this isn't specified completely enough
+						}
+
+						//possibly quiz is proctored and another character must be present to give the quiz
+						qc.isProctored = rand.nextInt(2) > 0;
+						if(qc.isProctored)
+						{
 						}
 					}
 					
@@ -170,36 +183,93 @@ public class Main
 
 	}
 	
-	//TODO: these methods
-	public CharacterElement characterById(int id)
+	public static String randPose()
+	{
+		return charPoses[rand.nextInt(charPoses.length)];
+	}
+	
+	//A point well within the boundary of the game screen
+	public static Point randPoint()
+	{
+		return new Point(rand.nextInt(gameWidth-200), rand.nextInt(gameHeight-200));
+	}
+	
+	public static Dimension randSize()
+	{
+		int width = rand.nextInt(elemWidthRange) + minElemWidth;
+		int height = (int)(width / charWidthPerHeight);
+		return new Dimension(width, height);
+	}
+	
+	public static CharacterElement characterById(int id)
+	{
+		//start with base GameElement
+		CharacterElement c = (CharacterElement)randElement();
+		c.imagePath = "character_" + id + "/char" + id + "_" + randPose() + ".png";
+		c.characterId = id;
+		c.animation = randAnimation();
+		c.sound = randSound();
+		c.name = "characterName";
+		return c;
+	}
+	
+	public static Animation randAnimation()
+	{
+		Animation a = new Animation();
+		a.movement = randEnum(Animation.Movement.class);
+		a.timing = randEnum(Animation.Timing.class);
+		a.path = randEnum(Animation.Path.class);
+		a.loop = rand.nextInt(2) > 0;
+		a.moveTo = randPoint();
+		return a;
+	}
+	
+	public static Sound randSound()
+	{
+		Sound s = new Sound();
+		s.type = randEnum(Sound.Type.class);
+		s.audioFilePath = "exampleSoundEffect.midi";
+		return s;
+	}
+	
+	public static CharacterElement randCharacter()
+	{
+		//randomly pick one of the available characters
+		int id = game.nonPlayers.get(rand.nextInt(game.nonPlayers.size())).characterId;
+		
+		return characterById(id);
+	}
+	
+	public static GameElement randElement()
+	{
+		GameElement e = new GameElement();
+		e.animation = randAnimation();
+		e.sound = randSound();
+		e.name = "elementName";
+		e.size = randSize();
+		e.location = randPoint();
+		return e;
+	}
+	
+	public static GenericElement randGeneric()
 	{
 		return null;
 	}
 	
-	public CharacterElement randCharacter()
+	public static EducationElement randEducation()
 	{
 		return null;
 	}
 	
-	public GenericElement randGeneric()
-	{
-		return null;
-	}
-	
-	public EducationElement randEducation()
-	{
-		return null;
-	}
-	
-	public PropElement randProp()
+	public static PropElement randProp()
 	{
 		return null;
 	}
 	
 	// randomly choose an enum constant from the given enumeration
-	public static Enum randEnum(Class enu)
+	public static <T extends Enum<T>> T randEnum(Class<T> enu)
 	{
-		Enum[] consts = (Enum[])enu.getEnumConstants();
+		T[] consts = enu.getEnumConstants();
 		return consts[rand.nextInt(consts.length)];
 	}
 	
