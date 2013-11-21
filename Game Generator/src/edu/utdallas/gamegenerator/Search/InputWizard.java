@@ -1262,6 +1262,9 @@ public class InputWizard implements ActionListener {
 				System.out.println("Error: Attempt to delete asset not in screen!");
 			}
 			break;
+		case "resizeAsset":
+			displayScreen(lastSelectedScene, lastSelectedScreen);
+			break;
 		case "saveToRepo":
 			SaveGameFile(Currentfile);
 			break;

@@ -6,6 +6,7 @@ import edu.utdallas.gamegenerator.Shared.*;
 import java.awt.*;
 import java.awt.Color;
 import java.util.List;
+import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -31,9 +32,11 @@ public class ScenePanel extends JPanel
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
+	private Point prevDragPoint;
 	private ScenePanel that = this;
 	private Asset toDeleteAsset = null;
 	private InputWizard parentWizard;
+	private boolean resize = false;
 	
 	public ScenePanel(InputWizard parent)
 	{
@@ -251,18 +254,118 @@ public class ScenePanel extends JPanel
 		        public void mouseEntered(MouseEvent e) { }
 		        public void mouseExited(MouseEvent e) { }
 		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
-		        public void mouseReleased(MouseEvent e) { }
+		        public void mouseReleased(MouseEvent e) { 
+		        	if(resize){
+		        		parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
+		        	}
+		        }
 		    });
 			label.addMouseMotionListener(new MouseMotionListener() {
 				public void mouseDragged(MouseEvent e) {
 		        	Point p = e.getPoint();
 		        	int deltaX = p.x - prevClickPoint.x;
 		        	int deltaY = p.y - prevClickPoint.y;
-		        	int newX = label.getX() + deltaX;
-		        	int newY = label.getY() + deltaY;
-		        	label.setLocation(newX, newY);
-					a.setLocX(newX);
-					a.setLocY(newY);
+		        	int invDeltaX = -deltaX;
+		        	int invDeltaY = -deltaY;
+		        	String imgPath;
+		        	if(a instanceof CharacterAsset)
+		        	{
+		        		imgPath = charBaseDir + a.getDisplayImage();
+		        	}
+		        	else
+		        	{
+		        		imgPath = imageBaseDir + a.getDisplayImage();
+		        	}
+		        	
+		        	if(label.getRootPane().getCursor().getType() == Cursor.NW_RESIZE_CURSOR)
+		        	{
+		        		a.setWidth(a.getWidth() + invDeltaX);
+		        		a.setHeight(a.getHeight() + invDeltaY);
+		        		a.setLocX(a.getLocX() + deltaX);
+		        		a.setLocY(a.getLocY() + deltaY);
+		        		a.setLocX2(a.getLocX() + a.getWidth());
+		        		a.setLocY2(a.getLocY() + a.getHeight());
+		        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
+		        		BufferedImage image;
+						try {
+							image = ImageIO.read(new File(imgPath));
+			        		int width = image.getWidth();
+			    			double desiredWidth = a.getWidth();
+			    			double scaleFactor = desiredWidth / width;
+			    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+			    			label.setIcon(new ImageIcon(scaledImage));
+			    			if(a instanceof ButtonAsset)
+			    			{
+			    				Graphics g = scaledImage.getGraphics();
+			    				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+			    				FontMetrics fMetrics = g.getFontMetrics();
+			    				g.setColor(Color.BLACK);
+			    				int sWidth = fMetrics.stringWidth(a.getName());
+			    				int sHeight = fMetrics.getHeight();
+			    				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
+			    				g.dispose();
+			    			}
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
+		        		resize = true;
+		        	}
+					else if(label.getRootPane().getCursor().getType() == Cursor.SW_RESIZE_CURSOR)
+					{
+						resize = false; //change back to true later
+					}
+					else if(label.getRootPane().getCursor().getType() == Cursor.NE_RESIZE_CURSOR)
+					{//currently broken
+//						a.setWidth(a.getWidth() + deltaX);
+//		        		a.setHeight(a.getHeight() + invDeltaY);
+//		        		//a.setLocX(a.getLocX() + deltaX);
+//		        		a.setLocY(a.getLocY() + deltaY);
+//		        		a.setLocX2(a.getLocX() + a.getWidth());
+//		        		a.setLocY2(a.getLocY() + a.getHeight());
+//		        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
+//		        		BufferedImage image;
+//						try {
+//							image = ImageIO.read(new File(imgPath));
+//			        		int width = image.getWidth();
+//			    			double desiredWidth = a.getWidth();
+//			    			double scaleFactor = desiredWidth / width;
+//			    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+//			    			label.setIcon(new ImageIcon(scaledImage));
+//			    			if(a instanceof ButtonAsset)
+//			    			{
+//			    				Graphics g = scaledImage.getGraphics();
+//			    				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+//			    				FontMetrics fMetrics = g.getFontMetrics();
+//			    				g.setColor(Color.BLACK);
+//			    				int sWidth = fMetrics.stringWidth(a.getName());
+//			    				int sHeight = fMetrics.getHeight();
+//			    				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
+//			    				g.dispose();
+//			    			}
+//						} catch (IOException e1) {
+//							// TODO Auto-generated catch block
+//							e1.printStackTrace();
+//						}
+		        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
+		        		resize = true;
+					}
+					else if(label.getRootPane().getCursor().getType() == Cursor.SE_RESIZE_CURSOR)
+					{
+						resize = false; //change back to true later
+					}
+					else
+					{
+			        	int newX = label.getX() + deltaX;
+			        	int newY = label.getY() + deltaY;
+			        	label.setLocation(newX, newY);
+						a.setLocX(newX);
+						a.setLocY(newY);
+						resize = false;
+					}
+					
+					//all - set highlighting
 					for (JLabel label : assetPanels){
 		        		label.setBorder(null);
 		        	}
