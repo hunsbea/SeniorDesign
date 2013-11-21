@@ -1,5 +1,6 @@
 package edu.utdallas.RepoUpdate;
 
+import edu.utdallas.gamegenerator.Search.InputWizard;
 import edu.utdallas.gamegenerator.Shared.*;
 
 import java.awt.*;
@@ -19,7 +20,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
@@ -38,10 +38,12 @@ public class ScenePanel extends JPanel implements ActionListener
 	private ScenePanel that = this;
 	private JLabel toDeleteLabel = null;
 	private Asset toDeleteAsset = null;
+	private InputWizard parentWizard;
 	
-	public ScenePanel()
+	public ScenePanel(InputWizard parent)
 	{
 		clear();
+		parentWizard = parent;
 		System.out.println("calling clear constructor\n");
 	}
 	
@@ -94,9 +96,10 @@ public class ScenePanel extends JPanel implements ActionListener
 				System.out.println("button assets: "+ a.getName()); // gets the name of the button --Abdulla
 				
 				String bName = a.getName();
-				JButton buttonName = new JButton(bName);
-				buttonName.setBounds(950, 356, 100, 40);
-				add(buttonName);
+				JButton button = new JButton(bName);
+				button.setBounds((int)a.getLocX(), (int) a.getLocY(), (int) a.getWidth(), (int) a.getHeight());
+				button.setEnabled(false);
+				add(button);
 				//buttonName.setSize(10, 10);
 				//buttonName.setBounds(x, y, width, height)
 				//System.out.println(buttonName.getSize());
@@ -213,7 +216,7 @@ public class ScenePanel extends JPanel implements ActionListener
 		        		JPopupMenu pMenu = new JPopupMenu();
 		        		JMenuItem menuItem = new JMenuItem("delete");
 		        		menuItem.setActionCommand("deleteElement");
-		        		menuItem.addActionListener(that);
+		        		menuItem.addActionListener(parentWizard);
 		        		pMenu.add(menuItem);
 		        		toDeleteLabel = panel;
 		        		toDeleteAsset = a;
@@ -327,5 +330,9 @@ public class ScenePanel extends JPanel implements ActionListener
 			break;
 		}
 		
+	}
+	public Asset getAssetToDelete()
+	{
+		return toDeleteAsset;
 	}
 }

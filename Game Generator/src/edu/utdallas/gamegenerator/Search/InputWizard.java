@@ -391,7 +391,7 @@ public class InputWizard implements ActionListener {
         browsePanel.add(toolbarPanel, BorderLayout.SOUTH);
         toolbarPanel.setPreferredSize(new Dimension(0, 80));
         
-        scenePanel = new ScenePanel(); // view/edit the Scene selected in the browse panel
+        scenePanel = new ScenePanel(this); // view/edit the Scene selected in the browse panel
         scenePanel.setLayout(null);
         JSplitPane splitPreviewPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, browsePanel, scenePanel);
         splitPreviewPane.setEnabled(false);
@@ -1249,6 +1249,18 @@ public class InputWizard implements ActionListener {
 			backgroundSelectWindow.setBackgroundPathString(backgroundSelectPath);
 			backgroundSelectWindow.setBackgroundFolderPath(currentBackgroundPath);
 			backgroundSelectWindow.setVisible(true);
+			break;
+		case "deleteElement":
+			Asset toDelete = scenePanel.getAssetToDelete();
+			if(lastSelectedScreen.getAssets().contains(toDelete))
+			{
+				lastSelectedScreen.getAssets().remove(toDelete);
+				displayScreen(lastSelectedScene, lastSelectedScreen);
+			}
+			else
+			{
+				System.out.println("Error: Attempt to delete asset not in screen!");
+			}
 			break;
 		case "saveToRepo":
 			SaveGameFile(Currentfile);
