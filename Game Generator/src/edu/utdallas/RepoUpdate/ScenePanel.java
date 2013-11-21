@@ -6,8 +6,6 @@ import edu.utdallas.gamegenerator.Shared.*;
 import java.awt.*;
 import java.awt.Color;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,7 +15,6 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -25,18 +22,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
 
-public class ScenePanel extends JPanel implements ActionListener
+public class ScenePanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
 	private ArrayList<InformationBoxAsset> infoAssets; //separate because must be handled after loading all other assets
-	private ArrayList<ButtonAsset> ButtonAssetList;
 	private ArrayList<JLabel> assetPanels;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
 	private ScenePanel that = this;
-	private JLabel toDeleteLabel = null;
 	private Asset toDeleteAsset = null;
 	private InputWizard parentWizard;
 	
@@ -44,6 +39,24 @@ public class ScenePanel extends JPanel implements ActionListener
 	{
 		clear();
 		parentWizard = parent;
+		addMouseListener(new MouseListener() {
+		        public void mouseClicked(MouseEvent e) { 
+		        	for (JLabel label : assetPanels){
+		        		label.setBorder(null);
+		        	}
+		        }
+		        public void mouseEntered(MouseEvent e) { }
+		        public void mouseExited(MouseEvent e) { }
+		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
+		        public void mouseReleased(MouseEvent e) { }
+		});
+		addMouseMotionListener(new MouseMotionListener() {
+			public void mouseDragged(MouseEvent e) {}
+			public void mouseMoved(MouseEvent e) {
+				getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		
 		System.out.println("calling clear constructor\n");
 	}
 	
@@ -51,7 +64,6 @@ public class ScenePanel extends JPanel implements ActionListener
 	{
 		background = null;
 		infoAssets = new ArrayList<InformationBoxAsset>();
-		ButtonAssetList = new ArrayList<ButtonAsset>(); // button Asset list --Abdulla
 		assetPanels = new ArrayList<JLabel>();
 		removeAll();
 		updateUI();
@@ -92,18 +104,15 @@ public class ScenePanel extends JPanel implements ActionListener
 				infoAssets.add((InformationBoxAsset)a);
 			}
 			else if (a instanceof ButtonAsset){
-				ButtonAssetList.add((ButtonAsset)a); // --Abdulla
-				System.out.println("button assets: "+ a.getName()); // gets the name of the button --Abdulla
-				
-				String bName = a.getName();
-				JButton button = new JButton(bName);
-				button.setBounds((int)a.getLocX(), (int) a.getLocY(), (int) a.getWidth(), (int) a.getHeight());
-				button.setEnabled(false);
-				add(button);
-				//buttonName.setSize(10, 10);
-				//buttonName.setBounds(x, y, width, height)
-				//System.out.println(buttonName.getSize());
-				
+				if(a.getDisplayImage() == null)
+				{
+					a.setDisplayImage("Props\\GenericInteraction\\Button.png");
+				}
+				else if(a.getDisplayImage().equals(""))
+				{
+					a.setDisplayImage("Props\\GenericInteraction\\Button.png");
+				}
+				loadAsset(a, imageBaseDir);
 			}
 		}
 		
@@ -134,7 +143,7 @@ public class ScenePanel extends JPanel implements ActionListener
 	}
 	
 	// Match the text strings to the correct (closest) text bubble image
-	// NOTE: not all JPanels may be bubble images, but the closest JPanel to the text coordinates should be a bubble
+	// NOTE: not all JLabels may be bubble images, but the closest JLabels to the text coordinates should be a bubble
 	private void associateText(ArrayList<JLabel> bubbles, List<InformationBoxAsset> texts)
 	{
 		double closest = Double.MAX_VALUE;
@@ -174,7 +183,6 @@ public class ScenePanel extends JPanel implements ActionListener
 		return (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y);
 	}
 	
-	// ScenePanel.getScaledImage(yourImage, scale);
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
 	{
 		int origW = orig.getWidth();
@@ -203,12 +211,24 @@ public class ScenePanel extends JPanel implements ActionListener
 			
 			
 			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-			final JLabel panel = new JLabel(new ImageIcon(scaledImage));
-			panel.setLayout(new BorderLayout());
-			panel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
-			add(panel);
+			//drawing text over a label with an image - draw the text on the image then add to the label
+			if(a instanceof ButtonAsset)
+			{
+				Graphics g = scaledImage.getGraphics();
+				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+				FontMetrics fMetrics = g.getFontMetrics();
+				g.setColor(Color.BLACK);
+				int sWidth = fMetrics.stringWidth(a.getName());
+				int sHeight = fMetrics.getHeight();
+				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
+				g.dispose();
+			}
+			final JLabel label = new JLabel(new ImageIcon(scaledImage));
+			label.setLayout(new BorderLayout());
+			label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+			add(label);
 			
-			panel.addMouseListener(new MouseListener() {
+			label.addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
 		        	//if right-click
 		        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
@@ -218,37 +238,63 @@ public class ScenePanel extends JPanel implements ActionListener
 		        		menuItem.setActionCommand("deleteElement");
 		        		menuItem.addActionListener(parentWizard);
 		        		pMenu.add(menuItem);
-		        		toDeleteLabel = panel;
 		        		toDeleteAsset = a;
 		        		that.add(pMenu);
 		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
 					}
-		        	for (JLabel panel : assetPanels){
-		        		panel.setBorder(null);
+		        	for (JLabel label : assetPanels){
+		        		label.setBorder(null);
 		        	}
 		        	Border highlights = BorderFactory.createLineBorder(Color.YELLOW, 5, true);
-		        		panel.setBorder(highlights);
-		        		}
+		        		label.setBorder(highlights);
+		        }
 		        public void mouseEntered(MouseEvent e) { }
 		        public void mouseExited(MouseEvent e) { }
 		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
 		        public void mouseReleased(MouseEvent e) { }
 		    });
-			panel.addMouseMotionListener(new MouseMotionListener() {
+			label.addMouseMotionListener(new MouseMotionListener() {
 				public void mouseDragged(MouseEvent e) {
 		        	Point p = e.getPoint();
 		        	int deltaX = p.x - prevClickPoint.x;
 		        	int deltaY = p.y - prevClickPoint.y;
-		        	int newX = panel.getX() + deltaX;
-		        	int newY = panel.getY() + deltaY;
-		        	panel.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
+		        	int newX = label.getX() + deltaX;
+		        	int newY = label.getY() + deltaY;
+		        	label.setLocation(newX, newY);
 					a.setLocX(newX);
 					a.setLocY(newY);
+					for (JLabel label : assetPanels){
+		        		label.setBorder(null);
+		        	}
+		        	Border highlights = BorderFactory.createLineBorder(Color.YELLOW, 5, true);
+		        		label.setBorder(highlights);
 				}
-				public void mouseMoved(MouseEvent e) { }
+				public void mouseMoved(MouseEvent e) {
+					Point p = e.getPoint();
+					if(p.x <= 5 && p.y <= 5)
+					{
+						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+					}
+					else if(p.x <= 5 && label.getHeight() - p.y <= 5)
+					{
+						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+					}
+					else if(label.getWidth() - p.x <= 5 && p.y <= 5)
+					{
+						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+					}
+					else if(label.getWidth() - p.x <= 5 && label.getHeight() - p.y <= 5)
+					{
+						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+					}
+					else
+					{
+						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					}
+				}
 			});
 
-			assetPanels.add(panel);
+			assetPanels.add(label);
 			repaint();
 		} 
 		catch (IOException ex) 
@@ -267,31 +313,31 @@ public class ScenePanel extends JPanel implements ActionListener
 			double scaleFactor = desiredWidth / width;
 			
 			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-			final JLabel panel = new JLabel(new ImageIcon(scaledImage));
-			panel.setLayout(new BorderLayout());
-			panel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
-			add(panel);
+			final JLabel label = new JLabel(new ImageIcon(scaledImage));
+			label.setLayout(new BorderLayout());
+			label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+			add(label);
 			
-			panel.addMouseListener(new MouseListener() {
+			label.addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { }
 		        public void mouseEntered(MouseEvent e) { }
 		        public void mouseExited(MouseEvent e) { }
 		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
 		        public void mouseReleased(MouseEvent e) { }
 		    });
-			panel.addMouseMotionListener(new MouseMotionListener() {
+			label.addMouseMotionListener(new MouseMotionListener() {
 				public void mouseDragged(MouseEvent e) {
 		        	Point p = e.getPoint();
 		        	int deltaX = p.x - prevClickPoint.x;
 		        	int deltaY = p.y - prevClickPoint.y;
-		        	int newX = panel.getX() + deltaX;
-		        	int newY = panel.getY() + deltaY;
-		        	panel.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
+		        	int newX = label.getX() + deltaX;
+		        	int newY = label.getY() + deltaY;
+		        	label.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
 				}
 				public void mouseMoved(MouseEvent e) { }
 			});
 			
-			assetPanels.add(panel);
+			assetPanels.add(label);
 			repaint();
 		} 
 		catch (IOException ex) 
@@ -303,34 +349,13 @@ public class ScenePanel extends JPanel implements ActionListener
     protected void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
-		//removeAll();
-        
+
         if(background != null)
         {
         	g.drawImage(background, 0, 0, null);
         }
-        // adding the panels is equivalent to painting
-        /*for(int i = 0; i < assetPanels.size(); i++)
-        {
-        	add(assetPanels.get(i));
-        }*/
     }
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch(e.getActionCommand())
-		{
-		case "deleteElement":
-			System.out.println("got action");
-    		that.remove(toDeleteLabel);
-    		that.updateUI();
-    		that.repaint();
-    		toDeleteAsset.setLocY(-1000);
-    		toDeleteAsset.setLocX(-1000);
-			break;
-		}
-		
-	}
+    
 	public Asset getAssetToDelete()
 	{
 		return toDeleteAsset;
