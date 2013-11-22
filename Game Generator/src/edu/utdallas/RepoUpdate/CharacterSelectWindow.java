@@ -145,6 +145,10 @@ public class CharacterSelectWindow extends JDialog
 		
     	for (File child : dir.listFiles())
 		{
+    		if(child.isDirectory())
+    		{
+    			continue;
+    		}
     		try {
     		BufferedImage image = getScaledImage(ImageIO.read(child), 0.5);
     		

@@ -31,24 +31,24 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import edu.utdallas.gamegenerator.Shared.CharacterAsset;
+import edu.utdallas.gamegenerator.Shared.ImageAsset;
 
-public class BackgroundSelectWindow extends JDialog
+public class PropSelectWindow extends JDialog
 {
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 1050, HEIGHT = 500;
+	public static final int WIDTH = 1050, HEIGHT = 700;
 	final JLabel pic = new JLabel();
-	final JPanel wPanel = new JPanel(new GridLayout(0, 2));
+	final JPanel wPanel = new JPanel(new GridLayout(0, 4));
 	//final JPanel ePanel = new JPanel(new GridLayout(0, 1, 0, 0));
 	final JPanel ePanel = new JPanel(new BorderLayout());
-//	final JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, 130, 80);
+	final JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, 130, 80);
 	final JComboBox<String> comboBox = new JComboBox<String>();
 	String selectedPath = "";
-	private String backPathString;
+	private ImageAsset imgAsset;
 	
-	public BackgroundSelectWindow(JFrame owner)
+	public PropSelectWindow(JFrame owner)
 	{
-		super(owner, "Background Selection", Dialog.DEFAULT_MODALITY_TYPE);
+		super(owner, "Character Selection", Dialog.DEFAULT_MODALITY_TYPE);
 		setSize(WIDTH, HEIGHT);
 
 		JPanel nPanel = new JPanel();
@@ -57,6 +57,15 @@ public class BackgroundSelectWindow extends JDialog
 //			comboBox.addItem("Character_" + i);
 //		}
 //		comboBox.addItem("Hero-Villian");
+		
+		File dir = new File("Office, Classroom/Props/");
+		for (File child : dir.listFiles())
+		{
+    		if(child.isDirectory())
+    		{
+    			comboBox.addItem(child.getName());
+    		}
+		}
 		nPanel.add(comboBox);
 		
 		JScrollPane wPane = new JScrollPane();
@@ -67,16 +76,48 @@ public class BackgroundSelectWindow extends JDialog
 		comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-            	handleChangeBackgroundFolder();
+            	handleChangePropCatagory();
             }
         });
 
 		JPanel panel2 = new JPanel(new BorderLayout());
+		slider.setMajorTickSpacing(10);
+		slider.setSnapToTicks(true);
+		slider.setPaintTicks(true);
+		Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
+        labels.put(20, new JLabel("Smaller"));
+        labels.put(120, new JLabel("Larger"));
+        slider.setLabelTable(labels);
+        slider.setPaintLabels(true);
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("Slider Value: " + slider.getValue());
+				double sValue = slider.getValue() / 100.0;
+            	
+				try {
+					BufferedImage img1 = getScaledImage(ImageIO.read(new File(selectedPath)), sValue);
+					System.out.println(selectedPath);
+					pic.setIcon(new ImageIcon(img1));
+            	}catch(Exception e4) { e4.printStackTrace(); }
+            }
+        });
+		panel2.add(slider, BorderLayout.CENTER);
 		JButton place = new JButton("Place");
 		place.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				backPathString = selectedPath.substring(selectedPath.indexOf((String)comboBox.getSelectedItem()));
+				imgAsset = new ImageAsset();
+				String imgstrng = selectedPath.substring(selectedPath.indexOf((String)comboBox.getSelectedItem()));
+				imgAsset.setDisplayImage(imgstrng);
+				imgAsset.setFontFamily("Comic Sans MS");
+				imgAsset.setFontSize(15);
+				imgAsset.setHeight(pic.getIcon().getIconHeight());
+				imgAsset.setWidth(pic.getIcon().getIconWidth());
+				imgAsset.setLocX(300);
+				imgAsset.setLocX2(300 + imgAsset.getWidth());
+				imgAsset.setLocY(50);
+				imgAsset.setLocY2(50 + imgAsset.getHeight());
+				imgAsset.setOpacity(1);
 				setVisible(false);
 			}
 		});
@@ -93,23 +134,22 @@ public class BackgroundSelectWindow extends JDialog
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(d.width/2 - WIDTH/2, d.height/2 - HEIGHT/2);
-		setResizable(false);
 		
-		handleChangeBackgroundFolder();
+		handleChangePropCatagory();
 	}
 	
-	private void handleChangeBackgroundFolder()
+	private void handleChangePropCatagory()
 	{
 		if(comboBox.getSelectedItem() == null)
 		{return;}
 		final ArrayList<JLabel> jlabels = new ArrayList<JLabel>();
-        String item = (String)comboBox.getSelectedItem();
+        String folder = (String)comboBox.getSelectedItem();
         
-        System.out.println(item);
+        System.out.println(folder);
         
-    	File dir = new File("Office, Classroom/" + item + "/");
+    	File dir = new File("Office, Classroom/Props/" + folder + "/");
     	wPanel.removeAll();
-    	
+		
     	for (File child : dir.listFiles())
 		{
     		if(child.isDirectory())
@@ -117,15 +157,15 @@ public class BackgroundSelectWindow extends JDialog
     			continue;
     		}
     		try {
-	    		BufferedImage image = getScaledImage(ImageIO.read(child), 0.43);
-	    		
-	    		final JLabel l = new JLabel(new ImageIcon(image));
-	    		l.setName(child.getPath().toString());
-				jlabels.add(l);
-				wPanel.add(l);
-				wPanel.validate();
-				wPanel.repaint();
-    		} catch(Exception e1) {}
+    		BufferedImage image = getScaledImage(ImageIO.read(child), 0.5);
+    		
+    		final JLabel l = new JLabel(new ImageIcon(image));
+    		l.setName(child.getPath().toString());
+			jlabels.add(l);
+			wPanel.add(l);
+			wPanel.validate();
+			wPanel.repaint();
+		} catch(Exception e1) {}
 		
 		}
     	for(final JLabel l : jlabels)
@@ -144,7 +184,7 @@ public class BackgroundSelectWindow extends JDialog
 					}
 					l.setBorder(BorderFactory.createLoweredBevelBorder());
 					try {
-						BufferedImage img1 = getScaledImage(ImageIO.read(new File(l.getName())), .43);
+						BufferedImage img1 = getScaledImage(ImageIO.read(new File(l.getName())), slider.getValue() / 100.0);
 						pic.setIcon(new ImageIcon(img1));
 			    		selectedPath = l.getName();
 					} catch(Exception e4) {}
@@ -173,24 +213,23 @@ public class BackgroundSelectWindow extends JDialog
 		    return resized;
 	}
 	
-	public void setBackgroundPathString(String backgroundString)
+	public void setImageAsset(ImageAsset imageAsset)
 	{
-		backPathString = backgroundString;
+		imgAsset = imageAsset;
 	}
 	
-	public String getNewBackgroundPath()
+	public ImageAsset getNewImageAsset()
 	{
-		return backPathString;
+		return imgAsset;
 	}
 	
-	public void setBackgroundFolderPath(String folderPath)
+	public void setImageChoices(ArrayList<String> ImageFolders)
 	{
 		comboBox.removeAllItems();
-		/*for(String charName : charNames)
+		for(String imageFolder : ImageFolders)
 		{
-			comboBox.addItem(charName);
-		}*/
-		comboBox.addItem(folderPath);
-		handleChangeBackgroundFolder();
+			comboBox.addItem(imageFolder);
+		}
+		handleChangePropCatagory();
 	}
 }

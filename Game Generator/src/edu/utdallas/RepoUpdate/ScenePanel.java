@@ -264,8 +264,6 @@ public class ScenePanel extends JPanel
 		        	Point p = e.getPoint();
 		        	int deltaX = p.x - prevClickPoint.x;
 		        	int deltaY = p.y - prevClickPoint.y;
-		        	//prevClickPoint.x = p.x;
-		        	//prevClickPoint.y = p.y;
 		        	int invDeltaX = -deltaX;
 		        	int invDeltaY = -deltaY;
 		        	String imgPath;
@@ -313,10 +311,8 @@ public class ScenePanel extends JPanel
 				    				g.dispose();
 				    			}
 							} catch (IOException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-			        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
 			        		resize = true;
 		        		}
 		        	}
@@ -331,7 +327,6 @@ public class ScenePanel extends JPanel
 							a.setWidth(a.getWidth() + invDeltaX);
 			        		a.setHeight(a.getHeight() + deltaY);
 			        		a.setLocX(a.getLocX() + deltaX);
-			        		//a.setLocY(a.getLocY() + deltaY);
 			        		prevClickPoint.y = p.y;
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
@@ -356,10 +351,8 @@ public class ScenePanel extends JPanel
 				    				g.dispose();
 				    			}
 							} catch (IOException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-			        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
 			        		resize = true;
 						}
 					}
@@ -398,10 +391,8 @@ public class ScenePanel extends JPanel
 				    				g.dispose();
 				    			}
 							} catch (IOException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-			        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
 			        		resize = true;
 						}
 					}
@@ -440,7 +431,6 @@ public class ScenePanel extends JPanel
 				    				g.dispose();
 				    			}
 							} catch (IOException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 			        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
