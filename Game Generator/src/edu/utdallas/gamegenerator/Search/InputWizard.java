@@ -301,13 +301,15 @@ public class InputWizard implements ActionListener {
 			@Override
 			public void windowDeactivated(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				if(backgroundSelectWindow.getNewBackgroundPath() == null)
+				if(soundSelectWindow.getNewSoundPath() == null)
 				{
+					System.out.println("got here, but null");
 					return;
 				}
 				else
 				{
 					soundSelectPath = soundSelectWindow.getNewSoundPath();
+					System.out.println(soundSelectPath);
 				}
 			}
 			@Override

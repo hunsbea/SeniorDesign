@@ -43,6 +43,51 @@ public class SoundSelectWindow extends JDialog
 			"Sound12.wav", "Sound13.wav", "Sound14.wav", "Sound15.wav" };
 
         list = new JList<String>(data);
+        
+        addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				stopAudio();
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
 
 		JScrollPane listPane = new JScrollPane(list);
 		add(listPane, BorderLayout.CENTER);
@@ -81,6 +126,14 @@ public class SoundSelectWindow extends JDialog
 		} catch(Exception e) {}
 		stop.setPreferredSize(new Dimension(100, 30));
 		JButton add = new JButton("Add");
+		add.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				soundPathString = soundFolder + soundFolderString + list.getSelectedValue().toString();
+				stopAudio();
+				setVisible(false);
+			}
+		});
 		add.setPreferredSize(new Dimension(100, 30));
 
 		flow.add(preview);
@@ -152,7 +205,6 @@ public class SoundSelectWindow extends JDialog
 		stopAudio();
 		try {
 		    File yourFile = new File(path);
-		    boolean b = yourFile.exists();
 		    System.out.println(path);
 		    AudioInputStream stream;
 		    AudioFormat format;
