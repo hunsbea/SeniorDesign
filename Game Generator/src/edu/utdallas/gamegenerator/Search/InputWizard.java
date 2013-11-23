@@ -1384,6 +1384,10 @@ public class InputWizard implements ActionListener {
 			{
 				soundSelectWindow.setSoundFolderPath(SoundSelectWindow.effectsFolder);
 			}
+			else
+			{
+				break;
+			}
 			soundSelectWindow.setVisible(true);
 			break;
 			//JD end

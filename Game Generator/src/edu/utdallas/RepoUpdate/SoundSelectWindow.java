@@ -28,6 +28,7 @@ public class SoundSelectWindow extends JDialog
 	private String soundPathString;
 	private JList<String> list;
 	private ListSelectionModel select;
+	private Clip currentClip;
 	
 	public SoundSelectWindow(JFrame owner)
 	{
@@ -68,6 +69,12 @@ public class SoundSelectWindow extends JDialog
 			}
 		});
 		JButton stop = new JButton("Stop");
+		stop.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				stopAudio();
+			}
+		});
 		try {
 			BufferedImage img = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/stop.png")), 1.0);
 			stop.setIcon(new ImageIcon(img));
@@ -142,8 +149,11 @@ public class SoundSelectWindow extends JDialog
 	
 	private void playAudio(String path)
 	{
+		stopAudio();
 		try {
 		    File yourFile = new File(path);
+		    boolean b = yourFile.exists();
+		    System.out.println(path);
 		    AudioInputStream stream;
 		    AudioFormat format;
 		    DataLine.Info info;
@@ -153,6 +163,7 @@ public class SoundSelectWindow extends JDialog
 		    format = stream.getFormat();
 		    info = new DataLine.Info(Clip.class, format);
 		    clip = (Clip) AudioSystem.getLine(info);
+		    currentClip = clip;
 
 		    clip.addLineListener(new LineListener()
 			{
@@ -169,6 +180,15 @@ public class SoundSelectWindow extends JDialog
 		    clip.start();
 		}
 		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void stopAudio()
+	{
+		if(!(currentClip == null) && currentClip.isRunning())
+		{
+			currentClip.stop();
+			currentClip.close();
 		}
 	}
 }
