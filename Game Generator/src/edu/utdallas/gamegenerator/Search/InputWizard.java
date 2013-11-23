@@ -11,6 +11,7 @@ import edu.utdallas.RepoUpdate.BackgroundSelectWindow;
 import edu.utdallas.RepoUpdate.PropSelectWindow;
 import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.CharacterSelectWindow;
+import edu.utdallas.RepoUpdate.SoundSelectWindow;
 import edu.utdallas.RepoUpdate.Updates;
 import edu.utdallas.gamegenerator.Shared.*;
 import edu.utdallas.gamegenerator.Structure.*;
@@ -67,11 +68,14 @@ public class InputWizard implements ActionListener {
  	private ImageAsset propSelectAsset;
  	private BackgroundSelectWindow backgroundSelectWindow;
  	private String backgroundSelectPath;
+ 	private SoundSelectWindow soundSelectWindow;
+ 	private String soundSelectPath;
  	public enum gameLevel{GAME, ACT, SCENE, SCREEN, CHALLENGE};
  	private gameLevel selectedLevel = null;
  	private JButton characterButton;
  	private JButton propButton;
  	private JButton backgroundButton;
+ 	private JButton soundButton;
  	private Scene lastSelectedScene = null;
  	private ScreenNode lastSelectedScreen = null;
  	private File Currentfile = null;
@@ -277,6 +281,52 @@ public class InputWizard implements ActionListener {
 			}
         	
         });
+        soundSelectWindow = new SoundSelectWindow(window);
+        soundSelectWindow.addWindowListener(new WindowListener(){
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				if(backgroundSelectWindow.getNewBackgroundPath() == null)
+				{
+					return;
+				}
+				else
+				{
+					soundSelectPath = soundSelectWindow.getNewSoundPath();
+				}
+			}
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         
         // create tree-structure for viewing Acts/Scenes
         actTree = new JTree();
@@ -303,6 +353,7 @@ public class InputWizard implements ActionListener {
             		characterButton.setEnabled(true);
             		propButton.setEnabled(true);
             		backgroundButton.setEnabled(false);
+            		soundButton.setEnabled(true);
             		selectedLevel = gameLevel.SCREEN;
             		lastSelectedScene = getScene(actName, sceneName);
             		lastSelectedScreen = getScreen(actName, sceneName, screenName);
@@ -317,6 +368,7 @@ public class InputWizard implements ActionListener {
           			characterButton.setEnabled(false);
             		propButton.setEnabled(false);
             		backgroundButton.setEnabled(true);
+            		soundButton.setEnabled(true);
           			selectedLevel = gameLevel.SCENE;
           			lastSelectedScene = getScene(actName, sceneName);
           			scenePanel.clear();
@@ -339,6 +391,7 @@ public class InputWizard implements ActionListener {
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
             		backgroundButton.setEnabled(false);
+            		soundButton.setEnabled(false);
             		selectedLevel = gameLevel.GAME;
             		for (CharacterAsset ca : chars){
             			
@@ -404,6 +457,7 @@ public class InputWizard implements ActionListener {
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
             		backgroundButton.setEnabled(false);
+            		soundButton.setEnabled(false);
             		selectedLevel = gameLevel.ACT;
             	}
             }
@@ -438,7 +492,10 @@ public class InputWizard implements ActionListener {
         toolbarPanel.add(speechButton);
         JButton buttonButton = new JButton("Button");
         toolbarPanel.add(buttonButton);
-        JButton soundButton = new JButton("Sound");
+        soundButton = new JButton("Sound");
+        soundButton.addActionListener(this);
+        soundButton.setEnabled(false);
+        soundButton.setActionCommand("soundToolbar");
         toolbarPanel.add(soundButton);
         backgroundButton = new JButton("Background");
         backgroundButton.addActionListener(this);
@@ -1316,6 +1373,10 @@ public class InputWizard implements ActionListener {
 			backgroundSelectWindow.setBackgroundPathString(backgroundSelectPath);
 			backgroundSelectWindow.setBackgroundFolderPath(currentBackgroundPath);
 			backgroundSelectWindow.setVisible(true);
+			break;
+		case "soundToolbar":
+			soundSelectPath = null;
+			
 			break;
 			//JD end
 		case "deleteElement":
