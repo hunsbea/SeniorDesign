@@ -36,7 +36,8 @@ import edu.utdallas.gamegenerator.Shared.ImageAsset;
 public class PropSelectWindow extends JDialog
 {
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 1050, HEIGHT = 700;
+	public static final int WIDTH = 1150, HEIGHT = 700;
+	private String imageBaseDir = "Office, Classroom\\";
 	final JLabel pic = new JLabel();
 	final JPanel wPanel = new JPanel(new GridLayout(0, 4));
 	//final JPanel ePanel = new JPanel(new GridLayout(0, 1, 0, 0));
@@ -50,15 +51,11 @@ public class PropSelectWindow extends JDialog
 	{
 		super(owner, "Character Selection", Dialog.DEFAULT_MODALITY_TYPE);
 		setSize(WIDTH, HEIGHT);
+		setResizable(false);
 
 		JPanel nPanel = new JPanel();
-//		for(int i = 1; i <= 29; i++)
-//		{
-//			comboBox.addItem("Character_" + i);
-//		}
-//		comboBox.addItem("Hero-Villian");
 		
-		File dir = new File("Office, Classroom/Props/");
+		File dir = new File("Office, Classroom/Props/SetDecoration/");
 		for (File child : dir.listFiles())
 		{
     		if(child.isDirectory())
@@ -107,7 +104,7 @@ public class PropSelectWindow extends JDialog
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				imgAsset = new ImageAsset();
-				String imgstrng = selectedPath.substring(selectedPath.indexOf((String)comboBox.getSelectedItem()));
+				String imgstrng = selectedPath.substring(selectedPath.indexOf(imageBaseDir)+imageBaseDir.length());
 				imgAsset.setDisplayImage(imgstrng);
 				imgAsset.setFontFamily("Comic Sans MS");
 				imgAsset.setFontSize(15);
@@ -126,7 +123,7 @@ public class PropSelectWindow extends JDialog
 
 		ePanel.add(pic,BorderLayout.CENTER);
 		ePanel.add(panel2,BorderLayout.SOUTH);
-		ePanel.setPreferredSize(new Dimension(325,650));
+		ePanel.setPreferredSize(new Dimension(325+100,650));
 
 		add(ePanel, BorderLayout.EAST);
 		add(wPane, BorderLayout.WEST);
@@ -147,7 +144,7 @@ public class PropSelectWindow extends JDialog
         
         System.out.println(folder);
         
-    	File dir = new File("Office, Classroom/Props/" + folder + "/");
+    	File dir = new File("Office, Classroom/Props/SetDecoration/" + folder + "/");
     	wPanel.removeAll();
 		
     	for (File child : dir.listFiles())
@@ -157,16 +154,16 @@ public class PropSelectWindow extends JDialog
     			continue;
     		}
     		try {
-    		BufferedImage image = getScaledImage(ImageIO.read(child), 0.5);
-    		
-    		final JLabel l = new JLabel(new ImageIcon(image));
-    		l.setName(child.getPath().toString());
-			jlabels.add(l);
-			wPanel.add(l);
-			wPanel.validate();
-			wPanel.repaint();
-		} catch(Exception e1) {}
-		
+    			BufferedImage image = ImageIO.read(child);
+	    		BufferedImage scaledImage = getScaledImage(image, (150f)/((float)image.getWidth()));
+	    		
+	    		final JLabel l = new JLabel(new ImageIcon(scaledImage));
+	    		l.setName(child.getPath().toString());
+				jlabels.add(l);
+				wPanel.add(l);
+				wPanel.validate();
+				wPanel.repaint();
+			} catch(Exception e1) {}
 		}
     	for(final JLabel l : jlabels)
 		{
@@ -178,23 +175,27 @@ public class PropSelectWindow extends JDialog
 				public void mouseExited(MouseEvent e) {
 				}
 				public void mousePressed(MouseEvent e) {
-					for(int i = 0; i < jlabels.size(); i++)
-					{
-						jlabels.get(i).setBorder(null);
-					}
-					l.setBorder(BorderFactory.createLoweredBevelBorder());
-					try {
-						BufferedImage img1 = getScaledImage(ImageIO.read(new File(l.getName())), slider.getValue() / 100.0);
-						pic.setIcon(new ImageIcon(img1));
-			    		selectedPath = l.getName();
-					} catch(Exception e4) {}
+					handleGridClick(l, jlabels);
 				}
 				public void mouseReleased(MouseEvent e) {
 				}
 			});
-			;
 		}
-        
+    	handleGridClick(jlabels.get(0), jlabels);
+	}
+	
+	private void handleGridClick(JLabel label, ArrayList<JLabel> jlabels)
+	{
+		for(int i = 0; i < jlabels.size(); i++)
+		{
+			jlabels.get(i).setBorder(null);
+		}
+		label.setBorder(BorderFactory.createLoweredBevelBorder());
+		try {
+			BufferedImage img1 = getScaledImage(ImageIO.read(new File(label.getName())), slider.getValue() / 100.0);
+			pic.setIcon(new ImageIcon(img1));
+    		selectedPath = label.getName();
+		} catch(Exception e4) {}
 	}
 
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)

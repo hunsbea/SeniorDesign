@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import edu.utdallas.RepoUpdate.BackgroundSelectWindow;
+import edu.utdallas.RepoUpdate.PropSelectWindow;
 import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.CharacterSelectWindow;
 import edu.utdallas.RepoUpdate.Updates;
@@ -62,11 +63,14 @@ public class InputWizard implements ActionListener {
  	//JD character selection class parameters
  	private CharacterSelectWindow characterSelectWindow;
  	private CharacterAsset characterSelectAsset;
+ 	private PropSelectWindow propSelectWindow;
+ 	private ImageAsset propSelectAsset;
  	private BackgroundSelectWindow backgroundSelectWindow;
  	private String backgroundSelectPath;
  	public enum gameLevel{GAME, ACT, SCENE, SCREEN, CHALLENGE};
  	private gameLevel selectedLevel = null;
  	private JButton characterButton;
+ 	private JButton propButton;
  	private JButton backgroundButton;
  	private Scene lastSelectedScene = null;
  	private ScreenNode lastSelectedScreen = null;
@@ -149,7 +153,6 @@ public class InputWizard implements ActionListener {
 			}
 			@Override
 			public void windowDeactivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
 				if(characterSelectWindow.getNewCharacterAsset() == null)
 				{
 					return;
@@ -175,6 +178,54 @@ public class InputWizard implements ActionListener {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
+        propSelectWindow = new PropSelectWindow(window);
+        propSelectWindow.addWindowListener(new WindowListener(){
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				if(propSelectWindow.getNewImageAsset() == null)
+				{
+					return;
+				}
+				else
+				{
+					List<Asset> currentAssets = lastSelectedScreen.getAssets();
+					currentAssets.add(propSelectWindow.getNewImageAsset());
+					lastSelectedScreen.setAssets(currentAssets);
+					displayScreen(lastSelectedScene, lastSelectedScreen);
+				}
+			}
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void windowOpened(WindowEvent arg0) {
 				
 			}
         	
@@ -250,6 +301,7 @@ public class InputWizard implements ActionListener {
             		String actName = selectedNode.getParent().getParent().toString();
             		//JD
             		characterButton.setEnabled(true);
+            		propButton.setEnabled(true);
             		backgroundButton.setEnabled(false);
             		selectedLevel = gameLevel.SCREEN;
             		lastSelectedScene = getScene(actName, sceneName);
@@ -263,6 +315,7 @@ public class InputWizard implements ActionListener {
             		String actName = selectedNode.getParent().toString();
           			Scene s = getScene(actName, sceneName);
           			characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
             		backgroundButton.setEnabled(true);
           			selectedLevel = gameLevel.SCENE;
           			lastSelectedScene = getScene(actName, sceneName);
@@ -284,6 +337,7 @@ public class InputWizard implements ActionListener {
             		xtraXposition = 180.00;
             		System.out.println("uniq chars before putting in size "+UNIQchars.size());
             		characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
             		backgroundButton.setEnabled(false);
             		selectedLevel = gameLevel.GAME;
             		for (CharacterAsset ca : chars){
@@ -348,6 +402,7 @@ public class InputWizard implements ActionListener {
             	}//end else if
             	else {
             		characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
             		backgroundButton.setEnabled(false);
             		selectedLevel = gameLevel.ACT;
             	}
@@ -374,7 +429,10 @@ public class InputWizard implements ActionListener {
         characterButton.setEnabled(false);
         characterButton.setActionCommand("charactersToolbar");
         toolbarPanel.add(characterButton);
-        JButton propButton = new JButton("Prop");
+        propButton = new JButton("Prop");
+        propButton.addActionListener(this);
+        propButton.setEnabled(false);
+        propButton.setActionCommand("propToolbar");
         toolbarPanel.add(propButton);
         JButton speechButton = new JButton("Speech");
         toolbarPanel.add(speechButton);
@@ -828,9 +886,11 @@ public class InputWizard implements ActionListener {
 		Scanner sc = new Scanner(act);
 		sc.next();
 		int actNum = sc.nextInt();
+		sc.close();
 		sc = new Scanner(scene);
 		sc.next();
 		int sceneNum = sc.nextInt();
+		sc.close();
 		
 		return game.getActs().get(actNum - 1).getScenes().get(sceneNum - 1);
 	}
@@ -840,12 +900,15 @@ public class InputWizard implements ActionListener {
 		Scanner sc = new Scanner(act);
 		sc.next();
 		int actNum = sc.nextInt();
+		sc.close();
 		sc = new Scanner(scene);
 		sc.next();
 		int sceneNum = sc.nextInt();
+		sc.close();
 		sc = new Scanner(screen);
 		sc.next();
 		int screenNum = sc.nextInt();
+		sc.close();
 		
 		return game.getActs().get(actNum - 1).getScenes().get(sceneNum - 1).getScreens().get(screenNum - 1);
 	}
@@ -1209,7 +1272,7 @@ public class InputWizard implements ActionListener {
 			
 			break;
 		case "charactersToolbar":
-			//JD call method to pass an asset to the character select window.
+			//JD
 			characterSelectAsset = null;
 			characterSelectWindow.setCharacterAsset(characterSelectAsset);
 			ArrayList<CharacterAsset> chars = new ArrayList<CharacterAsset>();
@@ -1240,7 +1303,11 @@ public class InputWizard implements ActionListener {
 				characterSelectWindow.setCharacterChoices(availableChars);
 				characterSelectWindow.setVisible(true);
 			}
-			//JD end
+			break;
+		case "propToolbar":
+			propSelectAsset = null;
+			propSelectWindow.setImageAsset(propSelectAsset);
+			propSelectWindow.setVisible(true);
 			break;
 		case "backgroundToolbar":
 			backgroundSelectPath = null;
@@ -1250,6 +1317,7 @@ public class InputWizard implements ActionListener {
 			backgroundSelectWindow.setBackgroundFolderPath(currentBackgroundPath);
 			backgroundSelectWindow.setVisible(true);
 			break;
+			//JD end
 		case "deleteElement":
 			Asset toDelete = scenePanel.getAssetToDelete();
 			if(lastSelectedScreen.getAssets().contains(toDelete))
