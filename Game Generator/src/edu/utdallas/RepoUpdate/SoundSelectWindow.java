@@ -32,7 +32,6 @@ public class SoundSelectWindow extends JDialog
 	public SoundSelectWindow(JFrame owner)
 	{
 		super(owner, "Sound Selection", Dialog.DEFAULT_MODALITY_TYPE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(d.width/2 - WIDTH/2, d.height/2 - HEIGHT/2);
@@ -55,6 +54,19 @@ public class SoundSelectWindow extends JDialog
 			preview.setIcon(new ImageIcon(img));
 		} catch(Exception e) {}
 		preview.setPreferredSize(new Dimension(100, 30));
+		preview.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int selectedIndex = list.getSelectedIndex();
+				if(selectedIndex == -1)
+				{
+					return;
+				}
+				String selected = list.getSelectedValue().toString();
+				playAudio(soundFolder + soundFolderString + selected);
+			}
+		});
 		JButton stop = new JButton("Stop");
 		try {
 			BufferedImage img = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/stop.png")), 1.0);
@@ -86,7 +98,12 @@ public class SoundSelectWindow extends JDialog
     		soundFiles.add(child.getName());
 		}
     	
-    	list.setListData((String[]) soundFiles.toArray());
+    	String[] soundFilesArray = new String[soundFiles.size()];
+    	for(int i = 0; i < soundFiles.size(); i++)
+    	{
+    		soundFilesArray[i] = soundFiles.get(i);
+    	}
+    	list.setListData(soundFilesArray);
     	select = list.getSelectionModel();
 		select.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 	}

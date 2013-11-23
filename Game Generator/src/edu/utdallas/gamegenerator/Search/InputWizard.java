@@ -1376,7 +1376,15 @@ public class InputWizard implements ActionListener {
 			break;
 		case "soundToolbar":
 			soundSelectPath = null;
-			
+			if(selectedLevel.equals(gameLevel.SCENE))
+			{
+				soundSelectWindow.setSoundFolderPath(SoundSelectWindow.musicFolder);
+			}
+			else if(selectedLevel.equals(gameLevel.SCREEN))
+			{
+				soundSelectWindow.setSoundFolderPath(SoundSelectWindow.effectsFolder);
+			}
+			soundSelectWindow.setVisible(true);
 			break;
 			//JD end
 		case "deleteElement":
