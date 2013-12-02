@@ -49,7 +49,7 @@ public class PropSelectWindow extends JDialog
 	
 	public PropSelectWindow(JFrame owner)
 	{
-		super(owner, "Character Selection", Dialog.DEFAULT_MODALITY_TYPE);
+		super(owner, "Prop Selection", Dialog.DEFAULT_MODALITY_TYPE);
 		setSize(WIDTH, HEIGHT);
 		setResizable(false);
 
