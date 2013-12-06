@@ -20,6 +20,7 @@ import java.util.*;
 
 public class SoundSelectWindow extends JDialog
 {
+	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 450, HEIGHT = 300;
 	public static final String soundFolder = "AudioAssetRepository\\";
 	public static final String effectsFolder = "effects\\sound effects from WavSource\\";
