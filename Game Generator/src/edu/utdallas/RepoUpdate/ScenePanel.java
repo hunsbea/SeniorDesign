@@ -169,7 +169,6 @@ public class ScenePanel extends JPanel
 			label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
 			add(label);
 			//if the asset is an information box asset, add the text.
-//			final JLabel textLabel = new JLabel("<html><p style=\"padding-left:12px\">" + a.getName() + "</p></html>");
 			if(a instanceof InformationBoxAsset)
 			{
 				int paddingTop = label.getHeight()/10;
