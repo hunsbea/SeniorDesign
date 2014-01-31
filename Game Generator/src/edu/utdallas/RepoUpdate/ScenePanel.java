@@ -103,7 +103,8 @@ public class ScenePanel extends JPanel
 			}
 			else if(a instanceof InformationBoxAsset)
 			{
-				infoAssets.add((InformationBoxAsset)a);
+				//infoAssets.add((InformationBoxAsset)a);
+				loadAsset(a, imageBaseDir);
 			}
 			else if (a instanceof ButtonAsset){
 				if(a.getDisplayImage() == null)
@@ -118,51 +119,9 @@ public class ScenePanel extends JPanel
 			}
 		}
 		
-		associateText(assetPanels, infoAssets);
 		addNotify();
 		revalidate();
 		repaint();
-	}
-		
-	// Match the text strings to the correct (closest) text bubble image
-	// NOTE: not all JLabels may be bubble images, but the closest JLabels to the text coordinates should be a bubble
-	private void associateText(ArrayList<JLabel> bubbles, List<InformationBoxAsset> texts)
-	{
-		double closest = Double.MAX_VALUE;
-		JLabel closestPanel = null;
-		
-		//TODO: there may be more text than bubbles due to bad XML formatting, this is a problem
-		if(bubbles == null || bubbles.size() == 0 || texts == null || texts.size() == 0)
-			return;
-		
-		// for each text, find the JPanel with closest x,y coordinates and set its font and text
-		for(InformationBoxAsset text : texts)
-		{
-			closestPanel = bubbles.get(0);
-			for(JLabel j : bubbles)
-			{
-				double dist = distSqrd(j.getLocation(), new Point((int)text.getLocX(), (int)text.getLocY()));
-				if(dist < closest)
-				{
-					closest = dist;
-					closestPanel = j;
-				}
-			}
-			
-			JLabel label = new JLabel("<html><p style=\"padding-left:12px\">" + text.getName() + "</p></html>");
-			label.setFont(new Font(text.getFontFamily(), Font.BOLD, text.getFontSize()));
-			label.setForeground(Color.BLACK);
-			label.setHorizontalAlignment(JLabel.CENTER);
-			label.setVerticalAlignment(JLabel.TOP);
-			closestPanel.add(label, BorderLayout.CENTER);
-			System.out.println(closestPanel.getX() + " " + closestPanel.getY() + " " + text.getName());
-		}
-	}
-	
-	// Save time, no need to calculate square root to determine shortest distance
-	private double distSqrd(Point a, Point b)
-	{
-		return (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y);
 	}
 	
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
@@ -188,7 +147,7 @@ public class ScenePanel extends JPanel
 			
 			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
 			int width = image.getWidth();
-			double desiredWidth = a.getWidth();
+			final double desiredWidth = a.getWidth();
 			double scaleFactor = desiredWidth / width;
 			
 			
@@ -209,6 +168,21 @@ public class ScenePanel extends JPanel
 			label.setLayout(new BorderLayout());
 			label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
 			add(label);
+			//if the asset is an information box asset, add the text.
+//			final JLabel textLabel = new JLabel("<html><p style=\"padding-left:12px\">" + a.getName() + "</p></html>");
+			if(a instanceof InformationBoxAsset)
+			{
+				int paddingTop = label.getHeight()/10;
+				int paddingLeft = label.getWidth()/16;
+				final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
+				textLabel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+				textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+				textLabel.setForeground(Color.BLACK);
+				textLabel.setHorizontalAlignment(JLabel.CENTER);
+				textLabel.setVerticalAlignment(JLabel.TOP);
+				label.add(textLabel);
+			}
+			
 			
 			label.addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
