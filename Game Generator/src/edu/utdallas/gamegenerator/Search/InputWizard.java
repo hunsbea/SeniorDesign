@@ -410,7 +410,7 @@ public class InputWizard implements ActionListener {
             				UNIQchars.add(c);
     						c.setLocX(0);
     						c.setLocY(0);
-            				scenePanel.loadAssetToRoot(c, charBaseDir);
+            				scenePanel.loadAsset(c, charBaseDir);
             				
             			}
             			else{	
@@ -431,7 +431,7 @@ public class InputWizard implements ActionListener {
             						c.setLocX(xtraXposition);
             						c.setLocY(0);
             						
-            						scenePanel.loadAssetToRoot(c, charBaseDir);
+            						scenePanel.loadAsset(c, charBaseDir);
             						xtraXposition = xtraXposition+ xtraXposition;
             						
             						} catch(Exception ex) {}
@@ -977,8 +977,6 @@ public class InputWizard implements ActionListener {
 		List<Asset> assets = screen.getAssets();
 		if(assets != null){
 			scenePanel.loadAssets(assets);
-			//assets.
-		//scenePanel.loadAssetsToRoot(assets);
 		}
 		else
 			System.out.println("assets null");
@@ -986,15 +984,6 @@ public class InputWizard implements ActionListener {
 		scenePanel.loadBackground(scene.getBackground());
 	}
 	
-	private void RootCharacters(ScreenNode screen)
-	{
-		List<Asset> assets = screen.getAssets();
-		if(assets != null)
-			scenePanel.loadAssetsToRoot(assets);
-		else
-			System.out.println("assets null");
-
-	}
 	// sets all the values of the matrix to the given value. 
 	private Matrix initializeMatrix(Matrix inputMatrix, double initValue)
 	{

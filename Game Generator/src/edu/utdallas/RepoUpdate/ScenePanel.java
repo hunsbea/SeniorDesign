@@ -123,27 +123,7 @@ public class ScenePanel extends JPanel
 		revalidate();
 		repaint();
 	}
-	public void loadAssetsToRoot(List<Asset> as)
-	{
-		clear();
-		System.out.println("calling clear load assets to root\n");
 		
-		
-		for(Asset a : as)
-		{
-			if(a instanceof CharacterAsset)
-			{
-				
-				loadAssetToRoot(a, charBaseDir);
-			}
-		}
-		
-		associateText(assetPanels, infoAssets);
-		addNotify();
-		revalidate();
-		repaint();
-	}
-	
 	// Match the text strings to the correct (closest) text bubble image
 	// NOTE: not all JLabels may be bubble images, but the closest JLabels to the text coordinates should be a bubble
 	private void associateText(ArrayList<JLabel> bubbles, List<InformationBoxAsset> texts)
@@ -487,52 +467,7 @@ public class ScenePanel extends JPanel
 			System.out.println(a.getDisplayImage() + " is missing from repository, cannot load");
 		}
 	}
-	public void loadAssetToRoot(final Asset a, String baseDir)
-	{
-		try 
-		{
-			
-			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
-			int width = image.getWidth();
-			double desiredWidth = a.getWidth();
-			double scaleFactor = desiredWidth / width;
-			
-			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-			final JLabel label = new JLabel(new ImageIcon(scaledImage));
-			label.setLayout(new BorderLayout());
-			label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
-			add(label);
-			
-			label.addMouseListener(new MouseListener() {
-		        public void mouseClicked(MouseEvent e) { }
-		        public void mouseEntered(MouseEvent e) { }
-		        public void mouseExited(MouseEvent e) { }
-		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
-		        public void mouseReleased(MouseEvent e) { }
-		    });
-			label.addMouseMotionListener(new MouseMotionListener() {
-				public void mouseDragged(MouseEvent e) {
-		        	Point p = e.getPoint();
-		        	int deltaX = p.x - prevClickPoint.x;
-		        	int deltaY = p.y - prevClickPoint.y;
-		        	//prevClickPoint.x = p.x;
-		        	//prevClickPoint.y = p.y;
-		        	int newX = label.getX() + deltaX;
-		        	int newY = label.getY() + deltaY;
-		        	label.setBounds(newX, newY, (int)a.getWidth(), (int)a.getHeight());
-				}
-				public void mouseMoved(MouseEvent e) { }
-			});
-			
-			assetPanels.add(label);
-			repaint();
-		} 
-		catch (IOException ex) 
-		{
-			System.out.println(a.getDisplayImage() + " is missing from repository, cannot load");
-		}
-	}
-	
+		
     protected void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
