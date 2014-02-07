@@ -27,7 +27,7 @@ public class ScenePanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
-	private ArrayList<JLabel> assetPanels;
+	private ArrayList<JLabel> assetLabels;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
@@ -42,8 +42,15 @@ public class ScenePanel extends JPanel
 		parentWizard = parent;
 		addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
-		        	for (JLabel label : assetPanels){
-		        		label.setBorder(null);
+		        	for (JLabel label : assetLabels){
+		        		if(label.getIcon()==null)
+		        		{
+		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+		        		}
+		        		else
+		        		{
+		        			label.setBorder(null);
+		        		}
 		        	}
 		        }
 		        public void mouseEntered(MouseEvent e) { }
@@ -64,7 +71,7 @@ public class ScenePanel extends JPanel
 	public void clear()
 	{
 		background = null;
-		assetPanels = new ArrayList<JLabel>();
+		assetLabels = new ArrayList<JLabel>();
 		removeAll();
 		updateUI();
 	}
@@ -74,7 +81,6 @@ public class ScenePanel extends JPanel
 		try 
 		{
 			background = getScaledImage(ImageIO.read(new File("Office, Classroom\\" + imageFile)), 1.5);
-			
 			repaint();
 		} 
 		catch (IOException ex) 
@@ -112,14 +118,6 @@ public class ScenePanel extends JPanel
 				loadAsset(a, imageBaseDir);
 			}
 			else if (a instanceof ButtonAsset){
-				if(a.getDisplayImage() == null)
-				{
-					a.setDisplayImage("Props\\GenericInteraction\\Button.png");
-				}
-				else if(a.getDisplayImage().equals(""))
-				{
-					a.setDisplayImage("Props\\GenericInteraction\\Button.png");
-				}
 				loadAsset(a, imageBaseDir);
 			}
 		}
@@ -151,7 +149,7 @@ public class ScenePanel extends JPanel
 		{
 			final JLabel label;
 			if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
-			{
+			{//asset does not have an image
 				label = new JLabel(a.getName());
 				label.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
 				label.setHorizontalAlignment(JLabel.CENTER);
@@ -163,7 +161,8 @@ public class ScenePanel extends JPanel
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 				add(label);
 			}
-			else {
+			else
+			{//asset has an image
 				BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
 				int width = image.getWidth();
 				final double desiredWidth = a.getWidth();
@@ -202,10 +201,17 @@ public class ScenePanel extends JPanel
 		        		that.add(pMenu);
 		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
 					}
-		        	for (JLabel label : assetPanels){
-		        		label.setBorder(null);
+		        	for (JLabel label : assetLabels){
+		        		if(label.getIcon()==null)
+		        		{
+		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+		        		}
+		        		else
+		        		{
+		        			label.setBorder(null);
+		        		}
 		        	}
-		        	Border highlights = BorderFactory.createLineBorder(Color.MAGENTA, 5, true);
+		        	Border highlights = BorderFactory.createLineBorder(Color.MAGENTA, 5);
 		        		label.setBorder(highlights);
 		        }
 		        public void mouseEntered(MouseEvent e) { }
@@ -248,6 +254,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocY(a.getLocY() + deltaY);
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
+			        		
 			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
@@ -283,28 +290,24 @@ public class ScenePanel extends JPanel
 			        		prevClickPoint.y = p.y;
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
-			        		BufferedImage image;
-							try {
-								image = ImageIO.read(new File(imgPath));
-				        		int width = image.getWidth();
-				    			double desiredWidth = a.getWidth();
-				    			double scaleFactor = desiredWidth / width;
-				    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-				    			label.setIcon(new ImageIcon(scaledImage));
-				    			if(a instanceof ButtonAsset)
-				    			{
-				    				Graphics g = scaledImage.getGraphics();
-				    				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-				    				FontMetrics fMetrics = g.getFontMetrics();
-				    				g.setColor(Color.BLACK);
-				    				int sWidth = fMetrics.stringWidth(a.getName());
-				    				int sHeight = fMetrics.getHeight();
-				    				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
-				    				g.dispose();
-				    			}
-							} catch (IOException e1) {
-								e1.printStackTrace();
+			        		
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		{
+			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			        		}
+			        		else {
+				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
+				        		BufferedImage image;
+								try {
+									image = ImageIO.read(new File(imgPath));
+					        		int width = image.getWidth();
+					    			double desiredWidth = a.getWidth();
+					    			double scaleFactor = desiredWidth / width;
+					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+					    			label.setIcon(new ImageIcon(scaledImage));
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 							}
 			        		resize = true;
 						}
@@ -323,28 +326,24 @@ public class ScenePanel extends JPanel
 			        		a.setLocY(a.getLocY() + deltaY);
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
-			        		BufferedImage image;
-							try {
-								image = ImageIO.read(new File(imgPath));
-				        		int width = image.getWidth();
-				    			double desiredWidth = a.getWidth();
-				    			double scaleFactor = desiredWidth / width;
-				    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-				    			label.setIcon(new ImageIcon(scaledImage));
-				    			if(a instanceof ButtonAsset)
-				    			{
-				    				Graphics g = scaledImage.getGraphics();
-				    				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-				    				FontMetrics fMetrics = g.getFontMetrics();
-				    				g.setColor(Color.BLACK);
-				    				int sWidth = fMetrics.stringWidth(a.getName());
-				    				int sHeight = fMetrics.getHeight();
-				    				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
-				    				g.dispose();
-				    			}
-							} catch (IOException e1) {
-								e1.printStackTrace();
+			        		
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		{
+			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			        		}
+			        		else {
+				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
+				        		BufferedImage image;
+								try {
+									image = ImageIO.read(new File(imgPath));
+					        		int width = image.getWidth();
+					    			double desiredWidth = a.getWidth();
+					    			double scaleFactor = desiredWidth / width;
+					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+					    			label.setIcon(new ImageIcon(scaledImage));
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 							}
 			        		resize = true;
 						}
@@ -363,30 +362,25 @@ public class ScenePanel extends JPanel
 			        		prevClickPoint.y = p.y;
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
-			        		BufferedImage image;
-							try {
-								image = ImageIO.read(new File(imgPath));
-				        		int width = image.getWidth();
-				    			double desiredWidth = a.getWidth();
-				    			double scaleFactor = desiredWidth / width;
-				    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-				    			label.setIcon(new ImageIcon(scaledImage));
-				    			if(a instanceof ButtonAsset)
-				    			{
-				    				Graphics g = scaledImage.getGraphics();
-				    				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-				    				FontMetrics fMetrics = g.getFontMetrics();
-				    				g.setColor(Color.BLACK);
-				    				int sWidth = fMetrics.stringWidth(a.getName());
-				    				int sHeight = fMetrics.getHeight();
-				    				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
-				    				g.dispose();
-				    			}
-							} catch (IOException e1) {
-								e1.printStackTrace();
+			        		
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		{
+			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			        		}
+			        		else {
+				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
+				        		BufferedImage image;
+								try {
+									image = ImageIO.read(new File(imgPath));
+					        		int width = image.getWidth();
+					    			double desiredWidth = a.getWidth();
+					    			double scaleFactor = desiredWidth / width;
+					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+					    			label.setIcon(new ImageIcon(scaledImage));
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 							}
-			        		//parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
 			        		resize = true;
 						}
 					}
@@ -401,11 +395,17 @@ public class ScenePanel extends JPanel
 					}
 					
 					//all - set highlighting
-					for (JLabel label : assetPanels){
-		        		label.setBorder(null);
+					for (JLabel label : assetLabels){
+						if(label.getIcon()==null)
+		        		{
+		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+		        		}
+		        		else
+		        		{
+		        			label.setBorder(null);
+		        		}
 		        	}
-		        	Border highlights = BorderFactory.createLineBorder(Color.YELLOW, 5, true);
-		        		label.setBorder(highlights);
+		        	label.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 5));
 				}
 				public void mouseMoved(MouseEvent e) {
 					Point p = e.getPoint();
@@ -432,7 +432,7 @@ public class ScenePanel extends JPanel
 				}
 			});
 
-			assetPanels.add(label);
+			assetLabels.add(label);
 			repaint();
 		} 
 		catch (IOException ex) 
