@@ -109,6 +109,10 @@ public class Structure {
                             newAsset = new CharacterAsset(asset);
                         } else if ("InformationBoxAsset".equals(asset.getType())) {
                             newAsset = new InformationBoxAsset(asset);
+                        } else if ("ConversationBubbleAsset".equals(asset.getType())) {
+                            newAsset = new ConversationBubbleAsset(asset);
+                        } else if ("ThoughtBubbleAsset".equals(asset.getType())) {
+                            newAsset = new ThoughtBubbleAsset(asset);
                         }
                         if(newAsset != null) {
                             screen.getAssets().set(d, newAsset);

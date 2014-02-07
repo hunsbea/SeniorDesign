@@ -27,7 +27,6 @@ public class ScenePanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
-	private ArrayList<InformationBoxAsset> infoAssets; //separate because must be handled after loading all other assets
 	private ArrayList<JLabel> assetPanels;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
@@ -65,7 +64,6 @@ public class ScenePanel extends JPanel
 	public void clear()
 	{
 		background = null;
-		infoAssets = new ArrayList<InformationBoxAsset>();
 		assetPanels = new ArrayList<JLabel>();
 		removeAll();
 		updateUI();
@@ -103,7 +101,14 @@ public class ScenePanel extends JPanel
 			}
 			else if(a instanceof InformationBoxAsset)
 			{
-				//infoAssets.add((InformationBoxAsset)a);
+				loadAsset(a, null);
+			}
+			else if(a instanceof ConversationBubbleAsset)
+			{
+				loadAsset(a, imageBaseDir);
+			}
+			else if(a instanceof ThoughtBubbleAsset)
+			{
 				loadAsset(a, imageBaseDir);
 			}
 			else if (a instanceof ButtonAsset){
@@ -144,44 +149,44 @@ public class ScenePanel extends JPanel
 	{
 		try 
 		{
-			
-			BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
-			int width = image.getWidth();
-			final double desiredWidth = a.getWidth();
-			double scaleFactor = desiredWidth / width;
-			
-			
-			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-			//drawing text over a label with an image - draw the text on the image then add to the label
-			if(a instanceof ButtonAsset)
+			final JLabel label;
+			if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
 			{
-				Graphics g = scaledImage.getGraphics();
-				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-				FontMetrics fMetrics = g.getFontMetrics();
-				g.setColor(Color.BLACK);
-				int sWidth = fMetrics.stringWidth(a.getName());
-				int sHeight = fMetrics.getHeight();
-				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
-				g.dispose();
+				label = new JLabel(a.getName());
+				label.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setForeground(Color.BLACK);
+				label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+				label.setBackground(Color.YELLOW);
+				label.setOpaque(true);
+				
+				label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				add(label);
 			}
-			final JLabel label = new JLabel(new ImageIcon(scaledImage));
-			label.setLayout(new BorderLayout());
-			label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
-			add(label);
-			//if the asset is an information box asset, add the text.
-			if(a instanceof InformationBoxAsset)
-			{
-				int paddingTop = label.getHeight()/10;
-				int paddingLeft = label.getWidth()/16;
-				final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
-				textLabel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
-				textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-				textLabel.setForeground(Color.BLACK);
-				textLabel.setHorizontalAlignment(JLabel.CENTER);
-				textLabel.setVerticalAlignment(JLabel.TOP);
-				label.add(textLabel);
+			else {
+				BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
+				int width = image.getWidth();
+				final double desiredWidth = a.getWidth();
+				double scaleFactor = desiredWidth / width;
+				BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+				label = new JLabel(new ImageIcon(scaledImage));
+				label.setLayout(new BorderLayout());
+				label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+				add(label);
+				//if the asset is an conversation or thought bubble asset, add the text.
+				if(a instanceof ConversationBubbleAsset || a instanceof ThoughtBubbleAsset)
+				{
+					int paddingTop = label.getHeight()/10;
+					int paddingLeft = label.getWidth()/16;
+					final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
+					textLabel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+					textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+					textLabel.setForeground(Color.BLACK);
+					textLabel.setHorizontalAlignment(JLabel.CENTER);
+					textLabel.setVerticalAlignment(JLabel.TOP);
+					label.add(textLabel);
+				}
 			}
-			
 			
 			label.addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
@@ -200,7 +205,7 @@ public class ScenePanel extends JPanel
 		        	for (JLabel label : assetPanels){
 		        		label.setBorder(null);
 		        	}
-		        	Border highlights = BorderFactory.createLineBorder(Color.YELLOW, 5, true);
+		        	Border highlights = BorderFactory.createLineBorder(Color.MAGENTA, 5, true);
 		        		label.setBorder(highlights);
 		        }
 		        public void mouseEntered(MouseEvent e) { }
@@ -243,28 +248,23 @@ public class ScenePanel extends JPanel
 			        		a.setLocY(a.getLocY() + deltaY);
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
-			        		BufferedImage image;
-							try {
-								image = ImageIO.read(new File(imgPath));
-				        		int width = image.getWidth();
-				    			double desiredWidth = a.getWidth();
-				    			double scaleFactor = desiredWidth / width;
-				    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-				    			label.setIcon(new ImageIcon(scaledImage));
-				    			if(a instanceof ButtonAsset)
-				    			{
-				    				Graphics g = scaledImage.getGraphics();
-				    				g.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-				    				FontMetrics fMetrics = g.getFontMetrics();
-				    				g.setColor(Color.BLACK);
-				    				int sWidth = fMetrics.stringWidth(a.getName());
-				    				int sHeight = fMetrics.getHeight();
-				    				g.drawString(a.getName(), scaledImage.getWidth()/2 - sWidth/2, scaledImage.getHeight()/2 + sHeight/4);
-				    				g.dispose();
-				    			}
-							} catch (IOException e1) {
-								e1.printStackTrace();
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		{
+			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			        		}
+			        		else {
+				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
+				        		BufferedImage image;
+								try {
+									image = ImageIO.read(new File(imgPath));
+					        		int width = image.getWidth();
+					    			double desiredWidth = a.getWidth();
+					    			double scaleFactor = desiredWidth / width;
+					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+					    			label.setIcon(new ImageIcon(scaledImage));
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 							}
 			        		resize = true;
 		        		}

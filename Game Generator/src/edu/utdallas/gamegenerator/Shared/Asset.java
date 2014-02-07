@@ -8,7 +8,6 @@ import edu.utdallas.gamegenerator.Locale.ObjectMovement;
 
 import javax.xml.bind.annotation.*;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +18,7 @@ import java.util.UUID;
  * Time: 8:50 PM
  */
 @XmlRootElement(name = "AssetBase")
-@XmlSeeAlso({ImageAsset.class, ButtonAsset.class, InformationBoxAsset.class, CharacterAsset.class})
+@XmlSeeAlso({ImageAsset.class, ButtonAsset.class, InformationBoxAsset.class, CharacterAsset.class, ConversationBubbleAsset.class, ThoughtBubbleAsset.class})
 public class Asset implements Cloneable {
     private String type;
     private UUID id;
