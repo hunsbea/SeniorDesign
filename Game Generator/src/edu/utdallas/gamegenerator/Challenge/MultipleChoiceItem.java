@@ -1,12 +1,18 @@
 package edu.utdallas.gamegenerator.Challenge;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "MultipleChoiceItem")
 public class MultipleChoiceItem extends Item
 {
 	private Stem stem;
 	private ItemImage image;
 	private List<Option> options;
-	
+
+    @XmlElement(name = "Stem")
 	public Stem getStem() 
 	{
 		return stem;
@@ -15,6 +21,7 @@ public class MultipleChoiceItem extends Item
 	{
 		this.stem = stem;
 	}
+    @XmlElement(name = "ItemImage")
 	public ItemImage getImage() 
 	{
 		return image;
@@ -23,6 +30,8 @@ public class MultipleChoiceItem extends Item
 	{
 		this.image = image;
 	}
+	@XmlElementWrapper(name = "Options")
+    @XmlElement(name = "Option")
 	public List<Option> getOptions() 
 	{
 		return options;

@@ -2,6 +2,11 @@ package edu.utdallas.gamegenerator.Challenge;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "QuizChallenge")
 public class QuizChallenge extends Challenge
 {
 	private Introduction intro;
@@ -10,6 +15,7 @@ public class QuizChallenge extends Challenge
 	private PedagogyType pedagogy;
 	private Layout layout;
 	
+    @XmlElement(name = "Introduction")
 	public Introduction getIntro() 
 	{
 		return intro;
@@ -18,6 +24,8 @@ public class QuizChallenge extends Challenge
 	{
 		this.intro = intro;
 	}
+	@XmlElementWrapper(name = "Items")
+    @XmlElement(name = "Item")
 	public List<Item> getItems() 
 	{
 		return items;
@@ -26,6 +34,7 @@ public class QuizChallenge extends Challenge
 	{
 		this.items = items;
 	}
+    @XmlElement(name = "Summary")
 	public Summary getSummary() 
 	{
 		return summary;
@@ -34,6 +43,7 @@ public class QuizChallenge extends Challenge
 	{
 		this.summary = summary;
 	}
+    @XmlElement(name = "PedagogyType")
 	public PedagogyType getPedagogy() 
 	{
 		return pedagogy;

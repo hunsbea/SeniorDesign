@@ -1,10 +1,15 @@
 package edu.utdallas.gamegenerator.Challenge;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Stem")
 public class Stem 
 {
 	private String stemQuestion;
 	private String stemText;
-	
+
+    @XmlElement(name = "StemText")
 	public String getStemText() 
 	{
 		return stemText;
@@ -13,7 +18,7 @@ public class Stem
 	{
 		this.stemText = stemText;
 	}
-	
+    @XmlElement(name = "StemQuestion")
 	public String getStemQuestion() 
 	{
 		return stemQuestion;
