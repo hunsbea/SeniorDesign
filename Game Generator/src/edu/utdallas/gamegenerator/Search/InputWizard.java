@@ -13,6 +13,13 @@ import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.CharacterSelectWindow;
 import edu.utdallas.RepoUpdate.SoundSelectWindow;
 import edu.utdallas.RepoUpdate.Updates;
+import edu.utdallas.gamegenerator.Challenge.Challenge;
+import edu.utdallas.gamegenerator.Challenge.Introduction;
+import edu.utdallas.gamegenerator.Challenge.Item;
+import edu.utdallas.gamegenerator.Challenge.Layout;
+import edu.utdallas.gamegenerator.Challenge.MultipleChoiceItem;
+import edu.utdallas.gamegenerator.Challenge.QuizChallenge;
+import edu.utdallas.gamegenerator.Challenge.Summary;
 import edu.utdallas.gamegenerator.Shared.*;
 import edu.utdallas.gamegenerator.Structure.*;
 
@@ -59,7 +66,7 @@ public class InputWizard implements ActionListener {
  	private JMenuItem remakeRepo;
  	private JMenuItem saveToRepo;
  	private static String label1 = "Preview after generating: ";
- 	private JTree actTree;
+ 	private JTree gameTree;
  	private ScenePanel scenePanel;
  	//JD character selection class parameters
  	private CharacterSelectWindow characterSelectWindow;
@@ -77,7 +84,7 @@ public class InputWizard implements ActionListener {
  	private JButton backgroundButton;
  	private JButton soundButton;
  	private Scene lastSelectedScene = null;
- 	private ScreenNode lastSelectedScreen = null;
+ 	private Screen lastSelectedScreen = null;
  	private File Currentfile = null;
  	//JD end
  	
@@ -331,53 +338,53 @@ public class InputWizard implements ActionListener {
         });
         
         // create tree-structure for viewing Acts/Scenes
-        actTree = new JTree();
+        gameTree = new JTree();
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("No game file selected");
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
-        actTree.setModel(model);
+        gameTree.setModel(model);
         //DefaultMutableTreeNodes are not JComponents and therefore cannot individually have actionListeners
         // that was a TERRIBLE design decision, because now all I have to work with are the names of the nodes 
         // in this one global tree selection listener
-        actTree.addTreeSelectionListener(new TreeSelectionListener() 
+        gameTree.addTreeSelectionListener(new TreeSelectionListener() 
         {
             public void valueChanged(TreeSelectionEvent e) 
             {
             	if(game == null) { return; } // don't try to display an empty game
-            	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) actTree.getLastSelectedPathComponent();
-            	if (selectedNode != null && selectedNode.isLeaf()) //a screen
+            	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) gameTree.getLastSelectedPathComponent();
+            	
+            	if (isQuestionNode(selectedNode))
             	{
-                	String screenName = selectedNode.toString();
-                	System.out.println(""+screenName);
-            		String sceneName = selectedNode.getParent().toString();
-            		System.out.println(""+sceneName);
-            		String actName = selectedNode.getParent().getParent().toString();
-            		//JD
+            		Item item = (Item)selectedNode.getUserObject();
+            		Challenge challenge = ((Screen)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject()).getChallenge();
+            		Scene scene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent().getParent()).getUserObject();
+            		
+            		displayChallenge(scene, challenge, item);
+            	}
+            	else if (isScreenNode(selectedNode))
+            	{
             		characterButton.setEnabled(true);
             		propButton.setEnabled(true);
             		backgroundButton.setEnabled(false);
             		soundButton.setEnabled(true);
             		selectedLevel = gameLevel.SCREEN;
-            		lastSelectedScene = getScene(actName, sceneName);
-            		lastSelectedScreen = getScreen(actName, sceneName, screenName);
-            		//JD end
-            		displayScreen(getScene(actName, sceneName),getScreen(actName, sceneName, screenName));
+            		lastSelectedScene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
+            		lastSelectedScreen = (Screen)selectedNode.getUserObject();
+            		displayScreen(lastSelectedScene, lastSelectedScreen);
             	}
-            	else if (selectedNode != null && selectedNode.getLastChild() != null && selectedNode.getLastChild().isLeaf()) //a scene painted
+            	else if (isSceneNode(selectedNode))
             	{
-            		String sceneName = selectedNode.toString();
-            		String actName = selectedNode.getParent().toString();
-          			Scene s = getScene(actName, sceneName);
+          			Scene s = (Scene)selectedNode.getUserObject();
           			characterButton.setEnabled(false);
             		propButton.setEnabled(false);
             		backgroundButton.setEnabled(true);
             		soundButton.setEnabled(true);
           			selectedLevel = gameLevel.SCENE;
-          			lastSelectedScene = getScene(actName, sceneName);
+          			lastSelectedScene = s;
           			scenePanel.clear();
           			System.out.println("calling clear scene node\n");
           			scenePanel.loadBackground(s.getBackground());
             	}
-            	else if(selectedNode != null && selectedNode.isRoot()) //game level
+            	else if(isGameNode(selectedNode))
             	{
             		ArrayList<CharacterAsset> UNIQchars = new ArrayList<CharacterAsset>();
             		
@@ -465,7 +472,7 @@ public class InputWizard implements ActionListener {
             }
         });
         
-        JScrollPane scrollPane = new JScrollPane(actTree);
+        JScrollPane scrollPane = new JScrollPane(gameTree);
         
         // create tabbed layout
         
@@ -799,6 +806,40 @@ public class InputWizard implements ActionListener {
         window.setVisible(true); // this needs to happen last to avoid blank window on start-up
 	}
 	
+	private boolean isGameNode(DefaultMutableTreeNode node)
+	{
+		return node != null && node.isRoot();
+	}
+	private boolean isActNode(DefaultMutableTreeNode node)
+	{
+		return node.getUserObject() instanceof Act;
+	}
+	private boolean isSceneNode(DefaultMutableTreeNode node)
+	{
+		return node.getUserObject() instanceof Scene;
+	}
+	private boolean isScreenNode(DefaultMutableTreeNode node)
+	{
+		return node.getUserObject() instanceof Screen;
+	}
+	private boolean isQuestionNode(DefaultMutableTreeNode node)
+	{
+		return node.getUserObject() instanceof Item;
+	}
+	private boolean isSummaryNode(DefaultMutableTreeNode node)
+	{
+		return node.getUserObject() instanceof Summary;
+	}
+	private boolean isIntroNode(DefaultMutableTreeNode node)
+	{
+		return node.getUserObject() instanceof Introduction;
+	}
+	private boolean isChallengeNode(DefaultMutableTreeNode node)
+	{
+		return isIntroNode(node) || isSummaryNode(node) || isQuestionNode(node);
+	}
+	
+	
 	private ArrayList<CharacterAsset> getCharacters()
 	{
 		ArrayList<CharacterAsset> chars = new ArrayList<CharacterAsset>();
@@ -809,8 +850,8 @@ public class InputWizard implements ActionListener {
 			List<Scene> scenes = a.getScenes();
 			for(Scene s : scenes)
 			{
-				List<ScreenNode> screens = s.getScreens();
-				for(ScreenNode scr : screens)
+				List<Screen> screens = s.getScreens();
+				for(Screen scr : screens)
 				{
 					List<Asset> assets = scr.getAssets();
 					for(Asset as : assets)
@@ -913,66 +954,61 @@ public class InputWizard implements ActionListener {
 	// file name is required because it will be the name of the root node
 	private void displayGame(Game game1, String name)
 	{
-		((DefaultMutableTreeNode) actTree.getModel().getRoot()).removeAllChildren();
+		((DefaultMutableTreeNode) gameTree.getModel().getRoot()).removeAllChildren();
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(name);
-        ((DefaultTreeModel) actTree.getModel()).setRoot(rootNode);
+        rootNode.setUserObject(game1);
+        ((DefaultTreeModel) gameTree.getModel()).setRoot(rootNode);
 		
 		List<Act> acts = game1.getActs();
 		for(int i = 0; i < acts.size(); i++)
 		{
 			DefaultMutableTreeNode actNode = new DefaultMutableTreeNode("Act " + (i + 1));
+			actNode.setUserObject(acts.get(i));
 			
 			List<Scene> scenes = acts.get(i).getScenes();
 			for(int j = 0; j < scenes.size(); j++)
 			{
 				DefaultMutableTreeNode sceneNode = new DefaultMutableTreeNode("Scene " + (j + 1));
+				sceneNode.setUserObject(scenes.get(j));
 				actNode.add(sceneNode);
-				List<ScreenNode> screens = scenes.get(j).getScreens();
+				List<Screen> screens = scenes.get(j).getScreens();
 				for(int k = 0; k < screens.size(); k++)
 				{
 					DefaultMutableTreeNode screenNode = new DefaultMutableTreeNode("Screen " + (k + 1));
+					screenNode.setUserObject(screens.get(k));
+					
+					if(screens.get(k).getChallenge() != null)
+					{
+						QuizChallenge challenge = (QuizChallenge)screens.get(k).getChallenge();
+						
+						DefaultMutableTreeNode introNode = new DefaultMutableTreeNode("Introduction");
+						introNode.setUserObject(challenge.getIntro());
+						screenNode.add(introNode);
+						
+						List<Item> items = challenge.getItems();
+						for(int m = 0; m < items.size(); m++)
+						{
+							DefaultMutableTreeNode questionNode = new DefaultMutableTreeNode("Challenge Question " + (m + 1));
+							questionNode.setUserObject(items.get(m));
+							screenNode.add(questionNode);
+						}
+
+						DefaultMutableTreeNode summaryNode = new DefaultMutableTreeNode("Summary");
+						summaryNode.setUserObject(challenge.getSummary());
+						screenNode.add(summaryNode);
+					}
+					
 					sceneNode.add(screenNode);
 				}
 			}
 			
 			rootNode.add(actNode);
 		}
-        actTree.expandRow(0);
-	}
-
-	private Scene getScene(String act, String scene)
-	{
-		Scanner sc = new Scanner(act);
-		sc.next();
-		int actNum = sc.nextInt();
-		sc.close();
-		sc = new Scanner(scene);
-		sc.next();
-		int sceneNum = sc.nextInt();
-		sc.close();
-		
-		return game.getActs().get(actNum - 1).getScenes().get(sceneNum - 1);
+        gameTree.expandRow(0);
 	}
 	
-	private ScreenNode getScreen(String act, String scene, String screen)
-	{
-		Scanner sc = new Scanner(act);
-		sc.next();
-		int actNum = sc.nextInt();
-		sc.close();
-		sc = new Scanner(scene);
-		sc.next();
-		int sceneNum = sc.nextInt();
-		sc.close();
-		sc = new Scanner(screen);
-		sc.next();
-		int screenNum = sc.nextInt();
-		sc.close();
-		
-		return game.getActs().get(actNum - 1).getScenes().get(sceneNum - 1).getScreens().get(screenNum - 1);
-	}
 	//paint the scene in all of its glory
-	private void displayScreen(Scene scene, ScreenNode screen)
+	private void displayScreen(Scene scene, Screen screen)
 	{
 		List<Asset> assets = screen.getAssets();
 		if(assets != null){
@@ -982,6 +1018,36 @@ public class InputWizard implements ActionListener {
 			System.out.println("assets null");
 
 		scenePanel.loadBackground(scene.getBackground());
+	}
+	
+	//paint the Challenge Multiple Choice question
+	private void displayChallenge(Scene scene, Challenge challenge, Item item)
+	{
+		System.out.println("in displayChallenge()");
+		
+		if(challenge instanceof QuizChallenge)
+		{
+			Layout layout = null;
+			
+			switch(((QuizChallenge)challenge).getLayout())
+			{
+				case MULTIPLE_CHOICE_LAYOUT:
+				{
+					if(item instanceof MultipleChoiceItem)
+					{
+						layout = new Layout((MultipleChoiceItem)item);
+					}
+					break;
+				}
+				default:
+				{
+					break;
+				}
+			}
+			
+			scenePanel.loadAssets(layout.getAssets());
+			scenePanel.loadBackground(scene.getBackground());
+		}
 	}
 	
 	// sets all the values of the matrix to the given value. 

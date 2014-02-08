@@ -4,12 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import oracle.jrockit.jfr.Options;
+
+import edu.utdallas.gamegenerator.Shared.Asset;
+import edu.utdallas.gamegenerator.Shared.ButtonAsset;
+import edu.utdallas.gamegenerator.Shared.InformationBoxAsset;
 
 
 /*
@@ -52,8 +59,64 @@ TODO: Assumptions:
 
 public class Layout extends JPanel
 {
-	private static final int hgap = 10, vgap = 10;
+	public static enum LayoutType { MULTIPLE_CHOICE_LAYOUT }
+	
+	private ArrayList<Asset> assets = new ArrayList<Asset>();
+	
+	public Layout(MultipleChoiceItem item)
+	{
+		int startY = 50;
+		for(int i = 0; i < 4; i++)
+		{
+			ButtonAsset option = new ButtonAsset();
+			option.setWidth(200);
+			option.setHeight(50);
+			option.setLocX(300);
+			option.setLocY(startY * (i + 1));
+			option.setFontFamily("Comic Sans MS");
+			option.setFontSize(15);
+			option.setName(item.getOptions().get(i).getText());
+			assets.add(option);
+		}
+		
+		InformationBoxAsset stemText = new InformationBoxAsset();
+		stemText.setWidth(200);
+		stemText.setHeight(100);
+		stemText.setLocX(50);
+		stemText.setLocY(50);
+		stemText.setFontFamily("Comic Sans MS");
+		stemText.setFontSize(15);
+		stemText.setName(item.getStem().getStemText());
+		assets.add(stemText);
+		
+		InformationBoxAsset stemQuestion = new InformationBoxAsset();
+		stemQuestion.setWidth(200);
+		stemQuestion.setHeight(100);
+		stemQuestion.setLocX(50);
+		stemQuestion.setLocY(150);
+		stemQuestion.setFontFamily("Comic Sans MS");
+		stemQuestion.setFontSize(15);
+		stemQuestion.setName(item.getStem().getStemQuestion());
+		assets.add(stemQuestion);
+	}
+	
+	public List<Asset> getAssets()
+	{
+		return assets;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*private static final int hgap = 10, vgap = 10;
 	private MultipleChoiceItem item; 
+	
 	
 	public Layout(MultipleChoiceItem item)
 	{
@@ -88,5 +151,5 @@ public class Layout extends JPanel
 		option.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		option.setBackground(Color.YELLOW);
 		option.setOpaque(true);
-	}
+	}*/
 }

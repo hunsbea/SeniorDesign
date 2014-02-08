@@ -1,8 +1,12 @@
-package edu.utdallas.gamegenerator.Shared;
+package edu.utdallas.gamegenerator.Structure;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import edu.utdallas.gamegenerator.Challenge.Challenge;
+import edu.utdallas.gamegenerator.Shared.Asset;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -12,13 +16,14 @@ import java.util.UUID;
  * Time: 9:44 PM
  */
 @XmlRootElement(name = "Screen")
-public class ScreenNode {
+public class Screen {
     private UUID id;
     private String background;
     private String name;
     private List<Asset> assets;
+    private Challenge challenge;
 
-    public ScreenNode() {
+    public Screen() {
         id = UUID.randomUUID();
     }
 
@@ -57,5 +62,20 @@ public class ScreenNode {
 
     public void setAssets(List<Asset> assets) {
         this.assets = assets;
+    }
+
+    @XmlElement(name = "Challenge")
+	public Challenge getChallenge() {
+		return challenge;
+	}
+
+	public void setChallenge(Challenge challenge) {
+		this.challenge = challenge;
+	}
+    
+    @Override
+    public String toString()
+    {
+    	return name;
     }
 }

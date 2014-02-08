@@ -2,7 +2,6 @@ package edu.utdallas.gamegenerator.Structure;
 
 import edu.utdallas.gamegenerator.Shared.Asset;
 import edu.utdallas.gamegenerator.Shared.Behavior;
-import edu.utdallas.gamegenerator.Shared.ScreenNode;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -17,20 +16,20 @@ import java.util.UUID;
  */
 @XmlRootElement(name = "Scene")
 public class Scene {
-    List<ScreenNode> screens;
+    List<Screen> screens;
     String background;
     String name;
     UUID id = UUID.randomUUID();
     List<Behavior> behaviorList;
     List<Asset> assets;
 
-    public List<ScreenNode> getScreens() {
+    public List<Screen> getScreens() {
         return screens;
     }
 
     @XmlElementWrapper(name = "Screens")
     @XmlElement(name = "Screen")
-    public void setScreens(List<ScreenNode> screens) {
+    public void setScreens(List<Screen> screens) {
         this.screens = screens;
     }
 
@@ -78,5 +77,11 @@ public class Scene {
 
     public void setAssets(List<Asset> assets) {
         this.assets = assets;
+    }
+    
+    @Override
+    public String toString()
+    {
+    	return name;
     }
 }

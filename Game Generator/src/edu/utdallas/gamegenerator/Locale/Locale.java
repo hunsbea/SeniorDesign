@@ -16,8 +16,8 @@ import edu.utdallas.gamegenerator.LearningAct.Prop.GameText;
 import edu.utdallas.gamegenerator.LearningAct.Prop.TextType;
 import edu.utdallas.gamegenerator.LearningAct.Screen.ChallengeScreen;
 import edu.utdallas.gamegenerator.LearningAct.Screen.BaseScreen;
-import edu.utdallas.gamegenerator.Shared.ScreenNode;
 import edu.utdallas.gamegenerator.Shared.*;
+import edu.utdallas.gamegenerator.Structure.Screen;
 import edu.utdallas.gamegenerator.Theme.Theme;
 import edu.utdallas.gamegenerator.Theme.ThemeStory;
 
@@ -73,8 +73,8 @@ public class Locale {
      * @param learningActId the index of the learning act
      * @return a list of ScreenNode
      */
-    public List<ScreenNode> getAct(int learningActId) {
-        List<ScreenNode> actScreens = new ArrayList<ScreenNode>();
+    public List<Screen> getAct(int learningActId) {
+        List<Screen> actScreens = new ArrayList<Screen>();
         actScreens.addAll(buildScreens(learningActId, ScreenType.LESSON_STORY_INTRO));
         actScreens.addAll(buildLesson(learningActId));
         actScreens.addAll(buildChallenges(learningActId));
@@ -87,10 +87,10 @@ public class Locale {
      * @param learningActId the id of the learning act to build
      * @return a list of ScreenNode representing the built challenge screens
      */
-    private List<ScreenNode> buildChallenges(int learningActId) {
+    private List<Screen> buildChallenges(int learningActId) {
         UUID currentScreen = screenTransitions.get(TransitionType.BEGINNING_OF_CHALLENGE);
         LessonAct lessonAct = learningActs.get(learningActId).getLessonActs().get(0);
-        List<ScreenNode> screenNodes = new ArrayList<ScreenNode>();
+        List<Screen> screenNodes = new ArrayList<Screen>();
         List<ChallengeScreen> challenges = lessonAct.getLessonChallenges();
         for(ChallengeScreen challenge : challenges) {
             UUID nextChallenge = UUID.randomUUID();
@@ -110,9 +110,9 @@ public class Locale {
      * @param currentScreen the UUID of the screen to be built
      * @return a list of ScreenNode containing the challenge
      */
-    private List<ScreenNode> buildChallenge(int learningActId, ChallengeScreen challenge, UUID currentScreen) {
+    private List<Screen> buildChallenge(int learningActId, ChallengeScreen challenge, UUID currentScreen) {
         UUID nextScreen = UUID.randomUUID();
-        List<ScreenNode> screenNodes = new ArrayList<ScreenNode>();
+        List<Screen> screenNodes = new ArrayList<Screen>();
         screenNodes.addAll(buildScreen(learningActId, challenge, localeScreens.get(ScreenType.CHALLENGE),
                 currentScreen, nextScreen));
         return screenNodes;
@@ -124,8 +124,8 @@ public class Locale {
      * @param screenType the type of screens to build
      * @return a list of ScreenNode
      */
-    private List<ScreenNode> buildScreens(int learningActId, ScreenType screenType) {
-        List<ScreenNode> lessonScreens = new ArrayList<ScreenNode>();
+    private List<Screen> buildScreens(int learningActId, ScreenType screenType) {
+        List<Screen> lessonScreens = new ArrayList<Screen>();
         UUID currentScreen = UUID.randomUUID();
         UUID nextScreen = null;
         ThemeStory themeStory = theme.getThemeStories().get(learningActId);
@@ -156,8 +156,8 @@ public class Locale {
      * @param learningActId the id of the learning act
      * @return a list of ScreenNode containing the built lesson screens
      */
-    private List<ScreenNode> buildLesson(int learningActId) {
-        List<ScreenNode> lessonScreens = new ArrayList<ScreenNode>();
+    private List<Screen> buildLesson(int learningActId) {
+        List<Screen> lessonScreens = new ArrayList<Screen>();
         UUID currentScreen = screenTransitions.get(TransitionType.BEGINNING_OF_LESSON);
         UUID nextScreen = null;
         LessonAct lessonAct = learningActs.get(learningActId).getLessonActs().get(0);
@@ -185,10 +185,10 @@ public class Locale {
      * @param nextScreenId the UUID of the next screen
      * @return a list of ScreenNode
      */
-    private List<ScreenNode> buildScreen(int learningActId, BaseScreen screen,
+    private List<Screen> buildScreen(int learningActId, BaseScreen screen,
                                          LocaleScreen localeScreen, UUID screenId, UUID nextScreenId) {
-        List<ScreenNode> screenNodes = new ArrayList<ScreenNode>();
-        ScreenNode screenNode = new ScreenNode();
+        List<Screen> screenNodes = new ArrayList<Screen>();
+        Screen screenNode = new Screen();
         screenNodes.add(screenNode);
         screenNode.setId(screenId);
         screenNode.setBackground(localeScreen.getBackground());
@@ -285,8 +285,8 @@ public class Locale {
      * @param additionalScreenId the id of the first screen in the additional screens
      * @return a list of ScreenNode representing the built additional screens
      */
-    private List<ScreenNode> buildAdditionalScreens(List<BaseScreen> additionalScreens, UUID additionalScreenId) {
-        List<ScreenNode> screenNodes = new ArrayList<ScreenNode>();
+    private List<Screen> buildAdditionalScreens(List<BaseScreen> additionalScreens, UUID additionalScreenId) {
+        List<Screen> screenNodes = new ArrayList<Screen>();
         UUID nextScreen = UUID.randomUUID();
         for(BaseScreen screen : additionalScreens) {
             screenNodes.addAll(buildScreen(0, screen, localeScreens.get(screen.getType()), additionalScreenId, nextScreen));

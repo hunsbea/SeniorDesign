@@ -5,8 +5,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import edu.utdallas.gamegenerator.Challenge.Layout.LayoutType;
+
 
 @XmlRootElement(name = "QuizChallenge")
 @XmlType(name = "QuizChallenge")
@@ -16,7 +18,7 @@ public class QuizChallenge extends Challenge
 	private List<Item> items;
 	private Summary summary;
 	private PedagogyType pedagogy;
-	private Layout layout;
+	private LayoutType layout;
 	
     @XmlElement(name = "Introduction")
 	public Introduction getIntro() 
@@ -55,12 +57,12 @@ public class QuizChallenge extends Challenge
 	{
 		this.pedagogy = pedagogy;
 	}
-	@XmlTransient
-	public Layout getLayout() 
+	@XmlElement(name = "Layout")
+	public LayoutType getLayout() 
 	{
 		return layout;
 	}
-	public void setLayout(Layout layout) 
+	public void setLayout(LayoutType layout) 
 	{
 		this.layout = layout;
 	}

@@ -51,7 +51,7 @@ public class Structure {
             Act act = acts.get(i);
             UUID nextActId = acts.get(i+1).getScenes().get(0).getScreens().get(0).getId();
             for(Scene scene : act.getScenes()) {
-                ScreenNode screenNode = scene.getScreens().get(0);
+                Screen screenNode = scene.getScreens().get(0);
                 if(screenNode.getAssets() != null) {
                     for(Asset asset : screenNode.getAssets()) {
                         if(asset.getBehaviors() != null) {
@@ -81,7 +81,7 @@ public class Structure {
                 Scene scene = act.getScenes().get(b);
                 scene.setName("Act" + a + " Scene" + b);
                 for(int c = 0; c < scene.getScreens().size(); c++) {
-                    ScreenNode screen = scene.getScreens().get(c);
+                    Screen screen = scene.getScreens().get(c);
                     screen.setName("Act" + a + " Scene" + b + " Screen" + c);
                 }
             }
@@ -97,7 +97,7 @@ public class Structure {
             for(int b = 0; b < act.getScenes().size(); b++) {
                 Scene scene = act.getScenes().get(b);
                 for(int c = 0; c < scene.getScreens().size(); c++) {
-                    ScreenNode screen = scene.getScreens().get(c);
+                    Screen screen = scene.getScreens().get(c);
                     for(int d = 0; d < screen.getAssets().size(); d++) {
                         Asset asset = screen.getAssets().get(d);
                         Asset newAsset = null;
@@ -143,7 +143,7 @@ public class Structure {
      * @param screenNodes a list of ScreenNode
      * @return an Act object containing all ScreenNodes from the list
      */
-    private Act createActFromScreens(List<ScreenNode> screenNodes) {
+    private Act createActFromScreens(List<Screen> screenNodes) {
         Act act = new Act();
         List<Scene> scenes = new ArrayList<Scene>();
         for(int i = 0; i < screenNodes.size(); i++) {

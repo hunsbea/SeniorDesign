@@ -4,9 +4,9 @@ import edu.utdallas.gamegenerator.Characters.Characters;
 import edu.utdallas.gamegenerator.LearningAct.LearningAct;
 import edu.utdallas.gamegenerator.Lesson.Lesson;
 import edu.utdallas.gamegenerator.Locale.Locale;
-import edu.utdallas.gamegenerator.Shared.ScreenNode;
 import edu.utdallas.gamegenerator.Structure.Game;
 import edu.utdallas.gamegenerator.Structure.Scene;
+import edu.utdallas.gamegenerator.Structure.Screen;
 import edu.utdallas.gamegenerator.Structure.Structure;
 import edu.utdallas.gamegenerator.Subject.Subject;
 import edu.utdallas.gamegenerator.Theme.Theme;
@@ -117,7 +117,7 @@ public class Test {
 
     private static void test() throws JAXBException {
         Scene scene = new Scene();
-        List<ScreenNode> screens = new ArrayList<ScreenNode>();
+        List<Screen> screens = new ArrayList<Screen>();
         scene.setScreens(screens);
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Scene.class);

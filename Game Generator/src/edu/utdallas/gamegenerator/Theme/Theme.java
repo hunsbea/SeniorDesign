@@ -7,11 +7,11 @@ import edu.utdallas.gamegenerator.Shared.BehaviorType;
 import edu.utdallas.gamegenerator.Characters.Characters;
 import edu.utdallas.gamegenerator.Characters.GameCharacter;
 import edu.utdallas.gamegenerator.LearningAct.Screen.TransitionType;
-import edu.utdallas.gamegenerator.Shared.ScreenNode;
 import edu.utdallas.gamegenerator.Shared.GameObject;
 import edu.utdallas.gamegenerator.Shared.SharedButton;
 import edu.utdallas.gamegenerator.Shared.SharedCharacter;
 import edu.utdallas.gamegenerator.Shared.SharedInformationBox;
+import edu.utdallas.gamegenerator.Structure.Screen;
 import edu.utdallas.gamegenerator.Subject.Subject;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -40,8 +40,8 @@ public class Theme {
      * If there are no intro screens it will return an empty list
      * @return the list of intro screens
      */
-    public List<ScreenNode> getIntro() {
-        return (introScreens != null ? getScreens(introScreens) : new ArrayList<ScreenNode>());
+    public List<Screen> getIntro() {
+        return (introScreens != null ? getScreens(introScreens) : new ArrayList<Screen>());
     }
 
     /**
@@ -49,8 +49,8 @@ public class Theme {
      * If there are no outro screens it will return an empty list
      * @return the list of outro screens
      */
-    public List<ScreenNode> getOutro() {
-        return (outroScreens != null ? getScreens(outroScreens) : new ArrayList<ScreenNode>());
+    public List<Screen> getOutro() {
+        return (outroScreens != null ? getScreens(outroScreens) : new ArrayList<Screen>());
     }
 
     /**
@@ -58,12 +58,12 @@ public class Theme {
      * @param screens a list of ThemeScreen
      * @return a list of ScreenNode
      */
-    private List<ScreenNode> getScreens(List<ThemeScreen> screens) {
-        List<ScreenNode> screenNodes = new ArrayList<ScreenNode>();
+    private List<Screen> getScreens(List<ThemeScreen> screens) {
+        List<Screen> screenNodes = new ArrayList<Screen>();
         UUID currentScreen = UUID.randomUUID();
         UUID nextScreen = UUID.randomUUID();
         for(ThemeScreen screen : screens) {
-            ScreenNode screenNode = new ScreenNode();
+            Screen screenNode = new Screen();
             screenNode.setId(currentScreen);
             screenNode.setBackground(screen.getBackground());
             List<Asset> assets = new ArrayList<Asset>();
