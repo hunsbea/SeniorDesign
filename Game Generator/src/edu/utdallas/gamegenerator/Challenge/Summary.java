@@ -1,6 +1,6 @@
 package edu.utdallas.gamegenerator.Challenge;
 
-public class Challenge 
+public class Summary 
 {
 
 }

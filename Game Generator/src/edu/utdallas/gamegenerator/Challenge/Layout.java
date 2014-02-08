@@ -1,4 +1,4 @@
-package edu.utdallas.gamegenerator.Structure;
+package edu.utdallas.gamegenerator.Challenge;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -1,6 +1,5 @@
 package edu.utdallas.gamegenerator;
 
-import edu.utdallas.gamegenerator.Challenge.Challenge;
 import edu.utdallas.gamegenerator.Characters.Characters;
 import edu.utdallas.gamegenerator.LearningAct.LearningAct;
 import edu.utdallas.gamegenerator.Lesson.Lesson;
@@ -11,6 +10,7 @@ import edu.utdallas.gamegenerator.Structure.Scene;
 import edu.utdallas.gamegenerator.Structure.Structure;
 import edu.utdallas.gamegenerator.Subject.Subject;
 import edu.utdallas.gamegenerator.Theme.Theme;
+import edu.utdallas.gamegenerator.old.Challenge.Challenge;
 
 import javax.xml.bind.*;
 import java.io.File;

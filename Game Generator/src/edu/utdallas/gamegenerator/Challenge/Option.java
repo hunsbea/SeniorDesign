@@ -1,4 +1,4 @@
-package edu.utdallas.gamegenerator.Structure;
+package edu.utdallas.gamegenerator.Challenge;
 
 public class Option 
 {
