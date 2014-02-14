@@ -43,7 +43,7 @@ public class ScenePanel extends JPanel
 		addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
 		        	for (JLabel label : assetLabels){
-		        		if(label.getIcon()==null)
+		        		if(label.getIcon()==null && !(label instanceof ConversationBubble))
 		        		{
 		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		        		}
@@ -149,8 +149,7 @@ public class ScenePanel extends JPanel
 		{
 			final JLabel label;
 			if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
-			{//asset does not have an image
-				//label = new JLabel("<html><p style=\"padding-left:5" + ";padding-top:5" + "\">" + a.getName() + "</p></html>");
+			{//asset is drawn yellow with a black border
 				label = new JLabel("<html><p style=\"text-align:center\">" + a.getName() + "</p></html>");
 				label.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
 				label.setHorizontalAlignment(JLabel.CENTER);
@@ -160,6 +159,14 @@ public class ScenePanel extends JPanel
 				label.setOpaque(true);
 				
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				add(label);
+			}
+			else if(a instanceof ConversationBubbleAsset)
+			{
+				label = new ConversationBubble(a.getName());
+				((ConversationBubble)label).setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+				((ConversationBubble)label).setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				((ConversationBubble)label).setPointDirection(ConversationBubble.PointDirection.LEFT_DOWN);
 				add(label);
 			}
 			else
@@ -173,25 +180,12 @@ public class ScenePanel extends JPanel
 				label.setLayout(new BorderLayout());
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
 				add(label);
-				//if the asset is an conversation or thought bubble asset, add the text.
-				if(a instanceof ConversationBubbleAsset/* || a instanceof ThoughtBubbleAsset*/)
-				{
-					int paddingTop = label.getHeight()/10;
-					int paddingLeft = label.getWidth()/16;
-					final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
-					textLabel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
-					textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-					textLabel.setForeground(Color.BLACK);
-					textLabel.setHorizontalAlignment(JLabel.CENTER);
-					textLabel.setVerticalAlignment(JLabel.TOP);
-					label.add(textLabel);
-				}
-				else if(a instanceof ThoughtBubbleAsset)
+				if(a instanceof ThoughtBubbleAsset)
 				{
 					int paddingTop = label.getHeight()/4;
 					int paddingLeft = label.getWidth()/10;
 					final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
-					textLabel.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
+					textLabel.setBounds(0, 0, scaledImage.getWidth(), scaledImage.getHeight());
 					textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
 					textLabel.setForeground(Color.BLACK);
 					textLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -215,7 +209,7 @@ public class ScenePanel extends JPanel
 		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
 					}
 		        	for (JLabel label : assetLabels){
-		        		if(label.getIcon()==null)
+		        		if(label.getIcon()==null && !(label instanceof ConversationBubble))
 		        		{
 		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		        		}
@@ -268,7 +262,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -304,7 +298,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -340,7 +334,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -376,7 +370,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -409,7 +403,7 @@ public class ScenePanel extends JPanel
 					
 					//all - set highlighting
 					for (JLabel label : assetLabels){
-						if(label.getIcon()==null)
+						if(label.getIcon()==null && !(label instanceof ConversationBubble))
 		        		{
 		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		        		}
