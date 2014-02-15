@@ -19,6 +19,7 @@ public class Scene {
     List<Screen> screens;
     String background;
     String name;
+    String backgroundAudio;
     UUID id = UUID.randomUUID();
     List<Behavior> behaviorList;
     List<Asset> assets;
@@ -58,6 +59,15 @@ public class Scene {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+    
+    @XmlElement(name = "BackgroundAudio")
+    public String getBackgroundMusic() {
+        return backgroundAudio;
+    }
+    
+    public void setBackgroundMusic(String backgroundMusic) {
+    	this.backgroundAudio=backgroundMusic;
     }
 
     @XmlElement

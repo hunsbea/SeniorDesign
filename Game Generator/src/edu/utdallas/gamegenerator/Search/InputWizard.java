@@ -384,6 +384,7 @@ public class InputWizard implements ActionListener {
           			scenePanel.clear();
           			System.out.println("calling clear scene node\n");
           			scenePanel.loadBackground(s.getBackground());
+          			scenePanel.backgroundMusicPreview();
             	}
             	else if(isGameNode(selectedNode))
             	{
@@ -1466,13 +1467,25 @@ public class InputWizard implements ActionListener {
 			if(lastSelectedScreen.getAssets().contains(toPreviewSound))
 			{
 				String insideSoundFolderPath = toPreviewSound.getSoundEffect();
-
 				soundSelectWindow.playAudio(soundFolder + insideSoundFolderPath);
 			}
 			else
 			{
 				System.out.println("Error: Attempt to preview asset not in screen!");
 			}
+			break;
+		case "backgroundMusicPreviewPlay":
+			//TODO finish
+			if(lastSelectedScene.getBackgroundMusic()!=null){
+				String insideSoundFolderPath = lastSelectedScene.getBackgroundMusic();
+				soundSelectWindow.playAudio(soundFolder + insideSoundFolderPath);
+			} else {
+				System.out.println("Error: No background music found.");
+			}
+			break;
+		case "backgroundMusicPreviewStop":
+			soundSelectWindow.stopAudio();
+			break;
 		case "resizeAsset":
 			displayScreen(lastSelectedScene, lastSelectedScreen);
 			break;

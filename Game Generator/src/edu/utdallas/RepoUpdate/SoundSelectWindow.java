@@ -38,12 +38,7 @@ public class SoundSelectWindow extends JDialog
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(d.width/2 - WIDTH/2, d.height/2 - HEIGHT/2);
 
-		String[] data = { "Sound1.wav", "Sound2.wav", "Sound3.wav",
-			"Sound4.wav", "Sound5.wav", "Sound6.wav", "Sound7.wav",
-			"Sound8.wav", "Sound9.wav", "Sound10.wav", "Sound11.wav",
-			"Sound12.wav", "Sound13.wav", "Sound14.wav", "Sound15.wav" };
-
-        list = new JList<String>(data);
+        list = new JList<String>();
         
         addWindowListener(new WindowListener() {
 
@@ -236,7 +231,7 @@ public class SoundSelectWindow extends JDialog
 			e.printStackTrace();
 		}
 	}
-	private void stopAudio()
+	public void stopAudio()
 	{
 		if(!(currentClip == null) && currentClip.isRunning())
 		{

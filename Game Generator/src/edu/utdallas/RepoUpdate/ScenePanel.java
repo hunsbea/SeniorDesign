@@ -15,7 +15,9 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -459,6 +461,40 @@ public class ScenePanel extends JPanel
 			System.out.println(a.getDisplayImage() + " is missing from repository, cannot load");
 		}
 	}
+	
+	public void backgroundMusicPreview() {
+		JButton backgroundMusic;
+		JButton backgroundMusicStop;
+
+        backgroundMusic = new JButton("Preview");
+        backgroundMusic.addActionListener(parentWizard);
+        backgroundMusic.setEnabled(true);
+        backgroundMusic.setActionCommand("backgroundMusicPreviewPlay");
+        backgroundMusic.setBounds(5, 5, 100, 30);
+        BufferedImage img;
+		try {
+			img = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/play.png")), 0.5);
+			backgroundMusic.setIcon(new ImageIcon(img));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        backgroundMusicStop = new JButton("Stop");
+        backgroundMusicStop.addActionListener(parentWizard);
+        backgroundMusicStop.setEnabled(true);
+        backgroundMusicStop.setActionCommand("backgroundMusicPreviewStop");
+        backgroundMusicStop.setBounds(105, 5, 100, 30);
+        BufferedImage img2;
+		try {
+			img2 = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/stop.png")), 1.0);
+			backgroundMusicStop.setIcon(new ImageIcon(img2));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+        add(backgroundMusic);
+        add(backgroundMusicStop);
+        
+	}
 		
     protected void paintComponent(Graphics g) 
     {
@@ -474,4 +510,5 @@ public class ScenePanel extends JPanel
 	{
 		return targetedAsset;
 	}
+
 }
