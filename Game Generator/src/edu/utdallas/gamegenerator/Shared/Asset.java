@@ -1,6 +1,5 @@
 package edu.utdallas.gamegenerator.Shared;
 
-import edu.utdallas.gamegenerator.Challenge.Hint;
 import edu.utdallas.gamegenerator.Characters.GameCharacter;
 import edu.utdallas.gamegenerator.LearningAct.Character.LearningActCharacter;
 import edu.utdallas.gamegenerator.LearningAct.Prop.GameButton;
@@ -41,7 +40,7 @@ public class Asset implements Cloneable {
     private int promotions;
     private int trophies;
     private int points;
-    private Hint hint;
+    private int hint;
     private String displayImage;
     private String soundEffect;
 
@@ -355,11 +354,11 @@ public class Asset implements Cloneable {
 
 //    @XmlElement(name = "Hint")
     @XmlTransient
-    public Hint getHint() {
+    public int getHint() {
         return hint;
     }
 
-    public void setHint(Hint hint) {
+    public void setHint(int hint) {
         this.hint = hint;
     }
 

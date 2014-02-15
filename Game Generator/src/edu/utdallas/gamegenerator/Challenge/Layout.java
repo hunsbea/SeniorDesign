@@ -79,7 +79,6 @@ public class Layout extends JPanel
 			option.setFontFamily("Comic Sans MS");
 			option.setFontSize(15);
 			option.setName(item.getOptions().get(i).getText());
-			option.setHint(item.getOptions().get(i).getHint());
 			assets.add(option);
 		}
 		
@@ -91,7 +90,6 @@ public class Layout extends JPanel
 		stemText.setFontFamily("Comic Sans MS");
 		stemText.setFontSize(15);
 		stemText.setName(item.getStem().getStemText().getText());
-		stemText.setHint(item.getStem().getStemText().getHint());
 		assets.add(stemText);
 		
 		InformationBoxAsset stemQuestion = new InformationBoxAsset();
@@ -102,7 +100,6 @@ public class Layout extends JPanel
 		stemQuestion.setFontFamily("Comic Sans MS");
 		stemQuestion.setFontSize(15);
 		stemQuestion.setName(item.getStem().getStemQuestion().getText());
-		stemQuestion.setHint(item.getStem().getStemQuestion().getHint());
 		assets.add(stemQuestion);
 	}
 	
@@ -110,4 +107,52 @@ public class Layout extends JPanel
 	{
 		return assets;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*private static final int hgap = 10, vgap = 10;
+	private MultipleChoiceItem item; 
+	
+	
+	public Layout(MultipleChoiceItem item)
+	{
+		super();
+		this.item = item;
+		setLayout(new BorderLayout());
+		
+		JPanel stemPanel = new JPanel(); //flow layout
+		JPanel optionPanel = new JPanel(new GridLayout(4, 1, hgap, vgap));
+		
+		List<Option> options = item.getOptions();
+		for(int i = 0; i < 4; i++)
+		{
+			JLabel option = new JLabel(options.get(i).getText());
+			formatLabel(option);
+			optionPanel.add(option);
+		}
+		
+		JLabel description = new JLabel(item.getStem().getStemText());
+		formatLabel(description);
+		stemPanel.add(description);
+		JLabel question = new JLabel(item.getStem().getStemQuestion());
+		formatLabel(question);
+		stemPanel.add(question);
+	}
+	
+	private void formatLabel(JLabel option)
+	{
+		option.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+		option.setHorizontalAlignment(JLabel.CENTER);
+		option.setForeground(Color.BLACK);
+		option.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+		option.setBackground(Color.YELLOW);
+		option.setOpaque(true);
+	}*/
 }
