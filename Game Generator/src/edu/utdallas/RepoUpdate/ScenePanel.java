@@ -158,6 +158,11 @@ public class ScenePanel extends JPanel
 				label.setBackground(Color.YELLOW);
 				label.setOpaque(true);
 				
+				if(a.getHint() != null)
+				{
+					label.setToolTipText(a.getHint().getText());
+				}
+				
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 				add(label);
 			}
