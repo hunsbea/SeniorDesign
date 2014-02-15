@@ -201,7 +201,7 @@ public class SoundSelectWindow extends JDialog
 		handleChangeSoundFolder();
 	}
 	
-	private void playAudio(String path)
+	public void playAudio(String path)
 	{
 		stopAudio();
 		try {

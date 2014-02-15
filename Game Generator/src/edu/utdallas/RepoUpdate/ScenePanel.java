@@ -32,7 +32,7 @@ public class ScenePanel extends JPanel
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
 	private ScenePanel that = this;
-	private Asset toDeleteAsset = null;
+	private Asset targetedAsset = null;
 	private InputWizard parentWizard;
 	private boolean resize = false;
 	
@@ -200,14 +200,26 @@ public class ScenePanel extends JPanel
 		        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
 		        		System.out.println("right-clicked");
 		        		JPopupMenu pMenu = new JPopupMenu();
-		        		JMenuItem menuItem = new JMenuItem("delete");
+		        		JMenuItem menuItem = new JMenuItem("Delete");
 		        		menuItem.setActionCommand("deleteElement");
 		        		menuItem.addActionListener(parentWizard);
+		        		
+		        		//Preview Sound in right click menu
+		        		JMenuItem menuItem2 = new JMenuItem("Preview Sound");
+		        		menuItem2.setActionCommand("previewSound");
+		        		menuItem2.addActionListener(parentWizard);
+		        		if(a.getSoundEffect()==null){
+		        			menuItem2.setEnabled(false);
+		        		}
+		        		
 		        		pMenu.add(menuItem);
-		        		toDeleteAsset = a;
+		        		pMenu.add(menuItem2);
+		        		
+		        		targetedAsset = a;
 		        		that.add(pMenu);
 		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
 					}
+					
 		        	for (JLabel label : assetLabels){
 		        		if(label.getIcon()==null && !(label instanceof ConversationBubble))
 		        		{
@@ -458,8 +470,8 @@ public class ScenePanel extends JPanel
         }
     }
     
-	public Asset getAssetToDelete()
+	public Asset getTargetedAsset()
 	{
-		return toDeleteAsset;
+		return targetedAsset;
 	}
 }

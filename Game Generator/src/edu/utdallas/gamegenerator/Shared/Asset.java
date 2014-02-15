@@ -42,6 +42,7 @@ public class Asset implements Cloneable {
     private int points;
     private int hint;
     private String displayImage;
+    private String soundEffect;
 
     public Asset() {
         id = UUID.randomUUID();
@@ -369,4 +370,13 @@ public class Asset implements Cloneable {
     public void setDisplayImage(String displayImage) {
         this.displayImage = displayImage;
     }
+    
+    @XmlElement(name = "SoundEffect")
+	public String getSoundEffect() {
+		return soundEffect;
+	}
+    
+    private void setSoundEffect(String soundEffect) {
+    	this.soundEffect = soundEffect;
+	}
 }

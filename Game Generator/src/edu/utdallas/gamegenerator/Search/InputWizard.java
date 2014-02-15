@@ -103,6 +103,7 @@ public class InputWizard implements ActionListener {
  	private String gameGradeLevel = "none";
 	private Updates updater;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
+	public static final String soundFolder = "AudioAssetRepository\\";
 	private Double xtraXposition = 180.00;
 	private int imgtrack = 0;
 	private int selectedValue = 1;
@@ -1449,7 +1450,7 @@ public class InputWizard implements ActionListener {
 			break;
 			//JD end
 		case "deleteElement":
-			Asset toDelete = scenePanel.getAssetToDelete();
+			Asset toDelete = scenePanel.getTargetedAsset();
 			if(lastSelectedScreen.getAssets().contains(toDelete))
 			{
 				lastSelectedScreen.getAssets().remove(toDelete);
@@ -1460,6 +1461,18 @@ public class InputWizard implements ActionListener {
 				System.out.println("Error: Attempt to delete asset not in screen!");
 			}
 			break;
+		case "previewSound":
+			Asset toPreviewSound = scenePanel.getTargetedAsset();
+			if(lastSelectedScreen.getAssets().contains(toPreviewSound))
+			{
+				String insideSoundFolderPath = toPreviewSound.getSoundEffect();
+
+				soundSelectWindow.playAudio(soundFolder + insideSoundFolderPath);
+			}
+			else
+			{
+				System.out.println("Error: Attempt to preview asset not in screen!");
+			}
 		case "resizeAsset":
 			displayScreen(lastSelectedScene, lastSelectedScreen);
 			break;
