@@ -11,13 +11,17 @@ public class MainTestChallenge
 {
 	public static void main(String[] args) 
 	{
-		/*QuizChallenge challenge = new QuizChallenge();
+		QuizChallenge challenge = new QuizChallenge();
 		ArrayList<Item> items = new ArrayList<Item>();
 		MultipleChoiceItem item = new MultipleChoiceItem();
 		ArrayList<Option> options = new ArrayList<Option>();
 		Stem stem = new Stem();
-		stem.setStemText("this explains whatever");
-		stem.setStemQuestion("answer this question");
+		StemText st = new StemText();
+		st.setText("this explains whatever");
+		stem.setStemText(st);
+		StemQuestion sq = new StemQuestion();
+		sq.setText("answer this question");
+		stem.setStemQuestion(sq);
 		item.setStem(stem);
 		Option option = new Option();
 		option.setText("an option");
@@ -38,14 +42,14 @@ public class MainTestChallenge
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	 
-			jaxbMarshaller.marshal(challenge, file);
+			//jaxbMarshaller.marshal(challenge, file);
 			jaxbMarshaller.marshal(challenge, System.out);
 	 
 		      } catch (JAXBException e) {
 			e.printStackTrace();
-		      }*/
+		      }
 		
-		try
+		/*try
 		{
 			File file = new File("TestChallenge.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Challenge.class);
@@ -57,7 +61,7 @@ public class MainTestChallenge
 		} 
 		catch (JAXBException e) {
 			e.printStackTrace();
-		  }
+		  }*/
 
 	}
 
