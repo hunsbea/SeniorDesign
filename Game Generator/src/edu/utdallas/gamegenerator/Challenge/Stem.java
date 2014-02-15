@@ -6,24 +6,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Stem")
 public class Stem 
 {
-	private String stemQuestion;
-	private String stemText;
+	private StemQuestion stemQuestion;
+	private StemText stemText;
 
     @XmlElement(name = "StemText")
-	public String getStemText() 
+	public StemText getStemText() 
 	{
 		return stemText;
 	}
-	public void setStemText(String stemText) 
+	public void setStemText(StemText stemText) 
 	{
 		this.stemText = stemText;
 	}
     @XmlElement(name = "StemQuestion")
-	public String getStemQuestion() 
+	public StemQuestion getStemQuestion() 
 	{
 		return stemQuestion;
 	}
-	public void setStemQuestion(String stemQuestion) 
+	public void setStemQuestion(StemQuestion stemQuestion) 
 	{
 		this.stemQuestion = stemQuestion;
 	}

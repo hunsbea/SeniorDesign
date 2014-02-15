@@ -86,7 +86,7 @@ public class Layout extends JPanel
 		stemText.setLocY(50);
 		stemText.setFontFamily("Comic Sans MS");
 		stemText.setFontSize(15);
-		stemText.setName(item.getStem().getStemText());
+		stemText.setName(item.getStem().getStemText().getText());
 		assets.add(stemText);
 		
 		InformationBoxAsset stemQuestion = new InformationBoxAsset();
@@ -96,7 +96,7 @@ public class Layout extends JPanel
 		stemQuestion.setLocY(150);
 		stemQuestion.setFontFamily("Comic Sans MS");
 		stemQuestion.setFontSize(15);
-		stemQuestion.setName(item.getStem().getStemQuestion());
+		stemQuestion.setName(item.getStem().getStemQuestion().getText());
 		assets.add(stemQuestion);
 	}
 	
