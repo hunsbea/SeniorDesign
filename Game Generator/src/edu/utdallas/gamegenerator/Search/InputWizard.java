@@ -814,31 +814,31 @@ public class InputWizard implements ActionListener {
 	}
 	private boolean isActNode(DefaultMutableTreeNode node)
 	{
-		return node.getUserObject() instanceof Act;
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Act;
 	}
 	private boolean isSceneNode(DefaultMutableTreeNode node)
 	{
-		return node.getUserObject() instanceof Scene;
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Scene;
 	}
 	private boolean isScreenNode(DefaultMutableTreeNode node)
 	{
-		return node.getUserObject() instanceof Screen;
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Screen;
 	}
 	private boolean isQuestionNode(DefaultMutableTreeNode node)
 	{
-		return node.getUserObject() instanceof Item;
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Item;
 	}
 	private boolean isSummaryNode(DefaultMutableTreeNode node)
 	{
-		return node.getUserObject() instanceof Summary;
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Summary;
 	}
 	private boolean isIntroNode(DefaultMutableTreeNode node)
 	{
-		return node.getUserObject() instanceof Introduction;
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Introduction;
 	}
 	private boolean isChallengeNode(DefaultMutableTreeNode node)
 	{
-		return isIntroNode(node) || isSummaryNode(node) || isQuestionNode(node);
+		return node != null && node.getUserObject() != null && ( isIntroNode(node) || isSummaryNode(node) || isQuestionNode(node) );
 	}
 	
 	
