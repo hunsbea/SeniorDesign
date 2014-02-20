@@ -467,13 +467,15 @@ public class ScenePanel extends JPanel
 		}
 	}
 	
-	public void backgroundMusicPreview() {
+	public void backgroundMusicPreview(boolean ifMusic) {
+		System.out.println(ifMusic);
+		
 		JButton backgroundMusic;
 		JButton backgroundMusicStop;
 
         backgroundMusic = new JButton("Preview");
         backgroundMusic.addActionListener(parentWizard);
-        backgroundMusic.setEnabled(true);
+        backgroundMusic.setEnabled(ifMusic);
         backgroundMusic.setActionCommand("backgroundMusicPreviewPlay");
         backgroundMusic.setBounds(5, 5, 100, 30);
         BufferedImage img;
@@ -485,7 +487,7 @@ public class ScenePanel extends JPanel
 		}
         backgroundMusicStop = new JButton("Stop");
         backgroundMusicStop.addActionListener(parentWizard);
-        backgroundMusicStop.setEnabled(true);
+        backgroundMusicStop.setEnabled(ifMusic);
         backgroundMusicStop.setActionCommand("backgroundMusicPreviewStop");
         backgroundMusicStop.setBounds(105, 5, 100, 30);
         BufferedImage img2;

@@ -352,7 +352,7 @@ public class InputWizard implements ActionListener {
             {
             	if(game == null) { return; } // don't try to display an empty game
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) gameTree.getLastSelectedPathComponent();
-            	
+            	soundSelectWindow.stopAudio();
             	if (isQuestionNode(selectedNode))
             	{
             		Item item = (Item)selectedNode.getUserObject();
@@ -384,7 +384,7 @@ public class InputWizard implements ActionListener {
           			scenePanel.clear();
           			System.out.println("calling clear scene node\n");
           			scenePanel.loadBackground(s.getBackground());
-          			scenePanel.backgroundMusicPreview();
+          			scenePanel.backgroundMusicPreview(lastSelectedScene.getBackgroundMusic() != null);
             	}
             	else if(isGameNode(selectedNode))
             	{
