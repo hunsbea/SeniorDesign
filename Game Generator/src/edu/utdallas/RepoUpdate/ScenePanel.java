@@ -45,7 +45,7 @@ public class ScenePanel extends JPanel
 		addMouseListener(new MouseListener() {
 		        public void mouseClicked(MouseEvent e) { 
 		        	for (JLabel label : assetLabels){
-		        		if(label.getIcon()==null && !(label instanceof ConversationBubble))
+		        		if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
 		        		{
 		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		        		}
@@ -176,6 +176,14 @@ public class ScenePanel extends JPanel
 				((ConversationBubble)label).setPointDirection(ConversationBubble.PointDirection.LEFT_DOWN);
 				add(label);
 			}
+			else if(a instanceof ThoughtBubbleAsset)
+			{
+				label = new ThoughtBubble(a.getName());
+				((ThoughtBubble)label).setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+				((ThoughtBubble)label).setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				((ThoughtBubble)label).setPointDirection(ThoughtBubble.PointDirection.LEFT_DOWN);
+				add(label);
+			}
 			else
 			{//asset has an image
 				BufferedImage image = ImageIO.read(new File(baseDir + a.getDisplayImage()));
@@ -187,18 +195,18 @@ public class ScenePanel extends JPanel
 				label.setLayout(new BorderLayout());
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
 				add(label);
-				if(a instanceof ThoughtBubbleAsset)
-				{
-					int paddingTop = label.getHeight()/4;
-					int paddingLeft = label.getWidth()/10;
-					final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
-					textLabel.setBounds(0, 0, scaledImage.getWidth(), scaledImage.getHeight());
-					textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-					textLabel.setForeground(Color.BLACK);
-					textLabel.setHorizontalAlignment(JLabel.CENTER);
-					textLabel.setVerticalAlignment(JLabel.TOP);
-					label.add(textLabel);
-				}
+//				if(a instanceof ThoughtBubbleAsset)
+//				{
+//					int paddingTop = label.getHeight()/4;
+//					int paddingLeft = label.getWidth()/10;
+//					final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
+//					textLabel.setBounds(0, 0, scaledImage.getWidth(), scaledImage.getHeight());
+//					textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
+//					textLabel.setForeground(Color.BLACK);
+//					textLabel.setHorizontalAlignment(JLabel.CENTER);
+//					textLabel.setVerticalAlignment(JLabel.TOP);
+//					label.add(textLabel);
+//				}
 			}
 			
 			label.addMouseListener(new MouseListener() {
@@ -228,7 +236,7 @@ public class ScenePanel extends JPanel
 					}
 					
 		        	for (JLabel label : assetLabels){
-		        		if(label.getIcon()==null && !(label instanceof ConversationBubble))
+		        		if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
 		        		{
 		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		        		}
@@ -281,7 +289,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -317,7 +325,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -353,7 +361,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -389,7 +397,7 @@ public class ScenePanel extends JPanel
 			        		a.setLocX2(a.getLocX() + a.getWidth());
 			        		a.setLocY2(a.getLocY() + a.getHeight());
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset)
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
 			        		{
 			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
 			        		}
@@ -422,7 +430,7 @@ public class ScenePanel extends JPanel
 					
 					//all - set highlighting
 					for (JLabel label : assetLabels){
-						if(label.getIcon()==null && !(label instanceof ConversationBubble))
+						if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
 		        		{
 		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		        		}
