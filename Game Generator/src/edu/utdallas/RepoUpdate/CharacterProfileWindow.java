@@ -28,6 +28,7 @@ public class CharacterProfileWindow extends JDialog
 	public static final String effectsFolder = "effects\\sound effects from WavSource\\";
 	public static final String musicFolder = "music\\";
 	private String soundFolderString;
+	private final Font font;
 	
 	public CharacterProfileWindow(JFrame owner, Character ch)
 	{
@@ -35,13 +36,51 @@ public class CharacterProfileWindow extends JDialog
 		setSize(WIDTH, HEIGHT);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(d.width/2 - WIDTH/2, d.height/2 - HEIGHT/2);
+		setBackground(Color.YELLOW);
+		font = new Font("Comic Sans MS", Font.BOLD, 15);
 
 		JPanel tagGrid = new JPanel(new GridLayout());
+		tagGrid.setBackground(Color.YELLOW);
 		JPanel elementGrid = new JPanel(new GridLayout());
+		elementGrid.setBackground(Color.YELLOW);
 		JPanel profilePanel = new JPanel(new BorderLayout());
+		
+		//name
+		JLabel nameLabel = new JLabel("Name");
+		nameLabel.setFont(font);
+		JTextField nameField = new JTextField(ch.getName());
+		nameField.setBackground(Color.YELLOW);
+		nameField.setEditable(false);
+		nameField.setFont(font);
+		tagGrid.add(nameLabel);
+		elementGrid.add(nameField);
+		
+		//Attendance
+		JLabel attendanceLabel = new JLabel("Attendance");
+		attendanceLabel.setFont(font);
+		JTextField attendanceField = new JTextField(ch.getProfile().getAttendance());
+		attendanceField.setBackground(Color.YELLOW);
+		attendanceField.setEditable(false);
+		attendanceField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(attendanceLabel);
+		elementGrid.add(attendanceField);
+		
+		//Availability
+		JLabel availabilityLabel = new JLabel("Availability");
+		availabilityLabel.setFont(font);
+		JTextField availabilityField = new JTextField(ch.getProfile().getAvailability());
+		availabilityField.setBackground(Color.YELLOW);
+		availabilityField.setEditable(false);
+		availabilityField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(availabilityLabel);
+		elementGrid.add(availabilityField);
         
 		profilePanel.add(tagGrid, BorderLayout.WEST);
-		profilePanel.add(elementGrid, BorderLayout.EAST);
+		profilePanel.add(elementGrid, BorderLayout.CENTER);
 		JScrollPane scrollPane = new JScrollPane(profilePanel);
 		add(scrollPane, BorderLayout.CENTER);
 	}
