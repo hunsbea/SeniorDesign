@@ -352,6 +352,32 @@ public class InputWizard implements ActionListener {
             		
             		displayChallenge(scene, challenge, item);
             	}
+            	else if (isIntroNode(selectedNode))
+            	{
+            		Introduction intro = (Introduction)selectedNode.getUserObject();
+            		Scene scene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent().getParent()).getUserObject();
+            		selectedLevel = gameLevel.CHALLENGE;
+            		characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
+            		backgroundButton.setEnabled(false);
+            		soundButton.setEnabled(false);
+            		
+            		scenePanel.loadAssets(intro.getAssets(), true);
+            		scenePanel.loadBackground(scene.getBackground());
+            	}
+            	else if (isSummaryNode(selectedNode))
+            	{
+            		Summary summary = (Summary)selectedNode.getUserObject();
+            		Scene scene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent().getParent()).getUserObject();
+            		selectedLevel = gameLevel.CHALLENGE;
+            		characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
+            		backgroundButton.setEnabled(false);
+            		soundButton.setEnabled(false);
+            		
+            		scenePanel.loadAssets(summary.getAssets(), true);
+            		scenePanel.loadBackground(scene.getBackground());
+            	}
             	else if (isScreenNode(selectedNode))
             	{
             		characterButton.setEnabled(true);
