@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.UUID;
+import edu.utdallas.gamegenerator.Character.Character;
 
 /**
  * User: clocke
@@ -16,6 +17,7 @@ public class Game {
     List<Act> acts;
     private UUID id = UUID.randomUUID();
     private String name;
+    private List<Character> characters;
 
     @XmlElementWrapper(name = "Acts")
     @XmlElement(name = "Act")
@@ -50,4 +52,14 @@ public class Game {
     {
     	return name;
     }
+
+    @XmlElementWrapper(name = "Characters")
+    @XmlElement(name = "Character")
+	public List<Character> getCharacters() {
+		return characters;
+	}
+
+	public void setCharacters(List<Character> characters) {
+		this.characters = characters;
+	}
 }
