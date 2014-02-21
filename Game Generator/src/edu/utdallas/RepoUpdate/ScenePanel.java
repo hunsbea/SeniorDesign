@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -91,7 +90,7 @@ public class ScenePanel extends JPanel
 		}
 	}
 	
-	public void loadAssets(List<Asset> as)
+	public void loadAssets(List<Asset> as, boolean readOnly)
 	{
 		clear();
 		System.out.println("calling clear load assets\n");
@@ -100,27 +99,27 @@ public class ScenePanel extends JPanel
 		{
 			if(a instanceof CharacterAsset)
 			{
-				loadAsset(a, charBaseDir);
+				loadAsset(a, charBaseDir, readOnly);
 				
 			}
 			else if(a instanceof ImageAsset)
 			{
-				loadAsset(a, imageBaseDir);
+				loadAsset(a, imageBaseDir, readOnly);
 			}
 			else if(a instanceof InformationBoxAsset)
 			{
-				loadAsset(a, null);
+				loadAsset(a, null, readOnly);
 			}
 			else if(a instanceof ConversationBubbleAsset)
 			{
-				loadAsset(a, imageBaseDir);
+				loadAsset(a, imageBaseDir, readOnly);
 			}
 			else if(a instanceof ThoughtBubbleAsset)
 			{
-				loadAsset(a, imageBaseDir);
+				loadAsset(a, imageBaseDir, readOnly);
 			}
 			else if (a instanceof ButtonAsset){
-				loadAsset(a, imageBaseDir);
+				loadAsset(a, imageBaseDir, readOnly);
 			}
 		}
 		
@@ -145,7 +144,7 @@ public class ScenePanel extends JPanel
 	    return resized;
 	}
 	
-	public void loadAsset(final Asset a, String baseDir)
+	public void loadAsset(final Asset a, String baseDir, boolean readOnly)
 	{
 		try 
 		{
@@ -195,276 +194,266 @@ public class ScenePanel extends JPanel
 				label.setLayout(new BorderLayout());
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
 				add(label);
-//				if(a instanceof ThoughtBubbleAsset)
-//				{
-//					int paddingTop = label.getHeight()/4;
-//					int paddingLeft = label.getWidth()/10;
-//					final JLabel textLabel = new JLabel("<html><p style=\"padding-left:" + paddingLeft + ";padding-top:" + paddingTop + "\">" + a.getName() + "</p></html>");
-//					textLabel.setBounds(0, 0, scaledImage.getWidth(), scaledImage.getHeight());
-//					textLabel.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
-//					textLabel.setForeground(Color.BLACK);
-//					textLabel.setHorizontalAlignment(JLabel.CENTER);
-//					textLabel.setVerticalAlignment(JLabel.TOP);
-//					label.add(textLabel);
-//				}
 			}
 			
-			label.addMouseListener(new MouseListener() {
-		        public void mouseClicked(MouseEvent e) { 
-		        	//if right-click
-		        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
-		        		System.out.println("right-clicked");
-		        		JPopupMenu pMenu = new JPopupMenu();
-		        		JMenuItem menuItem = new JMenuItem("Delete");
-		        		menuItem.setActionCommand("deleteElement");
-		        		menuItem.addActionListener(parentWizard);
-		        		
-		        		//Preview Sound in right click menu
-		        		JMenuItem menuItem2 = new JMenuItem("Preview Sound");
-		        		menuItem2.setActionCommand("previewSound");
-		        		menuItem2.addActionListener(parentWizard);
-		        		if(a.getSoundEffect()==null){
-		        			menuItem2.setEnabled(false);
-		        		}
-		        		
-		        		pMenu.add(menuItem);
-		        		pMenu.add(menuItem2);
-		        		
-		        		targetedAsset = a;
-		        		that.add(pMenu);
-		        		pMenu.show(e.getComponent(), e.getX(), e.getY());
-					}
-					
-		        	for (JLabel label : assetLabels){
-		        		if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
-		        		{
-		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-		        		}
-		        		else
-		        		{
-		        			label.setBorder(null);
-		        		}
-		        	}
-		        	Border highlights = BorderFactory.createLineBorder(Color.MAGENTA, 5);
-		        		label.setBorder(highlights);
-		        }
-		        public void mouseEntered(MouseEvent e) { }
-		        public void mouseExited(MouseEvent e) { }
-		        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
-		        public void mouseReleased(MouseEvent e) { 
-		        	if(resize){
-		        		parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
-		        	}
-		        }
-		    });
-			label.addMouseMotionListener(new MouseMotionListener() {
-				public void mouseDragged(MouseEvent e) {
-		        	Point p = e.getPoint();
-		        	int deltaX = p.x - prevClickPoint.x;
-		        	int deltaY = p.y - prevClickPoint.y;
-		        	int invDeltaX = -deltaX;
-		        	int invDeltaY = -deltaY;
-		        	String imgPath;
-		        	if(a instanceof CharacterAsset)
-		        	{
-		        		imgPath = charBaseDir + a.getDisplayImage();
-		        	}
-		        	else
-		        	{
-		        		imgPath = imageBaseDir + a.getDisplayImage();
-		        	}
-		        	
-		        	if(label.getRootPane().getCursor().getType() == Cursor.NW_RESIZE_CURSOR)
-		        	{
-		        		if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x > prevClickPoint.x || p.y > prevClickPoint.y))
-		        		{
-		        			//do nothing, don't let the image disappear
-		        		}
-		        		else
-		        		{
-			        		a.setWidth(a.getWidth() + invDeltaX);
-			        		a.setHeight(a.getHeight() + invDeltaY);
-			        		a.setLocX(a.getLocX() + deltaX);
-			        		a.setLocY(a.getLocY() + deltaY);
-			        		a.setLocX2(a.getLocX() + a.getWidth());
-			        		a.setLocY2(a.getLocY() + a.getHeight());
+			if(!readOnly){
+				label.addMouseListener(new MouseListener() {
+			        public void mouseClicked(MouseEvent e) { 
+			        	//if right-click
+			        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
+			        		System.out.println("right-clicked");
+			        		JPopupMenu pMenu = new JPopupMenu();
+			        		JMenuItem menuItem = new JMenuItem("Delete");
+			        		menuItem.setActionCommand("deleteElement");
+			        		menuItem.addActionListener(parentWizard);
 			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
-			        		{
-			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+			        		//Preview Sound in right click menu
+			        		JMenuItem menuItem2 = new JMenuItem("Preview Sound");
+			        		menuItem2.setActionCommand("previewSound");
+			        		menuItem2.addActionListener(parentWizard);
+			        		if(a.getSoundEffect()==null){
+			        			menuItem2.setEnabled(false);
 			        		}
-			        		else {
-				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
-				        		BufferedImage image;
-								try {
-									image = ImageIO.read(new File(imgPath));
-					        		int width = image.getWidth();
-					    			double desiredWidth = a.getWidth();
-					    			double scaleFactor = desiredWidth / width;
-					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-					    			label.setIcon(new ImageIcon(scaledImage));
-								} catch (IOException e1) {
-									e1.printStackTrace();
+			        		
+			        		pMenu.add(menuItem);
+			        		pMenu.add(menuItem2);
+			        		
+			        		targetedAsset = a;
+			        		that.add(pMenu);
+			        		pMenu.show(e.getComponent(), e.getX(), e.getY());
+						}
+						
+			        	for (JLabel label : assetLabels){
+			        		if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
+			        		{
+			        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+			        		}
+			        		else
+			        		{
+			        			label.setBorder(null);
+			        		}
+			        	}
+			        	Border highlights = BorderFactory.createLineBorder(Color.MAGENTA, 5);
+			        		label.setBorder(highlights);
+			        }
+			        public void mouseEntered(MouseEvent e) { }
+			        public void mouseExited(MouseEvent e) { }
+			        public void mousePressed(MouseEvent e) { prevClickPoint = e.getPoint(); }
+			        public void mouseReleased(MouseEvent e) { 
+			        	if(resize){
+			        		parentWizard.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "resizeAsset"));
+			        	}
+			        }
+			    });
+				label.addMouseMotionListener(new MouseMotionListener() {
+					public void mouseDragged(MouseEvent e) {
+			        	Point p = e.getPoint();
+			        	int deltaX = p.x - prevClickPoint.x;
+			        	int deltaY = p.y - prevClickPoint.y;
+			        	int invDeltaX = -deltaX;
+			        	int invDeltaY = -deltaY;
+			        	String imgPath;
+			        	if(a instanceof CharacterAsset)
+			        	{
+			        		imgPath = charBaseDir + a.getDisplayImage();
+			        	}
+			        	else
+			        	{
+			        		imgPath = imageBaseDir + a.getDisplayImage();
+			        	}
+			        	
+			        	if(label.getRootPane().getCursor().getType() == Cursor.NW_RESIZE_CURSOR)
+			        	{
+			        		if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x > prevClickPoint.x || p.y > prevClickPoint.y))
+			        		{
+			        			//do nothing, don't let the image disappear
+			        		}
+			        		else
+			        		{
+				        		a.setWidth(a.getWidth() + invDeltaX);
+				        		a.setHeight(a.getHeight() + invDeltaY);
+				        		a.setLocX(a.getLocX() + deltaX);
+				        		a.setLocY(a.getLocY() + deltaY);
+				        		a.setLocX2(a.getLocX() + a.getWidth());
+				        		a.setLocY2(a.getLocY() + a.getHeight());
+				        		
+				        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
+				        		{
+				        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				        		}
+				        		else {
+					        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
+					        		BufferedImage image;
+									try {
+										image = ImageIO.read(new File(imgPath));
+						        		int width = image.getWidth();
+						    			double desiredWidth = a.getWidth();
+						    			double scaleFactor = desiredWidth / width;
+						    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+						    			label.setIcon(new ImageIcon(scaledImage));
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
 								}
+				        		resize = true;
+			        		}
+			        	}
+						else if(label.getRootPane().getCursor().getType() == Cursor.SW_RESIZE_CURSOR)
+						{
+							if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x > prevClickPoint.x || p.y < prevClickPoint.y))
+			        		{
+			        			//do nothing, don't let the image disappear
+			        		}
+							else
+							{
+								a.setWidth(a.getWidth() + invDeltaX);
+				        		a.setHeight(a.getHeight() + deltaY);
+				        		a.setLocX(a.getLocX() + deltaX);
+				        		prevClickPoint.y = p.y;
+				        		a.setLocX2(a.getLocX() + a.getWidth());
+				        		a.setLocY2(a.getLocY() + a.getHeight());
+				        		
+				        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
+				        		{
+				        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				        		}
+				        		else {
+					        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
+					        		BufferedImage image;
+									try {
+										image = ImageIO.read(new File(imgPath));
+						        		int width = image.getWidth();
+						    			double desiredWidth = a.getWidth();
+						    			double scaleFactor = desiredWidth / width;
+						    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+						    			label.setIcon(new ImageIcon(scaledImage));
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								}
+				        		resize = true;
 							}
-			        		resize = true;
-		        		}
-		        	}
-					else if(label.getRootPane().getCursor().getType() == Cursor.SW_RESIZE_CURSOR)
-					{
-						if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x > prevClickPoint.x || p.y < prevClickPoint.y))
-		        		{
-		        			//do nothing, don't let the image disappear
-		        		}
+						}
+						else if(label.getRootPane().getCursor().getType() == Cursor.NE_RESIZE_CURSOR)
+						{
+							if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x < prevClickPoint.x || p.y > prevClickPoint.y))
+			        		{
+			        			//do nothing, don't let the image disappear
+			        		}
+							else
+							{
+								a.setWidth(a.getWidth() + deltaX);
+				        		a.setHeight(a.getHeight() + invDeltaY);
+				        		prevClickPoint.x = p.x;
+				        		a.setLocY(a.getLocY() + deltaY);
+				        		a.setLocX2(a.getLocX() + a.getWidth());
+				        		a.setLocY2(a.getLocY() + a.getHeight());
+				        		
+				        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
+				        		{
+				        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				        		}
+				        		else {
+					        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
+					        		BufferedImage image;
+									try {
+										image = ImageIO.read(new File(imgPath));
+						        		int width = image.getWidth();
+						    			double desiredWidth = a.getWidth();
+						    			double scaleFactor = desiredWidth / width;
+						    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+						    			label.setIcon(new ImageIcon(scaledImage));
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								}
+				        		resize = true;
+							}
+						}
+						else if(label.getRootPane().getCursor().getType() == Cursor.SE_RESIZE_CURSOR)
+						{
+							if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x < prevClickPoint.x || p.y < prevClickPoint.y))
+			        		{
+			        			//do nothing, don't let the image disappear
+			        		}
+							else
+							{
+								a.setWidth(a.getWidth() + deltaX);
+				        		a.setHeight(a.getHeight() + deltaY);
+				        		prevClickPoint.x = p.x;
+				        		prevClickPoint.y = p.y;
+				        		a.setLocX2(a.getLocX() + a.getWidth());
+				        		a.setLocY2(a.getLocY() + a.getHeight());
+				        		
+				        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
+				        		{
+				        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
+				        		}
+				        		else {
+					        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
+					        		BufferedImage image;
+									try {
+										image = ImageIO.read(new File(imgPath));
+						        		int width = image.getWidth();
+						    			double desiredWidth = a.getWidth();
+						    			double scaleFactor = desiredWidth / width;
+						    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
+						    			label.setIcon(new ImageIcon(scaledImage));
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								}
+				        		resize = true;
+							}
+						}
 						else
 						{
-							a.setWidth(a.getWidth() + invDeltaX);
-			        		a.setHeight(a.getHeight() + deltaY);
-			        		a.setLocX(a.getLocX() + deltaX);
-			        		prevClickPoint.y = p.y;
-			        		a.setLocX2(a.getLocX() + a.getWidth());
-			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
-			        		{
-			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
-			        		}
-			        		else {
-				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
-				        		BufferedImage image;
-								try {
-									image = ImageIO.read(new File(imgPath));
-					        		int width = image.getWidth();
-					    			double desiredWidth = a.getWidth();
-					    			double scaleFactor = desiredWidth / width;
-					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-					    			label.setIcon(new ImageIcon(scaledImage));
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
-							}
-			        		resize = true;
+				        	int newX = label.getX() + deltaX;
+				        	int newY = label.getY() + deltaY;
+				        	label.setLocation(newX, newY);
+							a.setLocX(newX);
+							a.setLocY(newY);
+							resize = false;
 						}
+						
+						//all - set highlighting
+						for (JLabel label : assetLabels){
+							if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
+			        		{
+			        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+			        		}
+			        		else
+			        		{
+			        			label.setBorder(null);
+			        		}
+			        	}
+			        	label.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 5));
 					}
-					else if(label.getRootPane().getCursor().getType() == Cursor.NE_RESIZE_CURSOR)
-					{
-						if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x < prevClickPoint.x || p.y > prevClickPoint.y))
-		        		{
-		        			//do nothing, don't let the image disappear
-		        		}
+					public void mouseMoved(MouseEvent e) {
+						Point p = e.getPoint();
+						if(p.x <= 5 && p.y <= 5)
+						{
+							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+						}
+						else if(p.x <= 5 && label.getHeight() - p.y <= 5)
+						{
+							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+						}
+						else if(label.getWidth() - p.x <= 5 && p.y <= 5)
+						{
+							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+						}
+						else if(label.getWidth() - p.x <= 5 && label.getHeight() - p.y <= 5)
+						{
+							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+						}
 						else
 						{
-							a.setWidth(a.getWidth() + deltaX);
-			        		a.setHeight(a.getHeight() + invDeltaY);
-			        		prevClickPoint.x = p.x;
-			        		a.setLocY(a.getLocY() + deltaY);
-			        		a.setLocX2(a.getLocX() + a.getWidth());
-			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
-			        		{
-			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
-			        		}
-			        		else {
-				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+invDeltaY);
-				        		BufferedImage image;
-								try {
-									image = ImageIO.read(new File(imgPath));
-					        		int width = image.getWidth();
-					    			double desiredWidth = a.getWidth();
-					    			double scaleFactor = desiredWidth / width;
-					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-					    			label.setIcon(new ImageIcon(scaledImage));
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
-							}
-			        		resize = true;
+							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 						}
 					}
-					else if(label.getRootPane().getCursor().getType() == Cursor.SE_RESIZE_CURSOR)
-					{
-						if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x < prevClickPoint.x || p.y < prevClickPoint.y))
-		        		{
-		        			//do nothing, don't let the image disappear
-		        		}
-						else
-						{
-							a.setWidth(a.getWidth() + deltaX);
-			        		a.setHeight(a.getHeight() + deltaY);
-			        		prevClickPoint.x = p.x;
-			        		prevClickPoint.y = p.y;
-			        		a.setLocX2(a.getLocX() + a.getWidth());
-			        		a.setLocY2(a.getLocY() + a.getHeight());
-			        		
-			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || label instanceof ThoughtBubble)
-			        		{
-			        			label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
-			        		}
-			        		else {
-				        		label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int) a.getWidth(), label.getHeight()+deltaY);
-				        		BufferedImage image;
-								try {
-									image = ImageIO.read(new File(imgPath));
-					        		int width = image.getWidth();
-					    			double desiredWidth = a.getWidth();
-					    			double scaleFactor = desiredWidth / width;
-					    			BufferedImage scaledImage = getScaledImage(image, scaleFactor);
-					    			label.setIcon(new ImageIcon(scaledImage));
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
-							}
-			        		resize = true;
-						}
-					}
-					else
-					{
-			        	int newX = label.getX() + deltaX;
-			        	int newY = label.getY() + deltaY;
-			        	label.setLocation(newX, newY);
-						a.setLocX(newX);
-						a.setLocY(newY);
-						resize = false;
-					}
-					
-					//all - set highlighting
-					for (JLabel label : assetLabels){
-						if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
-		        		{
-		        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-		        		}
-		        		else
-		        		{
-		        			label.setBorder(null);
-		        		}
-		        	}
-		        	label.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 5));
-				}
-				public void mouseMoved(MouseEvent e) {
-					Point p = e.getPoint();
-					if(p.x <= 5 && p.y <= 5)
-					{
-						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-					}
-					else if(p.x <= 5 && label.getHeight() - p.y <= 5)
-					{
-						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
-					}
-					else if(label.getWidth() - p.x <= 5 && p.y <= 5)
-					{
-						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
-					}
-					else if(label.getWidth() - p.x <= 5 && label.getHeight() - p.y <= 5)
-					{
-						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-					}
-					else
-					{
-						label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					}
-				}
-			});
+				});
+			}
 
 			assetLabels.add(label);
 			repaint();

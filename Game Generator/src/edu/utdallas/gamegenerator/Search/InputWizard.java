@@ -1,6 +1,5 @@
 package edu.utdallas.gamegenerator.Search;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.tree.*;
@@ -8,6 +7,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import edu.utdallas.RepoUpdate.BackgroundSelectWindow;
+import edu.utdallas.RepoUpdate.CharacterProfileWindow;
 import edu.utdallas.RepoUpdate.PropSelectWindow;
 import edu.utdallas.RepoUpdate.ScenePanel;
 import edu.utdallas.RepoUpdate.CharacterSelectWindow;
@@ -22,26 +22,19 @@ import edu.utdallas.gamegenerator.Challenge.QuizChallenge;
 import edu.utdallas.gamegenerator.Challenge.Summary;
 import edu.utdallas.gamegenerator.Shared.*;
 import edu.utdallas.gamegenerator.Structure.*;
+import edu.utdallas.gamegenerator.Character.Character;
 
 import Jama.Matrix;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 
@@ -104,8 +97,6 @@ public class InputWizard implements ActionListener {
 	private Updates updater;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	public static final String soundFolder = "AudioAssetRepository\\";
-	private Double xtraXposition = 180.00;
-	private int imgtrack = 0;
 	private int selectedValue = 1;
 	CharacterAsset c;
 	final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -388,78 +379,50 @@ public class InputWizard implements ActionListener {
             	}
             	else if(isGameNode(selectedNode))
             	{
-            		ArrayList<CharacterAsset> UNIQchars = new ArrayList<CharacterAsset>();
-            		
-            		ArrayList<CharacterAsset> chars = null;
-            		
-            		chars = getCharacters();
+            		List<Character> chars = game.getCharacters();
             		
             		scenePanel.clear();
             		System.out.println("calling clear rootnode\n");
-            		UNIQchars.clear();
-            		xtraXposition = 180.00;
-            		System.out.println("uniq chars before putting in size "+UNIQchars.size());
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
             		backgroundButton.setEnabled(false);
             		soundButton.setEnabled(false);
             		selectedLevel = gameLevel.GAME;
-            		for (CharacterAsset ca : chars){
+            		
+            		int xSpacing = 180;
+            		int charCounter = 0;
+            		int defaultHeight = 300;
+            		int defaultWidth = 180;
+            		for (final Character ca : chars){
             			
             			//create a copy as not to modify the original coordinates
-            			CharacterAsset c = (CharacterAsset)(Asset)ca.clone();
-            			
-            			//make all images a standard width
-            			int desiredWidth = 180;
-            			double mFactor = desiredWidth / c.getWidth();
-            			c.setWidth(c.getWidth() * mFactor);
-            			c.setHeight(c.getHeight() * mFactor);
-            			
-            			if(UNIQchars.size() == 0){
-            				UNIQchars.add(c);
-    						c.setLocX(0);
-    						c.setLocY(0);
-            				scenePanel.loadAsset(c, charBaseDir);
-            				
-            			}
-            			else{	
-            				int i =0;
-            				
-            				while(true){
-            					StringTokenizer st = new StringTokenizer(c.getDisplayImage(), "\\");
-            					String firstPart = st.nextToken();
-            					StringTokenizer st2 = new StringTokenizer(UNIQchars.get(i).getDisplayImage(), "\\");
-            					String firstPartU = st2.nextToken();
-            					
-            					
-            					if(!firstPart.equals(firstPartU) && i == UNIQchars.size()-1)
-            					{
-            						UNIQchars.add(c);
-            						try{
-            						
-            						c.setLocX(xtraXposition);
-            						c.setLocY(0);
-            						
-            						scenePanel.loadAsset(c, charBaseDir);
-            						xtraXposition = xtraXposition+ xtraXposition;
-            						
-            						} catch(Exception ex) {}
-            						break;
-            					}
-            					if (firstPart.equals(firstPartU)){
-               						
-            						break;
-            						
-            					}
-            					i++;
-            					if(i == UNIQchars.size()){
-     
-            						break;
-            					}
-            					
-            				}
-            			}
+            			CharacterAsset c = new CharacterAsset();
 
+            			//set image path for character
+            			c.setDisplayImage(ca.getProfile().getProfilePhoto());
+            			//make all images the standard character width and height
+            			c.setWidth(defaultWidth);
+            			c.setHeight(defaultHeight);
+            			//set image location
+            			c.setLocX(xSpacing*charCounter);
+            			c.setLocY(0);
+        				scenePanel.loadAsset(c, charBaseDir, true);
+        				//button for viewing profile
+        				JButton charButton = new JButton("View Profile");
+        				charButton.setBounds(xSpacing*charCounter+defaultWidth/8, defaultHeight, defaultWidth*3/4, 30);
+        				charButton.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+        				charButton.addActionListener(new ActionListener(){
+
+							@Override
+							public void actionPerformed(ActionEvent arg0) {
+								CharacterProfileWindow cpw = new CharacterProfileWindow(window,ca);
+								cpw.setVisible(true);
+							}
+        					
+        				});
+        				scenePanel.add(charButton);
+        				
+        				charCounter++;
             		}
             		
             		
@@ -499,8 +462,8 @@ public class InputWizard implements ActionListener {
         propButton.setEnabled(false);
         propButton.setActionCommand("propToolbar");
         toolbarPanel.add(propButton);
-        JButton speechButton = new JButton("Speech");
-        toolbarPanel.add(speechButton);
+        JButton textButton = new JButton("Text");
+        toolbarPanel.add(textButton);
         JButton buttonButton = new JButton("Button");
         toolbarPanel.add(buttonButton);
         soundButton = new JButton("Sound");
@@ -841,41 +804,29 @@ public class InputWizard implements ActionListener {
 		return node != null && node.getUserObject() != null && ( isIntroNode(node) || isSummaryNode(node) || isQuestionNode(node) );
 	}
 	
-	
-	private ArrayList<CharacterAsset> getCharacters()
-	{
-		ArrayList<CharacterAsset> chars = new ArrayList<CharacterAsset>();
-		
-		List<Act> acts = game.getActs();
-		for(Act a : acts)
-		{
-			List<Scene> scenes = a.getScenes();
-			for(Scene s : scenes)
-			{
-				List<Screen> screens = s.getScreens();
-				for(Screen scr : screens)
-				{
-					List<Asset> assets = scr.getAssets();
-					for(Asset as : assets)
-					{
-						if(as instanceof CharacterAsset)
-						{
-							chars.add((CharacterAsset)as);
-						}
-					}
-				}
-			}
-		}
-		
-		return chars;
-	}
-	
-	private ArrayList<String> getUniqueCharacterNames(ArrayList<CharacterAsset> chars)
+	private ArrayList<String> getScreenCharacterNames(ArrayList<CharacterAsset> chars)
 	{
 		ArrayList<String> charStrings = new ArrayList<String>();
 		for(CharacterAsset charAsset : chars)
 		{
 			String filePath = charAsset.getDisplayImage();
+			String charName = filePath.substring(0, filePath.indexOf('\\'));
+			
+			if(!charStrings.contains(charName))
+			{
+				charStrings.add(charName);
+			}
+		}
+		
+		return charStrings;
+	}
+	
+	private ArrayList<String> getGameGenericCharacterNames()
+	{
+		ArrayList<String> charStrings = new ArrayList<String>();
+		for(Character ch : game.getCharacters())
+		{
+			String filePath = ch.getProfile().getProfilePhoto();
 			String charName = filePath.substring(0, filePath.indexOf('\\'));
 			
 			if(!charStrings.contains(charName))
@@ -1018,7 +969,7 @@ public class InputWizard implements ActionListener {
 	{
 		List<Asset> assets = screen.getAssets();
 		if(assets != null){
-			scenePanel.loadAssets(assets);
+			scenePanel.loadAssets(assets, false);
 		}
 		else
 			System.out.println("assets null");
@@ -1051,7 +1002,7 @@ public class InputWizard implements ActionListener {
 				}
 			}
 			
-			scenePanel.loadAssets(layout.getAssets());
+			scenePanel.loadAssets(layout.getAssets(), true);
 			scenePanel.loadBackground(scene.getBackground());
 		}
 	}
@@ -1404,8 +1355,8 @@ public class InputWizard implements ActionListener {
 					chars.add((CharacterAsset)as);
 				}
 			}
-			ArrayList<String> charNamesInScreen = getUniqueCharacterNames(chars);
-			ArrayList<String> charNamesInGame = getUniqueCharacterNames(getCharacters());
+			ArrayList<String> charNamesInScreen = getScreenCharacterNames(chars);
+			ArrayList<String> charNamesInGame = getGameGenericCharacterNames();
 			ArrayList<String> availableChars = new ArrayList<String>();
 			for(String charName : charNamesInGame)
 			{
