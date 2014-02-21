@@ -995,9 +995,13 @@ public class InputWizard implements ActionListener {
 							screenNode.add(questionNode);
 						}
 
-						DefaultMutableTreeNode summaryNode = new DefaultMutableTreeNode("Summary");
-						summaryNode.setUserObject(challenge.getSummary());
-						screenNode.add(summaryNode);
+						List<Summary> summaries = challenge.getSummaries();
+						for(int m = 0; m < summaries.size(); m++)
+						{
+							DefaultMutableTreeNode summaryNode = new DefaultMutableTreeNode("Summary " + (m + 1));
+							summaryNode.setUserObject(summaries.get(m));
+							screenNode.add(summaryNode);
+						}
 					}
 					
 					sceneNode.add(screenNode);

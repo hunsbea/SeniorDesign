@@ -16,7 +16,7 @@ public class QuizChallenge extends Challenge
 {
 	private Introduction intro;
 	private List<Item> items;
-	private Summary summary;
+	private List<Summary> summaries;
 	private PedagogyType pedagogy;
 	private LayoutType layout;
 	
@@ -39,15 +39,6 @@ public class QuizChallenge extends Challenge
 	{
 		this.items = items;
 	}
-    @XmlElement(name = "Summary")
-	public Summary getSummary() 
-	{
-		return summary;
-	}
-	public void setSummary(Summary summary) 
-	{
-		this.summary = summary;
-	}
     @XmlElement(name = "PedagogyType")
 	public PedagogyType getPedagogy() 
 	{
@@ -65,5 +56,13 @@ public class QuizChallenge extends Challenge
 	public void setLayout(LayoutType layout) 
 	{
 		this.layout = layout;
+	}
+	@XmlElementWrapper(name = "Summaries")
+    @XmlElement(name = "Summary")
+	public List<Summary> getSummaries() {
+		return summaries;
+	}
+	public void setSummaries(List<Summary> summaries) {
+		this.summaries = summaries;
 	}
 }

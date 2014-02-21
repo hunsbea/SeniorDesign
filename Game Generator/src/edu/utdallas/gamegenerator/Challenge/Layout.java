@@ -1,18 +1,9 @@
 package edu.utdallas.gamegenerator.Challenge;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import oracle.jrockit.jfr.Options;
 
 import edu.utdallas.gamegenerator.Shared.Asset;
 import edu.utdallas.gamegenerator.Shared.ButtonAsset;
@@ -53,12 +44,14 @@ M:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::D
 
 TODO: Assumptions:
 1. Only multiple choice questions are available
-2. Each multiple choice question has a description, a question, and exactly 4 options
+2. Each multiple choice question has a description, a question, and 1+ options
 
 */
 
 public class Layout extends JPanel
 {
+	private static final long serialVersionUID = 1L;
+
 	public static enum LayoutType { MULTIPLE_CHOICE_LAYOUT }
 	
 	private ArrayList<Asset> assets = new ArrayList<Asset>();
