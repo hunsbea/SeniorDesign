@@ -12,6 +12,7 @@ public class CharacterProfileWindow extends JDialog
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 640, HEIGHT = 480;
 	private final Font font;
+	private JPanel tagGrid, elementGrid;
 	
 	public CharacterProfileWindow(JFrame owner, Character ch)
 	{
@@ -22,165 +23,78 @@ public class CharacterProfileWindow extends JDialog
 		setBackground(Color.YELLOW);
 		font = new Font("Comic Sans MS", Font.BOLD, 15);
 
-		JPanel tagGrid = new JPanel(new GridLayout());
+		tagGrid = new JPanel(new GridLayout(0,1));
 		tagGrid.setBackground(Color.YELLOW);
-		JPanel elementGrid = new JPanel(new GridLayout());
+		elementGrid = new JPanel(new GridLayout(0,1));
 		elementGrid.setBackground(Color.YELLOW);
 		JPanel profilePanel = new JPanel(new BorderLayout());
 		((BorderLayout)profilePanel.getLayout()).setHgap(2);
 		
-		//name
-		JLabel nameLabel = new JLabel("Name");
-		nameLabel.setFont(font);
-		JTextField nameField = new JTextField(ch.getName());
-		nameField.setBackground(Color.YELLOW);
-		nameField.setEditable(false);
-		nameField.setFont(font);
-		tagGrid.add(nameLabel);
-		elementGrid.add(nameField);
+		//Name
+		JLabel nameLabel = addProfileLabel("Name", ch.getName());
 		
 		//Attendance
-		JLabel attendanceLabel = new JLabel("Attendance");
-		attendanceLabel.setFont(font);
-		JTextField attendanceField = new JTextField(ch.getProfile().getAttendance());
-		attendanceField.setBackground(Color.YELLOW);
-		attendanceField.setEditable(false);
-		attendanceField.setFont(font);
-		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-		tagGrid.add(attendanceLabel);
-		elementGrid.add(attendanceField);
+		JLabel attendanceLabel = addProfileLabel("Attendance", ch.getProfile().getAttendance());
 		
 		//Availability
-		JLabel availabilityLabel = new JLabel("Availability");
-		availabilityLabel.setFont(font);
-		JTextField availabilityField = new JTextField(ch.getProfile().getAvailability());
-		availabilityField.setBackground(Color.YELLOW);
-		availabilityField.setEditable(false);
-		availabilityField.setFont(font);
-		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-		tagGrid.add(availabilityLabel);
-		elementGrid.add(availabilityField);
+		JLabel availabilityLabel = addProfileLabel("Availability", ch.getProfile().getAvailability());
 		
 		//Communication
-		JLabel communicationLabel = new JLabel("Communication");
-		communicationLabel.setFont(font);
-		JTextField communicationField = new JTextField(ch.getProfile().getCommunication());
-		communicationField.setBackground(Color.YELLOW);
-		communicationField.setEditable(false);
-		communicationField.setFont(font);
-		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-		tagGrid.add(communicationLabel);
-		elementGrid.add(communicationField);
+		JLabel communicationLabel = addProfileLabel("Communication", ch.getProfile().getCommunication());
 		
 		//Degrees
 		for(int i=0;i<ch.getProfile().getDegrees().size();i++)
 		{
 			JLabel degreesLabel;
-			if(i==0){
-				degreesLabel = new JLabel("Degrees");
-			}
-			else
-			{
-				degreesLabel = new JLabel("");
-			}
-			degreesLabel.setFont(font);
-			JTextField degreeField = new JTextField(ch.getProfile().getDegrees().get(i));
-			degreeField.setBackground(Color.YELLOW);
-			degreeField.setEditable(false);
-			degreeField.setFont(font);
-			((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-			((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-			tagGrid.add(degreesLabel);
-			elementGrid.add(degreeField);
+			if(i==0) { degreesLabel = addProfileLabel("Degrees", ch.getProfile().getDegrees().get(i)); }
+			else { degreesLabel = addProfileLabel("", ch.getProfile().getDegrees().get(i)); }
 		}
 		
 		//Demographics
 		for(int i=0;i<ch.getProfile().getDemographics().size();i++)
 		{
 			JLabel demographicsLabel;
-			if(i==0){
-				demographicsLabel = new JLabel("Demographics");
-			}
-			else
-			{
-				demographicsLabel = new JLabel("");
-			}
-			demographicsLabel.setFont(font);
-			JTextField demographicField = new JTextField(ch.getProfile().getDemographics().get(i));
-			demographicField.setBackground(Color.YELLOW);
-			demographicField.setEditable(false);
-			demographicField.setFont(font);
-			((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-			((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-			tagGrid.add(demographicsLabel);
-			elementGrid.add(demographicField);
+			if(i==0) { demographicsLabel = addProfileLabel("Demographics", ch.getProfile().getDemographics().get(i)); }
+			else { demographicsLabel = addProfileLabel("", ch.getProfile().getDemographics().get(i)); }
 		}
 		
 		//Skills
 		for(int i=0;i<ch.getProfile().getSkills().size();i++)
 		{
 			JLabel skillsLabel;
-			if(i==0){
-				skillsLabel = new JLabel("Skills");
-			}
-			else
-			{
-				skillsLabel = new JLabel("");
-			}
-			skillsLabel.setFont(font);
-			JTextField skillField = new JTextField(ch.getProfile().getSkills().get(i));
-			skillField.setBackground(Color.YELLOW);
-			skillField.setEditable(false);
-			skillField.setFont(font);
-			((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-			((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-			tagGrid.add(skillsLabel);
-			elementGrid.add(skillField);
+			if(i==0) { skillsLabel = addProfileLabel("Skills", ch.getProfile().getSkills().get(i)); }
+			else { skillsLabel = addProfileLabel("", ch.getProfile().getSkills().get(i)); }
 		}
 		
 		//Teamwork
-		JLabel teamworkLabel = new JLabel("Teamwork");
-		teamworkLabel.setFont(font);
-		JTextField teamworkField = new JTextField(ch.getProfile().getTeamwork());
-		teamworkField.setBackground(Color.YELLOW);
-		teamworkField.setEditable(false);
-		teamworkField.setFont(font);
-		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-		tagGrid.add(teamworkLabel);
-		elementGrid.add(teamworkField);
+		JLabel teamworkLabel = addProfileLabel("Teamwork", ch.getProfile().getTeamwork());
 		
 		//Title
-		JLabel titleLabel = new JLabel("Title");
-		titleLabel.setFont(font);
-		JTextField titleField = new JTextField(ch.getProfile().getTitle());
-		titleField.setBackground(Color.YELLOW);
-		titleField.setEditable(false);
-		titleField.setFont(font);
-		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-		tagGrid.add(titleLabel);
-		elementGrid.add(titleField);
+		JLabel titleLabel = addProfileLabel("Title", ch.getProfile().getTitle());
 		
 		//Experience
-		JLabel experienceLabel = new JLabel("Experience");
-		experienceLabel.setFont(font);
-		JTextField experienceField = new JTextField(Integer.toString(ch.getProfile().getYearsOfExperience()));
-		experienceField.setBackground(Color.YELLOW);
-		experienceField.setEditable(false);
-		experienceField.setFont(font);
-		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
-		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
-		tagGrid.add(experienceLabel);
-		elementGrid.add(experienceField);
+		JLabel experienceLabel = addProfileLabel("Experience", Integer.toString(ch.getProfile().getYearsOfExperience()));
         
 		profilePanel.add(tagGrid, BorderLayout.WEST);
 		profilePanel.add(elementGrid, BorderLayout.CENTER);
 		JScrollPane scrollPane = new JScrollPane(profilePanel);
 		add(scrollPane, BorderLayout.CENTER);
+	}
+	
+	private JLabel addProfileLabel(String title, String text)
+	{
+		JLabel label = new JLabel(title);
+		label.setFont(font);
+		JTextField experienceField = new JTextField(text);
+		experienceField.setBackground(Color.YELLOW);
+		experienceField.setEditable(false);
+		experienceField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(label);
+		elementGrid.add(experienceField);
+		
+		return label;
 	}
 	
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
