@@ -1,33 +1,16 @@
 package edu.utdallas.RepoUpdate;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.*;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 import javax.swing.*;
-
-import java.io.*;
-
-import javax.imageio.ImageIO;
-import java.util.*;
 
 import edu.utdallas.gamegenerator.Character.Character;
 
 public class CharacterProfileWindow extends JDialog
 {
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 450, HEIGHT = 300;
-	public static final String soundFolder = "AudioAssetRepository\\";
-	public static final String effectsFolder = "effects\\sound effects from WavSource\\";
-	public static final String musicFolder = "music\\";
-	private String soundFolderString;
+	public static final int WIDTH = 640, HEIGHT = 480;
 	private final Font font;
 	
 	public CharacterProfileWindow(JFrame owner, Character ch)
@@ -44,6 +27,7 @@ public class CharacterProfileWindow extends JDialog
 		JPanel elementGrid = new JPanel(new GridLayout());
 		elementGrid.setBackground(Color.YELLOW);
 		JPanel profilePanel = new JPanel(new BorderLayout());
+		((BorderLayout)profilePanel.getLayout()).setHgap(2);
 		
 		//name
 		JLabel nameLabel = new JLabel("Name");
@@ -78,6 +62,120 @@ public class CharacterProfileWindow extends JDialog
 		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
 		tagGrid.add(availabilityLabel);
 		elementGrid.add(availabilityField);
+		
+		//Communication
+		JLabel communicationLabel = new JLabel("Communication");
+		communicationLabel.setFont(font);
+		JTextField communicationField = new JTextField(ch.getProfile().getCommunication());
+		communicationField.setBackground(Color.YELLOW);
+		communicationField.setEditable(false);
+		communicationField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(communicationLabel);
+		elementGrid.add(communicationField);
+		
+		//Degrees
+		for(int i=0;i<ch.getProfile().getDegrees().size();i++)
+		{
+			JLabel degreesLabel;
+			if(i==0){
+				degreesLabel = new JLabel("Degrees");
+			}
+			else
+			{
+				degreesLabel = new JLabel("");
+			}
+			degreesLabel.setFont(font);
+			JTextField degreeField = new JTextField(ch.getProfile().getDegrees().get(i));
+			degreeField.setBackground(Color.YELLOW);
+			degreeField.setEditable(false);
+			degreeField.setFont(font);
+			((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+			((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+			tagGrid.add(degreesLabel);
+			elementGrid.add(degreeField);
+		}
+		
+		//Demographics
+		for(int i=0;i<ch.getProfile().getDemographics().size();i++)
+		{
+			JLabel demographicsLabel;
+			if(i==0){
+				demographicsLabel = new JLabel("Demographics");
+			}
+			else
+			{
+				demographicsLabel = new JLabel("");
+			}
+			demographicsLabel.setFont(font);
+			JTextField demographicField = new JTextField(ch.getProfile().getDemographics().get(i));
+			demographicField.setBackground(Color.YELLOW);
+			demographicField.setEditable(false);
+			demographicField.setFont(font);
+			((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+			((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+			tagGrid.add(demographicsLabel);
+			elementGrid.add(demographicField);
+		}
+		
+		//Skills
+		for(int i=0;i<ch.getProfile().getSkills().size();i++)
+		{
+			JLabel skillsLabel;
+			if(i==0){
+				skillsLabel = new JLabel("Skills");
+			}
+			else
+			{
+				skillsLabel = new JLabel("");
+			}
+			skillsLabel.setFont(font);
+			JTextField skillField = new JTextField(ch.getProfile().getSkills().get(i));
+			skillField.setBackground(Color.YELLOW);
+			skillField.setEditable(false);
+			skillField.setFont(font);
+			((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+			((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+			tagGrid.add(skillsLabel);
+			elementGrid.add(skillField);
+		}
+		
+		//Teamwork
+		JLabel teamworkLabel = new JLabel("Teamwork");
+		teamworkLabel.setFont(font);
+		JTextField teamworkField = new JTextField(ch.getProfile().getTeamwork());
+		teamworkField.setBackground(Color.YELLOW);
+		teamworkField.setEditable(false);
+		teamworkField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(teamworkLabel);
+		elementGrid.add(teamworkField);
+		
+		//Title
+		JLabel titleLabel = new JLabel("Title");
+		titleLabel.setFont(font);
+		JTextField titleField = new JTextField(ch.getProfile().getTitle());
+		titleField.setBackground(Color.YELLOW);
+		titleField.setEditable(false);
+		titleField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(titleLabel);
+		elementGrid.add(titleField);
+		
+		//Experience
+		JLabel experienceLabel = new JLabel("Experience");
+		experienceLabel.setFont(font);
+		JTextField experienceField = new JTextField(Integer.toString(ch.getProfile().getYearsOfExperience()));
+		experienceField.setBackground(Color.YELLOW);
+		experienceField.setEditable(false);
+		experienceField.setFont(font);
+		((GridLayout)tagGrid.getLayout()).setRows(((GridLayout)tagGrid.getLayout()).getRows()+1);
+		((GridLayout)elementGrid.getLayout()).setRows(((GridLayout)elementGrid.getLayout()).getRows()+1);
+		tagGrid.add(experienceLabel);
+		elementGrid.add(experienceField);
         
 		profilePanel.add(tagGrid, BorderLayout.WEST);
 		profilePanel.add(elementGrid, BorderLayout.CENTER);
