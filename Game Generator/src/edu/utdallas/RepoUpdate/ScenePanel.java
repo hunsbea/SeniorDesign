@@ -161,10 +161,18 @@ public class ScenePanel extends JPanel
 				label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 				label.setBackground(Color.YELLOW);
 				label.setOpaque(true);
-				
-				if(a.getHint() != null)
-				{
-					label.setToolTipText(a.getHint().getText());
+				if(a.getHint() != null){
+					JLabel hint = new JLabel(a.getHint().getText());
+					hint.setFont(new Font(a.getFontFamily(), Font.PLAIN, a.getFontSize()));
+					hint.setHorizontalAlignment(JLabel.CENTER);
+					hint.setForeground(Color.BLACK);
+					hint.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
+					hint.setBackground(Color.cyan);
+					hint.setOpaque(true);
+					hint.setBounds((int)(a.getLocX()+a.getWidth()), (int)a.getLocY()-10, 200, 30);
+					add(hint);
+					hiddenAssetLabels.add(hint);
+					if(isHidden) { hint.setVisible(false); }
 				}
 				
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), (int)a.getWidth(), (int)a.getHeight());
@@ -222,9 +230,6 @@ public class ScenePanel extends JPanel
 				
 			}
 			
-			//if(isHidden){
-				
-			//}
 			
 			if(!isReadOnly){
 				label.addMouseListener(new MouseListener() {

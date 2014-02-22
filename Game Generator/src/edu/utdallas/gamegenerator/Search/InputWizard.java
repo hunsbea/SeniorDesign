@@ -343,7 +343,7 @@ public class InputWizard implements ActionListener {
             {
             	if(game == null) { return; } // don't try to display an empty game
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) gameTree.getLastSelectedPathComponent();
-            	soundSelectWindow.stopAudio();
+            	SoundSelectWindow.stopAudio();
             	if (isQuestionNode(selectedNode))
             	{
             		Item item = (Item)selectedNode.getUserObject();
@@ -352,6 +352,9 @@ public class InputWizard implements ActionListener {
             		
             		displayChallenge(scene, challenge, item);
             	}
+            	//TODO 1. When going to a Question node in game the buttons do not refresh Assuming this method ^^^^^ is why.
+            	//TODO 2. The only difference between the two below is a cast and variable type, and we have a unused isChallange method
+            	//TODO that encompasses Intro, Question, Summary. Feels like we could tackle todo #1 and reduce the code
             	else if (isIntroNode(selectedNode))
             	{
             		Introduction intro = (Introduction)selectedNode.getUserObject();
