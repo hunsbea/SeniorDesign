@@ -29,7 +29,7 @@ public class SoundSelectWindow extends JDialog
 	private String soundPathString;
 	private JList<String> list;
 	private ListSelectionModel select;
-	private Clip currentClip;
+	private static Clip currentClip;
 	
 	public SoundSelectWindow(JFrame owner)
 	{
@@ -196,7 +196,7 @@ public class SoundSelectWindow extends JDialog
 		handleChangeSoundFolder();
 	}
 	
-	public void playAudio(String path)
+	public static void playAudio(String path)
 	{
 		stopAudio();
 		try {
@@ -231,7 +231,7 @@ public class SoundSelectWindow extends JDialog
 			e.printStackTrace();
 		}
 	}
-	public void stopAudio()
+	public static void stopAudio()
 	{
 		if(!(currentClip == null) && currentClip.isRunning())
 		{

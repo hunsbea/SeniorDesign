@@ -74,7 +74,7 @@ public class InputWizard implements ActionListener {
  	private gameLevel selectedLevel = null;
  	private JButton characterButton;
  	private JButton propButton;
- 	private JButton backgroundButton;
+ 	private JButton backgroundAndHiddenButton;
  	private JButton soundButton;
  	private Scene lastSelectedScene = null;
  	private Screen lastSelectedScreen = null;
@@ -359,7 +359,9 @@ public class InputWizard implements ActionListener {
             		selectedLevel = gameLevel.CHALLENGE;
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-            		backgroundButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
+            		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
             		
             		scenePanel.loadAssets(intro.getAssets(), true);
@@ -372,7 +374,9 @@ public class InputWizard implements ActionListener {
             		selectedLevel = gameLevel.CHALLENGE;
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-            		backgroundButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
+            		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
             		
             		scenePanel.loadAssets(summary.getAssets(), true);
@@ -382,7 +386,9 @@ public class InputWizard implements ActionListener {
             	{
             		characterButton.setEnabled(true);
             		propButton.setEnabled(true);
-            		backgroundButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
+            		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(true);
             		selectedLevel = gameLevel.SCREEN;
             		lastSelectedScene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
@@ -394,7 +400,9 @@ public class InputWizard implements ActionListener {
           			Scene s = (Scene)selectedNode.getUserObject();
           			characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-            		backgroundButton.setEnabled(true);
+                    backgroundAndHiddenButton.setText("Background");
+                    backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
+            		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(true);
           			selectedLevel = gameLevel.SCENE;
           			lastSelectedScene = s;
@@ -411,7 +419,9 @@ public class InputWizard implements ActionListener {
             		System.out.println("calling clear rootnode\n");
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-            		backgroundButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Background");
+                    backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
+            		backgroundAndHiddenButton.setEnabled(false);
             		soundButton.setEnabled(false);
             		selectedLevel = gameLevel.GAME;
             		
@@ -456,7 +466,9 @@ public class InputWizard implements ActionListener {
             	else {
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-            		backgroundButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Background");
+                    backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
+            		backgroundAndHiddenButton.setEnabled(false);
             		soundButton.setEnabled(false);
             		selectedLevel = gameLevel.ACT;
             	}
@@ -497,11 +509,11 @@ public class InputWizard implements ActionListener {
         soundButton.setEnabled(false);
         soundButton.setActionCommand("soundToolbar");
         toolbarPanel.add(soundButton);
-        backgroundButton = new JButton("Background");
-        backgroundButton.addActionListener(this);
-        backgroundButton.setEnabled(false);
-        backgroundButton.setActionCommand("backgroundToolbar");
-        toolbarPanel.add(backgroundButton);
+        backgroundAndHiddenButton = new JButton("Background");
+        backgroundAndHiddenButton.addActionListener(this);
+        backgroundAndHiddenButton.setEnabled(false);
+        backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
+        toolbarPanel.add(backgroundAndHiddenButton);
         //splitTreePane.setBottomComponent(toolbarPanel);
         browsePanel.add(toolbarPanel, BorderLayout.SOUTH);
         toolbarPanel.setPreferredSize(new Dimension(0, 80));
@@ -1466,6 +1478,9 @@ public class InputWizard implements ActionListener {
 			break;
 		case "backgroundMusicPreviewStop":
 			soundSelectWindow.stopAudio();
+			break;
+		case "toggleHiddenElements":
+			scenePanel.toggleHiddenElements();
 			break;
 		case "resizeAsset":
 			displayScreen(lastSelectedScene, lastSelectedScreen);

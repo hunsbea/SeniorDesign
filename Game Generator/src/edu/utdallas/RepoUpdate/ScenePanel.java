@@ -29,6 +29,7 @@ public class ScenePanel extends JPanel
 	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
 	private ArrayList<JLabel> assetLabels;
+	private ArrayList<JLabel> hiddenAssetLabels;
 	private String charBaseDir = "Office, Classroom\\Characters\\";
 	private String imageBaseDir = "Office, Classroom\\";
 	private Point prevClickPoint;
@@ -36,6 +37,7 @@ public class ScenePanel extends JPanel
 	private Asset targetedAsset = null;
 	private InputWizard parentWizard;
 	private boolean resize = false;
+	private boolean isHidden = true;
 	
 	public ScenePanel(InputWizard parent)
 	{
@@ -73,6 +75,7 @@ public class ScenePanel extends JPanel
 	{
 		background = null;
 		assetLabels = new ArrayList<JLabel>();
+		hiddenAssetLabels = new ArrayList<JLabel>();
 		removeAll();
 		updateUI();
 	}
@@ -144,7 +147,7 @@ public class ScenePanel extends JPanel
 	    return resized;
 	}
 	
-	public void loadAsset(final Asset a, String baseDir, boolean readOnly)
+	public void loadAsset(final Asset a, String baseDir, boolean isReadOnly)
 	{
 		try 
 		{
@@ -195,11 +198,39 @@ public class ScenePanel extends JPanel
 				label.setBounds((int)a.getLocX(), (int)a.getLocY(), scaledImage.getWidth(), scaledImage.getHeight());
 				add(label);
 			}
+			BufferedImage img = getScaledImage(ImageIO.read(new File("Office, Classroom/Asst Bitstrips and Composite images/sound-icon.png")), 0.13);
+
+			if(a.getSoundEffect() != null)
+			{
+				JLabel previewSoundButton = new JLabel(new ImageIcon(img));
+				previewSoundButton.setBounds(0, 0, 30, 30);
+				previewSoundButton.addMouseListener(new MouseListener() 
+				{
+					public void mouseClicked(MouseEvent e) 
+					{
+						SoundSelectWindow.playAudio("AudioAssetRepository\\" + a.getSoundEffect());
+					}
+					public void mouseEntered(MouseEvent e) { }
+					public void mouseExited(MouseEvent e) { }
+					public void mousePressed(MouseEvent e) { }
+					public void mouseReleased(MouseEvent e) { }
+				});
+				label.add(previewSoundButton);
+				label.setComponentZOrder(previewSoundButton, 0);
+				hiddenAssetLabels.add(previewSoundButton);
+				if(isHidden) { previewSoundButton.setVisible(false); }
+				
+			}
 			
-			if(!readOnly){
+			//if(isHidden){
+				
+			//}
+			
+			if(!isReadOnly){
 				label.addMouseListener(new MouseListener() {
 			        public void mouseClicked(MouseEvent e) { 
 			        	//if right-click
+			        	//TODO: this will be gone
 			        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
 			        		System.out.println("right-clicked");
 			        		JPopupMenu pMenu = new JPopupMenu();
@@ -513,6 +544,15 @@ public class ScenePanel extends JPanel
 	public Asset getTargetedAsset()
 	{
 		return targetedAsset;
+	}
+
+	public void toggleHiddenElements() {
+		System.out.println("Toggle");
+		isHidden = !isHidden;
+		for(JLabel l : hiddenAssetLabels)
+		{
+			l.setVisible(!isHidden);
+		}
 	}
 
 }

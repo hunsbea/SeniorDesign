@@ -21,17 +21,24 @@ public class ThoughtBubble extends JLabel {
     private Font fontC = new Font("Comic Sans MS", Font.BOLD, 15);
     public static enum PointDirection{LEFT_DOWN,CENTER_DOWN,RIGHT_DOWN};
     private PointDirection directionC = PointDirection.LEFT_DOWN;
+    JLabel innerLabel = new JLabel();
     
     public ThoughtBubble()
     {
-    	super();
-    	textC = "";
+    	this("");
     }
     
     public ThoughtBubble(String text)
     {
     	super();
     	textC = text;
+    	innerLabel.setFont(fontC);
+    	innerLabel.setForeground(Color.BLACK);
+    	innerLabel.setBackground(Color.WHITE);
+    	innerLabel.setOpaque(true);
+    	innerLabel.setHorizontalAlignment(JLabel.CENTER);
+    	innerLabel.setVerticalAlignment(JLabel.TOP);
+		add(innerLabel);
     }
     
     public void setPointDirection(PointDirection p)
@@ -68,15 +75,8 @@ public class ThoughtBubble extends JLabel {
      * @param text, the string to draw
      */
     private void paintString(String text) {
-    	JLabel innerLabel = new JLabel("<html><p>" + text + "</p></html>");
+    	innerLabel.setText("<html><p style=\"text-align:center\">" + text + "</p></html>");
     	innerLabel.setBounds(TEXT_LEFT, TEXT_TOP, widthC-TEXT_LEFT*2, heightC-TEXT_TOP*2-ARROW_HEIGHT);
-    	innerLabel.setFont(fontC);
-    	innerLabel.setForeground(Color.BLACK);
-    	innerLabel.setBackground(Color.WHITE);
-    	innerLabel.setOpaque(true);
-    	innerLabel.setHorizontalAlignment(JLabel.CENTER);
-    	innerLabel.setVerticalAlignment(JLabel.TOP);
-		add(innerLabel);
     }
     
     /**
