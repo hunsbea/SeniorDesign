@@ -66,8 +66,8 @@ public class Layout extends JPanel
 			ButtonAsset option = new ButtonAsset();
 			option.setWidth(300);
 			option.setHeight(bHeight);
-			option.setLocX(400);
-			option.setLocY(currentY);
+			option.setX(400);
+			option.setY(currentY);
 			currentY += bHeight;
 			option.setFontFamily("Comic Sans MS");
 			option.setFontSize(15);
@@ -79,8 +79,8 @@ public class Layout extends JPanel
 		InformationBoxAsset stemText = new InformationBoxAsset();
 		stemText.setWidth(300);
 		stemText.setHeight(150);
-		stemText.setLocX(50);
-		stemText.setLocY(50);
+		stemText.setX(50);
+		stemText.setY(50);
 		stemText.setFontFamily("Comic Sans MS");
 		stemText.setFontSize(15);
 		stemText.setName(item.getStem().getStemText().getText());
@@ -90,8 +90,8 @@ public class Layout extends JPanel
 		InformationBoxAsset stemQuestion = new InformationBoxAsset();
 		stemQuestion.setWidth(300);
 		stemQuestion.setHeight(150);
-		stemQuestion.setLocX(50);
-		stemQuestion.setLocY(200);
+		stemQuestion.setX(50);
+		stemQuestion.setY(200);
 		stemQuestion.setFontFamily("Comic Sans MS");
 		stemQuestion.setFontSize(15);
 		stemQuestion.setName(item.getStem().getStemQuestion().getText());

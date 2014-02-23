@@ -26,12 +26,12 @@ public class Asset implements Cloneable {
     private String name;
     private List<Behavior> behaviors;
     private int opacity = 1;
-    private double locX;
-    private double locY;
-    private double locX2;
-    private double locY2;
-    private double width;
-    private double height;
+    private int x;
+    private int y;
+    private int x2;
+    private int y2;
+    private int width;
+    private int height;
     private Color backgroundColor;
     private Color foregroundColor;
     private int fontSize = 15;
@@ -55,10 +55,10 @@ public class Asset implements Cloneable {
         setName(asset.getName());
         setBehaviors(asset.getBehaviors());
         setOpacity(asset.getOpacity());
-        setLocX(asset.getLocX());
-        setLocY(asset.getLocY());
-        setLocX2(asset.getLocX2());
-        setLocY2(asset.getLocY2());
+        setX(asset.getX());
+        setY(asset.getY());
+        setX2(asset.getX2());
+        setY2(asset.getY2());
         setWidth(asset.getWidth());
         setHeight(asset.getHeight());
         setBackgroundColor(asset.getBackgroundColor());
@@ -77,12 +77,12 @@ public class Asset implements Cloneable {
     public Asset(GameObject gameObject) {
         id = UUID.randomUUID();
         type = "ImageAsset";
-        locX = gameObject.getLocX();
-        locY = gameObject.getLocY();
+        x = gameObject.getX();
+        y = gameObject.getY();
         width = gameObject.getWidth();
         height = gameObject.getHeight();
-        locX2 = locX + width;
-        locY2 = locY + height;
+        x2 = x + width;
+        y2 = y + height;
         displayImage = gameObject.getPathToAsset();
     }
 
@@ -90,12 +90,12 @@ public class Asset implements Cloneable {
                  LearningActCharacter learningActCharacter) {
         id = UUID.randomUUID();
         type = "CharacterAsset";
-        locX = character.getLocX();
-        locY = character.getLocY();
+        x = character.getX();
+        y = character.getY();
         width = character.getWidth();
         height = character.getHeight();
-        locX2 = locX + width;
-        locY2 = locY + height;
+        x2 = x + width;
+        y2 = y + height;
         displayImage = gameCharacter.getCharacterAsset(character.getCharacterAssetType());
         behaviors = new ArrayList<Behavior>();
         for(ObjectMovement movement : character.getMovements()) {
@@ -108,12 +108,12 @@ public class Asset implements Cloneable {
     public Asset(SharedCharacter character, GameCharacter gameCharacter) {
         id = UUID.randomUUID();
         type = "CharacterAsset";
-        locX = character.getLocX();
-        locY = character.getLocY();
+        x = character.getX();
+        y = character.getY();
         width = character.getWidth();
         height = character.getHeight();
-        locX2 = locX + width;
-        locY2 = locY + height;
+        x2 = x + width;
+        y2 = y + height;
         displayImage = gameCharacter.getCharacterAsset(character.getCharacterAssetType());
         behaviors = new ArrayList<Behavior>();
         if(character.getMovements() != null) {
@@ -214,56 +214,56 @@ public class Asset implements Cloneable {
     }
 
     @XmlElement(name = "X")
-    public double getLocX() {
-        return locX;
+    public int getX() {
+        return x;
     }
 
-    public void setLocX(double locX) {
-        this.locX = locX;
+    public void setX(int x) {
+        this.x = x;
     }
 
     @XmlElement(name = "Y")
-    public double getLocY() {
-        return locY;
+    public int getY() {
+        return y;
     }
 
-    public void setLocY(double locY) {
-        this.locY = locY;
+    public void setY(int y) {
+        this.y = y;
     }
 
     @XmlElement(name = "X2")
-    public double getLocX2() {
-        return locX2;
+    public int getX2() {
+        return x2;
     }
 
-    public void setLocX2(double locX2) {
-        this.locX2 = locX2;
+    public void setX2(int x2) {
+        this.x2 = x2;
     }
 
     @XmlElement(name = "Y2")
-    public double getLocY2() {
-        return locY2;
+    public int getY2() {
+        return y2;
     }
 
-    public void setLocY2(double locY2) {
-        this.locY2 = locY2;
+    public void setY2(int y2) {
+        this.y2 = y2;
     }
 
     @XmlElement(name = "Width")
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
     @XmlElement(name = "Height")
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -377,7 +377,7 @@ public class Asset implements Cloneable {
 		return soundEffect;
 	}
     
-    private void setSoundEffect(String soundEffect) {
+    public void setSoundEffect(String soundEffect) {
     	this.soundEffect = soundEffect;
 	}
 }
