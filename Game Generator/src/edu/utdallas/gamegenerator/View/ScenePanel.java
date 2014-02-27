@@ -2,6 +2,7 @@ package edu.utdallas.gamegenerator.View;
 
 import edu.utdallas.gamegenerator.Search.InputWizard;
 import edu.utdallas.gamegenerator.Shared.*;
+import edu.utdallas.gamegenerator.Structure.Act;
 
 import java.awt.*;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ScenePanel extends JPanel
 {
@@ -542,6 +545,30 @@ public class ScenePanel extends JPanel
 		{
 			l.setVisible(!isHidden);
 		}
+	}
+
+	public void displayAct(Act act) {
+		// TODO Auto-generated method stub
+		JPanel actDisplay = new JPanel();
+		actDisplay.setBounds(0,0,that.getWidth(),that.getHeight());
+		actDisplay.setBackground(Color.red);
+		JLabel actText = new JLabel("<html><p style=\"text-align:center\">" + act.getName() + "</p></html>");
+		actText.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4), actDisplay.getY()+(actDisplay.getHeight()/4), actDisplay.getWidth()/2, actDisplay.getHeight()/2);
+		actText.setBackground(Color.LIGHT_GRAY);
+		actText.setForeground(Color.BLACK);
+		actText.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		actText.setFont(new Font("Times New Roman", Font.BOLD, 80));
+		actText.setHorizontalAlignment(JLabel.CENTER);
+		actText.setVerticalAlignment(JLabel.CENTER);
+		actText.setOpaque(true);
+		JLabel actTextShadow = new JLabel();
+		actTextShadow.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4)+4, actDisplay.getY()+(actDisplay.getHeight()/4)+4, actDisplay.getWidth()/2, actDisplay.getHeight()/2);
+		actTextShadow.setBackground(new Color(150, 36, 36));
+		actTextShadow.setOpaque(true);
+		add(actText);
+		add(actTextShadow);
+		add(actDisplay);
+		
 	}
 
 }

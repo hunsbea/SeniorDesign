@@ -76,6 +76,8 @@ public class InputWizard implements ActionListener {
  	private JButton propButton;
  	private JButton backgroundAndHiddenButton;
  	private JButton soundButton;
+ 	private JButton textButton;
+ 	private JButton buttonButton;
  	private Scene lastSelectedScene = null;
  	private Screen lastSelectedScreen = null;
  	private File Currentfile = null;
@@ -247,7 +249,15 @@ public class InputWizard implements ActionListener {
             		Item item = (Item)selectedNode.getUserObject();
             		Challenge challenge = ((Screen)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject()).getChallenge();
             		Scene scene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent().getParent()).getUserObject();
-            		
+            		selectedLevel = gameLevel.CHALLENGE;
+            		characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
+            		backgroundAndHiddenButton.setEnabled(true);
+            		soundButton.setEnabled(false);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
             		displayChallenge(scene, challenge, item);
             	}
             	//TODO 1. When going to a Question node in game the buttons do not refresh Assuming this method ^^^^^ is why.
@@ -264,6 +274,8 @@ public class InputWizard implements ActionListener {
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
             		
             		scenePanel.loadAssets(intro.getAssets(), true);
             		scenePanel.loadBackground(scene.getBackground());
@@ -279,6 +291,8 @@ public class InputWizard implements ActionListener {
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
             		
             		scenePanel.loadAssets(summary.getAssets(), true);
             		scenePanel.loadBackground(scene.getBackground());
@@ -291,6 +305,8 @@ public class InputWizard implements ActionListener {
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(true);
+            		textButton.setEnabled(true);
+                    buttonButton.setEnabled(true);
             		selectedLevel = gameLevel.SCREEN;
             		lastSelectedScene = (Scene)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
             		lastSelectedScreen = (Screen)selectedNode.getUserObject();
@@ -305,6 +321,8 @@ public class InputWizard implements ActionListener {
                     backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(true);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
           			selectedLevel = gameLevel.SCENE;
           			lastSelectedScene = s;
           			scenePanel.clear();
@@ -324,6 +342,8 @@ public class InputWizard implements ActionListener {
                     backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
             		backgroundAndHiddenButton.setEnabled(false);
             		soundButton.setEnabled(false);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
             		selectedLevel = gameLevel.GAME;
             		
             		int xSpacing = 180;
@@ -360,13 +380,29 @@ public class InputWizard implements ActionListener {
         				charCounter++;
             		}
             	}
-            	else { //Act node
+            	else if(isActNode(selectedNode)) { //Act node
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
                     backgroundAndHiddenButton.setText("Background");
                     backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
             		backgroundAndHiddenButton.setEnabled(false);
             		soundButton.setEnabled(false);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
+            		selectedLevel = gameLevel.ACT;
+            		scenePanel.clear();
+            		scenePanel.displayAct((Act)selectedNode.getUserObject());
+            	}
+            	else { //Just in case... Possibly error out
+            		characterButton.setEnabled(false);
+            		propButton.setEnabled(false);
+                    backgroundAndHiddenButton.setText("Background");
+                    backgroundAndHiddenButton.setActionCommand("backgroundToolbar");
+            		backgroundAndHiddenButton.setEnabled(false);
+            		soundButton.setEnabled(false);
+            		textButton.setEnabled(false);
+                    buttonButton.setEnabled(false);
+                    //gameLevel is unknown?
             		selectedLevel = gameLevel.ACT;
             	}
             }
@@ -394,10 +430,17 @@ public class InputWizard implements ActionListener {
         propButton.setEnabled(false);
         propButton.setActionCommand("propToolbar");
         toolbarPanel.add(propButton);
-        JButton textButton = new JButton("Text");
+        //TODO Stood-up though unused Text Button
+        textButton = new JButton("Text");
+        textButton.setEnabled(false);
+        textButton.setToolTipText("Not yet implemented");
         toolbarPanel.add(textButton);
-        JButton buttonButton = new JButton("Button");
+        //TODO Stood-up though unused Button Button
+        buttonButton = new JButton("Button");
+        buttonButton.setEnabled(false);
+        buttonButton.setToolTipText("Not yet implemented");
         toolbarPanel.add(buttonButton);
+        //TODO "How much do any of these other buttons do?" -Ryan 2/27/14
         soundButton = new JButton("Sound");
         soundButton.addActionListener(this);
         soundButton.setEnabled(false);
@@ -705,6 +748,10 @@ public class InputWizard implements ActionListener {
 	private boolean isGameNode(DefaultMutableTreeNode node)
 	{
 		return node != null && node.isRoot();
+	}
+	private boolean isActNode(DefaultMutableTreeNode node)
+	{
+		return node != null && node.getUserObject() != null && node.getUserObject() instanceof Act;
 	}
 	private boolean isSceneNode(DefaultMutableTreeNode node)
 	{
