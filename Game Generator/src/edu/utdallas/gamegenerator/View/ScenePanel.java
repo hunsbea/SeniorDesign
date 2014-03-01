@@ -30,6 +30,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class ScenePanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
+	private static final int MIN_LABEL_DIMENSION = 30;
 	private BufferedImage background;
 	private ArrayList<JLabel> assetLabels;
 	private ArrayList<JLabel> hiddenAssetLabels;
@@ -287,7 +288,7 @@ public class ScenePanel extends JPanel
 			        	
 			        	if(label.getRootPane().getCursor().getType() == Cursor.NW_RESIZE_CURSOR)
 			        	{
-			        		if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x > prevClickPoint.x || p.y > prevClickPoint.y))
+			        		if((a.getWidth()+invDeltaX <= MIN_LABEL_DIMENSION || label.getHeight()+invDeltaY <= MIN_LABEL_DIMENSION) && (p.x > prevClickPoint.x || p.y > prevClickPoint.y))
 			        		{
 			        			//do nothing, don't let the image disappear
 			        		}
@@ -323,7 +324,7 @@ public class ScenePanel extends JPanel
 			        	}
 						else if(label.getRootPane().getCursor().getType() == Cursor.SW_RESIZE_CURSOR)
 						{
-							if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x > prevClickPoint.x || p.y < prevClickPoint.y))
+							if((a.getWidth()+invDeltaX <= MIN_LABEL_DIMENSION || label.getHeight()+deltaY <= MIN_LABEL_DIMENSION) && (p.x > prevClickPoint.x || p.y < prevClickPoint.y))
 			        		{
 			        			//do nothing, don't let the image disappear
 			        		}
@@ -359,7 +360,7 @@ public class ScenePanel extends JPanel
 						}
 						else if(label.getRootPane().getCursor().getType() == Cursor.NE_RESIZE_CURSOR)
 						{
-							if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x < prevClickPoint.x || p.y > prevClickPoint.y))
+							if((a.getWidth()+deltaX <= MIN_LABEL_DIMENSION || label.getHeight()+invDeltaY <= MIN_LABEL_DIMENSION) && (p.x < prevClickPoint.x || p.y > prevClickPoint.y))
 			        		{
 			        			//do nothing, don't let the image disappear
 			        		}
@@ -395,7 +396,7 @@ public class ScenePanel extends JPanel
 						}
 						else if(label.getRootPane().getCursor().getType() == Cursor.SE_RESIZE_CURSOR)
 						{
-							if((a.getWidth() <= 30 || label.getHeight() <= 30) && (p.x < prevClickPoint.x || p.y < prevClickPoint.y))
+							if((a.getWidth()+deltaX <= MIN_LABEL_DIMENSION || label.getHeight()+deltaY <= MIN_LABEL_DIMENSION) && (p.x < prevClickPoint.x || p.y < prevClickPoint.y))
 			        		{
 			        			//do nothing, don't let the image disappear
 			        		}
