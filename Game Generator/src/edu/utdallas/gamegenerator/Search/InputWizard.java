@@ -2,6 +2,7 @@ package edu.utdallas.gamegenerator.Search;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -853,6 +854,8 @@ public class InputWizard implements ActionListener {
 	{
 		JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle("Select a game XML file");
+		chooser.setFileFilter(new FileNameExtensionFilter("Game XML", "xml","xmL","xMl","xML","Xml","XmL","XMl","XML"));
+		chooser.setAcceptAllFileFilterUsed(false);
 		int retval = chooser.showOpenDialog(null);
 		
 		if(retval == JFileChooser.APPROVE_OPTION)
