@@ -1,6 +1,9 @@
 package edu.utdallas.gamegenerator.Shared;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import edu.utdallas.gamegenerator.Shared.ConversationBubble.PointDirection;
 
 /**
  * User: Jacob Dahleen
@@ -9,10 +12,22 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "ConversationBubbleAsset")
 public class ConversationBubbleAsset extends Asset {
-    public ConversationBubbleAsset() {
+	private PointDirection point;
+	
+	public ConversationBubbleAsset() {
     }
 
     public ConversationBubbleAsset(Asset asset) {
         super(asset);
     }
+    
+    @XmlElement(name = "PointDirection")
+	public PointDirection getPointDirection() 
+	{
+		return point;
+	}
+	public void setPointDirection(PointDirection pointDirection) 
+	{
+		this.point = pointDirection;
+	}
 }

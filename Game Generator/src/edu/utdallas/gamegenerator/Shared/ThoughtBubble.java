@@ -8,6 +8,8 @@ import java.awt.Point;
 
 import javax.swing.JLabel;
 
+import edu.utdallas.gamegenerator.Shared.ConversationBubble.PointDirection;
+
 public class ThoughtBubble extends JLabel {
 	private int ARROW_HEIGHT = 7;
     private int ARROW_WIDTH = 4;
@@ -18,7 +20,6 @@ public class ThoughtBubble extends JLabel {
     private int heightC;
     private String textC;
     private Font fontC = new Font("Comic Sans MS", Font.BOLD, 15);
-    public static enum PointDirection{LEFT_DOWN,CENTER_DOWN,RIGHT_DOWN};
     private PointDirection directionC = PointDirection.LEFT_DOWN;
     
     public ThoughtBubble()
