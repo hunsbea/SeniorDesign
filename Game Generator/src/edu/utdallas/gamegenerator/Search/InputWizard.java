@@ -862,14 +862,18 @@ public class InputWizard implements ActionListener {
 		{
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
-            List<String> errors = GameErrorChecker.checkErrors(game);
-            for(String s : errors)
+            GameErrorList errorList = GameErrorChecker.checkErrors(game);
+            scenePanel.clear();
+            scenePanel.loadErrors(errorList);
+            for(String s : errorList)
             {
             	System.out.println(s);
             }
-            displayGame(game, file.getName());
+            if(!errorList.hasCriticalErrors()) 
+            { 
+            	displayGame(game, file.getName()); 
+            }
             Currentfile = file;
-            scenePanel.clear();
     		System.out.println("calling clear loadgame\n");
         } 
 		else 

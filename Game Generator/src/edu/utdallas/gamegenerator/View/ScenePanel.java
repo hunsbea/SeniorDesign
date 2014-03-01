@@ -84,6 +84,22 @@ public class ScenePanel extends JPanel
 		updateUI();
 	}
 	
+	public void loadErrors(List<String> errors)
+	{
+		clear();
+		String withNewlines = "";
+		for(String s : errors)
+		{
+			withNewlines += s + "\n";
+		}
+		withNewlines = withNewlines.replace("<", "&lt;").replace(">", "&gt;");
+		
+		JLabel label = new JLabel("<html><pre>" + withNewlines + "</pre></html>");
+		label.setBounds(10, 0, getWidth(), getHeight());
+		label.setVerticalAlignment(JLabel.TOP);
+		add(label);
+	}
+	
 	public void loadBackground(String imageFile)
 	{
 		try 

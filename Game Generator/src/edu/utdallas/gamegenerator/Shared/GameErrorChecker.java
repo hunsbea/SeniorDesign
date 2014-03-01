@@ -10,15 +10,16 @@ import edu.utdallas.gamegenerator.Structure.*;
 public class GameErrorChecker 
 {
 	// Check entire Game hierarchy for errors and return a list of errors
-	public static List<String> checkErrors(Game game)
+	public static GameErrorList checkErrors(Game game)
 	{
 		//TODO: don't save if no game file open
-		ArrayList<String> errors = new ArrayList<String>();
+		GameErrorList errors = new GameErrorList();
 		
 		//Check for Game-level errors
 		if(game == null)
 		{
-			errors.add("Unable to load Game");
+			errors.add("No <Game> detected in XML file");
+			errors.setHasCriticalErrors(true);
 		}
 		else
 		{
@@ -30,7 +31,8 @@ public class GameErrorChecker
 			// Check for global character errors
 			if(game.getCharacters() == null || game.getCharacters().size() == 0)
 			{
-				errors.add("Unable to load Game Characters");
+				errors.add("No <Characters> detected in Game");
+				errors.setHasCriticalErrors(true);
 			}
 			else
 			{
@@ -67,7 +69,8 @@ public class GameErrorChecker
 			// Check for Act-level errors
 			if(game.getActs() == null || game.getActs().size() == 0)
 			{
-				errors.add("Unable to load Acts");
+				errors.add("No <Acts> detected in Game");
+				errors.setHasCriticalErrors(true);
 			}
 			else
 			{
@@ -86,18 +89,19 @@ public class GameErrorChecker
 					List<Scene> scenes = acts.get(i).getScenes();
 					if(scenes == null || scenes.size() == 0)
 					{
-						errors.add("Unable to load Scenes for " + aName);
+						errors.add("No <Scenes> detected for " + aName);
+						errors.setHasCriticalErrors(true);
 					}
 					else
 					{
 						for(int j = 0; j < scenes.size(); j++)
 						{
 							// Need a way to refer to which Scene has an error
-							String sName = scenes.get(j).getName();
+							String sName = aName + " " + scenes.get(j).getName();
 							if(isNullOrEmpty(aName))
 							{
 								errors.add("The <Name> property of Scene found in position " + (j+1) + " is not specified");
-								sName = "Scene [in position " + (j+1) + "]";
+								sName = aName + " " + "Scene [in position " + (j+1) + "]";
 							}
 							if(scenes.get(j).getBackground() == null)
 							{
@@ -109,32 +113,34 @@ public class GameErrorChecker
 							List<Screen> screens = scenes.get(j).getScreens();
 							if(screens == null || screens.size() == 0)
 							{
-								errors.add("Unable to load Screens for " + aName + " " + sName);
+								errors.add("No <Screens> detected for " + aName + " " + sName);
+								errors.setHasCriticalErrors(true);
 							}
 							else
 							{
+								//TODO: check challenges
 								for(int k = 0; k < screens.size(); k++)
 								{
 									// Need a way to refer to which Screen has an error
-									String srName = screens.get(k).getName();
+									String srName = sName + " " + screens.get(k).getName();
 									if(isNullOrEmpty(srName))
 									{
 										errors.add("The <Name> property of Screen found in position " + (k+1) + " is not specified");
-										srName = "Screen [in position " + (k+1) + "]";
+										srName = sName + " " + "Screen [in position " + (k+1) + "]";
 									}
 									
 									//Check for Asset-level errors
 									List<Asset> assets = screens.get(k).getAssets();
 									if(assets == null || assets.size() == 0)
 									{
-										errors.add("Unable to load Assets for " + aName + " " + sName + " " + srName);
+										errors.add("No <Assets> detected for " + srName);
 									}
 									else
 									{
 										for(int m = 0; m < assets.size(); m++)
 										{
 											// Need a way to refer to which Asset has an error
-											String asName = "Asset [in position " + (m+1) + "]";
+											String asName = srName + " " + "Asset [in position " + (m+1) + "]";
 											
 											if(assets.get(m).getWidth() == 0)
 											{
