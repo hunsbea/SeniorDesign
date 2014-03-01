@@ -47,8 +47,8 @@ public class InputWizard implements ActionListener {
  * implements ActionListener so a subclass for it is not needed. 
  */
 	
-	private static int WIDTH = 1280;
-	private static int HEIGHT = 481;
+	public static final int WIDTH = 1280;
+	public static final int HEIGHT = 481;
 	private Matrix[] componentInputs;
 	private boolean submitClicked = false;
  	private JFrame window = new JFrame();
@@ -862,6 +862,11 @@ public class InputWizard implements ActionListener {
 		{
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
+            List<String> errors = GameErrorChecker.checkErrors(game);
+            for(String s : errors)
+            {
+            	System.out.println(s);
+            }
             displayGame(game, file.getName());
             Currentfile = file;
             scenePanel.clear();
