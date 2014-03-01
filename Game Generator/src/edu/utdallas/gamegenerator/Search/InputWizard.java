@@ -5,6 +5,7 @@ import javax.swing.event.*;
 import javax.swing.tree.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import edu.utdallas.RepoUpdate.Updates;
 import edu.utdallas.gamegenerator.Challenge.Challenge;
@@ -835,8 +836,10 @@ public class InputWizard implements ActionListener {
 	private Game SaveGameFile(File gameFile)
     {
             try {
-                    
-                    JAXBContext.newInstance(Game.class).createMarshaller().marshal(game, gameFile);
+            		JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
+            		Marshaller marshaller = jaxbContext.createMarshaller();
+            		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            		marshaller.marshal(game, gameFile);
             }
             catch (JAXBException e) {
                     e.printStackTrace();
