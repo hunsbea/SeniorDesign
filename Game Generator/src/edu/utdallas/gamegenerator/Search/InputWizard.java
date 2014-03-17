@@ -60,6 +60,7 @@ public class InputWizard implements ActionListener {
  	private JMenuItem addToRepo;
  	private JMenuItem remakeRepo;
  	private JMenuItem saveToRepo;
+ 	private JMenuItem saveToRepoAs;
  	private static String label1 = "Preview after generating: ";
  	private JTree gameTree;
  	private ScenePanel scenePanel;
@@ -140,6 +141,10 @@ public class InputWizard implements ActionListener {
         saveToRepo.addActionListener(this);
         saveToRepo.setActionCommand("saveToRepo");
         fileMenu.add(saveToRepo);
+        saveToRepoAs = new JMenuItem ("Save Game File As", KeyEvent.VK_A);
+        saveToRepoAs.addActionListener(this);
+        saveToRepoAs.setActionCommand("saveToRepoAs");
+        fileMenu.add(saveToRepoAs);
 
         //Create Character Select Window
         characterSelectWindow = new CharacterSelectWindow(window);
@@ -834,7 +839,7 @@ public class InputWizard implements ActionListener {
 		
 		return game1;
 	}
-	private Game SaveGameFile(File gameFile)
+	private Game saveGameFile(File gameFile)
     {
             try {
             		JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
@@ -848,6 +853,33 @@ public class InputWizard implements ActionListener {
             }
             return game;
     }
+	
+	private void saveGameFileAs()
+	{
+		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogTitle("Enter a name for the file");
+		chooser.setFileFilter(new FileNameExtensionFilter("Game XML", "XML"));
+		chooser.setAcceptAllFileFilterUsed(false);
+		int retval = chooser.showSaveDialog(null);
+		
+		if(retval == JFileChooser.APPROVE_OPTION)
+		{
+            File file = chooser.getSelectedFile();
+            // check for .xml (of any case variation) at the end ($) of the filename
+            if(!file.getName().matches(".*[.][Xx][Mm][Ll]$"))
+            {
+            	System.out.println("didn't match");
+            	file = new File(file.getPath() + ".XML");
+            }
+            game = saveGameFile(file);
+            Currentfile = file;
+    		System.out.println("saved as " + file.getPath());
+        } 
+		else 
+		{
+            System.out.println("Save command cancelled by user.");
+        }
+	}
 	
 	// C40 handle loading an XML game into the preview window
 	private void loadGame()
@@ -1426,7 +1458,12 @@ public class InputWizard implements ActionListener {
 			displayScreen(lastSelectedScene, lastSelectedScreen);
 			break;
 		case "saveToRepo":
-			SaveGameFile(Currentfile);
+			if(game != null)
+				saveGameFile(Currentfile);
+			break;
+		case "saveToRepoAs":
+			if(game != null)
+				saveGameFileAs();
 			break;
 		case "addToRepo":
 			File parent = new File("New Games\\");
@@ -1584,12 +1621,5 @@ public class InputWizard implements ActionListener {
 		System.out.println("Unanticipated Input in ActionPerformed:" + e.getActionCommand());
 		break;
 		}
-	}
-	public JMenuItem getSaveToRepo() {
-		return saveToRepo;
-	}
-	public void setSaveToRepo(JMenuItem saveToRepo) {
-		this.saveToRepo = saveToRepo;
-	}
-		
+	}	
 }
