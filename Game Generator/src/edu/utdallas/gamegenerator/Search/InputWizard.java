@@ -61,6 +61,7 @@ public class InputWizard implements ActionListener {
  	private JMenuItem remakeRepo;
  	private JMenuItem saveToRepo;
  	private JMenuItem saveToRepoAs;
+ 	private JMenuItem viewErrorList;
  	private static String label1 = "Preview after generating: ";
  	private JTree gameTree;
  	private ScenePanel scenePanel;
@@ -129,7 +130,7 @@ public class InputWizard implements ActionListener {
         menu = new JMenu("Repository Tools");
         menu.setMnemonic(KeyEvent.VK_R);
         menuBar.add(menu);
-        addToRepo = new JMenuItem("Add game to repository", KeyEvent.VK_A);
+        addToRepo = new JMenuItem("Add game to repository", KeyEvent.VK_D);
         addToRepo.setActionCommand("addToRepo");
         addToRepo.addActionListener(this);
         remakeRepo = new JMenuItem("Remake the repository", KeyEvent.VK_R);
@@ -141,10 +142,17 @@ public class InputWizard implements ActionListener {
         saveToRepo.addActionListener(this);
         saveToRepo.setActionCommand("saveToRepo");
         fileMenu.add(saveToRepo);
+        saveToRepo.setEnabled(false);
         saveToRepoAs = new JMenuItem ("Save Game File As", KeyEvent.VK_A);
         saveToRepoAs.addActionListener(this);
         saveToRepoAs.setActionCommand("saveToRepoAs");
         fileMenu.add(saveToRepoAs);
+        saveToRepoAs.setEnabled(false);
+        viewErrorList = new JMenuItem ("View XML Errors", KeyEvent.VK_E);
+        viewErrorList.addActionListener(this);
+        viewErrorList.setActionCommand("viewErrorList");
+        viewErrorList.setEnabled(false);
+        fileMenu.add(viewErrorList);
 
         //Create Character Select Window
         characterSelectWindow = new CharacterSelectWindow(window);
@@ -894,17 +902,13 @@ public class InputWizard implements ActionListener {
 		{
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
-            GameErrorList errorList = GameErrorChecker.checkErrors(game);
-            scenePanel.clear();
-            scenePanel.loadErrors(errorList);
-            for(String s : errorList)
-            {
-            	System.out.println(s);
-            }
-            if(!errorList.hasCriticalErrors()) 
+            if(!loadAndDisplayErrors(game)) 
             { 
             	displayGame(game, file.getName()); 
             }
+            viewErrorList.setEnabled(true);
+            saveToRepo.setEnabled(true);
+            saveToRepoAs.setEnabled(true);
             Currentfile = file;
     		System.out.println("calling clear loadgame\n");
         } 
@@ -913,6 +917,21 @@ public class InputWizard implements ActionListener {
             System.out.println("Open command cancelled by user.");
         }
 	}
+	
+	// return true if there are critical errors
+	private boolean loadAndDisplayErrors(Game game)
+	{
+        GameErrorList errorList = GameErrorChecker.checkErrors(game);
+        scenePanel.clear();
+        scenePanel.loadErrors(errorList);
+        for(String s : errorList)
+        {
+        	System.out.println(s);
+        }
+        
+        return errorList.hasCriticalErrors();
+	}
+	
 	// divide game into Acts and Scenes translating to java swing TreeNodes
 	// file name is required because it will be the name of the root node
 	private void displayGame(Game game1, String name)
@@ -1471,6 +1490,9 @@ public class InputWizard implements ActionListener {
 		case "saveToRepoAs":
 			if(game != null)
 				saveGameFileAs();
+			break;
+		case "viewErrorList":
+			loadAndDisplayErrors(game);
 			break;
 		case "addToRepo":
 			File parent = new File("New Games\\");
