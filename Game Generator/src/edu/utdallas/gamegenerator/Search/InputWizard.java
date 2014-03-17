@@ -85,6 +85,7 @@ public class InputWizard implements ActionListener {
  	private Scene lastSelectedScene = null;
  	private Screen lastSelectedScreen = null;
  	private File Currentfile = null;
+ 	private boolean hasCriticalGameErrors = false;
  	//JD end
  	
  	private Game game;
@@ -256,7 +257,7 @@ public class InputWizard implements ActionListener {
         {
             public void valueChanged(TreeSelectionEvent e) 
             {
-            	if(game == null) { return; } // don't try to display an empty game
+            	if(game == null || hasCriticalGameErrors) { return; } // don't try to display an empty game
             	DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) gameTree.getLastSelectedPathComponent();
             	AudioPlayer.stopAudio();
             	if (isQuestionNode(selectedNode))
@@ -902,9 +903,18 @@ public class InputWizard implements ActionListener {
 		{
             File file = chooser.getSelectedFile();
             game = readGameFile(file);
-            if(!loadAndDisplayErrors(game)) 
+            hasCriticalGameErrors = false;
+            loadAndDisplayErrors(game);
+            if(!hasCriticalGameErrors) 
             { 
             	displayGame(game, file.getName()); 
+            }
+            else
+            {
+        		((DefaultMutableTreeNode) gameTree.getModel().getRoot()).removeAllChildren();
+                DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
+                rootNode.setUserObject("No game file selected");
+                ((DefaultTreeModel) gameTree.getModel()).setRoot(rootNode);
             }
             viewErrorList.setEnabled(true);
             saveToRepo.setEnabled(true);
@@ -919,7 +929,7 @@ public class InputWizard implements ActionListener {
 	}
 	
 	// return true if there are critical errors
-	private boolean loadAndDisplayErrors(Game game)
+	private void loadAndDisplayErrors(Game game)
 	{
         GameErrorList errorList = GameErrorChecker.checkErrors(game);
         scenePanel.clear();
@@ -929,7 +939,7 @@ public class InputWizard implements ActionListener {
         	System.out.println(s);
         }
         
-        return errorList.hasCriticalErrors();
+        hasCriticalGameErrors = errorList.hasCriticalErrors();
 	}
 	
 	// divide game into Acts and Scenes translating to java swing TreeNodes
