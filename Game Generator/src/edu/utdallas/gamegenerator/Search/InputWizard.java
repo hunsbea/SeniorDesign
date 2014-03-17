@@ -1458,8 +1458,15 @@ public class InputWizard implements ActionListener {
 			displayScreen(lastSelectedScene, lastSelectedScreen);
 			break;
 		case "saveToRepo":
-			if(game != null)
-				saveGameFile(Currentfile);
+			if(Currentfile != null && !Currentfile.equals(""))
+			{
+				int retval = JOptionPane.showConfirmDialog(null, "Overwrite " + Currentfile + " and save changes?", "Warning", JOptionPane.YES_NO_OPTION);
+				if(retval == JOptionPane.YES_OPTION)
+				{
+					System.out.println("overwriting " + Currentfile);
+					saveGameFile(Currentfile);
+				}
+			}
 			break;
 		case "saveToRepoAs":
 			if(game != null)
