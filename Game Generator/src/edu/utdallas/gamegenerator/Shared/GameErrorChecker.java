@@ -113,7 +113,7 @@ public class GameErrorChecker
 							List<Screen> screens = scenes.get(j).getScreens();
 							if(screens == null || screens.size() == 0)
 							{
-								errors.add("No <Screens> detected for " + aName + " " + sName);
+								errors.add("No <Screens> detected for " + sName);
 								errors.setHasCriticalErrors(true);
 							}
 							else
