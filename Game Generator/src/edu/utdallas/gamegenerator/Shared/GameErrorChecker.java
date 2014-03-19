@@ -152,24 +152,22 @@ public class GameErrorChecker
 												errors.add("The <Height> property of " + asName + " is zero or not specified, will be set to 400 so that you know to resize");
 												assets.get(m).setHeight(400);
 											}
-											System.out.println(m);
+
 											if(assets.get(m).getX() > InputWizard.WIDTH - 150					// too far right
 													|| assets.get(m).getX() + assets.get(m).getWidth() <= 0		// too far left
 													|| assets.get(m).getY() > InputWizard.HEIGHT - 150			// too far down
 													|| assets.get(m).getY() + assets.get(m).getHeight() <= 0)	// too far up
 											{
-												System.out.println(assets.get(m).getX());
-												System.out.println(assets.get(m).getX() + " " + assets.get(m).getWidth());
-												errors.add(asName + assets.get(m).getName() + " is at risk of not being visible in the coordinate system, will be corrected if completely offscreen, should be manually checked regardless");
-												if(assets.get(m).getX() > InputWizard.WIDTH)				// too far right
+
+												errors.add(asName + " is at risk of not being visible in the coordinate system, will be corrected if completely offscreen, should be manually checked regardless");
+												if(assets.get(m).getX() > InputWizard.WIDTH)							// too far right
 													assets.get(m).setX(InputWizard.WIDTH - assets.get(m).getWidth());
-												if(assets.get(m).getX() <= 0){							// too far left
-													System.out.println("Working?");
+												if(assets.get(m).getX() <= 0){											// too far left
 													assets.get(m).setX(0);
 												}
-												if(assets.get(m).getY() > InputWizard.HEIGHT)				// too far down
+												if(assets.get(m).getY() > InputWizard.HEIGHT)							// too far down
 													assets.get(m).setY(InputWizard.HEIGHT-assets.get(m).getHeight());
-												if(assets.get(m).getY() <= 0)								// too far up
+												if(assets.get(m).getY() <= 0)											// too far up
 													assets.get(m).setY(0);
 											}
 											
