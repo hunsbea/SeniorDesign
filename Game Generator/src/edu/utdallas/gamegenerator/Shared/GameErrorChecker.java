@@ -142,20 +142,35 @@ public class GameErrorChecker
 											// Need a way to refer to which Asset has an error
 											String asName = srName + " " + "Asset [in position " + (m+1) + "]";
 											
-											if(assets.get(m).getWidth() == 0)
+											if(assets.get(m).getWidth() <= 0)
 											{
-												errors.add("The <Width> property of " + asName + " is zero or not specified");
+												errors.add("The <Width> property of " + asName + " is zero or not specified, will be set to 400 so that you know to resize");
+												assets.get(m).setWidth(400);
 											}
-											if(assets.get(m).getHeight() == 0)
+											if(assets.get(m).getHeight() <= 0)
 											{
-												errors.add("The <Height> property of " + asName + " is zero or not specified");
+												errors.add("The <Height> property of " + asName + " is zero or not specified, will be set to 400 so that you know to resize");
+												assets.get(m).setHeight(400);
 											}
+											System.out.println(m);
 											if(assets.get(m).getX() > InputWizard.WIDTH - 150					// too far right
 													|| assets.get(m).getX() + assets.get(m).getWidth() <= 0		// too far left
-													|| assets.get(m).getY() > InputWizard.HEIGHT				// too far down
+													|| assets.get(m).getY() > InputWizard.HEIGHT - 150			// too far down
 													|| assets.get(m).getY() + assets.get(m).getHeight() <= 0)	// too far up
 											{
-												errors.add(asName + " is not visible in the coordinate system");
+												System.out.println(assets.get(m).getX());
+												System.out.println(assets.get(m).getX() + " " + assets.get(m).getWidth());
+												errors.add(asName + assets.get(m).getName() + " is at risk of not being visible in the coordinate system, will be corrected if completely offscreen, should be manually checked regardless");
+												if(assets.get(m).getX() > InputWizard.WIDTH)				// too far right
+													assets.get(m).setX(InputWizard.WIDTH - assets.get(m).getWidth());
+												if(assets.get(m).getX() <= 0){							// too far left
+													System.out.println("Working?");
+													assets.get(m).setX(0);
+												}
+												if(assets.get(m).getY() > InputWizard.HEIGHT)				// too far down
+													assets.get(m).setY(InputWizard.HEIGHT-assets.get(m).getHeight());
+												if(assets.get(m).getY() <= 0)								// too far up
+													assets.get(m).setY(0);
 											}
 											
 											if(assets.get(m) instanceof CharacterAsset || assets.get(m) instanceof ImageAsset)
@@ -165,11 +180,12 @@ public class GameErrorChecker
 													errors.add("The <DisplayImage> property of " + asName + " is not specified");
 												}
 											}
-											if(assets.get(m) instanceof ButtonAsset || assets.get(m) instanceof ThoughtBubbleAsset || assets.get(m) instanceof ConversationBubbleAsset)
+											if(assets.get(m) instanceof ButtonAsset || assets.get(m) instanceof ThoughtBubbleAsset || assets.get(m) instanceof ConversationBubbleAsset || assets.get(m) instanceof InformationBoxAsset)
 											{
 												if(isNullOrEmpty(assets.get(m).getName()))
 												{
-													errors.add(asName + " contains no text");
+													errors.add(asName + " contains no text, will be filled with null");
+													assets.get(m).setName("null");
 												}
 											}
 										}
