@@ -61,7 +61,7 @@ public class InputWizard implements ActionListener {
  	private JMenuItem remakeRepo;
  	private JMenuItem saveToRepo;
  	private JMenuItem saveToRepoAs;
- 	private JMenuItem viewErrorList;
+ 	private JMenuItem checkErrorList;
  	private static String label1 = "Preview after generating: ";
  	private JTree gameTree;
  	private ScenePanel scenePanel;
@@ -149,11 +149,11 @@ public class InputWizard implements ActionListener {
         saveToRepoAs.setActionCommand("saveToRepoAs");
         fileMenu.add(saveToRepoAs);
         saveToRepoAs.setEnabled(false);
-        viewErrorList = new JMenuItem ("View XML Errors", KeyEvent.VK_E);
-        viewErrorList.addActionListener(this);
-        viewErrorList.setActionCommand("viewErrorList");
-        viewErrorList.setEnabled(false);
-        fileMenu.add(viewErrorList);
+        checkErrorList = new JMenuItem ("Check XML Errors", KeyEvent.VK_C);
+        checkErrorList.addActionListener(this);
+        checkErrorList.setActionCommand("viewErrorList");
+        checkErrorList.setEnabled(false);
+        fileMenu.add(checkErrorList);
 
         //Create Character Select Window
         characterSelectWindow = new CharacterSelectWindow(window);
@@ -916,7 +916,7 @@ public class InputWizard implements ActionListener {
                 rootNode.setUserObject("No game file selected");
                 ((DefaultTreeModel) gameTree.getModel()).setRoot(rootNode);
             }
-            viewErrorList.setEnabled(true);
+            checkErrorList.setEnabled(true);
             saveToRepo.setEnabled(true);
             saveToRepoAs.setEnabled(true);
             Currentfile = file;
