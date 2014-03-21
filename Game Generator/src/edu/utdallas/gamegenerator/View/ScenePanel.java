@@ -84,20 +84,21 @@ public class ScenePanel extends JPanel
 		updateUI();
 	}
 	
-	public void loadErrors(List<String> errors)
+	public void loadErrors(List<GameError> errors)
 	{
 		clear();
-		String withNewlines = "";
-		for(String s : errors)
-		{
-			withNewlines += s + "\n";
-		}
-		withNewlines = withNewlines.replace("<", "&lt;").replace(">", "&gt;");
 		
-		JLabel label = new JLabel("<html><pre>" + withNewlines + "</pre></html>");
-		label.setBounds(10, 0, getWidth(), getHeight());
-		label.setVerticalAlignment(JLabel.TOP);
-		add(label);
+		//TODO: need 3 columns: Icon for severity, Error Message, Button to click to resolve error
+		//	The button ActionListener will call the error's fixError() method
+		JPanel errorPanel = new JPanel(new GridLayout(errors.size(), 1)); //n rows, 1 col
+		errorPanel.setBounds(0, 0, getWidth(), getHeight());
+		for(int i = 0; i < errors.size(); i++)
+		{
+			errorPanel.add(new JLabel("<html><body style=\"width:" + (getWidth()-240) + "px\">" 
+					+ errors.get(i).getMessage().replace("<", "&lt;").replace(">", "&gt;") 
+					+ "</body></html>"));
+		}
+		add(errorPanel);
 	}
 	
 	public void loadBackground(String imageFile)

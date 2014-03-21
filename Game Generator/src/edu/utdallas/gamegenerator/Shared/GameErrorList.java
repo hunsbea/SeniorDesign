@@ -2,17 +2,15 @@ package edu.utdallas.gamegenerator.Shared;
 
 import java.util.ArrayList;
 
-public class GameErrorList extends ArrayList<String>
-{
-	private boolean hasCriticalErrors = false;
+import edu.utdallas.gamegenerator.Shared.GameError.Severity;
 
+public class GameErrorList extends ArrayList<GameError>
+{
 	public boolean hasCriticalErrors() 
 	{
-		return hasCriticalErrors;
-	}
-
-	public void setHasCriticalErrors(boolean hasCriticalErrors) 
-	{
-		this.hasCriticalErrors = hasCriticalErrors;
+		for(GameError e : this)
+			if(e.getSeverity() == Severity.HIGH)
+				return true;
+		return false;
 	}
 }

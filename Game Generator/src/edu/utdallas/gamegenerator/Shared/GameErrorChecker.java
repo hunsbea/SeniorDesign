@@ -5,12 +5,14 @@ import java.util.List;
 
 import edu.utdallas.gamegenerator.Character.Character;
 import edu.utdallas.gamegenerator.Search.InputWizard;
+import edu.utdallas.gamegenerator.Shared.GameError.Level;
+import edu.utdallas.gamegenerator.Shared.GameError.Severity;
 import edu.utdallas.gamegenerator.Structure.*;
 
 public class GameErrorChecker 
 {
 	// Check entire Game hierarchy for errors and return a list of errors
-	public static GameErrorList checkErrors(Game game)
+	public static GameErrorList checkErrors(final Game game, int panelWidth, int panelHeight)
 	{
 		//TODO: don't save if no game file open
 		GameErrorList errors = new GameErrorList();
@@ -18,21 +20,25 @@ public class GameErrorChecker
 		//Check for Game-level errors
 		if(game == null)
 		{
-			errors.add("No <Game> detected in XML file");
-			errors.setHasCriticalErrors(true);
+			errors.add(new GameError(Level.GAME, Severity.HIGH, "No <Game> detected in XML file") {
+				public void fixError() { } // can't fix this
+			});
 		}
 		else
 		{
 			if(game.getName() == null)
 			{
-				errors.add("The <Name> property of the game is not specified");
+				errors.add(new GameError(Level.GAME, Severity.LOW, "The <Name> property of the game is not specified") {
+					public void fixError() { game.setName("Game 1"); }
+				});
 			}
 			
 			// Check for global character errors
 			if(game.getCharacters() == null || game.getCharacters().size() == 0)
 			{
-				errors.add("No <Characters> detected in Game");
-				errors.setHasCriticalErrors(true);
+				errors.add(new GameError(Level.GAME, Severity.HIGH, "No <Characters> detected in Game") {
+					public void fixError() { } //TODO
+				});
 			}
 			else
 			{
@@ -43,20 +49,28 @@ public class GameErrorChecker
 					String cName = characters.get(i).getName();
 					if(isNullOrEmpty(cName))
 					{
-						errors.add("The <Name> property of Character found in position " + (i+1) + " is not specified");
+						errors.add(new GameError(Level.GAME, Severity.LOW, "The <Name> property of Character found in position " + (i+1) + " is not specified") {
+							public void fixError() { } //TODO
+						});
 						cName = "[in position " + (i+1) + "]";
 					}
 					if(isNullOrEmpty(characters.get(i).getBehavior()))
 					{
-						errors.add("The <Behavior> property of Character " + cName + " is not specified");
+						errors.add(new GameError(Level.GAME, Severity.LOW, "The <Behavior> property of Character " + cName + " is not specified") {
+							public void fixError() { } //TODO
+						});
 					}
 					if(characters.get(i).getCharacterID() == 0)
 					{
-						errors.add("The <CharacterID> property of Character " + cName + " is not specified");
+						errors.add(new GameError(Level.GAME, Severity.LOW, "The <CharacterID> property of Character " + cName + " is not specified") {
+							public void fixError() { } //TODO
+						});
 					}
 					if(characters.get(i).getProfile() == null)
 					{
-						errors.add("The <Profile> property of Character " + cName + " is not specified");
+						errors.add(new GameError(Level.GAME, Severity.LOW, "The <Profile> property of Character " + cName + " is not specified") {
+							public void fixError() { } //TODO
+						});
 					}
 					// Check valid profile properties
 					else
@@ -69,8 +83,9 @@ public class GameErrorChecker
 			// Check for Act-level errors
 			if(game.getActs() == null || game.getActs().size() == 0)
 			{
-				errors.add("No <Acts> detected in Game");
-				errors.setHasCriticalErrors(true);
+				errors.add(new GameError(Level.ACT, Severity.HIGH, "No <Acts> detected in Game") {
+					public void fixError() { } //TODO
+				});
 			}
 			else
 			{
@@ -81,7 +96,9 @@ public class GameErrorChecker
 					String aName = acts.get(i).getName();
 					if(isNullOrEmpty(aName))
 					{
-						errors.add("The <Name> property of Act found in position " + (i+1) + " is not specified");
+						errors.add(new GameError(Level.ACT, Severity.LOW, "The <Name> property of Act found in position " + (i+1) + " is not specified") {
+							public void fixError() { } //TODO
+						});
 						aName = "Act [in position " + (i+1) + "]";
 					}
 					
@@ -89,8 +106,9 @@ public class GameErrorChecker
 					List<Scene> scenes = acts.get(i).getScenes();
 					if(scenes == null || scenes.size() == 0)
 					{
-						errors.add("No <Scenes> detected for " + aName);
-						errors.setHasCriticalErrors(true);
+						errors.add(new GameError(Level.SCENE, Severity.HIGH, "No <Scenes> detected for " + aName) {
+							public void fixError() { } //TODO
+						});
 					}
 					else
 					{
@@ -100,12 +118,16 @@ public class GameErrorChecker
 							String sName = aName + " " + scenes.get(j).getName();
 							if(isNullOrEmpty(aName))
 							{
-								errors.add("The <Name> property of Scene found in position " + (j+1) + " is not specified");
+								errors.add(new GameError(Level.SCENE, Severity.LOW, "The <Name> property of Scene found in position " + (j+1) + " is not specified") {
+									public void fixError() { } //TODO
+								});
 								sName = aName + " " + "Scene [in position " + (j+1) + "]";
 							}
 							if(scenes.get(j).getBackground() == null)
 							{
-								errors.add("The <Background> property of " + sName + " is not specified");
+								errors.add(new GameError(Level.SCENE, Severity.LOW, "The <Background> property of " + sName + " is not specified") {
+									public void fixError() { } //TODO
+								});
 							}
 							//TODO: should we warn about no background audio?
 							
@@ -113,8 +135,9 @@ public class GameErrorChecker
 							List<Screen> screens = scenes.get(j).getScreens();
 							if(screens == null || screens.size() == 0)
 							{
-								errors.add("No <Screens> detected for " + sName);
-								errors.setHasCriticalErrors(true);
+								errors.add(new GameError(Level.SCREEN, Severity.HIGH, "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA No <Screens> detected for " + sName) {
+									public void fixError() { } //TODO
+								});
 							}
 							else
 							{
@@ -125,15 +148,19 @@ public class GameErrorChecker
 									String srName = sName + " " + screens.get(k).getName();
 									if(isNullOrEmpty(srName))
 									{
-										errors.add("The <Name> property of Screen found in position " + (k+1) + " is not specified");
+										errors.add(new GameError(Level.SCREEN, Severity.LOW, "The <Name> property of Screen found in position " + (k+1) + " is not specified") {
+											public void fixError() { } //TODO
+										});
 										srName = sName + " " + "Screen [in position " + (k+1) + "]";
 									}
 									
 									//Check for Asset-level errors
-									List<Asset> assets = screens.get(k).getAssets();
+									final List<Asset> assets = screens.get(k).getAssets();
 									if(assets == null || assets.size() == 0)
 									{
-										errors.add("No <Assets> detected for " + srName);
+										errors.add(new GameError(Level.SCREEN, Severity.LOW, "No <Assets> detected for " + srName) {
+											public void fixError() { } //TODO
+										});
 									}
 									else
 									{
@@ -144,46 +171,45 @@ public class GameErrorChecker
 											
 											if(assets.get(m).getWidth() <= 0)
 											{
-												errors.add("The <Width> property of " + asName + " is zero or not specified, will be set to 400 so that you know to resize");
-												assets.get(m).setWidth(400);
+												errors.add(new GameError(Level.SCREEN, Severity.LOW, "The <Width> property of " + asName + " is zero or not specified") {
+													public void fixError() { } //TODO
+												});
 											}
 											if(assets.get(m).getHeight() <= 0)
 											{
-												errors.add("The <Height> property of " + asName + " is zero or not specified, will be set to 400 so that you know to resize");
-												assets.get(m).setHeight(400);
+												errors.add(new GameError(Level.SCREEN, Severity.LOW, "The <Height> property of " + asName + " is zero or not specified") {
+													public void fixError() { } //TODO
+												});
 											}
 
-											if(assets.get(m).getX() > InputWizard.WIDTH - 150					// too far right
+											if(assets.get(m).getX() > panelWidth								// too far right
 													|| assets.get(m).getX() + assets.get(m).getWidth() <= 0		// too far left
-													|| assets.get(m).getY() > InputWizard.HEIGHT - 150			// too far down
+													|| assets.get(m).getY() > panelHeight						// too far down
 													|| assets.get(m).getY() + assets.get(m).getHeight() <= 0)	// too far up
 											{
-
-												errors.add(asName + " is at risk of not being visible in the coordinate system, will be corrected if completely offscreen, should be manually checked regardless");
-												if(assets.get(m).getX() > InputWizard.WIDTH)							// too far right
-													assets.get(m).setX(InputWizard.WIDTH - assets.get(m).getWidth());
-												if(assets.get(m).getX() <= 0){											// too far left
-													assets.get(m).setX(0);
-												}
-												if(assets.get(m).getY() > InputWizard.HEIGHT)							// too far down
-													assets.get(m).setY(InputWizard.HEIGHT-assets.get(m).getHeight());
-												if(assets.get(m).getY() <= 0)											// too far up
-													assets.get(m).setY(0);
+												errors.add(new GameError(Level.SCREEN, Severity.LOW, asName + " is not visible in the coordinate system") {
+													public void fixError() { } //TODO
+												});
 											}
 											
 											if(assets.get(m) instanceof CharacterAsset || assets.get(m) instanceof ImageAsset)
 											{
 												if(isNullOrEmpty(assets.get(m).getDisplayImage()))
 												{
-													errors.add("The <DisplayImage> property of " + asName + " is not specified");
+													errors.add(new GameError(Level.SCREEN, Severity.LOW, "The <DisplayImage> property of " + asName + " is not specified") {
+														public void fixError() { } //TODO
+													});
 												}
 											}
 											if(assets.get(m) instanceof ButtonAsset || assets.get(m) instanceof ThoughtBubbleAsset || assets.get(m) instanceof ConversationBubbleAsset || assets.get(m) instanceof InformationBoxAsset)
 											{
 												if(isNullOrEmpty(assets.get(m).getName()))
 												{
-													errors.add(asName + " contains no text, will be filled with null");
-													assets.get(m).setName("null");
+													final Asset toFix = assets.get(m);
+													errors.add(new GameError(Level.SCREEN, Severity.LOW, asName + " contains no text, will be filled with null") {
+														public void fixError() { toFix.setName("null"); }
+													});
+													
 												}
 											}
 										}

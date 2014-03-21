@@ -931,15 +931,16 @@ public class InputWizard implements ActionListener {
 	// return true if there are critical errors
 	private void loadAndDisplayErrors(Game game)
 	{
-        GameErrorList errorList = GameErrorChecker.checkErrors(game);
+        GameErrorList errorList = GameErrorChecker.checkErrors(game, scenePanel.getWidth(), scenePanel.getHeight());
         scenePanel.clear();
         scenePanel.loadErrors(errorList);
-        for(String s : errorList)
-        {
-        	System.out.println(s);
-        }
-        
         hasCriticalGameErrors = errorList.hasCriticalErrors();
+        
+        //Debug
+        for(GameError e : errorList)
+        {
+        	System.out.println(e);
+        }
 	}
 	
 	// divide game into Acts and Scenes translating to java swing TreeNodes
