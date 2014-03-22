@@ -1,7 +1,12 @@
 package edu.utdallas.gamegenerator.Shared;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import edu.utdallas.gamegenerator.Character.Character;
 import edu.utdallas.gamegenerator.Search.InputWizard;
@@ -197,8 +202,37 @@ public class GameErrorChecker
 												if(isNullOrEmpty(assets.get(m).getDisplayImage()))
 												{
 													errors.add(new GameError(Level.SCREEN, Severity.LOW, "The <DisplayImage> property of " + asName + " is not specified") {
-														public void fixError() { } //TODO
+														public void fixError() {} //TODO this fix error is below
 													});
+													assets.get(m).setDisplayImage("error_button.png");
+												} else if(assets.get(m) instanceof CharacterAsset) {
+													String baseDir = "Office, Classroom\\Characters\\";
+													try{
+														BufferedImage image = ImageIO.read(new File(baseDir + assets.get(m).getDisplayImage()));
+														int width = image.getWidth();
+														final double desiredWidth = assets.get(m).getWidth();
+														double scaleFactor = desiredWidth / width;
+														BufferedImage scaledImage = ImageHelper.getScaledImage(image, scaleFactor);
+													} catch (IOException ex) {
+														errors.add(new GameError( Level.SCREEN, Severity.MEDIUM, "The <DisplayImage> property of " + asName + " is missing from the repository") {
+															public void fixError() {} //TODO this fix error is below
+														});
+														assets.get(m).setDisplayImage("error_button.png");
+													}
+												} else if(assets.get(m) instanceof ImageAsset) {
+													String baseDir = "Office, Classroom\\";
+													try{
+														BufferedImage image = ImageIO.read(new File(baseDir + assets.get(m).getDisplayImage()));
+														int width = image.getWidth();
+														final double desiredWidth = assets.get(m).getWidth();
+														double scaleFactor = desiredWidth / width;
+														BufferedImage scaledImage = ImageHelper.getScaledImage(image, scaleFactor);
+													} catch (IOException ex) {
+														errors.add(new GameError( Level.SCREEN, Severity.MEDIUM, "The <DisplayImage> property of " + asName + " is missing from the repository") {
+															public void fixError() {} //TODO this fix error is below
+														});
+														assets.get(m).setDisplayImage("error_button.png");
+													}
 												}
 											}
 											if(assets.get(m) instanceof ButtonAsset || assets.get(m) instanceof ThoughtBubbleAsset || assets.get(m) instanceof ConversationBubbleAsset || assets.get(m) instanceof InformationBoxAsset)
