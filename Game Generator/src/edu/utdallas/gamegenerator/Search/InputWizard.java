@@ -25,6 +25,9 @@ import edu.utdallas.gamegenerator.View.PropSelectWindow;
 import edu.utdallas.gamegenerator.View.ScenePanel;
 import edu.utdallas.gamegenerator.View.SoundSelectWindow;
 import edu.utdallas.gamegenerator.Character.Character;
+import edu.utdallas.gamegenerator.Error.PreviewError;
+import edu.utdallas.gamegenerator.Error.GameErrorChecker;
+import edu.utdallas.gamegenerator.Error.GameErrorList;
 
 import Jama.Matrix;
 
@@ -937,7 +940,7 @@ public class InputWizard implements ActionListener {
         hasCriticalGameErrors = errorList.hasCriticalErrors();
         
         //Debug
-        for(GameError e : errorList)
+        for(PreviewError e : errorList)
         {
         	System.out.println(e);
         }

@@ -1,5 +1,6 @@
 package edu.utdallas.gamegenerator.View;
 
+import edu.utdallas.gamegenerator.Error.PreviewError;
 import edu.utdallas.gamegenerator.Search.InputWizard;
 import edu.utdallas.gamegenerator.Shared.*;
 import edu.utdallas.gamegenerator.Structure.Act;
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.Color;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,7 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,7 +27,6 @@ import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.border.Border;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ScenePanel extends JPanel
 {
@@ -84,20 +85,77 @@ public class ScenePanel extends JPanel
 		updateUI();
 	}
 	
-	public void loadErrors(List<GameError> errors)
+	private JPanel createErrorLevelPanel(String levelName, List<PreviewError> errors)
 	{
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(new JLabel("<html><h2>" + levelName + "</h2></html>"), BorderLayout.NORTH);
+		
+		// 3 columns: severity icon, error message, autocorrect button
+		JPanel errorsPanel = new JPanel(new GridLayout(errors.size(), 1));
+		for(final PreviewError e : errors)
+		{
+			JPanel rowPanel = new JPanel(new BorderLayout());
+			rowPanel.add(new JLabel("<html><h3>" + e.getSeverity().toString() + "</h3></html>"), BorderLayout.WEST); //string for now
+			rowPanel.add(new JLabel("<html><body style=\"margin-left:4px;\">" + e.getMessage().replace("<", "&lt;").replace(">", "&gt;") + "</body></html>"), BorderLayout.CENTER);
+			
+			JButton fixButton = new JButton("Autocorrect");
+			fixButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent ev) { e.fixError(); }
+			});
+			
+			rowPanel.add(fixButton, BorderLayout.EAST);
+			//rowPanel.setMaximumSize(new Dimension(getWidth()-240, 10));
+			errorsPanel.add(rowPanel);
+		}
+		panel.add(errorsPanel, BorderLayout.CENTER);
+		
+		return panel;
+	}
+	
+	public void loadErrors(List<PreviewError> errors)
+	{
+		ArrayList<PreviewError> gameLevelErrors = new ArrayList<PreviewError>();
+		ArrayList<PreviewError> actLevelErrors = new ArrayList<PreviewError>();
+		ArrayList<PreviewError> sceneLevelErrors = new ArrayList<PreviewError>();
+		ArrayList<PreviewError> screenLevelErrors = new ArrayList<PreviewError>();
+		
 		clear();
 		
-		//TODO: need 3 columns: Icon for severity, Error Message, Button to click to resolve error
-		//	The button ActionListener will call the error's fixError() method
-		JPanel errorPanel = new JPanel(new GridLayout(errors.size(), 1)); //n rows, 1 col
-		errorPanel.setBounds(0, 0, getWidth(), getHeight());
-		for(int i = 0; i < errors.size(); i++)
+		for(PreviewError e : errors)
 		{
-			errorPanel.add(new JLabel("<html><body style=\"width:" + (getWidth()-240) + "px\">" 
-					+ errors.get(i).getMessage().replace("<", "&lt;").replace(">", "&gt;") 
-					+ "</body></html>"));
+			switch(e.getLevel())
+			{
+				case GAME:
+					gameLevelErrors.add(e);
+					break;
+				case ACT:
+					actLevelErrors.add(e);
+					break;
+				case SCENE:
+					sceneLevelErrors.add(e);
+					break;
+				case SCREEN:
+					screenLevelErrors.add(e);
+					break;
+				default: //TODO: exception?
+					break;
+			}
 		}
+		
+		JPanel errorPanel = new JPanel();
+		errorPanel.setLayout(new BoxLayout(errorPanel, BoxLayout.Y_AXIS));
+		errorPanel.setBounds(0, 0, getWidth(), getHeight());
+		errorPanel.add(createErrorLevelPanel("Game-level", gameLevelErrors));
+		errorPanel.add(createErrorLevelPanel("Act-level", actLevelErrors));
+		errorPanel.add(createErrorLevelPanel("Scene-level", sceneLevelErrors));
+		errorPanel.add(createErrorLevelPanel("Screen-level", screenLevelErrors));
+		
+		//for(int i = 0; i < errors.size(); i++)
+		//{
+			//errorPanel.add(new JLabel("<html><body style=\"width:" + (getWidth()-240) + "px\">" 
+			//		+ errors.get(i).getMessage().replace("<", "&lt;").replace(">", "&gt;") 
+			//		+ "</body></html>"));
+		//}
 		add(errorPanel);
 	}
 	
@@ -155,6 +213,12 @@ public class ScenePanel extends JPanel
 	{
 		try 
 		{
+			// Don't load an asset with invalid dimensions
+			if(a.getWidth() <= 0 || a.getHeight() <= 0)
+			{
+				return;
+			}
+			
 			final JLabel label;
 			if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
 			{//asset is drawn yellow with a black border
