@@ -25,7 +25,7 @@ import edu.utdallas.gamegenerator.Structure.*;
 public class GameErrorChecker 
 {
 	// Check entire Game hierarchy for errors and return a list of errors
-	public static GameErrorList checkErrors(final Game game, int panelWidth, int panelHeight)
+	public static GameErrorList checkErrors(final Game game, final int panelWidth, final int panelHeight)
 	{
 		//TODO: don't save if no game file open
 		GameErrorList errors = new GameErrorList();
@@ -187,23 +187,38 @@ public class GameErrorChecker
 											if(asset.getWidth() <= 0)
 											{
 												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "The <Width> property of " + asName + " is zero or not specified") {
-													public void fixError() { } //TODO
+													public void fixError() { asset.setWidth(100); } //TODO
 												});
 											}
 											if(asset.getHeight() <= 0)
 											{
 												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "The <Height> property of " + asName + " is zero or not specified") {
-													public void fixError() { } //TODO
+													public void fixError() { asset.setHeight(100); } //TODO
 												});
 											}
 
-											if(asset.getX() > panelWidth						// too far right
-													|| asset.getX() + asset.getWidth() <= 0		// too far left
-													|| asset.getY() > panelHeight				// too far down
-													|| asset.getY() + asset.getHeight() <= 0)	// too far up
+											if(asset.getX() > panelWidth)				// too far right
 											{
-												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, asName + " is not visible in the coordinate system") {
-													public void fixError() { } //TODO
+												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, asName + " is not visible, right of the coordinate system") {
+													public void fixError() { asset.setX(panelWidth - 100); } //TODO
+												});
+											}
+											if(asset.getX() + asset.getWidth() <= 0)	// too far left
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, asName + " is not visible, left of the coordinate system") {
+													public void fixError() { asset.setX(100); } //TODO
+												});
+											}
+											if(asset.getY() > panelHeight)				// too far down
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, asName + " is not visible, below the coordinate system") {
+													public void fixError() { asset.setY(panelHeight - 100); } //TODO
+												});
+											}
+											if(asset.getY() + asset.getHeight() <= 0)	// too far up
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.LOW, asName + " is not visible, above the coordinate system") {
+													public void fixError() { asset.setY(100); } //TODO
 												});
 											}
 											

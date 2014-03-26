@@ -98,9 +98,12 @@ public class ScenePanel extends JPanel
 			rowPanel.add(new JLabel("<html><h3>" + e.getSeverity().toString() + "</h3></html>"), BorderLayout.WEST); //string for now
 			rowPanel.add(new JLabel("<html><body style=\"margin-left:4px;\">" + e.getMessage().replace("<", "&lt;").replace(">", "&gt;") + "</body></html>"), BorderLayout.CENTER);
 			
-			JButton fixButton = new JButton("Autocorrect");
+			final JButton fixButton = new JButton("Autocorrect");
 			fixButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent ev) { e.fixError(); }
+				public void actionPerformed(ActionEvent ev) { 
+					e.fixError();
+					fixButton.setEnabled(false);
+				}
 			});
 			
 			rowPanel.add(fixButton, BorderLayout.EAST);

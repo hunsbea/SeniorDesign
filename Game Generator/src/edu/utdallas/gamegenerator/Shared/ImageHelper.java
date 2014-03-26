@@ -12,8 +12,15 @@ public class ImageHelper
 {
 	public static BufferedImage getScaledImage(BufferedImage orig, double scale)
 	{
+		if(orig.getWidth() <= 0 || orig.getHeight() <= 0 || scale <= 0)
+			return null;
+		
+		System.out.println(scale);
+		
 		int origW = orig.getWidth();
 		int origH = orig.getHeight();
+		
+		
 		double newW = origW * scale;
 		double newH = origH * scale;
 		
