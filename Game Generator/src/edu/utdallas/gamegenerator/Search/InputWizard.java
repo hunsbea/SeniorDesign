@@ -845,7 +845,8 @@ public class InputWizard implements ActionListener {
 			game1 = (Game)JAXBContext.newInstance(Game.class).createUnmarshaller().unmarshal(gameFile);
 		}
 		catch (JAXBException e) {
-			e.printStackTrace();
+			//TODO this was printing errors before, do we want it in?
+			//e.printStackTrace();
 			System.out.println("Unable to open " + gameFile);
 		}
 		
