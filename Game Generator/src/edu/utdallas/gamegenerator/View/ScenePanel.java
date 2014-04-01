@@ -17,12 +17,14 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
@@ -212,7 +214,7 @@ public class ScenePanel extends JPanel
 		repaint();
 	}
 	
-	public void loadAsset(final Asset a, String baseDir, boolean isReadOnly)
+	public void loadAsset(final Asset a, final String baseDir, final boolean isReadOnly)
 	{
 		try 
 		{
@@ -225,7 +227,7 @@ public class ScenePanel extends JPanel
 			final JLabel label;
 			if(a instanceof ButtonAsset || a instanceof InformationBoxAsset)
 			{//asset is drawn yellow with a black border
-				label = new JLabel("<html><p style=\"text-align:center\">" + a.getName() + "</p></html>");
+				label = new JLabel(htmlWrap(a.getName()));
 				label.setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setForeground(Color.BLACK);
@@ -313,7 +315,7 @@ public class ScenePanel extends JPanel
 				label.addMouseListener(new MouseListener() {
 			        public void mouseClicked(MouseEvent e) { 
 			        	//if right-click
-			        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK){
+			        	if((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
 			        		System.out.println("right-clicked");
 			        		JPopupMenu pMenu = new JPopupMenu();
 			        		JMenuItem menuItem = new JMenuItem("Delete");
@@ -325,20 +327,38 @@ public class ScenePanel extends JPanel
 			        		JMenuItem menuItem2 = new JMenuItem("Preview Sound");
 			        		menuItem2.setActionCommand("previewSound");
 			        		menuItem2.addActionListener(parentWizard);
-			        		if(a.getSoundEffect()==null){
+			        		if(a.getSoundEffect() == null) {
 			        			menuItem2.setEnabled(false);
 			        		}
 			        		
 			        		pMenu.add(menuItem);
 			        		pMenu.add(menuItem2);
 			        		
+			        		if(a instanceof ButtonAsset || a instanceof InformationBoxAsset || a instanceof ConversationBubbleAsset || a instanceof ThoughtBubbleAsset)
+			        		{
+				        		JMenuItem menuItem3 = new JMenuItem("Edit Text");
+				        		menuItem3.addActionListener(new ActionListener() {
+				        			public void actionPerformed(ActionEvent e) {
+				        				String newText = (String)JOptionPane.showInputDialog(that, "Enter the new text and click \"OK\" when finished.", "Edit Text", JOptionPane.QUESTION_MESSAGE, null, null, a.getName());
+				        				if(newText != null)
+				        				{
+					        				a.setName(newText);
+					        				// for some reason, label.setText does not update the label, so must re-create it
+					        				remove(label);
+					        				loadAsset(a, baseDir, isReadOnly);
+				        				}
+				        			}
+				        		});
+				        		pMenu.add(menuItem3);
+			        		}
+			        		
 			        		targetedAsset = a;
 			        		that.add(pMenu);
 			        		pMenu.show(e.getComponent(), e.getX(), e.getY());
 						}
 						
-			        	for (JLabel label : assetLabels){
-			        		if(label.getIcon()==null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
+			        	for(JLabel label : assetLabels) {
+			        		if(label.getIcon() == null && !(label instanceof ConversationBubble || label instanceof ThoughtBubble))
 			        		{
 			        			label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 			        		}
@@ -396,7 +416,7 @@ public class ScenePanel extends JPanel
 				        			label.setBounds(a.getX(), a.getY(), a.getWidth(), a.getHeight());
 				        		}
 				        		else {
-					        		label.setBounds(a.getX(), a.getY(), a.getWidth(), label.getHeight()+invDeltaY);
+					        		label.setBounds(a.getX(), a.getY(), a.getWidth(), label.getHeight() + invDeltaY);
 					        		BufferedImage image;
 									try {
 										image = ImageIO.read(new File(imgPath));
@@ -660,6 +680,11 @@ public class ScenePanel extends JPanel
 		add(actTextShadow);
 		add(actDisplay);
 		
+	}
+	
+	private String htmlWrap(String s)
+	{
+		return "<html><p style=\"text-align:center\">" + s + "</p></html>";
 	}
 
 }
