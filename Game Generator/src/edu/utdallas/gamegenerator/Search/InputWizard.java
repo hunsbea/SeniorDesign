@@ -89,6 +89,7 @@ public class InputWizard implements ActionListener {
  	private Screen lastSelectedScreen = null;
  	private File Currentfile = null;
  	private boolean hasCriticalGameErrors = false;
+ 	private String toggleHiddenText = "Toggle Hidden";
  	//JD end
  	
  	private Game game;
@@ -271,7 +272,7 @@ public class InputWizard implements ActionListener {
             		selectedLevel = gameLevel.CHALLENGE;
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setText(toggleHiddenText);
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
@@ -289,7 +290,7 @@ public class InputWizard implements ActionListener {
             		selectedLevel = gameLevel.CHALLENGE;
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setText(toggleHiddenText);
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
@@ -306,7 +307,7 @@ public class InputWizard implements ActionListener {
             		selectedLevel = gameLevel.CHALLENGE;
             		characterButton.setEnabled(false);
             		propButton.setEnabled(false);
-                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setText(toggleHiddenText);
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(false);
@@ -320,7 +321,7 @@ public class InputWizard implements ActionListener {
             	{
             		characterButton.setEnabled(true);
             		propButton.setEnabled(true);
-                    backgroundAndHiddenButton.setText("Toggle Hidden Elements");
+                    backgroundAndHiddenButton.setText(toggleHiddenText);
                     backgroundAndHiddenButton.setActionCommand("toggleHiddenElements");
             		backgroundAndHiddenButton.setEnabled(true);
             		soundButton.setEnabled(true);
