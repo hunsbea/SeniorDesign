@@ -58,7 +58,9 @@ public class Layout extends JPanel
 	
 	public Layout(MultipleChoiceItem item)
 	{
-		int currentY = 50;
+		int startY = 30, startX = 30;
+		int currentY = startY;
+		int qPaddingY = 4;
 		int numButtons = item.getOptions().size();
 		int bHeight = 300 / numButtons;
 		for(int i = 0; i < numButtons; i++)
@@ -68,7 +70,7 @@ public class Layout extends JPanel
 			option.setHeight(bHeight);
 			option.setX(400);
 			option.setY(currentY);
-			currentY += bHeight;
+			currentY += bHeight + qPaddingY;
 			option.setFontFamily("Comic Sans MS");
 			option.setFontSize(15);
 			option.setName(item.getOptions().get(i).getText());
@@ -76,11 +78,12 @@ public class Layout extends JPanel
 			assets.add(option);
 		}
 		
+		int qHeight = (currentY - startY - qPaddingY) / 2 - (qPaddingY / 2);
 		InformationBoxAsset stemText = new InformationBoxAsset();
 		stemText.setWidth(300);
-		stemText.setHeight(150);
-		stemText.setX(50);
-		stemText.setY(50);
+		stemText.setHeight(qHeight);
+		stemText.setX(startX);
+		stemText.setY(startY);
 		stemText.setFontFamily("Comic Sans MS");
 		stemText.setFontSize(15);
 		stemText.setName(item.getStem().getStemText().getText());
@@ -89,9 +92,9 @@ public class Layout extends JPanel
 		
 		InformationBoxAsset stemQuestion = new InformationBoxAsset();
 		stemQuestion.setWidth(300);
-		stemQuestion.setHeight(150);
-		stemQuestion.setX(50);
-		stemQuestion.setY(200);
+		stemQuestion.setHeight(qHeight);
+		stemQuestion.setX(startX);
+		stemQuestion.setY(startY + qHeight + qPaddingY);
 		stemQuestion.setFontFamily("Comic Sans MS");
 		stemQuestion.setFontSize(15);
 		stemQuestion.setName(item.getStem().getStemQuestion().getText());
