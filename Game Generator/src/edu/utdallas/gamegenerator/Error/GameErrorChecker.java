@@ -7,7 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.xml.ws.Response;
 
+import edu.utdallas.gamegenerator.Challenge.Challenge;
+import edu.utdallas.gamegenerator.Challenge.Introduction;
+import edu.utdallas.gamegenerator.Challenge.Item;
+import edu.utdallas.gamegenerator.Challenge.MultipleChoiceItem;
+import edu.utdallas.gamegenerator.Challenge.Option;
+import edu.utdallas.gamegenerator.Challenge.QuizChallenge;
+import edu.utdallas.gamegenerator.Challenge.Summary;
 import edu.utdallas.gamegenerator.Character.Character;
 import edu.utdallas.gamegenerator.Error.PreviewError.Level;
 import edu.utdallas.gamegenerator.Error.PreviewError.Severity;
@@ -94,6 +102,7 @@ public class GameErrorChecker
 			}
 
 			// Check for Act-level errors
+			//TODO Acts wrapper check needed, or if this is not possible may need to change error to be more general
 			if(game.getActs() == null || game.getActs().size() == 0)
 			{
 				errors.add(new PreviewError(Level.ACT, Severity.HIGH, "No <Acts> detected in Game") {
@@ -116,6 +125,7 @@ public class GameErrorChecker
 					}
 					
 					//Check for Scene-level errors
+					//TODO Scenes wrapper check needed, or if this is not possible may need to change error to be more general
 					List<Scene> scenes = acts.get(i).getScenes();
 					if(scenes == null || scenes.size() == 0)
 					{
@@ -143,7 +153,7 @@ public class GameErrorChecker
 								});
 							}
 							//TODO: should we warn about no background audio?
-							
+							//TODO: Ryan 4/8 10AM "Don't think so, Longstreet never specified that backgeound music is mandatory"
 							//Check for Screen-level errors
 							List<Screen> screens = scenes.get(j).getScreens();
 							if(screens == null || screens.size() == 0)
@@ -154,7 +164,7 @@ public class GameErrorChecker
 							}
 							else
 							{
-								//TODO: check challenges
+								
 								for(int k = 0; k < screens.size(); k++)
 								{
 									// Need a way to refer to which Screen has an error
@@ -165,6 +175,57 @@ public class GameErrorChecker
 											public void fixError() { } //TODO
 										});
 										srName = sName + " " + "Screen [in position " + (k+1) + "]";
+									}
+									
+									//TODO: check challenges
+									//Challenge checking
+									//Need a way to check if their are two Challenges in a screen. First thought was
+									//getting a list and checking if size was > 1 but the Screen class doesn't return
+									//Challenges as lists cause it assumes their is only one. 
+									final Challenge challenge = screens.get(k).getChallenge();
+									if(challenge != null){
+										if(challenge.getClass() == QuizChallenge.class) {
+											QuizChallenge qChallenge = (QuizChallenge) challenge;
+											
+											List<Item> items = qChallenge.getItems();
+											//Catches C_13 & C_14?
+											if(items == null) {
+												errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "There are no questions in the challenge on Screen " + (k+1)) {
+													public void fixError() { } //TODO
+												});
+											} else {
+												for (int u = 0; u < items.size(); u++){
+													if(items.get(u).getClass() == MultipleChoiceItem.class){
+														MultipleChoiceItem mcItem = (MultipleChoiceItem) items.get(u);
+														List<Option> options = mcItem.getOptions();
+														//Catches C_15 & C_16
+														if(options ==null){
+															errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "There are no answers to choose from in question " + (u+1) +" on Screen " + (k+1)) {
+																public void fixError() { } //TODO
+															});
+														} else {
+															
+														}
+													} else {
+														//TODO Item has no type
+													}
+												}
+											}
+											
+											List<Summary> summaries = qChallenge.getSummaries();
+											Introduction intros = qChallenge.getIntro();
+											
+										} else {
+											//TODO May need enum for Level.CHALLENGE?
+											errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "The xsi:type is not specified for the challenge of Screen found in position " + (k+1)) {
+												public void fixError() { } //TODO
+											});
+										}
+										
+									} else {
+										//TODO At this point the screen could either have no challange at all or a null
+										//challenge tag correct? One needing an error, the other being a normal occurence
+										//Any ways to distinguish
 									}
 									
 									//Check for Asset-level errors
