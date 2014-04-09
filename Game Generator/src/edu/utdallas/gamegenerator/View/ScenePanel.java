@@ -45,6 +45,7 @@ public class ScenePanel extends JPanel
 	private InputWizard parentWizard;
 	private boolean resize = false;
 	private boolean isHidden = true;
+	private final int resizeBorder = 20;
 	
 	public ScenePanel(InputWizard parent)
 	{
@@ -565,19 +566,19 @@ public class ScenePanel extends JPanel
 					}
 					public void mouseMoved(MouseEvent e) {
 						Point p = e.getPoint();
-						if(p.x <= 5 && p.y <= 5)
+						if(p.x <= resizeBorder && p.y <= resizeBorder)
 						{
 							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
 						}
-						else if(p.x <= 5 && label.getHeight() - p.y <= 5)
+						else if(p.x <= resizeBorder && label.getHeight() - p.y <= resizeBorder)
 						{
 							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
 						}
-						else if(label.getWidth() - p.x <= 5 && p.y <= 5)
+						else if(label.getWidth() - p.x <= resizeBorder && p.y <= resizeBorder)
 						{
 							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
 						}
-						else if(label.getWidth() - p.x <= 5 && label.getHeight() - p.y <= 5)
+						else if(label.getWidth() - p.x <= resizeBorder && label.getHeight() - p.y <= resizeBorder)
 						{
 							label.getRootPane().setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
 						}

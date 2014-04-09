@@ -89,7 +89,7 @@ public class InputWizard implements ActionListener {
  	private Screen lastSelectedScreen = null;
  	private File Currentfile = null;
  	private boolean hasCriticalGameErrors = false;
- 	private String toggleHiddenText = "Toggle Hidden";
+ 	private String toggleHiddenText = "Show/Hide";
  	//JD end
  	
  	private Game game;
