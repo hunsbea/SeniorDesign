@@ -15,8 +15,10 @@ import edu.utdallas.gamegenerator.Challenge.Item;
 import edu.utdallas.gamegenerator.Challenge.MultipleChoiceItem;
 import edu.utdallas.gamegenerator.Challenge.Option;
 import edu.utdallas.gamegenerator.Challenge.QuizChallenge;
+import edu.utdallas.gamegenerator.Challenge.Stem;
 import edu.utdallas.gamegenerator.Challenge.Summary;
 import edu.utdallas.gamegenerator.Character.Character;
+import edu.utdallas.gamegenerator.Character.Profile;
 import edu.utdallas.gamegenerator.Error.PreviewError.Level;
 import edu.utdallas.gamegenerator.Error.PreviewError.Severity;
 import edu.utdallas.gamegenerator.Search.InputWizard;
@@ -96,7 +98,62 @@ public class GameErrorChecker
 					// Check valid profile properties
 					else
 					{
-						//TODO: check valid profile properties
+						Profile profile = characters.get(i).getProfile();
+						if(profile.getDemographics() == null || profile.getDemographics().size() == 0)
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Demographics> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(profile.getDegrees() == null || profile.getDegrees().size() == 0)
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Degrees> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(profile.getSkills() == null || profile.getSkills().size() == 0)
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Skills> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(isNullOrEmpty(profile.getAttendance()))
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Attendance> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(isNullOrEmpty(profile.getAvailability()))
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Availability> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(isNullOrEmpty(profile.getCommunication()))
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Communication> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(isNullOrEmpty(profile.getTeamwork()))
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Teamwork> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						if(isNullOrEmpty(profile.getTitle()))
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <Title> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}
+						//TODO: 0 might actually be real data
+						/*if(profile.getYearsOfExperience() == 0)
+						{
+							errors.add(new PreviewError(Level.GAME, Severity.LOW, "The <YearsOfExperience> property of Character " + cName + " profile is missing or empty") {
+								public void fixError() { } //TODO
+							});
+						}*/
 					}
 				}
 			}
@@ -183,39 +240,129 @@ public class GameErrorChecker
 									//getting a list and checking if size was > 1 but the Screen class doesn't return
 									//Challenges as lists cause it assumes their is only one. 
 									final Challenge challenge = screens.get(k).getChallenge();
-									if(challenge != null){
-										if(challenge.getClass() == QuizChallenge.class) {
+									if(challenge != null) 
+									{
+										if(challenge instanceof QuizChallenge)
+										{
 											QuizChallenge qChallenge = (QuizChallenge) challenge;
 											
-											List<Item> items = qChallenge.getItems();
-											//Catches C_13 & C_14?
-											if(items == null) {
-												errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "There are no questions in the challenge on Screen " + (k+1)) {
+											if(qChallenge.getLayout() == null)
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "Layout in Challenge in " + srName + " is missing or empty") {
 													public void fixError() { } //TODO
 												});
-											} else {
-												for (int u = 0; u < items.size(); u++){
-													if(items.get(u).getClass() == MultipleChoiceItem.class){
+											}
+											
+											List<Item> items = qChallenge.getItems();
+											//Catches C_13 & C_14
+											if(items == null || items.size() == 0) 
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "There are no Questions in the Challenge in " + srName) {
+													public void fixError() { } //TODO
+												});
+											} 
+											else 
+											{
+												for (int u = 0; u < items.size(); u++)
+												{
+													if(items.get(u) instanceof MultipleChoiceItem)
+													{
 														MultipleChoiceItem mcItem = (MultipleChoiceItem) items.get(u);
+														
 														List<Option> options = mcItem.getOptions();
 														//Catches C_15 & C_16
-														if(options ==null){
-															errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "There are no answers to choose from in question " + (u+1) +" on Screen " + (k+1)) {
+														if(options == null || options.size() == 0) 
+														{
+															errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "There are no answers to choose from in Question " + (u+1) +" in " + srName) {
 																public void fixError() { } //TODO
 															});
-														} else {
-															
 														}
-													} else {
+														else
+														{
+															for(Option o : options)
+															{
+																if(o == null || isNullOrEmpty(o.getText()))
+																{
+																	errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "Option in Challenge Question in " + srName + " has no text") {
+																		public void fixError() { } //TODO
+																	});
+																}
+															}
+														}
+														if(options.size() == 1)
+														{
+															errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "Only one response in Challenge Question in " + srName) {
+																public void fixError() { } //TODO
+															});
+														}
+														else if(options.size() > 6)
+														{
+															errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "More than 6 responses in Challenge Question in " + srName) {
+																public void fixError() { } //TODO
+															});
+														}
+														
+														Stem stem = mcItem.getStem();
+														if(stem == null)
+														{
+															errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "No STEM Collection in Challenge in " + srName) {
+																public void fixError() { } //TODO
+															});
+														}
+														else
+														{
+															if(stem.getStemQuestion() == null)
+															{
+																errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "No STEM question in Challenge in " + srName) {
+																	public void fixError() { } //TODO
+																});
+															}
+															else if(isNullOrEmpty(stem.getStemQuestion().getText()))
+															{
+																errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "STEM Question with empty Text field in Challenge in " + srName) {
+																	public void fixError() { } //TODO
+																});
+															}
+															if(stem.getStemText() == null)
+															{
+																errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "No STEM text in Challenge in " + srName) {
+																	public void fixError() { } //TODO
+																});
+															}
+															else if(isNullOrEmpty(stem.getStemText().getText()))
+															{
+																errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "STEM Text with empty Text field in Challenge in " + srName) {
+																	public void fixError() { } //TODO
+																});
+															}
+														}
+													} 
+													else 
+													{
 														//TODO Item has no type
 													}
 												}
 											}
 											
 											List<Summary> summaries = qChallenge.getSummaries();
-											Introduction intros = qChallenge.getIntro();
+											if(summaries == null || summaries.size() == 0)
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "No Summaries in Challenge in " + srName) {
+													public void fixError() { } //TODO
+												});
+											}
 											
-										} else {
+											Introduction intro = qChallenge.getIntro();
+											if(intro == null)
+											{
+												errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "No Introduction in Challenge in " + srName) {
+													public void fixError() { } //TODO
+												});
+											}
+											
+										} 
+										else 
+										{
 											//TODO May need enum for Level.CHALLENGE?
 											errors.add(new PreviewError(Level.SCREEN, Severity.MEDIUM, "The xsi:type is not specified for the challenge of Screen found in position " + (k+1)) {
 												public void fixError() { } //TODO
@@ -223,8 +370,8 @@ public class GameErrorChecker
 										}
 										
 									} else {
-										//TODO At this point the screen could either have no challange at all or a null
-										//challenge tag correct? One needing an error, the other being a normal occurence
+										//TODO At this point the screen could either have no challenge at all or a null
+										//challenge tag correct? One needing an error, the other being a normal occurrence
 										//Any ways to distinguish
 									}
 									
@@ -327,7 +474,26 @@ public class GameErrorChecker
 													errors.add(new PreviewError(Level.SCREEN, Severity.LOW, asName + " contains no text, will be filled with null") {
 														public void fixError() { asset.setName("null"); }
 													});
-													
+												}
+												if(asset instanceof ThoughtBubbleAsset)
+												{
+													ThoughtBubbleAsset tbAsset = (ThoughtBubbleAsset)asset;
+													if(tbAsset.getPointDirection() == null)
+													{
+														errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "ThoughtBubble in " + asName + " requires a PointDirection field") {
+															public void fixError() { } //TODO
+														});
+													}
+												}
+												if(asset instanceof ConversationBubbleAsset)
+												{
+													ConversationBubbleAsset cbAsset = (ConversationBubbleAsset)asset;
+													if(cbAsset.getPointDirection() == null)
+													{
+														errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "ConversationBubble in " + asName + " requires a PointDirection field") {
+															public void fixError() { } //TODO
+														});
+													}
 												}
 											}
 										}

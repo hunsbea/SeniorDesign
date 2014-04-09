@@ -978,25 +978,35 @@ public class InputWizard implements ActionListener {
 					if(screens.get(k).getChallenge() != null)
 					{
 						QuizChallenge challenge = (QuizChallenge)screens.get(k).getChallenge();
-						
-						DefaultMutableTreeNode introNode = new DefaultMutableTreeNode("Introduction");
-						introNode.setUserObject(challenge.getIntro());
-						screenNode.add(introNode);
+
+						Introduction intro = challenge.getIntro();
+						if(intro != null)
+						{
+							DefaultMutableTreeNode introNode = new DefaultMutableTreeNode("Introduction");
+							introNode.setUserObject(challenge.getIntro());
+							screenNode.add(introNode);
+						}
 						
 						List<Item> items = challenge.getItems();
-						for(int m = 0; m < items.size(); m++)
+						if(items != null && items.size() > 0)
 						{
-							DefaultMutableTreeNode questionNode = new DefaultMutableTreeNode("Challenge Question " + (m + 1));
-							questionNode.setUserObject(items.get(m));
-							screenNode.add(questionNode);
+							for(int m = 0; m < items.size(); m++)
+							{
+								DefaultMutableTreeNode questionNode = new DefaultMutableTreeNode("Challenge Question " + (m + 1));
+								questionNode.setUserObject(items.get(m));
+								screenNode.add(questionNode);
+							}
 						}
 
 						List<Summary> summaries = challenge.getSummaries();
-						for(int m = 0; m < summaries.size(); m++)
+						if(summaries != null && summaries.size() > 0)
 						{
-							DefaultMutableTreeNode summaryNode = new DefaultMutableTreeNode("Summary " + (m + 1));
-							summaryNode.setUserObject(summaries.get(m));
-							screenNode.add(summaryNode);
+							for(int m = 0; m < summaries.size(); m++)
+							{
+								DefaultMutableTreeNode summaryNode = new DefaultMutableTreeNode("Summary " + (m + 1));
+								summaryNode.setUserObject(summaries.get(m));
+								screenNode.add(summaryNode);
+							}
 						}
 					}
 					
@@ -1030,6 +1040,8 @@ public class InputWizard implements ActionListener {
 		if(challenge instanceof QuizChallenge)
 		{
 			Layout layout = null;
+			if(((QuizChallenge)challenge).getLayout() == null)
+				return;
 			
 			switch(((QuizChallenge)challenge).getLayout())
 			{

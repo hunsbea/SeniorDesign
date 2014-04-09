@@ -58,6 +58,12 @@ public class Layout extends JPanel
 	
 	public Layout(MultipleChoiceItem item)
 	{
+		// for now, don't display any of the challenge if any piece is missing
+		if(item == null || item.getOptions() == null || item.getOptions().size() == 0
+				|| item.getStem() == null || item.getStem().getStemText() == null
+				|| item.getStem().getStemQuestion() == null)
+			return;
+		
 		int startY = 30, startX = 30;
 		int currentY = startY;
 		int qPaddingY = 4;

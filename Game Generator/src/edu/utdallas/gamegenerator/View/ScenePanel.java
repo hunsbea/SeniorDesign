@@ -258,7 +258,7 @@ public class ScenePanel extends JPanel
 				((ConversationBubble)label).setFont(new Font(a.getFontFamily(), Font.BOLD, a.getFontSize()));
 				((ConversationBubble)label).setBounds(a.getX(), a.getY(), a.getWidth(), a.getHeight());
 				//if there is a point direction defined, use it. If there is not one it will default to left
-				if(((ConversationBubbleAsset)a).getPointDirection() != null){
+				if(((ConversationBubbleAsset)a).getPointDirection() != null) {
 					((ConversationBubble)label).setPointDirection(((ConversationBubbleAsset) a).getPointDirection());
 				}
 				add(label);
