@@ -3,8 +3,10 @@ package edu.utdallas.gamegenerator.Structure;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.List;
 import java.util.UUID;
+
 import edu.utdallas.gamegenerator.Character.Character;
 
 /**
@@ -18,6 +20,7 @@ public class Game {
     private UUID id = UUID.randomUUID();
     private String name;
     private List<Character> characters;
+    private List<String> learningObjectives;
 
     @XmlElementWrapper(name = "Acts")
     @XmlElement(name = "Act")
@@ -62,4 +65,15 @@ public class Game {
 	public void setCharacters(List<Character> characters) {
 		this.characters = characters;
 	}
+	
+    
+    @XmlElementWrapper(name = "LearningObjectives")
+    @XmlElement(name = "Objective")
+    public List<String> getLearningObjectives() {
+        return learningObjectives;
+    }
+
+    public void setLearningObjectives(List<String> lOs) {
+        this.learningObjectives = lOs;
+    }
 }

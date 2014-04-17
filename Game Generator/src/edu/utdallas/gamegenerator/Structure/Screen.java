@@ -22,6 +22,7 @@ public class Screen {
     private String name;
     private List<Asset> assets;
     private Challenge challenge;
+    private List<String> learningObjectives;
 
     public Screen() {
         id = UUID.randomUUID();
@@ -72,10 +73,22 @@ public class Screen {
 	public void setChallenge(Challenge challenge) {
 		this.challenge = challenge;
 	}
+	
+    
+    @XmlElementWrapper(name = "LearningObjectives")
+    @XmlElement(name = "Objective")
+    public List<String> getLearningObjectives() {
+        return learningObjectives;
+    }
+
+    public void setLearningObjectives(List<String> lOs) {
+        this.learningObjectives = lOs;
+    }
     
     @Override
     public String toString()
     {
     	return name;
     }
+
 }

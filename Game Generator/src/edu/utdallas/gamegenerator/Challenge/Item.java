@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 public class Item 
 {
 	private String name;
+	private String learningObjective;
 
 	@XmlElement(name = "Name")
 	public String getName() {
@@ -17,6 +18,15 @@ public class Item
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@XmlElement(name = "Objective")
+	public String getLearningObjective() {
+		return learningObjective;
+	}
+	
+	public void setLearningObjective(String learningObjective) {
+		this.learningObjective = learningObjective;
 	}
 	
 	@Override
