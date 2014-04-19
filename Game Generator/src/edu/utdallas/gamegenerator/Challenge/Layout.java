@@ -106,6 +106,19 @@ public class Layout extends JPanel
 		stemQuestion.setName(item.getStem().getStemQuestion().getText());
 		stemQuestion.setHint(item.getStem().getStemQuestion().getHint());
 		assets.add(stemQuestion);
+		
+		InformationBoxAsset learningObjective = new InformationBoxAsset();
+		learningObjective.setWidth(1);
+		learningObjective.setHeight(1);
+		learningObjective.setX(WIDTH-50);
+		learningObjective.setY(0);
+		learningObjective.setFontFamily("Comic Sans MS");
+		learningObjective.setFontSize(12);
+		learningObjective.setName("");
+		Hint hint = new Hint();
+		hint.setText(item.getLearningObjective());
+		learningObjective.setHint(hint);
+		assets.add(learningObjective);
 	}
 	
 	public List<Asset> getAssets()

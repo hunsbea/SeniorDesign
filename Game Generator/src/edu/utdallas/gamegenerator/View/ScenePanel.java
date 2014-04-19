@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -665,7 +666,7 @@ public class ScenePanel extends JPanel
 		actDisplay.setBounds(0,0,that.getWidth(),that.getHeight());
 		actDisplay.setBackground(Color.red);
 		JLabel actText = new JLabel("<html><p style=\"text-align:center\">" + act.getName() + "</p></html>");
-		actText.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4), actDisplay.getY()+(actDisplay.getHeight()/4), actDisplay.getWidth()/2, actDisplay.getHeight()/2);
+		actText.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4), actDisplay.getY()+(actDisplay.getHeight()/20), actDisplay.getWidth()/2, actDisplay.getHeight()/4);
 		actText.setBackground(Color.LIGHT_GRAY);
 		actText.setForeground(Color.BLACK);
 		actText.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -674,13 +675,34 @@ public class ScenePanel extends JPanel
 		actText.setVerticalAlignment(JLabel.CENTER);
 		actText.setOpaque(true);
 		JLabel actTextShadow = new JLabel();
-		actTextShadow.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4)+4, actDisplay.getY()+(actDisplay.getHeight()/4)+4, actDisplay.getWidth()/2, actDisplay.getHeight()/2);
+		actTextShadow.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4)+4, actDisplay.getY()+(actDisplay.getHeight()/20)+4, actDisplay.getWidth()/2, actDisplay.getHeight()/4);
 		actTextShadow.setBackground(new Color(150, 36, 36));
 		actTextShadow.setOpaque(true);
+		if(act.getLearningObjectives() != null){
+			JLabel actLearningObjectives = new JLabel(htmlWrap(htmlListWrap(act.getLearningObjectives())));
+			actLearningObjectives.setBounds(actDisplay.getWidth()/16, (actDisplay.getHeight()/3) +15, actDisplay.getWidth()/8 *7, (actDisplay.getHeight()/2)+20);
+			actLearningObjectives.setBackground(Color.LIGHT_GRAY);
+			actLearningObjectives.setForeground(Color.BLACK);
+			actLearningObjectives.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			actLearningObjectives.setFont(new Font("Times New Roman", Font.BOLD, 15));
+			actLearningObjectives.setHorizontalAlignment(JLabel.CENTER);
+			actLearningObjectives.setOpaque(true);
+			add(actLearningObjectives);
+		}
 		add(actText);
 		add(actTextShadow);
 		add(actDisplay);
 		
+		
+	}
+	
+	private String htmlListWrap(List<String> list){
+		String htmlListString = "";
+		for(int i = 0; i<list.size(); i++){
+			htmlListString = htmlListString + "<li>"+list.get(i)+"</li>";
+		}
+		htmlListString = "<ul>"+htmlListString+"</ul>";
+		return htmlListString;
 	}
 	
 	private String htmlWrap(String s)
