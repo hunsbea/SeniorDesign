@@ -78,7 +78,7 @@ public class Layout extends JPanel
 			option.setY(currentY);
 			currentY += bHeight + qPaddingY;
 			option.setFontFamily("Comic Sans MS");
-			option.setFontSize(22);
+			option.setFontSize(18);
 			option.setName(item.getOptions().get(i).getText());
 			option.setHint(item.getOptions().get(i).getHint());
 			assets.add(option);
@@ -91,7 +91,7 @@ public class Layout extends JPanel
 		stemText.setX(startX);
 		stemText.setY(startY);
 		stemText.setFontFamily("Comic Sans MS");
-		stemText.setFontSize(24);
+		stemText.setFontSize(20);
 		stemText.setName(item.getStem().getStemText().getText());
 		stemText.setHint(item.getStem().getStemText().getHint());
 		assets.add(stemText);
@@ -102,7 +102,7 @@ public class Layout extends JPanel
 		stemQuestion.setX(startX);
 		stemQuestion.setY(startY + qHeight + qPaddingY);
 		stemQuestion.setFontFamily("Comic Sans MS");
-		stemQuestion.setFontSize(36);
+		stemQuestion.setFontSize(30);
 		stemQuestion.setName(item.getStem().getStemQuestion().getText());
 		stemQuestion.setHint(item.getStem().getStemQuestion().getHint());
 		assets.add(stemQuestion);
@@ -110,10 +110,10 @@ public class Layout extends JPanel
 		InformationBoxAsset learningObjective = new InformationBoxAsset();
 		learningObjective.setWidth(1);
 		learningObjective.setHeight(1);
-		learningObjective.setX(WIDTH-50);
-		learningObjective.setY(0);
+		learningObjective.setX(725);
+		learningObjective.setY(15);
 		learningObjective.setFontFamily("Comic Sans MS");
-		learningObjective.setFontSize(12);
+		learningObjective.setFontSize(18);
 		learningObjective.setName("");
 		Hint hint = new Hint();
 		hint.setText(item.getLearningObjective());

@@ -258,7 +258,7 @@ public class ScenePanel extends JPanel
 					hint.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
 					hint.setBackground(Color.cyan);
 					hint.setOpaque(true);
-					hint.setBounds(a.getX(), a.getY(), 200, 30);
+					hint.setBounds(a.getX()-20, a.getY()-10, 260, 30);
 					add(hint);
 					setComponentZOrder(hint, 0);
 					hiddenAssetLabels.add(hint);
