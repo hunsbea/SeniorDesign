@@ -92,15 +92,19 @@ public class ScenePanel extends JPanel
 	private JPanel createErrorLevelPanel(String levelName, List<PreviewError> errors)
 	{
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new JLabel("<html><h2>" + levelName + "</h2></html>"), BorderLayout.NORTH);
+		panel.add(new JLabel("<html><h1>" + levelName + "</h1></html>"), BorderLayout.NORTH);
 		
 		// 3 columns: severity icon, error message, autocorrect button
 		JPanel errorsPanel = new JPanel(new GridLayout(errors.size(), 1));
 		for(final PreviewError e : errors)
 		{
 			JPanel rowPanel = new JPanel(new BorderLayout());
-			rowPanel.add(new JLabel("<html><h3>" + e.getSeverity().toString() + "</h3></html>"), BorderLayout.WEST); //string for now
-			rowPanel.add(new JLabel("<html><body style=\"margin-left:4px;\">" + e.getMessage().replace("<", "&lt;").replace(">", "&gt;") + "</body></html>"), BorderLayout.CENTER);
+			JLabel error = new JLabel("<html><h2>" + e.getSeverity().toString() + "</h2></html>");
+			error.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+			rowPanel.add(error, BorderLayout.WEST); //string for now
+			JLabel error2 = new JLabel("<html><body style=\"margin-left:4px;\">" + e.getMessage().replace("<", "&lt;").replace(">", "&gt;") + "</body></html>");
+			error2.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+			rowPanel.add(error2, BorderLayout.CENTER);
 			
 			final JButton fixButton = new JButton("Autocorrect");
 			fixButton.addActionListener(new ActionListener(){
@@ -152,9 +156,19 @@ public class ScenePanel extends JPanel
 		JPanel errorPanel = new JPanel();
 		errorPanel.setLayout(new BoxLayout(errorPanel, BoxLayout.Y_AXIS));
 		errorPanel.setBounds(0, 0, getWidth(), getHeight());
+		
+		Font font = new Font("Comic Sans MS", Font.BOLD, 48);
+		JPanel gamePanel = createErrorLevelPanel("Game-level", gameLevelErrors);
+		gamePanel.setFont(font);
 		errorPanel.add(createErrorLevelPanel("Game-level", gameLevelErrors));
+		JPanel actPanel = createErrorLevelPanel("Act-level", actLevelErrors);
+		actPanel.setFont(font);
 		errorPanel.add(createErrorLevelPanel("Act-level", actLevelErrors));
+		JPanel scenePanel = createErrorLevelPanel("Scene-level", sceneLevelErrors);
+		scenePanel.setFont(font);
 		errorPanel.add(createErrorLevelPanel("Scene-level", sceneLevelErrors));
+		JPanel screenPanel = createErrorLevelPanel("Screen-level", screenLevelErrors);
+		screenPanel.setFont(font);
 		errorPanel.add(createErrorLevelPanel("Screen-level", screenLevelErrors));
 		
 		//for(int i = 0; i < errors.size(); i++)
@@ -666,26 +680,26 @@ public class ScenePanel extends JPanel
 		actDisplay.setBounds(0,0,that.getWidth(),that.getHeight());
 		actDisplay.setBackground(Color.red);
 		JLabel actText = new JLabel("<html><p style=\"text-align:center\">" + act.getName() + "</p></html>");
-		actText.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4), actDisplay.getY()+(actDisplay.getHeight()/20), actDisplay.getWidth()/2, actDisplay.getHeight()/4);
-		actText.setBackground(Color.LIGHT_GRAY);
+		actText.setBounds(actDisplay.getX()+(actDisplay.getWidth()/8), actDisplay.getY()+(actDisplay.getHeight()/20), actDisplay.getWidth()/2, actDisplay.getHeight()/4);
+		actText.setBackground(Color.WHITE);
 		actText.setForeground(Color.BLACK);
 		actText.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-		actText.setFont(new Font("Times New Roman", Font.BOLD, 80));
+		actText.setFont(new Font("Comic Sans MS", Font.BOLD, 76));
 		actText.setHorizontalAlignment(JLabel.CENTER);
 		actText.setVerticalAlignment(JLabel.CENTER);
 		actText.setOpaque(true);
 		JLabel actTextShadow = new JLabel();
-		actTextShadow.setBounds(actDisplay.getX()+(actDisplay.getWidth()/4)+4, actDisplay.getY()+(actDisplay.getHeight()/20)+4, actDisplay.getWidth()/2, actDisplay.getHeight()/4);
+		actTextShadow.setBounds(actDisplay.getX()+(actDisplay.getWidth()/8)+4, actDisplay.getY()+(actDisplay.getHeight()/20)+4, actDisplay.getWidth()/2, actDisplay.getHeight()/4);
 		actTextShadow.setBackground(new Color(150, 36, 36));
 		actTextShadow.setOpaque(true);
 		if(act.getLearningObjectives() != null){
-			JLabel actLearningObjectives = new JLabel(htmlWrap(htmlListWrap(act.getLearningObjectives())));
+			JLabel actLearningObjectives = new JLabel("<html><p style=\"text-align:left\">" + htmlListWrap(act.getLearningObjectives()) + "</p></html>");
 			actLearningObjectives.setBounds(actDisplay.getWidth()/16, (actDisplay.getHeight()/3) +15, actDisplay.getWidth()/8 *7, (actDisplay.getHeight()/2)+20);
-			actLearningObjectives.setBackground(Color.LIGHT_GRAY);
+			actLearningObjectives.setBackground(Color.WHITE);
 			actLearningObjectives.setForeground(Color.BLACK);
 			actLearningObjectives.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-			actLearningObjectives.setFont(new Font("Times New Roman", Font.BOLD, 15));
-			actLearningObjectives.setHorizontalAlignment(JLabel.CENTER);
+			actLearningObjectives.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+			actLearningObjectives.setHorizontalAlignment(JLabel.LEFT);
 			actLearningObjectives.setOpaque(true);
 			add(actLearningObjectives);
 		}

@@ -78,7 +78,7 @@ public class Layout extends JPanel
 			option.setY(currentY);
 			currentY += bHeight + qPaddingY;
 			option.setFontFamily("Comic Sans MS");
-			option.setFontSize(15);
+			option.setFontSize(22);
 			option.setName(item.getOptions().get(i).getText());
 			option.setHint(item.getOptions().get(i).getHint());
 			assets.add(option);
@@ -91,7 +91,7 @@ public class Layout extends JPanel
 		stemText.setX(startX);
 		stemText.setY(startY);
 		stemText.setFontFamily("Comic Sans MS");
-		stemText.setFontSize(15);
+		stemText.setFontSize(24);
 		stemText.setName(item.getStem().getStemText().getText());
 		stemText.setHint(item.getStem().getStemText().getHint());
 		assets.add(stemText);
@@ -102,7 +102,7 @@ public class Layout extends JPanel
 		stemQuestion.setX(startX);
 		stemQuestion.setY(startY + qHeight + qPaddingY);
 		stemQuestion.setFontFamily("Comic Sans MS");
-		stemQuestion.setFontSize(15);
+		stemQuestion.setFontSize(36);
 		stemQuestion.setName(item.getStem().getStemQuestion().getText());
 		stemQuestion.setHint(item.getStem().getStemQuestion().getHint());
 		assets.add(stemQuestion);
