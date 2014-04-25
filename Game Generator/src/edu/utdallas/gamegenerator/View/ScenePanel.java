@@ -693,7 +693,9 @@ public class ScenePanel extends JPanel
 		actTextShadow.setBackground(new Color(150, 36, 36));
 		actTextShadow.setOpaque(true);
 		if(act.getLearningObjectives() != null){
-			JLabel actLearningObjectives = new JLabel("<html><p style=\"text-align:left\">" + htmlListWrap(act.getLearningObjectives()) + "</p></html>");
+			//TODO Hard coded for WDPI but would just need to add a source in XML and a act.getSource
+			//TODO Also HTMLListWrap needs a nesting component to nest 1.1.1 within 1.1 when necessary.
+			JLabel actLearningObjectives = new JLabel("<html><p style=\"text-align:left\">Learning Objectives provided by WDPI" + htmlListWrap(act.getLearningObjectives()) + "</p></html>");
 			actLearningObjectives.setBounds(actDisplay.getWidth()/16, (actDisplay.getHeight()/3) +15, actDisplay.getWidth()/8 *7, (actDisplay.getHeight()/2)+20);
 			actLearningObjectives.setBackground(Color.WHITE);
 			actLearningObjectives.setForeground(Color.BLACK);
