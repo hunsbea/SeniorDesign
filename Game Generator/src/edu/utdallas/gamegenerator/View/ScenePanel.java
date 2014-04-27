@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -95,7 +96,7 @@ public class ScenePanel extends JPanel
 		panel.add(new JLabel("<html><h1>" + levelName + "</h1></html>"), BorderLayout.NORTH);
 		
 		// 3 columns: severity icon, error message, autocorrect button
-		JPanel errorsPanel = new JPanel(new GridLayout(errors.size(), 1));
+		JPanel errorsPanel = new JPanel(new GridLayout(errors.size()+1, 1));
 		for(final PreviewError e : errors)
 		{
 			JPanel rowPanel = new JPanel(new BorderLayout());
@@ -113,10 +114,15 @@ public class ScenePanel extends JPanel
 					fixButton.setEnabled(false);
 				}
 			});
+			System.out.println("fixButton.getHeight() " + fixButton.getHeight());
+			if(fixButton.getHeight()>50)
+				fixButton.setSize(fixButton.getWidth(), 50);
 			
 			rowPanel.add(fixButton, BorderLayout.EAST);
-			//rowPanel.setMaximumSize(new Dimension(getWidth()-240, 10));
+		//	rowPanel.setPreferredSize(new Dimension(getWidth()-240, 50));
 			errorsPanel.add(rowPanel);
+			errorsPanel.add(Box.createRigidArea(new Dimension(getWidth(), getHeight()-380)));
+			
 		}
 		panel.add(errorsPanel, BorderLayout.CENTER);
 		
@@ -155,21 +161,29 @@ public class ScenePanel extends JPanel
 		
 		JPanel errorPanel = new JPanel();
 		errorPanel.setLayout(new BoxLayout(errorPanel, BoxLayout.Y_AXIS));
-		errorPanel.setBounds(0, 0, getWidth(), getHeight());
+		errorPanel.setBounds(0, 100, getWidth(), getHeight());
 		
-		Font font = new Font("Comic Sans MS", Font.BOLD, 48);
-		JPanel gamePanel = createErrorLevelPanel("Game-level", gameLevelErrors);
+		Font font = new Font("Comic Sans MS", Font.BOLD, 18);
+		JLabel introPanel = new JLabel("<html><p style=\"text-align:left\">" + "Welcome to the SimSYS Preview tool. We have reviewed the Game file for errors. If any have been found, they will be shown below. Some can be corrected automatically before you proceed to previewing the Game using the tree on the left." + "</p></html>");
+		introPanel.setFont(font);
+		introPanel.setBounds(0, -150, getWidth(), getHeight());
+		add(introPanel);
+		JPanel gamePanel = createErrorLevelPanel("Game-level Errors:", gameLevelErrors);
 		gamePanel.setFont(font);
-		errorPanel.add(createErrorLevelPanel("Game-level", gameLevelErrors));
-		JPanel actPanel = createErrorLevelPanel("Act-level", actLevelErrors);
+		if(gameLevelErrors.size()>=1)
+			errorPanel.add(gamePanel);
+		JPanel actPanel = createErrorLevelPanel("Act-level Errors:", actLevelErrors);
 		actPanel.setFont(font);
-		errorPanel.add(createErrorLevelPanel("Act-level", actLevelErrors));
-		JPanel scenePanel = createErrorLevelPanel("Scene-level", sceneLevelErrors);
+		if(actLevelErrors.size()>=1)
+			errorPanel.add(actPanel);
+		JPanel scenePanel = createErrorLevelPanel("Scene-level Errors:", sceneLevelErrors);
 		scenePanel.setFont(font);
-		errorPanel.add(createErrorLevelPanel("Scene-level", sceneLevelErrors));
-		JPanel screenPanel = createErrorLevelPanel("Screen-level", screenLevelErrors);
+		if(sceneLevelErrors.size()>=1)
+			errorPanel.add(scenePanel);
+		JPanel screenPanel = createErrorLevelPanel("Screen-level Errors:", screenLevelErrors);
 		screenPanel.setFont(font);
-		errorPanel.add(createErrorLevelPanel("Screen-level", screenLevelErrors));
+		if(screenLevelErrors.size()>=1)
+			errorPanel.add(screenPanel);
 		
 		//for(int i = 0; i < errors.size(); i++)
 		//{
