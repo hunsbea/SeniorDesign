@@ -209,8 +209,6 @@ public class GameErrorChecker
 									public void fixError() { } //TODO
 								});
 							}
-							//TODO: should we warn about no background audio?
-							//TODO: Ryan 4/8 10AM "Don't think so, Longstreet never specified that backgeound music is mandatory"
 							//Check for Screen-level errors
 							List<Screen> screens = scenes.get(j).getScreens();
 							if(screens == null || screens.size() == 0)
@@ -490,7 +488,7 @@ public class GameErrorChecker
 													ConversationBubbleAsset cbAsset = (ConversationBubbleAsset)asset;
 													if(cbAsset.getPointDirection() == null)
 													{
-														errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "ConversationBubble in " + asName + " requires a PointDirection field") {
+														errors.add(new PreviewError(Level.SCREEN, Severity.LOW, "ConversationBubble in " + asName + " requires attention (PointDirection field)") {
 															public void fixError() { } //TODO
 														});
 													}

@@ -93,14 +93,16 @@ public class ScenePanel extends JPanel
 	private JPanel createErrorLevelPanel(String levelName, List<PreviewError> errors)
 	{
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new JLabel("<html><h1>" + levelName + "</h1></html>"), BorderLayout.NORTH);
+		JLabel levelNamePanel = new JLabel("<html><h1>" + levelName + "</h1></html>");
+		levelNamePanel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		panel.add(levelNamePanel, BorderLayout.NORTH);
 		
 		// 3 columns: severity icon, error message, autocorrect button
 		JPanel errorsPanel = new JPanel(new GridLayout(errors.size()+1, 1));
 		for(final PreviewError e : errors)
 		{
 			JPanel rowPanel = new JPanel(new BorderLayout());
-			JLabel error = new JLabel("<html><h2>" + e.getSeverity().toString() + "</h2></html>");
+			JLabel error = new JLabel("<html><h2>Priority: " + e.getSeverity().toString() + "</h2></html>");
 			error.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 			rowPanel.add(error, BorderLayout.WEST); //string for now
 			JLabel error2 = new JLabel("<html><body style=\"margin-left:4px;\">" + e.getMessage().replace("<", "&lt;").replace(">", "&gt;") + "</body></html>");
@@ -163,25 +165,31 @@ public class ScenePanel extends JPanel
 		errorPanel.setLayout(new BoxLayout(errorPanel, BoxLayout.Y_AXIS));
 		errorPanel.setBounds(0, 100, getWidth(), getHeight());
 		
-		Font font = new Font("Comic Sans MS", Font.BOLD, 18);
-		JLabel introPanel = new JLabel("<html><p style=\"text-align:left\">" + "Welcome to the SimSYS Preview tool. We have reviewed the Game file for errors. If any have been found, they will be shown below. Some can be corrected automatically before you proceed to previewing the Game using the tree on the left." + "</p></html>");
-		introPanel.setFont(font);
-		introPanel.setBounds(0, -150, getWidth(), getHeight());
+		Font font1 = new Font("Comic Sans MS", Font.BOLD, 20);
+		Font font2 = new Font("Comic Sans MS", Font.BOLD, 30);
+		JLabel introPanel = new JLabel("<html><p style=\"text-align:left\">" + "Welcome to the SimSYS Preview tool!" + "</p></html>");
+		introPanel.setFont(font2);
+		introPanel.setBounds(5, -185, getWidth(), getHeight());
 		add(introPanel);
+		//. We have reviewed the Game file for errors. If any have been found, they will be shown below. Some can be corrected automatically before you proceed to previewing the Game using the tree on the left.
+		JLabel introPanel2 = new JLabel("<html><p style=\"text-align:left\">" + "Before you finalize the game editing, we have checked for errors. Look below to see if your game has any of these errors and where they can be found." + "</p></html>");
+		introPanel2.setFont(font1);
+		introPanel2.setBounds(5, -125, getWidth(), getHeight());
+		add(introPanel2);
 		JPanel gamePanel = createErrorLevelPanel("Game-level Errors:", gameLevelErrors);
-		gamePanel.setFont(font);
+		gamePanel.setFont(font1);
 		if(gameLevelErrors.size()>=1)
 			errorPanel.add(gamePanel);
 		JPanel actPanel = createErrorLevelPanel("Act-level Errors:", actLevelErrors);
-		actPanel.setFont(font);
+		actPanel.setFont(font1);
 		if(actLevelErrors.size()>=1)
 			errorPanel.add(actPanel);
 		JPanel scenePanel = createErrorLevelPanel("Scene-level Errors:", sceneLevelErrors);
-		scenePanel.setFont(font);
+		scenePanel.setFont(font1);
 		if(sceneLevelErrors.size()>=1)
 			errorPanel.add(scenePanel);
 		JPanel screenPanel = createErrorLevelPanel("Screen-level Errors:", screenLevelErrors);
-		screenPanel.setFont(font);
+		screenPanel.setFont(font1);
 		if(screenLevelErrors.size()>=1)
 			errorPanel.add(screenPanel);
 		
