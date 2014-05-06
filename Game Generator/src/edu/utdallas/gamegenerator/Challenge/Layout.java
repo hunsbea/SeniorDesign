@@ -116,7 +116,7 @@ public class Layout extends JPanel
 		learningObjective.setFontSize(18);
 		learningObjective.setName("");
 		Hint hint = new Hint();
-		hint.setText("L.O. " + item.getLearningObjective());
+		hint.setText("Learning Obj. " + item.getLearningObjective());
 		learningObjective.setHint(hint);
 		assets.add(learningObjective);
 	}
